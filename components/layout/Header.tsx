@@ -49,10 +49,10 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
               />
             </div>
             <div className="hidden sm:flex flex-col leading-none">
-              <span className="font-display text-[20px] tracking-tight text-espresso-800">
-                Léna <span className="text-corail-500">Rénove</span>
+              <span className={cn('font-display text-[20px] tracking-tight transition-colors duration-500', scrolled ? 'text-espresso-800' : 'text-ivory')}>
+                Léna <span className="text-corail-400">Rénove</span>
               </span>
-              <span className="text-[10px] uppercase tracking-[0.25em] text-espresso-400 mt-1">
+              <span className={cn('text-[10px] uppercase tracking-[0.25em] mt-1 transition-colors duration-500', scrolled ? 'text-espresso-400' : 'text-ivory/60')}>
                 Artisan Peintre · 95
               </span>
             </div>
@@ -67,7 +67,9 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
                   href={route.href}
                   className={cn(
                     'relative text-[13px] font-semibold uppercase tracking-[0.15em] transition-colors duration-300',
-                    active ? 'text-corail-600' : 'text-espresso-700 hover:text-corail-600'
+                    active
+                      ? scrolled ? 'text-corail-600' : 'text-corail-300'
+                      : scrolled ? 'text-espresso-700 hover:text-corail-600' : 'text-ivory hover:text-corail-300'
                   )}
                 >
                   {route.label}
@@ -90,7 +92,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
               Devis Gratuit
             </Link>
             <button
-              className="lg:hidden p-2 text-espresso-800 hover:text-corail-600 transition"
+              className={cn('lg:hidden p-2 transition', scrolled ? 'text-espresso-800 hover:text-corail-600' : 'text-ivory hover:text-corail-300')}
               aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
               onClick={() => setOpen(!open)}
             >
