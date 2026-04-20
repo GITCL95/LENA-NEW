@@ -37,24 +37,15 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
         )}
       >
         <div className="container-premium flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative h-11 w-11 overflow-hidden rounded-full ring-1 ring-border group-hover:ring-corail-500 transition">
+          <Link href="/" className="flex items-center group">
+            <div className="relative h-14 w-36 overflow-hidden">
               <Image
                 src="/assets/img/logo-lt.png"
                 alt="Logo Léna Rénove"
-                width={44}
-                height={44}
-                className="object-cover"
+                fill
+                className="object-contain object-left"
                 priority
               />
-            </div>
-            <div className="hidden sm:flex flex-col leading-none">
-              <span className={cn('font-display text-[20px] tracking-tight transition-colors duration-500', scrolled ? 'text-espresso-800' : 'text-ivory')}>
-                Léna <span className="text-corail-400">Rénove</span>
-              </span>
-              <span className={cn('text-[10px] uppercase tracking-[0.25em] mt-1 transition-colors duration-500', scrolled ? 'text-espresso-400' : 'text-ivory/60')}>
-                Artisan Peintre · 95
-              </span>
             </div>
           </Link>
 
