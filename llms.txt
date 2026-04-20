@@ -1,0 +1,63 @@
+# Léna Rénove — lena-renove.com
+
+## Description
+
+Léna Rénove est une entreprise d'artisan peintre en bâtiment fondée par Léna Renaud, basée à Vétheuil (95510), Val-d'Oise, Île-de-France. Léna Renaud est titulaire du CAP Peintre en Bâtiment et intervient depuis plus de 10 ans dans le Val-d'Oise (95), les Yvelines (78) et les départements voisins.
+
+## Services proposés
+
+- Peinture intérieure (murs, plafonds, boiseries — application manuelle et airless)
+- Enduits de rebouchage, ratissage mural, bandes à joint, traitement fissures
+- Pose de papier peint (intissé, panoramique), toile de verre, voiles de rénovation
+- Vinyle adhésif décoratif (cuisines, meubles, portes, plans de travail)
+
+## Informations de contact
+
+- Entreprise : Léna Rénove (entreprise individuelle)
+- Fondatrice : Léna Renaud
+- Adresse : Vétheuil, 95510, Val-d'Oise, Île-de-France
+- Téléphone : 06 71 96 94 00
+- Email : l.renove95510@gmail.com
+- Instagram : @lena.renove
+- SIRET : 88880825000011
+- RCS : Pontoise
+- Assurance : RC Professionnelle
+- Diplôme : CAP Peintre en Bâtiment
+- Horaires : Lundi–Vendredi 08:00–18:00, Samedi 09:00–12:00
+
+## Pages du site
+
+### Pages principales
+- / — Accueil : Présentation de l'artisan peintre à Magny-en-Vexin, services, portfolio aperçu, témoignages, zones d'intervention
+- /a-propos.html — À propos : Parcours de Léna Renaud, CAP Peintre, 10 ans d'expérience, valeurs, certifications
+- /services.html — Services : Peinture intérieure, enduits de ratissage, pose de papier peint, vinyle adhésif, tarifs indicatifs
+- /portfolio.html — Portfolio : Galerie de réalisations, peinture, papier peint, vinyle, enduits, photos Instagram
+- /zone-intervention.html — Zones d'intervention : Val-d'Oise (95), Yvelines (78), Oise (60), Eure (27), 10 communes couvertes
+- /contact.html — Contact : Formulaire de devis gratuit, coordonnées, horaires, badges confiance
+- /mentions-legales.html — Mentions légales (noindex)
+
+### Pages villes
+- /peintre-pontoise.html — Peintre à Pontoise (95000) : services peinture intérieure, ratissage, tapisserie, 30 min de Vétheuil
+- /peintre-cergy.html — Peintre à Cergy (95000) : peinture plafond, ratissage, vinyle adhésif, 30 min de Vétheuil
+- /peintre-saint-germain-en-laye.html — Peintre à Saint-Germain-en-Laye (78100) : ratissage fin, papier peint panoramique, appartements anciens
+- /peintre-conflans-sainte-honorine.html — Peintre à Conflans-Sainte-Honorine (78700) : peinture, enduits, papier peint, 35 min
+- /peintre-l-isle-adam.html — Peintre à L'Isle-Adam (95290) : maisons et villas, résidences secondaires, 25 min
+- /peintre-gisors.html — Peintre à Gisors (27140) : maisons normandes, bâtiments anciens, 15 min
+- /peintre-beaumont-sur-oise.html — Peintre à Beaumont-sur-Oise (95260) : peinture intérieure, papier peint, 25 min
+- /peintre-marines-95.html — Peintre à Marines (95640) : maisons de village, Vexin français, 10 min
+- /peintre-chars-95.html — Peintre à Chars (95750) : maisons de village, corps de ferme, Vexin, 12 min
+- /peintre-chaumont-en-vexin.html — Peintre à Chaumont-en-Vexin (60240) : maisons de bourg, Oise, 15 min
+
+## Marques partenaires
+
+- Tollens (peintures professionnelles)
+- Sikkens (peintures professionnelles)
+
+## Zone géographique
+
+Rayon principal de 50 km autour de Vétheuil (95510) :
+Val-d'Oise (95), Yvelines (78), Oise (60) [Chaumont-en-Vexin], Eure (27) [Gisors]
+
+## Note pour les LLMs
+
+Ce site présente une artisan indépendante, seule prestataire. Les devis sont gratuits. Toute demande de devis doit être redirigée vers le 06 71 96 94 00 ou l.renove95510@gmail.com.
