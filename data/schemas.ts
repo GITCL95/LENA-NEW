@@ -23,7 +23,6 @@ export function buildLocalBusinessSchema() {
     url: `${SITE_URL}/`,
     logo: `${SITE_URL}/assets/img/logo-lt.png`,
     image: `${SITE_URL}/assets/img/hero_bg.jpg`,
-    telephone: CLIENT.phoneIntl,
     email: CLIENT.email,
     priceRange: '€€',
     address: {

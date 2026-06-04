@@ -36,7 +36,6 @@ export default function MentionsLegales() {
                 Siège : {CLIENT.address.street}, {CLIENT.address.postalCode} {CLIENT.address.locality}<br />
                 SIRET : {CLIENT.siret}<br />
                 {CLIENT.rcs}<br />
-                Téléphone : <a href={`tel:${CLIENT.phoneIntl}`} className="text-corail-600 underline">{CLIENT.phone}</a><br />
                 Email : <a href={`mailto:${CLIENT.email}`} className="text-corail-600 underline">{CLIENT.email}</a>
               </p>
             </article>

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ArrowRight, Phone } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { CLIENT } from '@data/client';
 
 export default function CTA() {
@@ -41,10 +41,6 @@ export default function CTA() {
               Demander un devis
               <ArrowRight size={16} strokeWidth={2} />
             </Link>
-            <a href={`tel:${CLIENT.phoneIntl}`} className="btn-outline-light">
-              <Phone size={16} strokeWidth={1.8} />
-              {CLIENT.phone}
-            </a>
           </div>
         </motion.div>
       </div>

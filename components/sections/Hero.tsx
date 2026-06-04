@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, Phone } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { CLIENT } from '@data/client';
 
 export default function Hero() {
@@ -84,10 +84,6 @@ export default function Hero() {
               Devis Gratuit
               <ArrowRight size={16} strokeWidth={2} />
             </Link>
-            <a href={`tel:${CLIENT.phoneIntl}`} className="btn-outline-light">
-              <Phone size={16} strokeWidth={1.8} />
-              Appeler maintenant
-            </a>
           </motion.div>
 
           {/* Trust badges */}

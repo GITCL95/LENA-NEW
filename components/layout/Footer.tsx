@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Instagram, Phone, Mail, MapPin } from 'lucide-react';
+import { Instagram, Mail, MapPin } from 'lucide-react';
 import { CLIENT, NAV_ROUTES } from '@data/client';
 import { CITIES } from '@data/cities';
 
@@ -24,9 +24,6 @@ export default function Footer() {
             <Link href="/contact-peintre-magny-en-vexin.html" className="btn-primary">
               Devis Gratuit
             </Link>
-            <a href={`tel:${CLIENT.phoneIntl}`} className="btn-outline-light">
-              {CLIENT.phone}
-            </a>
           </div>
         </div>
 
@@ -56,10 +53,6 @@ export default function Footer() {
                 <MapPin size={16} className="mt-0.5 text-corail-400 flex-shrink-0" strokeWidth={1.8} />
                 <span>{CLIENT.address.street}, {CLIENT.address.postalCode} · Val-d&apos;Oise</span>
               </div>
-              <a href={`tel:${CLIENT.phoneIntl}`} className="flex items-start gap-3 text-ivory/80 hover:text-corail-300 transition">
-                <Phone size={16} className="mt-0.5 text-corail-400 flex-shrink-0" strokeWidth={1.8} />
-                <span>{CLIENT.phone}</span>
-              </a>
               <a href={`mailto:${CLIENT.email}`} className="flex items-start gap-3 text-ivory/80 hover:text-corail-300 transition">
                 <Mail size={16} className="mt-0.5 text-corail-400 flex-shrink-0" strokeWidth={1.8} />
                 <span>{CLIENT.email}</span>

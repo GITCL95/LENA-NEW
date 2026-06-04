@@ -125,9 +125,13 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
                 transition={{ delay: 0.5 }}
                 className="mt-6"
               >
-                <a href={`tel:${CLIENT.phoneIntl}`} className="btn-primary">
-                  {CLIENT.phone}
-                </a>
+                <Link
+                  href="/contact-peintre-magny-en-vexin.html"
+                  onClick={() => setOpen(false)}
+                  className="btn-primary"
+                >
+                  Devis Gratuit
+                </Link>
               </motion.div>
             </nav>
           </motion.div>

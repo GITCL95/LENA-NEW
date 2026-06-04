@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Phone, Mail, MapPin, Clock, Instagram, ArrowRight, Check } from 'lucide-react';
+import { Mail, MapPin, Clock, Instagram, ArrowRight, Check } from 'lucide-react';
 import SEO from '@components/layout/SEO';
 import Layout from '@components/layout/Layout';
 import PageHero from '@components/sections/PageHero';
@@ -33,7 +33,7 @@ export default function Contact() {
 
   const title = 'Contact · Devis gratuit 24h · Léna Rénove';
   const description =
-    "Contactez Léna Rénove pour un devis gratuit sous 24h. Artisan peintre à Magny-en-Vexin (95). Tél. 06 71 96 94 00. Intervention Val-d'Oise et Yvelines.";
+    "Contactez Léna Rénove pour un devis gratuit sous 24h. Artisan peintre à Magny-en-Vexin (95). Intervention Val-d'Oise et Yvelines.";
   const path = '/contact-peintre-magny-en-vexin.html';
 
   const jsonLd = [
@@ -96,11 +96,7 @@ export default function Contact() {
                       <div>
                         <h3 className="font-display text-2xl text-espresso-800">Message reçu, merci !</h3>
                         <p className="mt-2 text-espresso-500 leading-relaxed">
-                          Je reviens vers vous sous 24h ouvrées. Pour un échange immédiat,
-                          n&apos;hésitez pas à m&apos;appeler au{' '}
-                          <a href={`tel:${CLIENT.phoneIntl}`} className="text-corail-600 underline font-semibold">
-                            {CLIENT.phone}
-                          </a>.
+                          Je reviens vers vous sous 24h ouvrées.
                         </p>
                       </div>
                     </div>
@@ -194,15 +190,6 @@ export default function Contact() {
                     <span className="eyebrow !text-corail-300 before:!bg-corail-400">Contact direct</span>
                     <h3 className="mt-4 font-display text-2xl">Parler à Léna</h3>
                     <div className="mt-6 space-y-4">
-                      <a href={`tel:${CLIENT.phoneIntl}`} className="flex items-center gap-4 group">
-                        <span className="w-11 h-11 rounded-full bg-ivory/10 grid place-items-center group-hover:bg-corail-500 transition">
-                          <Phone size={17} strokeWidth={1.8} />
-                        </span>
-                        <div>
-                          <div className="text-[11px] uppercase tracking-[0.2em] text-ivory/50">Téléphone</div>
-                          <div className="font-display text-lg group-hover:text-corail-300 transition">{CLIENT.phone}</div>
-                        </div>
-                      </a>
                       <a href={`mailto:${CLIENT.email}`} className="flex items-center gap-4 group">
                         <span className="w-11 h-11 rounded-full bg-ivory/10 grid place-items-center group-hover:bg-corail-500 transition">
                           <Mail size={17} strokeWidth={1.8} />

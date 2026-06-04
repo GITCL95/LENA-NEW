@@ -179,9 +179,6 @@ export default function Services() {
                         Devis pour ce service
                         <ArrowRight size={16} strokeWidth={2} />
                       </Link>
-                      <a href={`tel:${CLIENT.phoneIntl}`} className="btn-outline">
-                        {CLIENT.phone}
-                      </a>
                     </div>
                   </motion.div>
                 </div>

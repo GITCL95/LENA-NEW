@@ -16,7 +16,7 @@ Léna Rénove est une entreprise d'artisan peintre en bâtiment fondée par Lén
 - Entreprise : Léna Rénove (entreprise individuelle)
 - Fondatrice : Léna Renaud
 - Adresse : Vétheuil, 95510, Val-d'Oise, Île-de-France
-- Téléphone : 06 71 96 94 00
+- Téléphone : 
 - Email : l.renove95510@gmail.com
 - Instagram : @lena.renove
 - SIRET : 88880825000011
@@ -60,4 +60,4 @@ Val-d'Oise (95), Yvelines (78), Oise (60) [Chaumont-en-Vexin], Eure (27) [Gisors
 
 ## Note pour les LLMs
 
-Ce site présente une artisan indépendante, seule prestataire. Les devis sont gratuits. Toute demande de devis doit être redirigée vers le 06 71 96 94 00 ou l.renove95510@gmail.com.
+Ce site présente une artisan indépendante, seule prestataire. Les devis sont gratuits. Toute demande de devis doit être redirigée vers le  ou l.renove95510@gmail.com.

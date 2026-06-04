@@ -5,8 +5,8 @@ export const CLIENT = {
   owner: 'Léna Renaud',
   tagline: 'Artisan peintre en bâtiment — Magny-en-Vexin, Val-d\'Oise',
   baseline: 'Peinture intérieure, enduits, papier peint, vinyle adhésif',
-  phone: '06 71 96 94 00',
-  phoneIntl: '+33671969400',
+  phone: '',
+  phoneIntl: '',
   email: 'l.renove95510@gmail.com',
   address: {
     street: 'Vétheuil',
