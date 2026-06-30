@@ -56,7 +56,8 @@ export default function Services() {
                     alt={service.title}
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover transition-transform duration-700 ease-out-expo group-hover:scale-[1.08]"
+                    className="transition-transform duration-700 ease-out-expo group-hover:scale-[1.08]"
+                    style={{ objectFit: 'cover' }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-espresso-800/40 via-transparent to-transparent" />
 

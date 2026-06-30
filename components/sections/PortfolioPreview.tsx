@@ -46,7 +46,8 @@ export default function PortfolioPreview() {
                 alt={`${project.label} · ${project.location}`}
                 fill
                 sizes="(max-width: 1024px) 50vw, 25vw"
-                className="object-cover transition-transform duration-[1200ms] ease-out-expo group-hover:scale-110"
+                className="transition-transform duration-[1200ms] ease-out-expo group-hover:scale-110"
+                style={{ objectFit: 'cover' }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-espresso-800 via-espresso-800/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-500" />
               <div className="absolute inset-x-0 bottom-0 p-5 lg:p-6 text-ivory">

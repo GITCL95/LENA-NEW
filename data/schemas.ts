@@ -8,7 +8,7 @@ export function buildWebSiteSchema() {
     '@id': `${SITE_URL}/#website`,
     url: `${SITE_URL}/`,
     name: CLIENT.brand,
-    description: 'Artisan peintre en bâtiment à Magny-en-Vexin, Val-d\'Oise',
+    description: 'Artisan peintre en bâtiment à Vétheuil, Val-d\'Oise',
     inLanguage: 'fr-FR',
   };
 }
@@ -62,8 +62,7 @@ export function buildLocalBusinessSchema() {
       bestRating: '5',
     },
     areaServed: [
-      'Magny-en-Vexin', 'Pontoise', 'Cergy', 'Saint-Germain-en-Laye',
-      'Conflans-Sainte-Honorine', 'L\'Isle-Adam', 'Gisors', 'Beaumont-sur-Oise',
+      'Vétheuil', 'Magny-en-Vexin', 'Pontoise', 'Cergy', 'Gisors',
       'Marines', 'Chars', 'Chaumont-en-Vexin',
     ],
     hasOfferCatalog: {

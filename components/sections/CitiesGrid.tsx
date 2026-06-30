@@ -20,7 +20,7 @@ export default function CitiesGrid() {
               et les <span className="italic text-corail-600 font-normal">Yvelines.</span>
             </h2>
             <p className="mt-6 max-w-xl text-espresso-500 leading-relaxed">
-              Basée à Vétheuil (95), Léna Rénove intervient dans un rayon de 50 km autour de Magny-en-Vexin.
+              Basée à Vétheuil (95), Léna Rénove intervient dans un rayon de 40 km autour de Vétheuil.
             </p>
           </motion.div>
 

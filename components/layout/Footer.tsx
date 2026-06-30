@@ -38,6 +38,7 @@ export default function Footer() {
                 width={48}
                 height={48}
                 className="rounded-full ring-1 ring-ivory/20"
+                style={{ height: 'auto' }}
               />
               <div>
                 <div className="font-display text-xl">Léna <span className="text-corail-400">Rénove</span></div>

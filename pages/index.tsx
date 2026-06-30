@@ -20,9 +20,9 @@ import {
 import { SITE_URL } from '@data/client';
 
 export default function Home() {
-  const title = 'Peintre Magny-en-Vexin (95) · Devis Gratuit · Léna Rénove';
+  const title = 'Peintre Vétheuil (95) · Devis Gratuit · Léna Rénove';
   const description =
-    "Artisan peintre à Magny-en-Vexin (95) depuis 10 ans. Peinture intérieure, enduits, ratissage, papier peint, vinyle adhésif. CAP Peintre, RC Pro. Devis gratuit 24h.";
+    "Artisan peintre à Vétheuil (95) depuis 10 ans. Peinture intérieure, enduits, ratissage, papier peint, vinyle adhésif. CAP Peintre, RC Pro. Devis gratuit 24h.";
 
   const jsonLd = [
     buildWebSiteSchema(),

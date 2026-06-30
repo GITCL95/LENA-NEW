@@ -13,7 +13,7 @@ import { buildWebPageSchema, buildBreadcrumbSchema, buildFAQSchema } from '@data
 
 const SERVICES_FAQ = [
   {
-    q: 'Quel est le prix au m² pour une peinture intérieure à Magny-en-Vexin ?',
+    q: 'Quel est le prix au m² pour une peinture intérieure à Vétheuil (95) ?',
     a: 'Entre 25 et 45 €/m² fournitures comprises selon l\'état du support, le nombre de couches et la finition choisie (mate, satinée, brillante). Devis gratuit et détaillé sous 24h après visite.',
   },
   {
@@ -53,9 +53,9 @@ const PACKAGES = [
 ];
 
 export default function Services() {
-  const title = 'Peinture intérieure Magny-en-Vexin (95) · Services · Léna Rénove';
+  const title = 'Peinture intérieure Vétheuil (95) · Services · Léna Rénove';
   const description =
-    "Services de peinture intérieure, enduits de ratissage, pose de papier peint et vinyle adhésif à Magny-en-Vexin. CAP Peintre, RC Pro. Tollens & Sikkens. Devis 24h.";
+    "Services de peinture intérieure, enduits de ratissage, pose de papier peint et vinyle adhésif à Vétheuil. CAP Peintre, RC Pro. Tollens & Sikkens. Devis 24h.";
   const path = '/peinture-interieure-renovation-magny-en-vexin.html';
 
   const jsonLd = [

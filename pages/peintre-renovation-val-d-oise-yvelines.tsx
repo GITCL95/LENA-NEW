@@ -13,7 +13,7 @@ import { buildWebPageSchema, buildBreadcrumbSchema, buildFAQSchema } from '@data
 const ZONES_FAQ = [
   {
     q: 'Dans quelles villes du Val-d\'Oise intervenez-vous ?',
-    a: 'Léna Rénove couvre l\'ensemble du Val-d\'Oise (95) avec des pages dédiées pour Pontoise, Cergy, L\'Isle-Adam, Beaumont-sur-Oise, Marines, Chars — et intervient également dans toutes les communes du Vexin français.',
+    a: 'Léna Rénove couvre l\'ensemble du Val-d\'Oise (95) avec des pages dédiées pour Pontoise, Cergy, Marines, Chars — et intervient également dans toutes les communes du Vexin français.',
   },
   {
     q: 'Intervenez-vous à Pontoise pour des travaux de peinture ?',
@@ -21,11 +21,11 @@ const ZONES_FAQ = [
   },
   {
     q: 'Quel est le délai d\'intervention dans le Val-d\'Oise ?',
-    a: 'Devis gratuit sous 24h après visite, et début des travaux sous 15 jours en moyenne selon le planning. Les communes proches de Magny-en-Vexin (Marines, Chars, L\'Isle-Adam) peuvent bénéficier d\'une intervention encore plus rapide.',
+    a: 'Devis gratuit sous 24h après visite, et début des travaux sous 15 jours en moyenne selon le planning. Les communes proches de Vétheuil (Marines, Chars) peuvent bénéficier d\'une intervention encore plus rapide.',
   },
   {
     q: 'Quels travaux réalisez-vous dans les Yvelines ?',
-    a: 'Tous nos services : peinture intérieure, ratissage, pose de papier peint, vinyle adhésif. Principales villes des Yvelines couvertes : Saint-Germain-en-Laye, Conflans-Sainte-Honorine.',
+    a: 'Tous nos services : peinture intérieure, ratissage, pose de papier peint, vinyle adhésif. Nous intervenons également dans les communes des Yvelines proches de Vétheuil.',
   },
   {
     q: 'Proposez-vous des devis gratuits à Cergy ?',
@@ -47,7 +47,7 @@ const DEPARTMENTS = [
 export default function Zones() {
   const title = 'Peintre Val-d\'Oise (95) et Yvelines (78) · Léna Rénove';
   const description =
-    "Artisan peintre en bâtiment dans tout le Val-d'Oise et les Yvelines. Pontoise, Cergy, Saint-Germain, Conflans, L'Isle-Adam, Gisors, Beaumont, Marines, Chars. Devis 24h.";
+    "Artisan peintre en bâtiment basé à Vétheuil. Intervention à Pontoise, Cergy, Gisors, Marines, Chars, Chaumont-en-Vexin. Devis 24h.";
   const path = '/peintre-renovation-val-d-oise-yvelines.html';
 
   const jsonLd = [
@@ -66,7 +66,7 @@ export default function Zones() {
         <PageHero
           eyebrow="Zones d'intervention"
           title={<>Peintre en bâtiment dans le<br /><span className="italic text-corail-300 font-normal">Val-d&apos;Oise et les Yvelines.</span></>}
-          description="Basée à Vétheuil (95510), Léna Rénove intervient dans un rayon de 50 km — Val-d'Oise, Yvelines, Oise, Eure. 10 villes principales couvertes par des pages dédiées."
+          description="Basée à Vétheuil (95510), Léna Rénove intervient dans un rayon de 40 km — Val-d'Oise, Yvelines, Oise, Eure. 6 villes principales couvertes par des pages dédiées."
           breadcrumb={[
             { label: 'Accueil', href: '/' },
             { label: 'Zones' },
@@ -100,7 +100,7 @@ export default function Zones() {
             >
               <span className="eyebrow">Nos villes</span>
               <h2 className="mt-5 font-display text-display-lg tracking-tightest text-balance">
-                10 villes principales,<br />
+                6 villes principales,<br />
                 <span className="italic text-corail-600 font-normal">couvertes en détail.</span>
               </h2>
               <p className="mt-6 text-espresso-500 leading-relaxed">
@@ -180,7 +180,7 @@ export default function Zones() {
                   <span className="italic text-corail-600 font-normal">identique partout.</span>
                 </h2>
                 <p className="mt-6 text-espresso-500 leading-relaxed text-[17px]">
-                  Que vous soyez à Magny-en-Vexin, à Pontoise ou à Saint-Germain-en-Laye,
+                  Que vous soyez à Vétheuil, à Pontoise ou à Cergy,
                   la méthode et le niveau d&apos;exigence restent les mêmes. Seuls le délai
                   d&apos;intervention et la typologie du bâti varient.
                 </p>

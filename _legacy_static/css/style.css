@@ -484,6 +484,7 @@ p:last-child { margin-bottom: 0; }
 .about-img-wrap { position: relative; }
 .about-img-wrap img {
   width: 100%;
+  height: auto;
   aspect-ratio: 4/5;
   object-fit: cover;
   border-radius: var(--radius-lg);
@@ -1003,6 +1004,7 @@ p:last-child { margin-bottom: 0; }
 .service-detail.reverse > * { direction: ltr; }
 .service-detail-img img {
   width: 100%;
+  height: auto;
   aspect-ratio: 4/3;
   object-fit: cover;
   border-radius: var(--radius-lg);

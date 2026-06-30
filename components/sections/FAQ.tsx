@@ -10,7 +10,7 @@ interface FAQProps {
 }
 
 export default function FAQ({
-  title = 'FAQ — Peintre à Magny-en-Vexin',
+  title = 'FAQ — Peintre à Vétheuil',
   eyebrow = 'Questions fréquentes',
   items = HOME_FAQ,
 }: FAQProps) {

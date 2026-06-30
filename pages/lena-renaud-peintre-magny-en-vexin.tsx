@@ -46,7 +46,7 @@ const PROCESS = [
 ];
 
 export default function APropos() {
-  const title = 'Léna Renaud · Artisan peintre à Magny-en-Vexin · Léna Rénove';
+  const title = 'Léna Renaud · Artisan peintre à Vétheuil · Léna Rénove';
   const description =
     "Léna Renaud, artisan peintre titulaire du CAP Peintre en Bâtiment, fondatrice de Léna Rénove. 10 ans d'expérience dans le Val-d'Oise et les Yvelines. RC Pro. Tollens & Sikkens.";
   const path = '/lena-renaud-peintre-magny-en-vexin.html';
@@ -95,7 +95,7 @@ export default function APropos() {
               >
                 <div className="relative aspect-[4/5] overflow-hidden rounded-4xl">
                   <Image
-                    src="/assets/img/about_heading_bg.jpg"
+                    src="/assets/img/about_heading_bg.webp"
                     alt="Léna Renaud, artisan peintre à Vétheuil"
                     fill
                     sizes="(max-width: 1024px) 100vw, 40vw"

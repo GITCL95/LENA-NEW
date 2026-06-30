@@ -26,11 +26,11 @@ export default function About() {
           >
             <div className="relative aspect-[4/5] overflow-hidden rounded-4xl">
               <Image
-                src="/assets/img/about_heading_bg.jpg"
+                src="/assets/img/about_heading_bg.webp"
                 alt="Léna Renaud, artisan peintre en bâtiment à Magny-en-Vexin"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
-                className="object-cover"
+                style={{ objectFit: 'cover' }}
               />
             </div>
 

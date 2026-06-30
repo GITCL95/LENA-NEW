@@ -24,7 +24,7 @@ export default function Hero() {
       <motion.div style={{ y, scale }} className="absolute inset-0 z-0">
         <Image
           src="/assets/img/hero_bg.jpg"
-          alt="Rénovation intérieure à Magny-en-Vexin par Léna Rénove"
+          alt="Rénovation intérieure à Vétheuil par Léna Rénove"
           fill
           priority
           sizes="100vw"
@@ -60,7 +60,7 @@ export default function Hero() {
             className="mt-6 font-display text-display-2xl text-ivory tracking-tightest text-balance"
           >
             Peintre en bâtiment<br />
-            <span className="italic text-corail-300 font-normal">à Magny-en-Vexin</span>
+            <span className="italic text-corail-300 font-normal">à Vétheuil</span>
           </motion.h1>
 
           <motion.p

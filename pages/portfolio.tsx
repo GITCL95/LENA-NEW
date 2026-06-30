@@ -131,7 +131,8 @@ export default function Portfolio() {
                         alt={project.alt}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        className="object-cover transition-transform duration-[1200ms] ease-out-expo group-hover:scale-110"
+                        className="transition-transform duration-[1200ms] ease-out-expo group-hover:scale-110"
+                        style={{ objectFit: 'cover' }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-espresso-800/90 via-espresso-800/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       <div className="absolute inset-x-0 bottom-0 p-6 text-ivory opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 text-left">
