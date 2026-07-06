@@ -9,29 +9,219 @@ import CTA from '@components/sections/CTA';
 import { CLIENT, SITE_URL } from '@data/client';
 import { buildWebPageSchema, buildBreadcrumbSchema } from '@data/schemas';
 
-type Category = 'all' | 'peinture' | 'papier-peint' | 'enduits' | 'vinyle';
+type Category = 'all' | 'cabinet-medical' | 'chambre' | 'escalier' | 'cuisine-bain' | 'wc';
 
 const PROJECTS = [
-  { src: '/assets/img/insta-1.jpg', alt: 'Peinture salon moderne', category: 'peinture', location: 'Pontoise' },
-  { src: '/assets/img/insta-2.jpg', alt: 'Papier peint chambre panoramique', category: 'papier-peint', location: 'Cergy' },
-  { src: '/assets/img/insta-3.jpg', alt: 'Vinyle adhésif cuisine', category: 'vinyle', location: 'Saint-Germain' },
-  { src: '/assets/img/insta-4.jpg', alt: 'Enduit de ratissage', category: 'enduits', location: 'Magny-en-Vexin' },
-  { src: '/assets/img/insta-5.jpg', alt: 'Peinture plafond', category: 'peinture', location: 'L\'Isle-Adam' },
-  { src: '/assets/img/insta-6.jpg', alt: 'Papier peint intissé salon', category: 'papier-peint', location: 'Gisors' },
-  { src: '/assets/img/insta-7.jpg', alt: 'Relooking meubles vinyle', category: 'vinyle', location: 'Conflans' },
-  { src: '/assets/img/insta-8.jpg', alt: 'Rénovation intégrale appartement', category: 'peinture', location: 'Cergy' },
-  { src: '/assets/img/insta-9.jpg', alt: 'Pose papier peint panoramique', category: 'papier-peint', location: 'Pontoise' },
-  { src: '/assets/img/insta-10.jpg', alt: 'Enduit lissage mur', category: 'enduits', location: 'Beaumont' },
-  { src: '/assets/img/insta-11.jpg', alt: 'Peinture façade intérieure', category: 'peinture', location: 'Marines' },
-  { src: '/assets/img/insta-12.jpg', alt: 'Vinyle plan de travail', category: 'vinyle', location: 'Chaumont-en-Vexin' },
+  // 1. Cabinet Médical
+  {
+    src: '/assets/img/realisations/cabinet-medical-fresque/cabinet-medical-fresque-1.webp',
+    alt: "Création d'une fresque murale artistique dans un cabinet médical (détail)",
+    category: 'cabinet-medical',
+    location: 'Pontoise'
+  },
+  {
+    src: '/assets/img/realisations/cabinet-medical-fresque/cabinet-medical-fresque-2.webp',
+    alt: "Fresque murale personnalisée pour la salle d'attente d'un cabinet médical",
+    category: 'cabinet-medical',
+    location: 'Pontoise'
+  },
+  {
+    src: '/assets/img/realisations/inauguration-cabinet-medical/inauguration-cabinet-medical-1.webp',
+    alt: "Inauguration du cabinet médical après la réalisation de la fresque",
+    category: 'cabinet-medical',
+    location: 'Pontoise'
+  },
+
+  // 2. WC
+  {
+    src: '/assets/img/realisations/decoration-wc/decoration-wc-1.webp',
+    alt: "Décoration des WC - Pose de papier peint à motifs géométriques",
+    category: 'wc',
+    location: 'Cergy'
+  },
+  {
+    src: '/assets/img/realisations/decoration-wc/decoration-wc-2.webp',
+    alt: "Décoration des WC - Finition peinture et harmonie des couleurs",
+    category: 'wc',
+    location: 'Cergy'
+  },
+
+  // 3. Escaliers
+  {
+    src: '/assets/img/realisations/entretien-cage-escalier/entretien-cage-escalier-1.webp',
+    alt: "Entretien d'une cage d'escalier - Préparation et mise en peinture des murs",
+    category: 'escalier',
+    location: 'Conflans-Sainte-Honorine'
+  },
+  {
+    src: '/assets/img/realisations/entretien-cage-escalier/entretien-cage-escalier-2.webp',
+    alt: "Mise en peinture blanche et finitions soignées de la cage d'escalier",
+    category: 'escalier',
+    location: 'Conflans-Sainte-Honorine'
+  },
+  {
+    src: '/assets/img/realisations/entretien-cage-escalier/entretien-cage-escalier-3.webp',
+    alt: "Cage d'escalier rénovée - Luminosité et propreté retrouvées",
+    category: 'escalier',
+    location: 'Conflans-Sainte-Honorine'
+  },
+  {
+    src: '/assets/img/realisations/renovation-escalier-magistral/renovation-escalier-magistral-1.webp',
+    alt: "Rénovation d'un accent d'escalier magistral - Ponçage et préparation du bois",
+    category: 'escalier',
+    location: 'Saint-Germain-en-Laye'
+  },
+  {
+    src: '/assets/img/realisations/renovation-escalier-magistral/renovation-escalier-magistral-2.webp',
+    alt: "Mise en peinture bicolore de l'escalier magistral",
+    category: 'escalier',
+    location: 'Saint-Germain-en-Laye'
+  },
+  {
+    src: '/assets/img/realisations/renovation-escalier-magistral/renovation-escalier-magistral-3.webp',
+    alt: "Finitions de peinture sur les marches et contremarches",
+    category: 'escalier',
+    location: 'Saint-Germain-en-Laye'
+  },
+  {
+    src: '/assets/img/realisations/renovation-escalier-magistral/renovation-escalier-magistral-4.webp',
+    alt: "Escalier magistral rénové - Rendu élégant et moderne",
+    category: 'escalier',
+    location: 'Saint-Germain-en-Laye'
+  },
+
+  // 4. Cuisine & Bain
+  {
+    src: '/assets/img/realisations/modification-chambre-sdb/modification-chambre-sdb-1.webp',
+    alt: "Transformation d'une chambre en salle de bain - Douche à l'italienne",
+    category: 'cuisine-bain',
+    location: 'Herblay'
+  },
+  {
+    src: '/assets/img/realisations/modification-chambre-sdb/modification-chambre-sdb-2.webp',
+    alt: "Rénovation de salle de bain - Pose de faïence et peinture résistante à l'humidité",
+    category: 'cuisine-bain',
+    location: 'Herblay'
+  },
+  {
+    src: '/assets/img/realisations/modification-chambre-sdb/modification-chambre-sdb-3.webp',
+    alt: "Transformation de chambre en salle de bain - Aménagement et peinture",
+    category: 'cuisine-bain',
+    location: 'Herblay'
+  },
+  {
+    src: '/assets/img/realisations/modification-chambre-sdb/modification-chambre-sdb-4.webp',
+    alt: "Finitions de la nouvelle salle de bain - Peinture et décoration",
+    category: 'cuisine-bain',
+    location: 'Herblay'
+  },
+  {
+    src: '/assets/img/realisations/beton-cire-cuisine/beton-cire-cuisine-1.webp',
+    alt: "Application de béton ciré sur le plan de travail de cuisine",
+    category: 'cuisine-bain',
+    location: 'L\'Isle-Adam'
+  },
+  {
+    src: '/assets/img/realisations/beton-cire-cuisine/beton-cire-cuisine-2.webp',
+    alt: "Béton ciré de cuisine - Détail du lissage de l'enduit",
+    category: 'cuisine-bain',
+    location: 'L\'Isle-Adam'
+  },
+  {
+    src: '/assets/img/realisations/beton-cire-cuisine/beton-cire-cuisine-3.webp',
+    alt: "Plan de travail en béton ciré - Finition protectrice hydrofuge",
+    category: 'cuisine-bain',
+    location: 'L\'Isle-Adam'
+  },
+  {
+    src: '/assets/img/realisations/beton-cire-cuisine/beton-cire-cuisine-4.webp',
+    alt: "Mise en peinture des meubles et portes de cuisine",
+    category: 'cuisine-bain',
+    location: 'L\'Isle-Adam'
+  },
+  {
+    src: '/assets/img/realisations/beton-cire-cuisine/beton-cire-cuisine-5.webp',
+    alt: "Entretien et rénovation de cuisine - Rendu final du plan de travail et des meubles",
+    category: 'cuisine-bain',
+    location: 'L\'Isle-Adam'
+  },
+  {
+    src: '/assets/img/realisations/beton-cire-cuisine/beton-cire-cuisine-6.webp',
+    alt: "Rénovation de cuisine - Préparation des surfaces avant peinture",
+    category: 'cuisine-bain',
+    location: 'L\'Isle-Adam'
+  },
+  {
+    src: '/assets/img/realisations/beton-cire-cuisine/beton-cire-cuisine-7.webp',
+    alt: "Application de la peinture de finition sur les façades de cuisine",
+    category: 'cuisine-bain',
+    location: 'L\'Isle-Adam'
+  },
+  {
+    src: '/assets/img/realisations/beton-cire-cuisine/beton-cire-cuisine-8.webp',
+    alt: "Détail de finition sur le béton ciré et jonction crédence",
+    category: 'cuisine-bain',
+    location: 'L\'Isle-Adam'
+  },
+
+  // 5. Chambres
+  {
+    src: '/assets/img/realisations/papier-peint-panoramique-lit/papier-peint-panoramique-lit-1.webp',
+    alt: "Pose de papier peint panoramique moderne en tête de lit",
+    category: 'chambre',
+    location: 'Magny-en-Vexin'
+  },
+  {
+    src: '/assets/img/realisations/renovation-master-bedroom/renovation-master-bedroom-1.webp',
+    alt: "Rénovation de la chambre parentale - Peinture murale raffinée",
+    category: 'chambre',
+    location: 'Enghien-les-Bains'
+  },
+  {
+    src: '/assets/img/realisations/renovation-master-bedroom/renovation-master-bedroom-2.webp',
+    alt: "Pose de papier peint panoramique floral en tête de lit",
+    category: 'chambre',
+    location: 'Enghien-les-Bains'
+  },
+  {
+    src: '/assets/img/realisations/renovation-master-bedroom/renovation-master-bedroom-3.webp',
+    alt: "Rénovation master bedroom - Association de la peinture et du papier peint",
+    category: 'chambre',
+    location: 'Enghien-les-Bains'
+  },
+  {
+    src: '/assets/img/realisations/renovation-master-bedroom/renovation-master-bedroom-4.webp',
+    alt: "Master bedroom - Zoom sur la pose parfaite du lé de papier peint",
+    category: 'chambre',
+    location: 'Enghien-les-Bains'
+  },
+  {
+    src: '/assets/img/realisations/renovation-master-bedroom/renovation-master-bedroom-5.webp',
+    alt: "Rénovation de la suite parentale - Préparation minutieuse des supports",
+    category: 'chambre',
+    location: 'Enghien-les-Bains'
+  },
+  {
+    src: '/assets/img/realisations/renovation-master-bedroom/renovation-master-bedroom-6.webp',
+    alt: "Chambre parentale rénovée - Ambiance douce et lumineuse",
+    category: 'chambre',
+    location: 'Enghien-les-Bains'
+  },
+  {
+    src: '/assets/img/realisations/renovation-chambre-chapelle/renovation-chambre-chapelle-1.webp',
+    alt: "Rénovation de la chambre chapelle - Peinture et décoration",
+    category: 'chambre',
+    location: 'Marines'
+  }
 ];
 
 const FILTERS: { id: Category; label: string }[] = [
   { id: 'all', label: 'Tous les projets' },
-  { id: 'peinture', label: 'Peinture' },
-  { id: 'papier-peint', label: 'Papier peint' },
-  { id: 'enduits', label: 'Enduits' },
-  { id: 'vinyle', label: 'Vinyle' },
+  { id: 'cabinet-medical', label: 'Cabinet médical' },
+  { id: 'chambre', label: 'Chambres' },
+  { id: 'escalier', label: 'Escaliers' },
+  { id: 'cuisine-bain', label: 'Cuisine & Bain' },
+  { id: 'wc', label: 'WC' },
 ];
 
 export default function Portfolio() {
