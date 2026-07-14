@@ -113,9 +113,23 @@ export default function Footer() {
         {/* Bottom */}
         <div className="border-t border-ivory/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-3 text-[12px] text-ivory/50">
           <span>© {new Date().getFullYear()} {CLIENT.brand} · {CLIENT.owner} · SIRET {CLIENT.siret} · {CLIENT.rcs}</span>
-          <Link href="/mentions-legales.html" className="hover:text-corail-300 transition">
-            Mentions légales
-          </Link>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <Link href="/mentions-legales.html" className="hover:text-corail-300 transition">
+              Mentions légales
+            </Link>
+            <span>·</span>
+            <span>
+              Ce site a été créé par{' '}
+              <a
+                href="https://www.alizee-web.com/"
+                target="_blank"
+                rel="noopener"
+                className="hover:text-corail-300 transition underline decoration-dotted"
+              >
+                Alizée Web
+              </a>
+            </span>
+          </div>
         </div>
       </div>
 
