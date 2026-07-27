@@ -1,10 +1,13 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { Instagram, Mail, MapPin } from 'lucide-react';
 import { CLIENT, NAV_ROUTES } from '@data/client';
 import { CITIES } from '@data/cities';
 
 export default function Footer() {
+  const router = useRouter();
+  const isHome = router.pathname === '/';
   return (
     <footer className="relative bg-espresso-800 text-ivory overflow-hidden">
       <div className="absolute inset-0 grain-overlay opacity-50 pointer-events-none" />
@@ -117,18 +120,22 @@ export default function Footer() {
             <Link href="/mentions-legales.html" className="hover:text-corail-300 transition">
               Mentions légales
             </Link>
-            <span>·</span>
-            <span>
-              Ce site a été créé par{' '}
-              <a
-                href="https://www.alizee-web.com/"
-                target="_blank"
-                rel="noopener"
-                className="hover:text-corail-300 transition underline decoration-dotted"
-              >
-                Alizée Web
-              </a>
-            </span>
+            {isHome && (
+              <>
+                <span>·</span>
+                <span>
+                  Ce site a été créé par{' '}
+                  <a
+                    href="https://www.alizee-web.com/"
+                    target="_blank"
+                    rel="noopener"
+                    className="hover:text-corail-300 transition underline decoration-dotted"
+                  >
+                    Alizée Web
+                  </a>
+                </span>
+              </>
+            )}
           </div>
         </div>
       </div>
