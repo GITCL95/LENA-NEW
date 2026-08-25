@@ -27,16 +27,43 @@ const SERVICE_OPTIONS = [
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    // Formspree / Netlify handle this via action attribute in production.
-    // Local fallback: simulate success after short delay.
-    setTimeout(() => {
-      setSubmitted(true);
+    setError(null);
+
+    try {
+      const response = await fetch("https://formspree.io/f/xeajyayy", {
+        method: "POST",
+        body: new FormData(e.currentTarget),
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        const data = await response.json().catch(() => null);
+        if (data && data.errors && data.errors.length > 0) {
+          setError(
+            data.errors.map((err: { message: string }) => err.message).join(", ")
+          );
+        } else {
+          setError(
+            "Une erreur est survenue lors de l'envoi. Veuillez réessayer ou me contacter directement par téléphone ou email."
+          );
+        }
+      }
+    } catch {
+      setError(
+        "Une erreur réseau est survenue. Veuillez vérifier votre connexion et réessayer."
+      );
+    } finally {
       setLoading(false);
-    }, 800);
+    }
   };
 
   const title = "Contact · Devis gratuit 24h · Léna Rénove";
@@ -127,7 +154,7 @@ export default function Contact() {
                   <form
                     onSubmit={handleSubmit}
                     method="POST"
-                    action={`https://formsubmit.co/${CLIENT.email}`}
+                    action="https://formspree.io/f/xeajyayy"
                     className="mt-10 space-y-6"
                   >
                     <input
@@ -135,7 +162,12 @@ export default function Contact() {
                       name="_subject"
                       value="Nouveau devis depuis lena-renove.com"
                     />
-                    <input type="hidden" name="_captcha" value="false" />
+
+                    {error && (
+                      <div className="rounded-2xl bg-corail-500/10 border border-corail-500/30 p-4 text-[14px] text-corail-700">
+                        {error}
+                      </div>
+                    )}
 
                     <div className="grid md:grid-cols-2 gap-5">
                       <Field label="Prénom" name="firstname" required />
