@@ -64,9 +64,10 @@
 
 .desktopNav {
   display: flex;
-  gap: clamp(1.25rem, 2.35vw, 2.125rem);
+  gap: clamp(0.75rem, calc(3.75vw - 1.5rem), 2.125rem);
   font-size: 0.9375rem;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .desktopNav a:hover,
@@ -126,6 +127,7 @@
   border-color: #d18c76;
   color: var(--rust);
   font-size: 0.875rem;
+  white-space: nowrap;
 }
 
 .headerButton:hover {
