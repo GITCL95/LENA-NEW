@@ -1,24 +1,16 @@
 import { useState, type FormEvent, type HTMLInputTypeAttribute } from 'react';
+import { useRouter } from 'next/router';
 import SEO from '@components/layout/SEO';
 import SiteLayout, { Arrow, ArrowLink } from '@components/layout/SiteLayout';
-import { CLIENT, CONTACT_PATH, SITE_URL } from '@data/client';
+import { CLIENT, CONTACT_PATH, LEGAL_PATH, SITE_URL } from '@data/client';
 import { buildBreadcrumbSchema, buildWebPageSchema } from '@data/schemas';
+import { QUOTE_SERVICES, type QuoteService } from '@data/services';
 import styles from '@/styles/Contact.module.css';
 import siteStyles from '@/styles/Site.module.css';
 
 const FORM_ENDPOINT = 'https://formspree.io/f/xeajyayy';
 const EMAIL_LINK = `mailto:${CLIENT.email}`;
-const LEGAL_PATH = '/mentions-legales.html';
-
-const SERVICES = [
-  'Peinture intérieure',
-  'Enduits et ratissage',
-  'Pose de papier peint',
-  'Vinyle adhésif décoratif',
-  'Rénovation complète',
-  'Peinture extérieure',
-  'Autre demande ou conseil',
-];
+const serviceOptions = Object.keys(QUOTE_SERVICES) as QuoteService[];
 
 const title = 'Contact · Devis gratuit sous 24 h · Léna Rénove';
 const description = 'Contactez Léna Rénove pour un devis gratuit sous 24 h après visite. Artisane peintre à Vétheuil, dans le Val-d’Oise et les Yvelines.';
@@ -55,7 +47,7 @@ export default function Contact() {
           </div>
         </section>
 
-        <section id="contact" className={styles.details} aria-labelledby="quote-title">
+        <section id="contact" className={styles.details} aria-labelledby="quote-title" tabIndex={-1}>
           <div className={`${siteStyles.container} ${styles.columns}`}>
             <div>
               <h2 id="quote-title" className={styles.formTitle}>Votre demande de devis</h2>
@@ -70,6 +62,8 @@ export default function Contact() {
 }
 
 function QuoteForm() {
+  const { query } = useRouter();
+  const [serviceChoices, setServiceChoices] = useState<Partial<Record<QuoteService, boolean>>>({});
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
@@ -143,10 +137,19 @@ function QuoteForm() {
               <legend className={styles.label}>Type de prestation <span>(facultatif)</span></legend>
               <p id="services-hint" className={styles.servicesHint}>Vous pouvez sélectionner plusieurs prestations.</p>
               <div className={styles.services}>
-                {SERVICES.map((service) => (
+                {serviceOptions.map((service) => (
                   <label key={service} className={styles.service}>
-                    <input type="checkbox" name="services[]" value={service} />
-                    {service}
+                    <input
+                      type="checkbox"
+                      name="services[]"
+                      value={QUOTE_SERVICES[service]}
+                      checked={serviceChoices[service] ?? (query.prestation === service)}
+                      onChange={(event) => {
+                        const { checked } = event.currentTarget;
+                        setServiceChoices((choices) => ({ ...choices, [service]: checked }));
+                      }}
+                    />
+                    {QUOTE_SERVICES[service]}
                   </label>
                 ))}
               </div>
@@ -168,7 +171,7 @@ function QuoteForm() {
               <input type="checkbox" id="quote-consent" required />
               <p>
                 <label htmlFor="quote-consent">J’accepte que mes données soient utilisées pour traiter ma demande.</label>{' '}
-                <a href={LEGAL_PATH}>Mentions légales</a>.
+                <a href={LEGAL_PATH} target="_blank" rel="noopener" aria-label="Mentions légales (nouvel onglet)">Mentions légales</a>.
               </p>
             </div>
 

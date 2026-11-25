@@ -117,13 +117,13 @@
   background: var(--paper);
 }
 
-.serviceLink::after {
+.cardLink::after {
   position: absolute;
   inset: 0;
   content: '';
 }
 
-.serviceLink:hover {
+.cardLink:hover {
   color: var(--rust);
 }
 
@@ -192,6 +192,10 @@
 
 .projectPhoto img {
   object-position: center 57%;
+}
+
+.projectCard {
+  position: relative;
 }
 
 .projectCard:first-child .projectPhoto {

@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import SEO from '@components/layout/SEO';
 import SiteLayout, { ArrowLink, QuoteButton } from '@components/layout/SiteLayout';
-import { CLIENT, PAINTING_PATH, PORTFOLIO_PATH, SITE_URL } from '@data/client';
+import { CLIENT, PONTOISE_PATH, PORTFOLIO_PATH, SITE_URL } from '@data/client';
+import { serviceHref } from '@data/services';
 import {
   buildBreadcrumbSchema,
   buildLocalBusinessSchema,
@@ -23,7 +24,6 @@ const services = [
   {
     title: 'Peinture intérieure',
     slug: 'peinture',
-    href: PAINTING_PATH,
     detail: 'Murs, plafonds et boiseries. Finitions mates, satinées ou brillantes.',
     image: 'insta-9.jpg',
   },
@@ -45,22 +45,25 @@ const services = [
     detail: 'Relooking de cuisines, de meubles et de portes.',
     image: 'service_thumb_4.jpg',
   },
-];
+] as const;
 
 const projects = [
   {
     title: 'Peinture d’un salon',
     location: 'Pontoise',
+    href: `${PONTOISE_PATH}#realisation`,
     image: 'projet-renov-3.jpg',
     alt: 'Salon aux murs bleu-gris, soubassements blancs et parquet clair',
   },
   {
     title: 'Papier peint panoramique',
+    href: `${PORTFOLIO_PATH}#papier-peint-panoramique`,
     image: 'realisations/papier-peint-panoramique-lit/papier-peint-panoramique-lit-1.webp',
     alt: 'Chambre mansardée avec un papier peint panoramique à motif de palmiers',
   },
   {
     title: 'Peinture d’une chambre',
+    href: `${PORTFOLIO_PATH}#chambre-terracotta`,
     image: 'realisations/renovation-master-bedroom/renovation-master-bedroom-6.webp',
     alt: 'Deux portes sombres dans une chambre aux murs terracotta',
   },
@@ -121,13 +124,13 @@ export default function Home() {
               <p className={styles.servicesIntro}>De la préparation des supports à la finition.</p>
             </div>
             <ul className={styles.serviceGrid}>
-              {services.map(({ title: service, slug, href, detail, image }) => (
+              {services.map(({ title: service, slug, detail, image }) => (
                 <li key={slug} id={slug} className={styles.serviceCard}>
                   <div className={styles.servicePhoto}>
                     <Image src={`${images}/${image}`} alt="" fill />
                   </div>
                   <div className={styles.serviceCopy}>
-                    <h3>{href ? <a href={href} className={styles.serviceLink}>{service}</a> : service}</h3>
+                    <h3><a href={serviceHref(slug)} className={styles.cardLink}>{service}</a></h3>
                     <p>{detail}</p>
                   </div>
                 </li>
@@ -144,13 +147,13 @@ export default function Home() {
               <h2 id="projects-title" className={siteStyles.sectionTitle}>Les chantiers <em>en images.</em></h2>
             </div>
             <div className={styles.projectGrid}>
-              {projects.map(({ title: project, location, image, alt }) => (
+              {projects.map(({ title: project, location, image, alt, href }) => (
                 <figure className={styles.projectCard} key={project}>
                   <div className={styles.projectPhoto}>
                     <Image src={`${images}/${image}`} alt={alt} fill />
                   </div>
                   <figcaption>
-                    <span>{project}</span>
+                    <a href={href} className={styles.cardLink}>{project}</a>
                     {location && <span className={styles.projectLocation}>{location}</span>}
                   </figcaption>
                 </figure>

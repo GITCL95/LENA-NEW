@@ -22,7 +22,7 @@ export default function PageHero({
   return (
     <section
       className={
-        'relative pt-44 pb-20 md:pt-56 md:pb-28 overflow-hidden ' +
+        'relative py-14 md:py-20 overflow-hidden ' +
         (isDark ? 'bg-espresso-800 text-ivory' : 'bg-ivory-300 text-espresso-800')
       }
     >
@@ -42,7 +42,7 @@ export default function PageHero({
           transition={{ duration: 0.8 }}
           aria-label="Fil d'ariane"
           className={
-            'flex items-center gap-2 text-[12px] uppercase tracking-[0.2em] mb-8 ' +
+            'flex flex-wrap items-center gap-2 text-[12px] uppercase tracking-[0.2em] mb-8 ' +
             (isDark ? 'text-ivory/60' : 'text-espresso-400')
           }
         >
@@ -56,7 +56,7 @@ export default function PageHero({
                   {crumb.label}
                 </Link>
               ) : (
-                <span className={isDark ? 'text-corail-300' : 'text-corail-600'}>{crumb.label}</span>
+                <span aria-current="page" className={isDark ? 'text-corail-300' : 'text-corail-600'}>{crumb.label}</span>
               )}
               {i < breadcrumb.length - 1 && <ChevronRight size={12} className="opacity-50" />}
             </span>

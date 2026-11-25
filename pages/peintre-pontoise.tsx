@@ -2,9 +2,10 @@ import Image from 'next/image';
 import SEO from '@components/layout/SEO';
 import SiteLayout, { ArrowLink } from '@components/layout/SiteLayout';
 import { DetailFaq, DetailHero, OnPageNavigation } from '@components/sections/DetailPage';
-import { PAINTING_PATH, PONTOISE_PATH, SITE_URL, ZONES_PATH } from '@data/client';
+import { PONTOISE_PATH, SITE_URL, ZONES_PATH } from '@data/client';
 import { PONTOISE } from '@data/cities';
 import { buildBreadcrumbSchema, buildFAQSchema, buildWebPageSchema } from '@data/schemas';
+import { serviceHref } from '@data/services';
 import detailStyles from '@/styles/Detail.module.css';
 import siteStyles from '@/styles/Site.module.css';
 import styles from '@/styles/Pontoise.module.css';
@@ -24,11 +25,11 @@ const districts = [
 ];
 
 const services = [
-  { title: 'Peinture intérieure', detail: 'Murs, plafonds et boiseries. Finitions mates, satinées ou brillantes.', href: PAINTING_PATH },
-  { title: 'Enduits et ratissage', detail: 'Rebouchage, traitement des fissures et lissage avant finition.', href: '/#enduits' },
-  { title: 'Pose de papier peint', detail: 'Pose de papier peint intissé ou panoramique avec préparation du support.', href: '/#papier-peint' },
-  { title: 'Vinyle adhésif décoratif', detail: 'Relooking de cuisines, de meubles, de portes et de plans de travail.', href: '/#vinyle' },
-];
+  { title: 'Peinture intérieure', detail: 'Murs, plafonds et boiseries. Finitions mates, satinées ou brillantes.', service: 'peinture' },
+  { title: 'Enduits et ratissage', detail: 'Rebouchage, traitement des fissures et lissage avant finition.', service: 'enduits' },
+  { title: 'Pose de papier peint', detail: 'Pose de papier peint intissé ou panoramique avec préparation du support.', service: 'papier-peint' },
+  { title: 'Vinyle adhésif décoratif', detail: 'Relooking de cuisines, de meubles, de portes et de plans de travail.', service: 'vinyle' },
+] as const;
 
 const visitSteps = [
   { title: 'Décrivez vos travaux', detail: 'Indiquez votre quartier à Pontoise et les pièces ou surfaces que vous souhaitez rénover.' },
@@ -121,9 +122,9 @@ export default function Pontoise() {
             <p className={siteStyles.eyebrow}>Prestations à Pontoise</p>
             <h2 id="pontoise-services-title" className={siteStyles.sectionTitle}>Vos travaux <em>d’intérieur.</em></h2>
             <ul className={styles.services} role="list">
-              {services.map(({ title, detail, href }) => (
+              {services.map(({ title, detail, service }) => (
                 <li key={title}>
-                  <ArrowLink href={href} className={styles.serviceCard}>
+                  <ArrowLink href={serviceHref(service)} className={styles.serviceCard}>
                     <div><h3>{title}</h3><p>{detail}</p></div>
                   </ArrowLink>
                 </li>

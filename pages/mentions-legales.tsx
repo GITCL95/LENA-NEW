@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import Layout from '@components/layout/Layout';
+import SiteLayout from '@components/layout/SiteLayout';
 import PageHero from '@components/sections/PageHero';
-import { CLIENT, SITE_URL } from '@data/client';
+import { CLIENT, LEGAL_PATH, SITE_URL } from '@data/client';
 
 export default function MentionsLegales() {
   const title = 'Mentions légales · Léna Rénove';
@@ -13,9 +13,9 @@ export default function MentionsLegales() {
         <title>{title}</title>
         <meta name="description" content={description} />
         <meta name="robots" content="noindex, follow" />
-        <link rel="canonical" href={`${SITE_URL}/mentions-legales.html`} />
+        <link rel="canonical" href={`${SITE_URL}${LEGAL_PATH}`} />
       </Head>
-      <Layout>
+      <SiteLayout page="legal">
         <PageHero
           eyebrow="Informations légales"
           title={<>Mentions <span className="italic text-corail-300 font-normal">légales.</span></>}
@@ -95,7 +95,7 @@ export default function MentionsLegales() {
             </article>
           </div>
         </section>
-      </Layout>
+      </SiteLayout>
     </>
   );
 }

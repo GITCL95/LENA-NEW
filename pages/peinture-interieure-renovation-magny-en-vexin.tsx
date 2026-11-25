@@ -2,7 +2,7 @@ import Image from 'next/image';
 import SEO from '@components/layout/SEO';
 import SiteLayout, { ArrowLink } from '@components/layout/SiteLayout';
 import { DetailFaq, DetailHero, OnPageNavigation } from '@components/sections/DetailPage';
-import { CLIENT, CONTACT_PATH, PAINTING_PATH, SITE_URL } from '@data/client';
+import { CLIENT, PAINTING_PATH, QUOTE_PATH, SITE_URL } from '@data/client';
 import { buildBreadcrumbSchema, buildFAQSchema, buildWebPageSchema } from '@data/schemas';
 import styles from '@/styles/Painting.module.css';
 import siteStyles from '@/styles/Site.module.css';
@@ -177,7 +177,7 @@ export default function Painting() {
               <h2 id="budget-title" className={`${siteStyles.sectionTitle} ${detailStyles.inlineTitle}`}>Quel budget <em>prévoir ?</em></h2>
               <p className={styles.price}>25 à 45 <span>€/m²</span></p>
               <p className={styles.priceNote}>Fourchette indicative, fournitures comprises.</p>
-              <ArrowLink href={CONTACT_PATH} className={`${siteStyles.button} ${siteStyles.contactButton}`}>
+              <ArrowLink href={QUOTE_PATH} className={`${siteStyles.button} ${siteStyles.contactButton}`}>
                 Demander un devis
               </ArrowLink>
             </div>

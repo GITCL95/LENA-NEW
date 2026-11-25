@@ -33,6 +33,10 @@
   color: var(--accent, var(--rust));
 }
 
+.site > main {
+  isolation: isolate;
+}
+
 .container {
   width: min(85%, 76.5rem);
   margin-inline: auto;
@@ -213,6 +217,7 @@
 }
 
 .textLink:hover,
+.contactAreaLink:hover,
 .footerInner a:hover {
   text-decoration: underline;
   text-underline-offset: 0.2em;

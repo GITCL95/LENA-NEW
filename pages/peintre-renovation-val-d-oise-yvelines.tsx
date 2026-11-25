@@ -2,10 +2,9 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { MapPin, ArrowUpRight, Navigation, Clock, Check } from 'lucide-react';
 import SEO from '@components/layout/SEO';
-import Layout from '@components/layout/Layout';
+import SiteLayout from '@components/layout/SiteLayout';
 import PageHero from '@components/sections/PageHero';
 import FAQ from '@components/sections/FAQ';
-import CTA from '@components/sections/CTA';
 import { CITIES } from '@data/cities';
 import { SITE_URL, ZONES_PATH } from '@data/client';
 import { buildWebPageSchema, buildBreadcrumbSchema, buildFAQSchema } from '@data/schemas';
@@ -62,7 +61,7 @@ export default function Zones() {
   return (
     <>
       <SEO title={title} description={description} path={path} jsonLd={jsonLd} />
-      <Layout>
+      <SiteLayout page="zones">
         <PageHero
           eyebrow="Zones d'intervention"
           title={<>Peintre en bâtiment dans le<br /><span className="italic text-corail-300 font-normal">Val-d&apos;Oise et les Yvelines.</span></>}
@@ -187,8 +186,8 @@ export default function Zones() {
               </motion.div>
 
               <motion.ul
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.9, delay: 0.15 }}
                 className="lg:col-span-6 space-y-4"
@@ -218,8 +217,7 @@ export default function Zones() {
           title="FAQ — Val-d'Oise & Yvelines"
           items={ZONES_FAQ}
         />
-        <CTA />
-      </Layout>
+      </SiteLayout>
     </>
   );
 }

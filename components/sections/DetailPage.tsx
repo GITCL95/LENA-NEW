@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import { QuoteButton } from '@components/layout/SiteLayout';
-import { CONTACT_PATH } from '@data/client';
 import styles from '@/styles/Detail.module.css';
 import siteStyles from '@/styles/Site.module.css';
 
@@ -21,7 +20,7 @@ export function DetailHero({ id, eyebrow, title, emphasis, description, photo, c
           {title}<br /><em>{emphasis}</em>
         </h1>
         <p className={`${siteStyles.heroDescription} ${styles.heroDescription}`}>{description}</p>
-        <QuoteButton href={CONTACT_PATH} />
+        <QuoteButton />
         <p className={siteStyles.heroNote}>Devis gratuit sous 24 h après visite.</p>
       </div>
       <figure className={styles.heroPhoto}>

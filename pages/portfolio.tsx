@@ -18,6 +18,7 @@ const CATEGORIES = {
 type Category = keyof typeof CATEGORIES;
 type Photo = { src: string; alt: string };
 type Project = {
+  anchor?: string;
   title: string;
   category: Category;
   photos: readonly [Photo, ...Photo[]];
@@ -42,6 +43,7 @@ const PROJECTS: readonly Project[] = [
     coverPosition: '42% center',
   },
   {
+    anchor: 'papier-peint-panoramique',
     title: 'Papier peint panoramique',
     category: 'chambre',
     photos: [photo('papier-peint-panoramique-lit', 1, 'Chambre avec un papier peint panoramique derrière le lit')],
@@ -90,6 +92,7 @@ const PROJECTS: readonly Project[] = [
     coverPosition: 'center 57%',
   },
   {
+    anchor: 'chambre-terracotta',
     title: 'Chambre aux tons terracotta',
     category: 'chambre',
     photos: [
@@ -239,7 +242,7 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void
   const cardClass = before ? styles.featured : wideOnMobile ? styles.wideOnMobile : undefined;
 
   return (
-    <li className={cardClass}>
+    <li id={project.anchor} className={cardClass}>
       <button type="button" className={styles.card} aria-haspopup="dialog" aria-label={title} onClick={onOpen}>
         <span className={styles.media}>
           {before ? (

@@ -59,6 +59,11 @@
       "source": "/peintre-chaumont-en-vexin.html",
       "destination": "/peintre-chaumont-en-vexin",
       "statusCode": 301
+    },
+    {
+      "source": "/mentions-legales.html",
+      "destination": "/mentions-legales",
+      "statusCode": 301
     }
   ],
   "rewrites": [
@@ -105,6 +110,10 @@
     {
       "source": "/peintre-chaumont-en-vexin",
       "destination": "/peintre-chaumont-en-vexin.html"
+    },
+    {
+      "source": "/mentions-legales",
+      "destination": "/mentions-legales.html"
     }
   ]
 }

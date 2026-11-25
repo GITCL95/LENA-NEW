@@ -1,3 +1,21 @@
+import { CONTACT_PATH, PAINTING_PATH } from './client';
+
+export const QUOTE_SERVICES = {
+  peinture: 'Peinture intérieure',
+  enduits: 'Enduits et ratissage',
+  'papier-peint': 'Pose de papier peint',
+  vinyle: 'Vinyle adhésif décoratif',
+  renovation: 'Rénovation complète',
+  exterieur: 'Peinture extérieure',
+  autre: 'Autre demande ou conseil',
+} as const;
+
+export type QuoteService = keyof typeof QUOTE_SERVICES;
+
+export function serviceHref(service: QuoteService) {
+  return service === 'peinture' ? PAINTING_PATH : `${CONTACT_PATH}?prestation=${service}#contact`;
+}
+
 export type Service = {
   id: string;
   number: string;
@@ -7,7 +25,7 @@ export type Service = {
   description: string;
   features: string[];
   image: string;
-  slug: string;
+  slug: QuoteService;
 };
 
 export const SERVICES: Service[] = [

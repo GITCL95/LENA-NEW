@@ -1,6 +1,8 @@
 export const SITE_URL = "https://lena-renove.com";
 export const ABOUT_PATH = "/lena-renaud-peintre-magny-en-vexin";
 export const CONTACT_PATH = "/contact-peintre-magny-en-vexin";
+export const QUOTE_PATH = `${CONTACT_PATH}#contact`;
+export const LEGAL_PATH = "/mentions-legales";
 export const PORTFOLIO_PATH = "/portfolio";
 export const PAINTING_PATH = "/peinture-interieure-renovation-magny-en-vexin";
 export const ZONES_PATH = "/peintre-renovation-val-d-oise-yvelines";

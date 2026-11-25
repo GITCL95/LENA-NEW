@@ -4,13 +4,12 @@ import { motion } from 'framer-motion';
 import { MapPin, Clock, Users, Check, ArrowUpRight, ArrowRight, Star } from 'lucide-react';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import SEO from '@components/layout/SEO';
-import Layout from '@components/layout/Layout';
+import SiteLayout from '@components/layout/SiteLayout';
 import PageHero from '@components/sections/PageHero';
 import FAQ from '@components/sections/FAQ';
-import CTA from '@components/sections/CTA';
 import { CITIES, City, getCityBySlug } from '@data/cities';
-import { SERVICES } from '@data/services';
-import { CLIENT, CONTACT_PATH, PONTOISE_PATH, SITE_URL, ZONES_PATH } from '@data/client';
+import { SERVICES, serviceHref } from '@data/services';
+import { CLIENT, PONTOISE_PATH, QUOTE_PATH, SITE_URL, ZONES_PATH } from '@data/client';
 import { buildWebPageSchema, buildBreadcrumbSchema, buildFAQSchema } from '@data/schemas';
 
 interface CityPageProps {
@@ -93,7 +92,7 @@ export default function CityPage({ city, neighbours }: CityPageProps) {
   return (
     <>
       <SEO title={city.title} description={city.metaDescription} path={path} jsonLd={jsonLd} />
-      <Layout>
+      <SiteLayout page="city">
         <PageHero
           eyebrow={`${city.postalCode} · ${city.departmentName}`}
           title={<>{city.h1.split(' à ')[0]} à<br /><span className="italic text-corail-300 font-normal">{city.name}.</span></>}
@@ -173,7 +172,7 @@ export default function CityPage({ city, neighbours }: CityPageProps) {
                       ))}
                     </ul>
                     <Link
-                      href={CONTACT_PATH}
+                      href={QUOTE_PATH}
                       className="mt-8 inline-flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.18em] text-corail-300 hover:text-corail-200 transition"
                     >
                       Demander un devis
@@ -205,8 +204,9 @@ export default function CityPage({ city, neighbours }: CityPageProps) {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
               {SERVICES.map((service, i) => (
-                <motion.div
+                <motion.a
                   key={service.id}
+                  href={serviceHref(service.slug)}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-50px' }}
@@ -220,7 +220,7 @@ export default function CityPage({ city, neighbours }: CityPageProps) {
                   <p className="mt-3 text-[13px] text-espresso-500 leading-relaxed">
                     {service.excerpt}
                   </p>
-                </motion.div>
+                </motion.a>
               ))}
             </div>
           </div>
@@ -270,8 +270,7 @@ export default function CityPage({ city, neighbours }: CityPageProps) {
           title={`FAQ — Peintre à ${city.name}`}
           items={cityFaq}
         />
-        <CTA />
-      </Layout>
+      </SiteLayout>
     </>
   );
 }
