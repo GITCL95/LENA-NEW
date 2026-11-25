@@ -1,3 +1,5 @@
+import { PONTOISE_PATH } from './client';
+
 export type City = {
   name: string;
   slug: string;
@@ -20,33 +22,35 @@ export type City = {
   landmarks: string;
 };
 
+export const PONTOISE: City = {
+  name: 'Pontoise',
+  slug: 'pontoise',
+  href: PONTOISE_PATH,
+  filePath: 'peintre-pontoise',
+  postalCode: '95000',
+  distance: '35 min',
+  department: '95',
+  departmentName: 'Val-d\'Oise',
+  population: '30 000 hab.',
+  priority: 1,
+  description:
+    "Préfecture du Val-d'Oise, Pontoise mêle patrimoine médiéval et maisons de caractère. Léna Rénove intervient sur tout le centre historique (rue Thiers, rue de Gisors) comme sur les quartiers résidentiels (Les Louvrais, Marcouville) pour vos travaux de peinture intérieure, enduit de ratissage, pose de papier peint et relooking en vinyle adhésif.",
+  neighbourhoods: ['Centre historique', 'Les Louvrais', 'Marcouville', 'Maradas'],
+  nearbyCities: ['cergy', 'marines-95', 'chars-95'],
+  keyword: 'peintre pontoise',
+  secondaryKeywords: ['peinture intérieure pontoise', 'travaux de ratissage pontoise', 'pose de tapisserie pontoise', 'peinture de boiseries pontoise'],
+  title: 'Peintre Pontoise (95) · Peinture intérieure · Léna Rénove',
+  metaDescription: "Artisan peintre à Pontoise (95). Peinture intérieure, ratissage, tapisserie, boiseries. Devis gratuit 24h. CAP Peintre, RC Pro. Tollens & Sikkens.",
+  h1: 'Peintre à Pontoise',
+  landmarks: 'Cathédrale Saint-Maclou, Musée Tavet-Delacour, centre médiéval',
+};
+
 export const CITIES: City[] = [
-  {
-    name: 'Pontoise',
-    slug: 'pontoise',
-    href: '/peintre-pontoise.html',
-    filePath: 'peintre-pontoise',
-    postalCode: '95000',
-    distance: '35 min',
-    department: '95',
-    departmentName: 'Val-d\'Oise',
-    population: '30 000 hab.',
-    priority: 1,
-    description:
-      "Préfecture du Val-d'Oise, Pontoise mêle patrimoine médiéval et maisons de caractère. Léna Rénove intervient sur tout le centre historique (rue Thiers, rue de Gisors) comme sur les quartiers résidentiels (Les Louvrais, Marcouville) pour vos travaux de peinture intérieure, enduit de ratissage, pose de papier peint et relooking en vinyle adhésif.",
-    neighbourhoods: ['Centre historique', 'Les Louvrais', 'Marcouville', 'Maradas'],
-    nearbyCities: ['cergy', 'marines-95', 'chars-95'],
-    keyword: 'peintre pontoise',
-    secondaryKeywords: ['peinture intérieure pontoise', 'travaux de ratissage pontoise', 'pose de tapisserie pontoise', 'peinture de boiseries pontoise'],
-    title: 'Peintre Pontoise (95) · Peinture intérieure · Léna Rénove',
-    metaDescription: "Artisan peintre à Pontoise (95). Peinture intérieure, ratissage, tapisserie, boiseries. Devis gratuit 24h. CAP Peintre, RC Pro. Tollens & Sikkens.",
-    h1: 'Peintre à Pontoise',
-    landmarks: 'Cathédrale Saint-Maclou, Musée Tavet-Delacour, centre médiéval',
-  },
+  PONTOISE,
   {
     name: 'Cergy',
     slug: 'cergy',
-    href: '/peintre-cergy.html',
+    href: '/peintre-cergy',
     filePath: 'peintre-cergy',
     postalCode: '95000',
     distance: '30 min',
@@ -68,7 +72,7 @@ export const CITIES: City[] = [
   {
     name: 'Gisors',
     slug: 'gisors',
-    href: '/peintre-gisors.html',
+    href: '/peintre-gisors',
     filePath: 'peintre-gisors',
     postalCode: '27140',
     distance: '35 min',
@@ -90,7 +94,7 @@ export const CITIES: City[] = [
   {
     name: 'Marines',
     slug: 'marines-95',
-    href: '/peintre-marines-95.html',
+    href: '/peintre-marines-95',
     filePath: 'peintre-marines-95',
     postalCode: '95640',
     distance: '30 min',
@@ -112,7 +116,7 @@ export const CITIES: City[] = [
   {
     name: 'Chars',
     slug: 'chars-95',
-    href: '/peintre-chars-95.html',
+    href: '/peintre-chars-95',
     filePath: 'peintre-chars-95',
     postalCode: '95750',
     distance: '30 min',
@@ -134,7 +138,7 @@ export const CITIES: City[] = [
   {
     name: 'Chaumont-en-Vexin',
     slug: 'chaumont-en-vexin',
-    href: '/peintre-chaumont-en-vexin.html',
+    href: '/peintre-chaumont-en-vexin',
     filePath: 'peintre-chaumont-en-vexin',
     postalCode: '60240',
     distance: '45 min',

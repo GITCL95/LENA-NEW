@@ -10,7 +10,7 @@ import FAQ from '@components/sections/FAQ';
 import CTA from '@components/sections/CTA';
 import { CITIES, City, getCityBySlug } from '@data/cities';
 import { SERVICES } from '@data/services';
-import { CLIENT, SITE_URL } from '@data/client';
+import { CLIENT, CONTACT_PATH, PONTOISE_PATH, SITE_URL, ZONES_PATH } from '@data/client';
 import { buildWebPageSchema, buildBreadcrumbSchema, buildFAQSchema } from '@data/schemas';
 
 interface CityPageProps {
@@ -20,7 +20,7 @@ interface CityPageProps {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: CITIES.map((c) => ({ params: { slug: c.filePath } })),
+    paths: CITIES.filter((city) => city.href !== PONTOISE_PATH).map((city) => ({ params: { slug: city.filePath } })),
     fallback: false,
   };
 };
@@ -67,7 +67,7 @@ export default function CityPage({ city, neighbours }: CityPageProps) {
     buildWebPageSchema({ path, title: city.title, description: city.metaDescription }),
     buildBreadcrumbSchema([
       { name: 'Accueil', url: `${SITE_URL}/` },
-      { name: 'Zones', url: `${SITE_URL}/peintre-renovation-val-d-oise-yvelines.html` },
+      { name: 'Zones', url: `${SITE_URL}${ZONES_PATH}` },
       { name: city.name, url: `${SITE_URL}${path}` },
     ]),
     buildFAQSchema(cityFaq),
@@ -100,7 +100,7 @@ export default function CityPage({ city, neighbours }: CityPageProps) {
           description={city.description.split('.')[0] + '.'}
           breadcrumb={[
             { label: 'Accueil', href: '/' },
-            { label: 'Zones', href: '/peintre-renovation-val-d-oise-yvelines.html' },
+            { label: 'Zones', href: ZONES_PATH },
             { label: city.name },
           ]}
         />
@@ -173,7 +173,7 @@ export default function CityPage({ city, neighbours }: CityPageProps) {
                       ))}
                     </ul>
                     <Link
-                      href="/contact-peintre-magny-en-vexin.html"
+                      href={CONTACT_PATH}
                       className="mt-8 inline-flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.18em] text-corail-300 hover:text-corail-200 transition"
                     >
                       Demander un devis
@@ -238,7 +238,7 @@ export default function CityPage({ city, neighbours }: CityPageProps) {
                     <span className="italic text-corail-600 font-normal">couvertes.</span>
                   </h2>
                 </div>
-                <Link href="/peintre-renovation-val-d-oise-yvelines.html" className="btn-link">
+                <Link href={ZONES_PATH} className="btn-link">
                   Toutes les zones <ArrowRight size={14} strokeWidth={1.8} />
                 </Link>
               </div>

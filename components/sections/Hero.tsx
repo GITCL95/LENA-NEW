@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import { CLIENT } from '@data/client';
+import { CLIENT, CONTACT_PATH } from '@data/client';
 
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -80,7 +80,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.55, ease: [0.19, 1, 0.22, 1] }}
             className="mt-12 flex flex-wrap items-center gap-4"
           >
-            <Link href="/contact-peintre-magny-en-vexin.html" className="btn-primary">
+            <Link href={CONTACT_PATH} className="btn-primary">
               Devis Gratuit
               <ArrowRight size={16} strokeWidth={2} />
             </Link>

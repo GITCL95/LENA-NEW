@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Instagram, Mail, MapPin } from 'lucide-react';
-import { CLIENT, NAV_ROUTES } from '@data/client';
+import { CLIENT, CONTACT_PATH, NAV_ROUTES } from '@data/client';
 import { CITIES } from '@data/cities';
 
 export default function Footer() {
@@ -24,7 +24,7 @@ export default function Footer() {
             </h2>
           </div>
           <div className="flex flex-wrap gap-4">
-            <Link href="/contact-peintre-magny-en-vexin.html" className="btn-primary">
+            <Link href={CONTACT_PATH} className="btn-primary">
               Devis Gratuit
             </Link>
           </div>

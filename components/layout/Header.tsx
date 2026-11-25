@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@lib/cn';
-import { NAV_ROUTES, CLIENT } from '@data/client';
+import { NAV_ROUTES, CLIENT, CONTACT_PATH } from '@data/client';
 
 interface HeaderProps {
   currentPath?: string;
@@ -77,7 +77,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
 
           <div className="flex items-center gap-3">
             <Link
-              href="/contact-peintre-magny-en-vexin.html"
+              href={CONTACT_PATH}
               className="hidden md:inline-flex btn-primary !py-3 !px-6 !text-[12px]"
             >
               Devis Gratuit
@@ -126,7 +126,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
                 className="mt-6"
               >
                 <Link
-                  href="/contact-peintre-magny-en-vexin.html"
+                  href={CONTACT_PATH}
                   onClick={() => setOpen(false)}
                   className="btn-primary"
                 >

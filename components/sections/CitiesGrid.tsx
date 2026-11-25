@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, MapPin } from 'lucide-react';
 import { CITIES } from '@data/cities';
+import { ZONES_PATH } from '@data/client';
 
 export default function CitiesGrid() {
   return (
@@ -24,7 +25,7 @@ export default function CitiesGrid() {
             </p>
           </motion.div>
 
-          <Link href="/peintre-renovation-val-d-oise-yvelines.html" className="btn-outline">
+          <Link href={ZONES_PATH} className="btn-outline">
             Voir toutes les zones
             <ArrowUpRight size={16} strokeWidth={1.8} />
           </Link>

@@ -1,0 +1,397 @@
+.hero {
+  padding-block: 3.125rem 2.65625rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero h1 {
+  margin-block: 0.8125rem 1rem;
+  font-size: clamp(3.75rem, 6.53vw, 5.875rem);
+  letter-spacing: -0.057em;
+  line-height: 1;
+}
+
+.heroDescription {
+  max-width: 37rem;
+  color: var(--muted);
+  font-size: 1.125rem;
+  line-height: 1.55;
+}
+
+.heroLink {
+  display: none;
+}
+
+.details {
+  background: var(--white);
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.62fr) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(2rem, 5.4vw, 4.875rem);
+  padding-block: 3.3125rem 5.171875rem;
+}
+
+.formTitle {
+  font-size: clamp(2.625rem, 3.475vw, 3.125rem);
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+
+.requiredNote {
+  margin-top: 0.46875rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.form {
+  --control-border: #cbb5a7;
+
+  display: grid;
+  gap: 1.15625rem;
+  margin-top: 1.34375rem;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.15625rem 1rem;
+}
+
+.cityField {
+  grid-column: 1 / -1;
+}
+
+.label {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 750;
+  line-height: 1.4;
+}
+
+.requiredMark {
+  color: var(--rust);
+}
+
+.control {
+  display: block;
+  width: 100%;
+  min-height: 2.875rem;
+  margin-top: 0.3125rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--control-border);
+  border-radius: 0.375rem;
+  background: var(--paper);
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.control::placeholder {
+  color: #73594b;
+  opacity: 1;
+}
+
+.form textarea {
+  height: 8.333rem;
+  min-height: 8.333rem;
+  padding-top: 0.75rem;
+  resize: vertical;
+}
+
+.form input:focus-visible,
+.form textarea:focus-visible {
+  outline: 2px solid var(--rust);
+  outline-offset: 2px;
+}
+
+.label span:not(.requiredMark),
+.servicesHint,
+.consent {
+  color: var(--muted);
+  font-size: 0.8125rem;
+  font-weight: 400;
+}
+
+.servicesHint {
+  margin-top: 0.1875rem;
+  line-height: 1.5;
+}
+
+.services {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  margin-top: 0.5rem;
+}
+
+.service {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-height: 2.25rem;
+  padding: 0.375rem 0.625rem;
+  border: 1px solid #dac1b3;
+  border-radius: 999px;
+  background: var(--paper);
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  cursor: pointer;
+}
+
+.service:hover,
+.service:has(:checked) {
+  border-color: var(--rust);
+}
+
+.form input[type='checkbox'] {
+  flex: 0 0 auto;
+  width: 0.875rem;
+  height: 0.875rem;
+  accent-color: var(--rust);
+  cursor: pointer;
+}
+
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  margin-top: 0.125rem;
+  line-height: 1.5;
+}
+
+.consent input {
+  margin-top: 0.0625rem;
+}
+
+.consent label {
+  cursor: pointer;
+}
+
+.consent a {
+  color: var(--rust);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.submit {
+  justify-self: start;
+  margin-top: -0.40625rem;
+  padding-inline: 1.5rem;
+}
+
+.submit:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.error,
+.confirmation {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  background: var(--paper);
+}
+
+.error {
+  color: var(--rust);
+}
+
+.confirmation {
+  margin-top: 1rem;
+  color: var(--muted);
+}
+
+.confirmation h3 {
+  color: var(--ink);
+  font-size: 1.75rem;
+}
+
+.sidebar {
+  display: grid;
+  gap: 0.9375rem;
+}
+
+.direct {
+  --accent: var(--peach);
+
+  padding: 1.625rem 1.5rem 0.9375rem;
+  border-radius: 0.3125rem 3.25rem 0.3125rem 0.3125rem;
+  background: var(--dark);
+  color: #fff8ef;
+}
+
+.direct h2 {
+  margin-block: 0.3125rem 0.6875rem;
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+.directLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 3.875rem;
+  padding-block: 0.625rem;
+  border-top: 1px solid var(--dark-border);
+  color: var(--peach);
+  font-size: 1rem;
+  font-weight: 750;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.directLink:hover {
+  color: #ffc4ac;
+}
+
+.directLabel {
+  display: block;
+  margin-bottom: 0.125rem;
+  color: var(--dark-text);
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+.office {
+  padding: 1.125rem 1.4375rem 0.9375rem;
+  border: 1px solid var(--border);
+  border-radius: 0.4375rem;
+  background: var(--paper);
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.office h3 {
+  margin-bottom: 0.3125rem;
+  color: var(--ink);
+  font-size: 1.625rem;
+  line-height: 1.12;
+}
+
+.registration {
+  margin-top: 0.46875rem;
+  font-size: 0.75rem;
+}
+
+.hours {
+  margin-top: 0.875rem;
+  padding-top: 0.875rem;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 57.5rem) {
+  .hero {
+    padding-block: 1.8125rem 1.71875rem;
+  }
+
+  .hero h1 {
+    margin-block: 0.6875rem 0.8125rem;
+    font-size: clamp(2.5rem, 13.46vw, 4rem);
+    line-height: 1;
+  }
+
+  .hero h1 em {
+    display: block;
+  }
+
+  .heroDescription {
+    font-size: 1rem;
+  }
+
+  .heroLink {
+    display: inline-flex;
+    margin-top: 0.78125rem;
+    font-size: 0.875rem;
+  }
+
+  .columns {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.1875rem;
+    padding-block: 1.9375rem 2.5625rem;
+  }
+
+  .formTitle {
+    font-size: clamp(1.75rem, 8.46vw, 2.75rem);
+    line-height: 1.05;
+  }
+
+  .requiredNote,
+  .label span:not(.requiredMark),
+  .servicesHint,
+  .consent {
+    font-size: 0.8125rem;
+  }
+
+  .requiredNote {
+    margin-top: 0.34375rem;
+  }
+
+  .form {
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .fields {
+    gap: 0.9375rem 0.5625rem;
+  }
+
+  .contactField {
+    grid-column: 1 / -1;
+  }
+
+  .label {
+    font-size: 0.875rem;
+  }
+
+  .control {
+    padding-inline: 0.625rem;
+  }
+
+  .form textarea {
+    height: 8.375rem;
+    min-height: 8.375rem;
+  }
+
+  .service {
+    min-height: 2.1875rem;
+    padding-inline: 0.5625rem;
+    font-size: 0.75rem;
+  }
+
+  .form input[type='checkbox'] {
+    width: 0.9375rem;
+    height: 0.9375rem;
+  }
+
+  .consent {
+    gap: 0.5625rem;
+    margin-top: 0;
+  }
+
+  .submit {
+    justify-self: stretch;
+    min-height: 3.375rem;
+    margin-top: -0.21875rem;
+  }
+
+  .sidebar {
+    gap: 0.625rem;
+  }
+
+  .direct {
+    padding: 1.1875rem 1rem 0.59375rem;
+    border-radius: 0.3125rem 2.5rem 0.3125rem 0.3125rem;
+  }
+
+  .direct h2 {
+    margin-bottom: 0.75rem;
+  }
+
+  .office {
+    padding: 0.9375rem 0.9375rem 0.875rem;
+  }
+}

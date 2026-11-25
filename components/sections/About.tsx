@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight } from 'lucide-react';
-import { CLIENT } from '@data/client';
+import { CLIENT, CONTACT_PATH } from '@data/client';
 
 const CHECKS = [
   'CAP Peintre en Bâtiment — Diplôme d\'État',
@@ -110,7 +110,7 @@ export default function About() {
                 Notre histoire
                 <ArrowRight size={16} strokeWidth={2} />
               </Link>
-              <Link href="/contact-peintre-magny-en-vexin.html" className="btn-outline">
+              <Link href={CONTACT_PATH} className="btn-outline">
                 Demander un devis
               </Link>
             </div>

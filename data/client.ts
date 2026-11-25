@@ -1,4 +1,10 @@
 export const SITE_URL = "https://lena-renove.com";
+export const ABOUT_PATH = "/lena-renaud-peintre-magny-en-vexin";
+export const CONTACT_PATH = "/contact-peintre-magny-en-vexin";
+export const PORTFOLIO_PATH = "/portfolio";
+export const PAINTING_PATH = "/peinture-interieure-renovation-magny-en-vexin";
+export const ZONES_PATH = "/peintre-renovation-val-d-oise-yvelines";
+export const PONTOISE_PATH = "/peintre-pontoise";
 
 export const CLIENT = {
   brand: "Léna Rénove",
@@ -43,12 +49,9 @@ export const CLIENT = {
 
 export const NAV_ROUTES = [
   { label: "Accueil", href: "/" },
-  { label: "À propos", href: "/lena-renaud-peintre-magny-en-vexin.html" },
-  {
-    label: "Services",
-    href: "/peinture-interieure-renovation-magny-en-vexin.html",
-  },
-  { label: "Portfolio", href: "/portfolio.html" },
-  { label: "Zones", href: "/peintre-renovation-val-d-oise-yvelines.html" },
-  { label: "Contact", href: "/contact-peintre-magny-en-vexin.html" },
+  { label: "À propos", href: ABOUT_PATH },
+  { label: "Prestations", href: PAINTING_PATH },
+  { label: "Réalisations", href: PORTFOLIO_PATH },
+  { label: "Zones", href: ZONES_PATH },
+  { label: "Contact", href: CONTACT_PATH },
 ] as const;

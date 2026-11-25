@@ -1,199 +1,214 @@
 import Image from 'next/image';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { Check, ArrowRight, Clock, Euro, ShieldCheck } from 'lucide-react';
 import SEO from '@components/layout/SEO';
-import Layout from '@components/layout/Layout';
-import PageHero from '@components/sections/PageHero';
-import FAQ from '@components/sections/FAQ';
-import CTA from '@components/sections/CTA';
-import { SERVICES } from '@data/services';
-import { CLIENT, SITE_URL } from '@data/client';
-import { buildWebPageSchema, buildBreadcrumbSchema, buildFAQSchema } from '@data/schemas';
+import SiteLayout, { ArrowLink } from '@components/layout/SiteLayout';
+import { DetailFaq, DetailHero, OnPageNavigation } from '@components/sections/DetailPage';
+import { CLIENT, CONTACT_PATH, PAINTING_PATH, SITE_URL } from '@data/client';
+import { buildBreadcrumbSchema, buildFAQSchema, buildWebPageSchema } from '@data/schemas';
+import styles from '@/styles/Painting.module.css';
+import siteStyles from '@/styles/Site.module.css';
+import detailStyles from '@/styles/Detail.module.css';
 
-const SERVICES_FAQ = [
+const sections = [
+  { id: 'surfaces', label: 'Surfaces peintes' },
+  { id: 'finitions', label: 'Finitions et techniques' },
+  { id: 'etapes', label: 'Étapes du chantier' },
+  { id: 'tarif', label: 'Tarif' },
+  { id: 'realisations', label: 'Réalisations' },
+];
+
+const surfaces = [
+  { title: 'Murs', detail: 'Je prépare les supports avant de peindre. Lors de la visite, je relève l’état des murs et les surfaces à traiter.' },
+  { title: 'Plafonds', detail: 'Les plafonds sont préparés puis mis en peinture. Je protège le mobilier et les sols avant le début des travaux.' },
+  { title: 'Boiseries', detail: 'Les boiseries intérieures, comme les plinthes et les encadrements, sont préparées et peintes avec une finition adaptée au support.' },
+];
+
+const finishes = [
+  { id: 'matte', title: 'Mate', detail: 'Peu de reflets.' },
+  { id: 'satin', title: 'Satinée', detail: 'Des reflets doux.' },
+  { id: 'gloss', title: 'Brillante', detail: 'Des reflets plus marqués.' },
+];
+
+const steps = [
+  { title: 'Visite et mesures', detail: 'Je me déplace gratuitement pour examiner les surfaces, prendre les mesures et comprendre vos attentes.' },
+  { title: 'Devis détaillé', detail: 'Vous recevez sous 24 h le détail des quantités, des matériaux, de la main-d’œuvre et du délai.' },
+  { title: 'Protection et préparation', detail: 'Je protège sols et meubles. Selon l’état des supports, je les nettoie, les rebouche, les lisse et les ponce.' },
+  { title: 'Mise en peinture', detail: 'J’applique le nombre de couches prévu au devis et la finition choisie.' },
+  { title: 'Contrôle et livraison', detail: 'Nous vérifions le résultat ensemble. Le chantier est livré propre et les déchets sont évacués.' },
+];
+
+const priceFactors = [
+  { title: 'État des supports', detail: 'La préparation dépend des défauts à corriger avant la peinture.' },
+  { title: 'Nombre de couches', detail: 'Le nombre de couches retenu est pris en compte dans le devis.' },
+  { title: 'Finition choisie', detail: 'Le tarif varie selon la finition mate, satinée ou brillante.' },
+];
+
+const photos = [
   {
-    q: 'Quel est le prix au m² pour une peinture intérieure à Vétheuil (95) ?',
-    a: 'Entre 25 et 45 €/m² fournitures comprises selon l\'état du support, le nombre de couches et la finition choisie (mate, satinée, brillante). Devis gratuit et détaillé sous 24h après visite.',
+    src: '/assets/img/realisations/renovation-master-bedroom/renovation-master-bedroom-5.webp',
+    alt: 'Chambre aux murs terracotta avec deux fenêtres et un parquet clair',
+    caption: 'Peinture murale dans les tons terracotta',
+    sizes: '(max-width: 920px) 90vw, 52vw',
   },
   {
-    q: 'Pouvez-vous poser un papier peint panoramique professionnel ?',
-    a: 'Oui. Léna Rénove maîtrise la pose d\'intissé, de panoramique, de toile de verre et de voiles de rénovation. Chaque raccord est préparé avec soin pour un rendu sans défaut.',
-  },
-  {
-    q: 'Combien de temps dure un chantier de rénovation complète ?',
-    a: 'Pour un appartement de 50 m² : 3 à 5 jours. Pour une maison de 100 m² : 7 à 10 jours. Le devis précise le délai d\'exécution exact.',
-  },
-  {
-    q: 'Proposez-vous le relooking de cuisine en vinyle adhésif ?',
-    a: 'Oui. Le vinyle adhésif décoratif transforme meubles, portes et plans de travail sans gros travaux. Effets bois, cuir, métal, uni — rendu surprenant et longue durée.',
-  },
-  {
-    q: 'Quelles marques de peinture utilisez-vous ?',
-    a: 'Exclusivement Tollens et Sikkens — peintures professionnelles à la durabilité et au pouvoir couvrant supérieurs. Je sélectionne la gamme en fonction du support et de l\'usage.',
+    src: '/assets/img/realisations/renovation-master-bedroom/renovation-master-bedroom-6.webp',
+    alt: 'Deux portes foncées dans un angle aux murs terracotta',
+    caption: 'Détail de boiseries peintes',
+    sizes: '(max-width: 920px) 90vw, 32vw',
   },
 ];
 
-const PACKAGES = [
+const faq = [
   {
-    icon: Clock,
-    title: 'Intervention rapide',
-    text: 'Devis sous 24h. Début de chantier dans les 15 jours selon planning.',
+    q: 'Comment connaître la durée de mes travaux ?',
+    a: 'Le devis précise le délai d’exécution après la visite et la prise de mesures.',
   },
   {
-    icon: Euro,
-    title: 'Devis transparent',
-    text: 'Quantités, matériaux, main-d\'œuvre : tout est détaillé. Pas d\'extras cachés.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Garantie sérénité',
-    text: 'RC Pro active. Chantier net, déchets évacués, SAV assuré en cas de retouche.',
+    q: 'Le chantier est-il couvert par une assurance ?',
+    a: 'Oui. Léna Rénove est couverte par une responsabilité civile professionnelle. Léna Renaud est titulaire du CAP Peintre en bâtiment.',
   },
 ];
 
-export default function Services() {
-  const title = 'Peinture intérieure Vétheuil (95) · Services · Léna Rénove';
-  const description =
-    "Services de peinture intérieure, enduits de ratissage, pose de papier peint et vinyle adhésif à Vétheuil. CAP Peintre, RC Pro. Tollens & Sikkens. Devis 24h.";
-  const path = '/peinture-interieure-renovation-magny-en-vexin.html';
+const title = 'Peinture intérieure à Vétheuil (95) · Léna Rénove';
+const description = 'Peinture des murs, plafonds et boiseries par Léna Renaud à Vétheuil, dans le Val-d’Oise et les Yvelines. Devis gratuit sous 24 h après visite.';
+const jsonLd = [
+  buildWebPageSchema({ path: PAINTING_PATH, title, description }),
+  buildBreadcrumbSchema([
+    { name: 'Accueil', url: `${SITE_URL}/` },
+    { name: 'Peinture intérieure', url: `${SITE_URL}${PAINTING_PATH}` },
+  ]),
+  buildFAQSchema(faq),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    serviceType: 'Peinture intérieure',
+    url: `${SITE_URL}${PAINTING_PATH}`,
+    provider: { '@id': `${SITE_URL}/#business` },
+    areaServed: ['Val-d’Oise', 'Yvelines'],
+  },
+];
 
-  const jsonLd = [
-    buildWebPageSchema({ path, title, description }),
-    buildBreadcrumbSchema([
-      { name: 'Accueil', url: `${SITE_URL}/` },
-      { name: 'Services', url: `${SITE_URL}${path}` },
-    ]),
-    buildFAQSchema(SERVICES_FAQ),
-    {
-      '@context': 'https://schema.org',
-      '@type': 'Service',
-      serviceType: 'Peinture intérieure et rénovation',
-      provider: { '@id': `${SITE_URL}/#business` },
-      areaServed: { '@type': 'AdministrativeArea', name: 'Val-d\'Oise' },
-      hasOfferCatalog: {
-        '@type': 'OfferCatalog',
-        name: 'Services de peinture',
-        itemListElement: SERVICES.map((s) => ({
-          '@type': 'Offer',
-          name: s.title,
-          description: s.excerpt,
-        })),
-      },
-    },
-  ];
-
+export default function Painting() {
   return (
     <>
-      <SEO title={title} description={description} path={path} jsonLd={jsonLd} />
-      <Layout>
-        <PageHero
-          eyebrow="Services · Peinture intérieure"
-          title={<>Peinture, enduits, papier peint,<br /><span className="italic text-corail-300 font-normal">vinyle adhésif.</span></>}
-          description="Quatre expertises complémentaires pour transformer tous types d'intérieurs — appartements, maisons, locaux professionnels. Préparation exigeante, finitions impeccables."
-          breadcrumb={[
-            { label: 'Accueil', href: '/' },
-            { label: 'Services' },
-          ]}
+      <SEO title={title} description={description} path={PAINTING_PATH} jsonLd={jsonLd} />
+      <SiteLayout page="painting">
+        <DetailHero
+          id="peinture"
+          eyebrow="Artisane peintre · Vétheuil"
+          title="Peinture"
+          emphasis="intérieure."
+          description="Murs, plafonds et boiseries dans le neuf comme en rénovation. De la préparation des supports à la finition, votre chantier est réalisé par Léna Renaud."
+          photo={{
+            src: '/assets/img/projet-renov-3.jpg',
+            alt: 'Salon aux murs bleu-gris, soubassements blancs et parquet clair',
+            caption: 'Peinture d’un salon à Pontoise',
+          }}
         />
+        <OnPageNavigation sections={sections} />
 
-        {/* Packages bar */}
-        <section className="border-b border-border/60 bg-ivory-300">
-          <div className="container-premium">
-            <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border/70">
-              {PACKAGES.map((p) => (
-                <div key={p.title} className="py-8 md:py-10 px-6 flex items-start gap-5">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-corail-500 text-ivory grid place-items-center">
-                    <p.icon size={18} strokeWidth={1.8} />
+        <section id="surfaces" className={`${detailStyles.section} ${detailStyles.light}`} aria-labelledby="surfaces-title">
+          <div className={siteStyles.container}>
+            <div className={styles.splitHeading}>
+              <div>
+                <p className={siteStyles.eyebrow}>Surfaces peintes</p>
+                <h2 id="surfaces-title" className={siteStyles.sectionTitle}>Murs, plafonds <em>et boiseries.</em></h2>
+              </div>
+              <p>Pour les appartements, les maisons et les locaux professionnels, en neuf ou en rénovation.</p>
+            </div>
+            <ul className={`${styles.threeColumns} ${styles.surfaceGrid}`} role="list">
+              {surfaces.map(({ title, detail }) => (
+                <li key={title} className={styles.surface}>
+                  <h3>{title}</h3>
+                  <p>{detail}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section id="finitions" className={`${detailStyles.section} ${detailStyles.blush}`} aria-labelledby="finish-title">
+          <div className={siteStyles.container}>
+            <p className={siteStyles.eyebrow}>Finitions et techniques</p>
+            <h2 id="finish-title" className={`${siteStyles.sectionTitle} ${detailStyles.inlineTitle}`}>Du mat <em>au brillant.</em></h2>
+            <ul className={styles.threeColumns} role="list">
+              {finishes.map(({ id, title, detail }) => (
+                <li key={id} className={styles.finish}>
+                  <span className={styles.swatch} data-finish={id} aria-hidden="true" />
+                  <div className={styles.finishCopy}>
+                    <h3>{title}</h3>
+                    <p>{detail}</p>
                   </div>
-                  <div>
-                    <div className="font-display text-xl text-espresso-800">{p.title}</div>
-                    <p className="mt-1 text-[14px] text-espresso-500 leading-relaxed">{p.text}</p>
-                  </div>
-                </div>
+                </li>
+              ))}
+            </ul>
+            <p className={styles.finishNote}>Aperçus illustratifs des niveaux de brillance.</p>
+            <div className={styles.techniques}>
+              <div>
+                <h3>Peintures utilisées</h3>
+                <p>Peintures professionnelles <strong>{CLIENT.brands.join(' et ')}</strong>. Selon le support, la prestation prévoit une peinture acrylique, glycéro ou naturelle.</p>
+              </div>
+              <div>
+                <h3>Modes d’application</h3>
+                <p>Application <strong>manuelle ou au pistolet airless</strong>, selon la surface à peindre et l’état du support.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="etapes" className={`${detailStyles.section} ${detailStyles.light}`} aria-labelledby="steps-title">
+          <div className={siteStyles.container}>
+            <p className={siteStyles.eyebrow}>Étapes du chantier</p>
+            <h2 id="steps-title" className={siteStyles.sectionTitle}>De la visite <em>au contrôle final.</em></h2>
+            <ol className={styles.steps} role="list">
+              {steps.map(({ title, detail }, index) => (
+                <li key={title} className={styles.step}>
+                  <span className={styles.stepNumber} aria-hidden="true">{index + 1}</span>
+                  <div><h3>{title}</h3><p>{detail}</p></div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section id="tarif" className={`${detailStyles.section} ${styles.budget}`} aria-labelledby="budget-title">
+          <div className={`${siteStyles.container} ${styles.budgetInner}`}>
+            <div>
+              <p className={siteStyles.eyebrow}>Tarif de peinture intérieure</p>
+              <h2 id="budget-title" className={`${siteStyles.sectionTitle} ${detailStyles.inlineTitle}`}>Quel budget <em>prévoir ?</em></h2>
+              <p className={styles.price}>25 à 45 <span>€/m²</span></p>
+              <p className={styles.priceNote}>Fourchette indicative, fournitures comprises.</p>
+              <ArrowLink href={CONTACT_PATH} className={`${siteStyles.button} ${siteStyles.contactButton}`}>
+                Demander un devis
+              </ArrowLink>
+            </div>
+            <div className={styles.priceFactors}>
+              <h3>Ce qui fait varier le prix</h3>
+              <dl>
+                {priceFactors.map(({ title, detail }) => (
+                  <div key={title}><dt>{title}</dt><dd>{detail}</dd></div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </section>
+
+        <section id="realisations" className={`${detailStyles.section} ${detailStyles.light}`} aria-labelledby="painting-projects-title">
+          <div className={siteStyles.container}>
+            <p className={siteStyles.eyebrow}>Réalisations de peinture</p>
+            <h2 id="painting-projects-title" className={`${siteStyles.sectionTitle} ${detailStyles.inlineTitle}`}>Couleurs <em>et boiseries.</em></h2>
+            <div className={styles.photos}>
+              {photos.map(({ src, alt, caption, sizes }) => (
+                <figure key={src}>
+                  <div className={styles.projectPhoto}><Image src={src} alt={alt} fill sizes={sizes} /></div>
+                  <figcaption>{caption}</figcaption>
+                </figure>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Service blocks alternés */}
-        {SERVICES.map((service, i) => {
-          const reverse = i % 2 === 1;
-          return (
-            <section
-              key={service.id}
-              id={service.slug}
-              className={'section ' + (i % 2 === 1 ? 'bg-ivory-300' : '')}
-            >
-              <div className="container-premium">
-                <div className={'grid lg:grid-cols-12 gap-12 lg:gap-20 items-center ' + (reverse ? 'lg:[&>*:first-child]:order-2' : '')}>
-                  <motion.div
-                    initial={{ opacity: 0, x: reverse ? 30 : -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: '-80px' }}
-                    transition={{ duration: 1, ease: [0.19, 1, 0.22, 1] }}
-                    className="lg:col-span-6 relative"
-                  >
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-4xl">
-                      <Image
-                        src={service.image}
-                        alt={service.title}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 50vw"
-                        className="object-cover"
-                      />
-                    </div>
-                    <div className="absolute -top-6 -left-4 font-display text-[clamp(80px,10vw,160px)] text-corail-500/10 leading-none select-none pointer-events-none">
-                      {service.number}
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-80px' }}
-                    transition={{ duration: 0.9, delay: 0.1 }}
-                    className="lg:col-span-6"
-                  >
-                    <span className="eyebrow">Service {service.number} / 04</span>
-                    <h2 className="mt-5 font-display text-display-md tracking-tightest text-balance">
-                      {service.title}
-                    </h2>
-                    <p className="mt-6 text-espresso-600 leading-relaxed text-[17px]">
-                      {service.description}
-                    </p>
-
-                    <ul className="mt-8 grid sm:grid-cols-2 gap-3">
-                      {service.features.map((f) => (
-                        <li key={f} className="flex items-start gap-3 text-[15px] text-espresso-700">
-                          <span className="flex-shrink-0 w-6 h-6 rounded-full bg-corail-500 grid place-items-center mt-0.5">
-                            <Check size={13} className="text-ivory" strokeWidth={3} />
-                          </span>
-                          {f}
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div className="mt-10 flex flex-wrap gap-4">
-                      <Link href="/contact-peintre-magny-en-vexin.html" className="btn-primary">
-                        Devis pour ce service
-                        <ArrowRight size={16} strokeWidth={2} />
-                      </Link>
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
-            </section>
-          );
-        })}
-
-        <FAQ
-          eyebrow="Questions fréquentes"
-          title="FAQ — Nos services"
-          items={SERVICES_FAQ}
-        />
-        <CTA />
-      </Layout>
+        <DetailFaq items={faq} />
+      </SiteLayout>
     </>
   );
 }

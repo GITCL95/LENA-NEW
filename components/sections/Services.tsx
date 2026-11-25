@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { SERVICES } from '@data/services';
+import { PAINTING_PATH } from '@data/client';
 
 export default function Services() {
   return (
@@ -46,7 +47,7 @@ export default function Services() {
               transition={{ duration: 0.9, delay: i * 0.1, ease: [0.19, 1, 0.22, 1] }}
             >
               <Link
-                href={`/peinture-interieure-renovation-magny-en-vexin.html#${service.slug}`}
+                href={service.slug === 'peinture' ? PAINTING_PATH : `/#${service.slug}`}
                 className="group card-premium block"
               >
                 {/* Image */}
@@ -104,7 +105,7 @@ export default function Services() {
           transition={{ duration: 1, delay: 0.3 }}
           className="mt-14 flex justify-center"
         >
-          <Link href="/peinture-interieure-renovation-magny-en-vexin.html" className="btn-outline">
+          <Link href="/#prestations" className="btn-outline">
             Voir tous les services
             <ArrowUpRight size={16} strokeWidth={1.8} />
           </Link>

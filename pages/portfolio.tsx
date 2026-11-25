@@ -1,416 +1,270 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, Instagram, ArrowRight } from 'lucide-react';
 import SEO from '@components/layout/SEO';
-import Layout from '@components/layout/Layout';
-import CTA from '@components/sections/CTA';
-import { CLIENT, SITE_URL } from '@data/client';
-import { buildWebPageSchema, buildBreadcrumbSchema } from '@data/schemas';
+import SiteLayout, { Arrow } from '@components/layout/SiteLayout';
+import { CLIENT, PORTFOLIO_PATH, SITE_URL } from '@data/client';
+import { buildBreadcrumbSchema, buildWebPageSchema } from '@data/schemas';
+import styles from '@/styles/Portfolio.module.css';
+import siteStyles from '@/styles/Site.module.css';
 
-type Category = 'all' | 'cabinet-medical' | 'chambre' | 'escalier' | 'cuisine-bain' | 'wc';
+const CATEGORIES = {
+  'cabinet-medical': 'Cabinet médical',
+  chambre: 'Chambres',
+  escalier: 'Escaliers',
+  'cuisine-bain': 'Cuisine et bain',
+  wc: 'WC',
+} as const;
 
-const PROJECTS = [
-  // 1. Cabinet Médical
+type Category = keyof typeof CATEGORIES;
+type Photo = { src: string; alt: string };
+type Project = {
+  title: string;
+  category: Category;
+  photos: readonly [Photo, ...Photo[]];
+  before?: Photo;
+  coverPosition?: string;
+  wideOnMobile?: boolean;
+};
+
+function photo(folder: string, number: number, alt: string): Photo {
+  return { src: `/assets/img/realisations/${folder}/${folder}-${number}.webp`, alt };
+}
+
+const PROJECTS: readonly Project[] = [
   {
-    src: '/assets/img/realisations/cabinet-medical-fresque/cabinet-medical-fresque-1.webp',
-    alt: "Création d'une fresque murale artistique dans un cabinet médical (détail)",
+    title: 'Fresque dans une salle d’attente',
     category: 'cabinet-medical',
-    location: 'Pontoise'
+    before: photo('cabinet-medical-fresque', 1, 'Salle d’attente avant la réalisation de la fresque'),
+    photos: [
+      photo('cabinet-medical-fresque', 2, 'Salle d’attente après la réalisation de la fresque aux palmiers'),
+      photo('inauguration-cabinet-medical', 1, 'Inauguration du cabinet médical devant la fresque'),
+    ],
+    coverPosition: '42% center',
   },
   {
-    src: '/assets/img/realisations/cabinet-medical-fresque/cabinet-medical-fresque-2.webp',
-    alt: "Fresque murale personnalisée pour la salle d'attente d'un cabinet médical",
-    category: 'cabinet-medical',
-    location: 'Pontoise'
+    title: 'Papier peint panoramique',
+    category: 'chambre',
+    photos: [photo('papier-peint-panoramique-lit', 1, 'Chambre avec un papier peint panoramique derrière le lit')],
+    coverPosition: 'center 57%',
   },
   {
-    src: '/assets/img/realisations/inauguration-cabinet-medical/inauguration-cabinet-medical-1.webp',
-    alt: "Inauguration du cabinet médical après la réalisation de la fresque",
-    category: 'cabinet-medical',
-    location: 'Pontoise'
+    title: 'Rénovation d’un escalier',
+    category: 'escalier',
+    photos: [
+      photo('renovation-escalier-magistral', 3, 'Escalier en bois, soubassement gris et rampe en fer forgé'),
+      photo('renovation-escalier-magistral', 2, 'Palier et boiseries de la cage d’escalier'),
+      photo('renovation-escalier-magistral', 1, 'Vue plongeante de l’escalier et de sa rampe'),
+      photo('renovation-escalier-magistral', 4, 'Autre vue de la cage d’escalier'),
+    ],
+    coverPosition: 'center 58%',
   },
-
-  // 2. WC
   {
-    src: '/assets/img/realisations/decoration-wc/decoration-wc-1.webp',
-    alt: "Décoration des WC - Pose de papier peint à motifs géométriques",
+    title: 'Rénovation d’une cuisine',
+    category: 'cuisine-bain',
+    photos: [
+      photo('beton-cire-cuisine', 2, 'Cuisine rénovée avec des meubles bleus et un îlot en bois'),
+      photo('beton-cire-cuisine', 1, 'Autre vue des meubles bleus et de la crédence'),
+      photo('beton-cire-cuisine', 3, 'Vue de l’îlot et du plan de travail'),
+      photo('beton-cire-cuisine', 4, 'Détail des meubles et du plan de travail'),
+    ],
+    coverPosition: '51% center',
+  },
+  {
+    title: 'Rénovation d’une salle de bain',
+    category: 'cuisine-bain',
+    photos: [
+      photo('modification-chambre-sdb', 2, 'Salle de bain rénovée avec un meuble vasque et une paroi de douche'),
+      photo('modification-chambre-sdb', 1, 'Vue de la pièce en cours de transformation'),
+      photo('modification-chambre-sdb', 3, 'Autre vue de la pièce en travaux'),
+      photo('modification-chambre-sdb', 4, 'Détail de la douche'),
+    ],
+    coverPosition: 'center 54%',
+  },
+  {
+    title: 'Décoration de WC',
     category: 'wc',
-    location: 'Cergy'
+    photos: [
+      photo('decoration-wc', 2, 'WC décorés avec un soubassement peint en rouge sombre'),
+      photo('decoration-wc', 1, 'WC avant la décoration'),
+    ],
+    coverPosition: 'center 57%',
   },
   {
-    src: '/assets/img/realisations/decoration-wc/decoration-wc-2.webp',
-    alt: "Décoration des WC - Finition peinture et harmonie des couleurs",
-    category: 'wc',
-    location: 'Cergy'
-  },
-
-  // 3. Escaliers
-  {
-    src: '/assets/img/realisations/entretien-cage-escalier/entretien-cage-escalier-1.webp',
-    alt: "Entretien d'une cage d'escalier - Préparation et mise en peinture des murs",
-    category: 'escalier',
-    location: 'Conflans-Sainte-Honorine'
-  },
-  {
-    src: '/assets/img/realisations/entretien-cage-escalier/entretien-cage-escalier-2.webp',
-    alt: "Mise en peinture blanche et finitions soignées de la cage d'escalier",
-    category: 'escalier',
-    location: 'Conflans-Sainte-Honorine'
-  },
-  {
-    src: '/assets/img/realisations/entretien-cage-escalier/entretien-cage-escalier-3.webp',
-    alt: "Cage d'escalier rénovée - Luminosité et propreté retrouvées",
-    category: 'escalier',
-    location: 'Conflans-Sainte-Honorine'
-  },
-  {
-    src: '/assets/img/realisations/renovation-escalier-magistral/renovation-escalier-magistral-1.webp',
-    alt: "Rénovation d'un accent d'escalier magistral - Ponçage et préparation du bois",
-    category: 'escalier',
-    location: 'Saint-Germain-en-Laye'
-  },
-  {
-    src: '/assets/img/realisations/renovation-escalier-magistral/renovation-escalier-magistral-2.webp',
-    alt: "Mise en peinture bicolore de l'escalier magistral",
-    category: 'escalier',
-    location: 'Saint-Germain-en-Laye'
-  },
-  {
-    src: '/assets/img/realisations/renovation-escalier-magistral/renovation-escalier-magistral-3.webp',
-    alt: "Finitions de peinture sur les marches et contremarches",
-    category: 'escalier',
-    location: 'Saint-Germain-en-Laye'
-  },
-  {
-    src: '/assets/img/realisations/renovation-escalier-magistral/renovation-escalier-magistral-4.webp',
-    alt: "Escalier magistral rénové - Rendu élégant et moderne",
-    category: 'escalier',
-    location: 'Saint-Germain-en-Laye'
-  },
-
-  // 4. Cuisine & Bain
-  {
-    src: '/assets/img/realisations/modification-chambre-sdb/modification-chambre-sdb-1.webp',
-    alt: "Transformation d'une chambre en salle de bain - Douche à l'italienne",
-    category: 'cuisine-bain',
-    location: 'Herblay'
-  },
-  {
-    src: '/assets/img/realisations/modification-chambre-sdb/modification-chambre-sdb-2.webp',
-    alt: "Rénovation de salle de bain - Pose de faïence et peinture résistante à l'humidité",
-    category: 'cuisine-bain',
-    location: 'Herblay'
-  },
-  {
-    src: '/assets/img/realisations/modification-chambre-sdb/modification-chambre-sdb-3.webp',
-    alt: "Transformation de chambre en salle de bain - Aménagement et peinture",
-    category: 'cuisine-bain',
-    location: 'Herblay'
-  },
-  {
-    src: '/assets/img/realisations/modification-chambre-sdb/modification-chambre-sdb-4.webp',
-    alt: "Finitions de la nouvelle salle de bain - Peinture et décoration",
-    category: 'cuisine-bain',
-    location: 'Herblay'
-  },
-  {
-    src: '/assets/img/realisations/beton-cire-cuisine/beton-cire-cuisine-1.webp',
-    alt: "Application de béton ciré sur le plan de travail de cuisine",
-    category: 'cuisine-bain',
-    location: 'L\'Isle-Adam'
-  },
-  {
-    src: '/assets/img/realisations/beton-cire-cuisine/beton-cire-cuisine-2.webp',
-    alt: "Béton ciré de cuisine - Détail du lissage de l'enduit",
-    category: 'cuisine-bain',
-    location: 'L\'Isle-Adam'
-  },
-  {
-    src: '/assets/img/realisations/beton-cire-cuisine/beton-cire-cuisine-3.webp',
-    alt: "Plan de travail en béton ciré - Finition protectrice hydrofuge",
-    category: 'cuisine-bain',
-    location: 'L\'Isle-Adam'
-  },
-  {
-    src: '/assets/img/realisations/beton-cire-cuisine/beton-cire-cuisine-4.webp',
-    alt: "Mise en peinture des meubles et portes de cuisine",
-    category: 'cuisine-bain',
-    location: 'L\'Isle-Adam'
-  },
-  {
-    src: '/assets/img/realisations/beton-cire-cuisine/beton-cire-cuisine-5.webp',
-    alt: "Entretien et rénovation de cuisine - Rendu final du plan de travail et des meubles",
-    category: 'cuisine-bain',
-    location: 'L\'Isle-Adam'
-  },
-  {
-    src: '/assets/img/realisations/beton-cire-cuisine/beton-cire-cuisine-6.webp',
-    alt: "Rénovation de cuisine - Préparation des surfaces avant peinture",
-    category: 'cuisine-bain',
-    location: 'L\'Isle-Adam'
-  },
-  {
-    src: '/assets/img/realisations/beton-cire-cuisine/beton-cire-cuisine-7.webp',
-    alt: "Application de la peinture de finition sur les façades de cuisine",
-    category: 'cuisine-bain',
-    location: 'L\'Isle-Adam'
-  },
-  {
-    src: '/assets/img/realisations/beton-cire-cuisine/beton-cire-cuisine-8.webp',
-    alt: "Détail de finition sur le béton ciré et jonction crédence",
-    category: 'cuisine-bain',
-    location: 'L\'Isle-Adam'
-  },
-
-  // 5. Chambres
-  {
-    src: '/assets/img/realisations/papier-peint-panoramique-lit/papier-peint-panoramique-lit-1.webp',
-    alt: "Pose de papier peint panoramique moderne en tête de lit",
+    title: 'Chambre aux tons terracotta',
     category: 'chambre',
-    location: 'Magny-en-Vexin'
+    photos: [
+      photo('renovation-master-bedroom', 5, 'Chambre aux murs terracotta et au parquet en bois'),
+      photo('renovation-master-bedroom', 6, 'Détail des portes foncées sur les murs terracotta'),
+    ],
+    coverPosition: 'center 56%',
   },
   {
-    src: '/assets/img/realisations/renovation-master-bedroom/renovation-master-bedroom-1.webp',
-    alt: "Rénovation de la chambre parentale - Peinture murale raffinée",
+    title: 'Chambre sous les combles',
     category: 'chambre',
-    location: 'Enghien-les-Bains'
+    photos: [photo('renovation-chambre-chapelle', 1, 'Chambre sous les combles avec poutres apparentes et une fenêtre centrale')],
+    coverPosition: 'center 55%',
+    wideOnMobile: true,
   },
-  {
-    src: '/assets/img/realisations/renovation-master-bedroom/renovation-master-bedroom-2.webp',
-    alt: "Pose de papier peint panoramique floral en tête de lit",
-    category: 'chambre',
-    location: 'Enghien-les-Bains'
-  },
-  {
-    src: '/assets/img/realisations/renovation-master-bedroom/renovation-master-bedroom-3.webp',
-    alt: "Rénovation master bedroom - Association de la peinture et du papier peint",
-    category: 'chambre',
-    location: 'Enghien-les-Bains'
-  },
-  {
-    src: '/assets/img/realisations/renovation-master-bedroom/renovation-master-bedroom-4.webp',
-    alt: "Master bedroom - Zoom sur la pose parfaite du lé de papier peint",
-    category: 'chambre',
-    location: 'Enghien-les-Bains'
-  },
-  {
-    src: '/assets/img/realisations/renovation-master-bedroom/renovation-master-bedroom-5.webp',
-    alt: "Rénovation de la suite parentale - Préparation minutieuse des supports",
-    category: 'chambre',
-    location: 'Enghien-les-Bains'
-  },
-  {
-    src: '/assets/img/realisations/renovation-master-bedroom/renovation-master-bedroom-6.webp',
-    alt: "Chambre parentale rénovée - Ambiance douce et lumineuse",
-    category: 'chambre',
-    location: 'Enghien-les-Bains'
-  },
-  {
-    src: '/assets/img/realisations/renovation-chambre-chapelle/renovation-chambre-chapelle-1.webp',
-    alt: "Rénovation de la chambre chapelle - Peinture et décoration",
-    category: 'chambre',
-    location: 'Marines'
-  }
 ];
 
-const FILTERS: { id: Category; label: string }[] = [
+const FILTERS = [
   { id: 'all', label: 'Tous les projets' },
-  { id: 'cabinet-medical', label: 'Cabinet médical' },
-  { id: 'chambre', label: 'Chambres' },
-  { id: 'escalier', label: 'Escaliers' },
-  { id: 'cuisine-bain', label: 'Cuisine & Bain' },
-  { id: 'wc', label: 'WC' },
+  ...(Object.keys(CATEGORIES) as Category[]).map((id) => ({ id, label: CATEGORIES[id] })),
+] as const;
+
+const title = 'Réalisations · Les chantiers en images · Léna Rénove';
+const description = 'Avant/après et détails de finition des chantiers de Léna Rénove dans le Val-d’Oise et les Yvelines.';
+const jsonLd = [
+  buildWebPageSchema({ path: PORTFOLIO_PATH, title, description }),
+  buildBreadcrumbSchema([
+    { name: 'Accueil', url: `${SITE_URL}/` },
+    { name: 'Réalisations', url: `${SITE_URL}${PORTFOLIO_PATH}` },
+  ]),
 ];
 
 export default function Portfolio() {
-  const [filter, setFilter] = useState<Category>('all');
-  const [lightbox, setLightbox] = useState<number | null>(null);
+  const [filter, setFilter] = useState<Category | 'all'>('all');
+  const [selected, setSelected] = useState<Project | null>(null);
+  const [photoIndex, setPhotoIndex] = useState(0);
+  const dialog = useRef<HTMLDialogElement>(null);
+  const projects = filter === 'all' ? PROJECTS : PROJECTS.filter(({ category }) => category === filter);
+  const selectedPhotos = selected?.before ? [selected.before, ...selected.photos] : selected?.photos;
+  const currentPhoto = selectedPhotos?.[photoIndex];
 
-  const filtered = filter === 'all' ? PROJECTS : PROJECTS.filter((p) => p.category === filter);
+  function openProject(project: Project) {
+    setSelected(project);
+    setPhotoIndex(0);
+    dialog.current?.showModal();
+  }
 
-  const title = 'Portfolio · Réalisations peinture · Léna Rénove';
-  const description = 'Découvrez les réalisations de Léna Rénove, artisan peintre dans le Val-d\'Oise. Peinture, papier peint, enduits et vinyle adhésif en images.';
-
-  const jsonLd = [
-    buildWebPageSchema({ path: '/portfolio.html', title, description }),
-    buildBreadcrumbSchema([
-      { name: 'Accueil', url: `${SITE_URL}/` },
-      { name: 'Portfolio', url: `${SITE_URL}/portfolio.html` },
-    ]),
-  ];
+  function changePhoto(direction: number) {
+    const count = selectedPhotos?.length ?? 0;
+    if (count > 1) setPhotoIndex((index) => (index + direction + count) % count);
+  }
 
   return (
     <>
-      <SEO title={title} description={description} path="/portfolio.html" jsonLd={jsonLd} />
-      <Layout>
-        {/* Hero */}
-        <section className="relative pt-44 pb-20 md:pt-52 md:pb-24 bg-espresso-800 text-ivory overflow-hidden">
-          <div className="absolute inset-0 grain-overlay opacity-50" />
-          <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-corail-500/15 rounded-full blur-3xl" />
-          <div className="container-premium relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: [0.19, 1, 0.22, 1] }}
-              className="max-w-4xl"
-            >
-              <span className="eyebrow !text-corail-300 before:!bg-corail-400">Portfolio</span>
-              <h1 className="mt-6 font-display text-display-xl tracking-tightest text-balance">
-                Réalisations
-                <span className="italic text-corail-300 font-normal"> soignées.</span>
-              </h1>
-              <p className="mt-6 max-w-2xl text-ivory/75 text-lg leading-relaxed">
-                Avant/après, détails de finitions, chantiers en cours. Les projets
-                réalisés par Léna Rénove dans le Val-d&apos;Oise et les Yvelines.
-              </p>
-              <a
-                href={CLIENT.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-8 inline-flex items-center gap-3 text-[13px] font-semibold uppercase tracking-[0.18em] text-corail-300 hover:text-corail-200 transition"
-              >
-                <span className="w-10 h-10 rounded-full border border-corail-300/40 grid place-items-center">
-                  <Instagram size={16} strokeWidth={1.5} />
-                </span>
-                Suivre {CLIENT.instagramHandle}
-              </a>
-            </motion.div>
+      <SEO title={title} description={description} path={PORTFOLIO_PATH} jsonLd={jsonLd} />
+      <SiteLayout page="portfolio">
+        <section className={styles.hero} aria-labelledby="portfolio-title">
+          <div className={siteStyles.container}>
+            <p className={siteStyles.eyebrow}>Réalisations</p>
+            <h1 id="portfolio-title">Les chantiers <em>en images.</em></h1>
+            <p className={styles.description}>{description}</p>
           </div>
         </section>
 
-        {/* Filters + Grid */}
-        <section className="section">
-          <div className="container-premium">
-            {/* Filters */}
-            <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-14">
-              {FILTERS.map((f) => (
+        <section className={styles.gallery} aria-label="Projets réalisés">
+          <div className={siteStyles.container}>
+            <div className={styles.filters} role="group" aria-label="Filtrer les projets">
+              {FILTERS.map(({ id, label }) => (
                 <button
-                  key={f.id}
-                  onClick={() => setFilter(f.id)}
-                  className={
-                    'px-5 py-2.5 text-[12px] font-semibold uppercase tracking-[0.15em] rounded-full border transition-all duration-300 ' +
-                    (filter === f.id
-                      ? 'bg-espresso-800 border-espresso-800 text-ivory'
-                      : 'bg-transparent border-border text-espresso-600 hover:border-espresso-800 hover:text-espresso-800')
-                  }
+                  key={id}
+                  type="button"
+                  className={styles.filter}
+                  aria-pressed={filter === id}
+                  aria-controls="portfolio-projects"
+                  onClick={() => setFilter(id)}
                 >
-                  {f.label}
+                  {label}
                 </button>
               ))}
             </div>
+            <p className="sr-only" role="status">{projects.length} {projects.length === 1 ? 'projet' : 'projets'}</p>
 
-            {/* Masonry grid */}
-            <motion.div layout className="columns-1 md:columns-2 lg:columns-3 gap-5">
-              <AnimatePresence>
-                {filtered.map((project, i) => (
-                  <motion.button
-                    key={project.src}
-                    layout
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.6, delay: i * 0.04, ease: [0.19, 1, 0.22, 1] }}
-                    onClick={() => setLightbox(PROJECTS.indexOf(project))}
-                    className="group relative block w-full mb-5 break-inside-avoid overflow-hidden rounded-2xl bg-ivory-300"
-                  >
-                    <div className="relative aspect-[3/4]">
-                      <Image
-                        src={project.src}
-                        alt={project.alt}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        className="transition-transform duration-[1200ms] ease-out-expo group-hover:scale-110"
-                        style={{ objectFit: 'cover' }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-espresso-800/90 via-espresso-800/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      <div className="absolute inset-x-0 bottom-0 p-6 text-ivory opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 text-left">
-                        <div className="text-[10px] uppercase tracking-[0.25em] text-corail-300 mb-2">
-                          {project.location}
-                        </div>
-                        <div className="font-display text-lg leading-snug">
-                          {project.alt}
-                        </div>
-                      </div>
-                    </div>
-                  </motion.button>
-                ))}
-              </AnimatePresence>
-            </motion.div>
+            <ul id="portfolio-projects" className={styles.projects} role="list">
+              {projects.map((project) => (
+                <ProjectCard key={project.title} project={project} onOpen={() => openProject(project)} />
+              ))}
+            </ul>
           </div>
         </section>
 
-        {/* Lightbox */}
-        <AnimatePresence>
-          {lightbox !== null && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setLightbox(null)}
-              className="fixed inset-0 z-[100] bg-espresso-800/95 backdrop-blur-md grid place-items-center p-4 md:p-10 cursor-zoom-out"
-            >
-              <button
-                onClick={() => setLightbox(null)}
-                aria-label="Fermer"
-                className="absolute top-6 right-6 w-12 h-12 rounded-full bg-ivory/10 hover:bg-ivory/20 text-ivory grid place-items-center transition"
-              >
-                <X size={22} />
-              </button>
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                transition={{ duration: 0.4, ease: [0.19, 1, 0.22, 1] }}
-                onClick={(e) => e.stopPropagation()}
-                className="relative w-full max-w-4xl aspect-[3/4] md:aspect-[4/5] cursor-default"
-              >
-                <Image
-                  src={PROJECTS[lightbox].src}
-                  alt={PROJECTS[lightbox].alt}
-                  fill
-                  sizes="100vw"
-                  className="object-contain"
-                />
-              </motion.div>
-              <div className="absolute bottom-8 inset-x-0 text-center text-ivory/80">
-                <div className="text-[12px] uppercase tracking-[0.25em] text-corail-300 mb-1">
-                  {PROJECTS[lightbox].location}
-                </div>
-                <div className="font-display text-lg">{PROJECTS[lightbox].alt}</div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Bandeau Instagram */}
-        <section className="section-sm bg-ivory-300 border-y border-border/60">
-          <div className="container-premium text-center">
-            <p className="font-display text-[clamp(24px,3vw,36px)] tracking-tightest text-espresso-800">
-              Suivez tous les projets sur{' '}
-              <a
-                href={CLIENT.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="italic text-corail-600 hover:text-corail-700 transition inline-flex items-center gap-2"
-              >
-                Instagram <ArrowRight size={24} strokeWidth={1.5} />
-              </a>
-            </p>
-            <p className="mt-3 text-[14px] uppercase tracking-[0.25em] text-espresso-400">
+        <section className={styles.instagram} aria-labelledby="instagram-title">
+          <div className={`${siteStyles.container} ${styles.instagramInner}`}>
+            <h2 id="instagram-title">Plus de chantiers <em>sur Instagram.</em></h2>
+            <a href={CLIENT.instagram} target="_blank" rel="noopener noreferrer" className={`${siteStyles.button} ${styles.instagramButton}`}>
               {CLIENT.instagramHandle}
-            </p>
-            <div className="mt-6">
-              <Link href="/contact-peintre-magny-en-vexin.html" className="btn-primary">
-                Commencer votre projet
-              </Link>
-            </div>
+              <Arrow />
+            </a>
           </div>
         </section>
 
-        <CTA />
-      </Layout>
+        <dialog
+          ref={dialog}
+          className={styles.lightbox}
+          aria-labelledby="project-title"
+          data-lenis-prevent
+          onClose={() => setSelected(null)}
+          onClick={(event) => {
+            if (event.target === event.currentTarget) event.currentTarget.close();
+          }}
+          onKeyDown={(event) => {
+            if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+              event.preventDefault();
+              changePhoto(event.key === 'ArrowLeft' ? -1 : 1);
+            }
+          }}
+        >
+          <div className={styles.lightboxContent}>
+            <div className={styles.lightboxHeader}>
+              <h2 id="project-title">{selected?.title}</h2>
+              <button type="button" className={styles.close} aria-label="Fermer" onClick={() => dialog.current?.close()}>×</button>
+            </div>
+            {currentPhoto && (
+              <figure>
+                <div className={styles.lightboxPhoto}>
+                  <Image src={currentPhoto.src} alt={currentPhoto.alt} fill sizes="90vw" loading="eager" />
+                </div>
+                <figcaption className={styles.lightboxCaption} aria-live="polite">{currentPhoto.alt}</figcaption>
+              </figure>
+            )}
+            {selectedPhotos && selectedPhotos.length > 1 && (
+              <div className={styles.lightboxControls}>
+                <button type="button" onClick={() => changePhoto(-1)}>Précédente</button>
+                <span>{photoIndex + 1} / {selectedPhotos.length}</span>
+                <button type="button" onClick={() => changePhoto(1)}>Suivante</button>
+              </div>
+            )}
+          </div>
+        </dialog>
+      </SiteLayout>
     </>
+  );
+}
+
+function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void }) {
+  const { title, category, photos: [cover], before, wideOnMobile, coverPosition } = project;
+  const sizes = `(max-width: 920px) ${wideOnMobile ? '90vw' : '44vw'}, 28vw`;
+  const cardClass = before ? styles.featured : wideOnMobile ? styles.wideOnMobile : undefined;
+
+  return (
+    <li className={cardClass}>
+      <button type="button" className={styles.card} aria-haspopup="dialog" aria-label={title} onClick={onOpen}>
+        <span className={styles.media}>
+          {before ? (
+            <>
+              <span className={styles.comparisonPhoto}>
+                <Image {...before} fill sizes={sizes} style={{ objectPosition: coverPosition }} loading="eager" />
+                <span className={styles.beforeLabel}>Avant</span>
+              </span>
+              <span className={styles.comparisonPhoto}>
+                <Image {...cover} fill sizes={sizes} style={{ objectPosition: coverPosition }} loading="eager" />
+                <span className={styles.afterLabel}>Après</span>
+              </span>
+            </>
+          ) : (
+            <Image {...cover} fill sizes={sizes} style={{ objectPosition: coverPosition }} />
+          )}
+        </span>
+        <span className={styles.caption}>
+          <span className={styles.category}>{CATEGORIES[category]}</span>
+          <span className={styles.cardTitle}>
+            <span>{title}</span>
+            {!before && <span className={styles.cardArrow} aria-hidden="true">↗</span>}
+          </span>
+        </span>
+      </button>
+    </li>
   );
 }

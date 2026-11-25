@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { PORTFOLIO_PATH } from '@data/client';
 
 const PROJECTS = [
   { img: '/assets/img/projet-renov-3.jpg', label: 'Peinture salon', location: 'Pontoise' },
@@ -22,7 +23,7 @@ export default function PortfolioPreview() {
               <span className="italic text-corail-600 font-normal">finitions sans compromis.</span>
             </h2>
           </div>
-          <Link href="/portfolio.html" className="btn-link group">
+          <Link href={PORTFOLIO_PATH} className="btn-link group">
             Voir tout le portfolio
             <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" strokeWidth={1.8} />
           </Link>

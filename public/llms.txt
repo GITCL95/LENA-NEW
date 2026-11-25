@@ -47,10 +47,11 @@
 
 - Accueil : https://lena-renove.com/
 - À propos : https://lena-renove.com/lena-renaud-peintre-magny-en-vexin.html
-- Services : https://lena-renove.com/peinture-interieure-renovation-magny-en-vexin.html
-- Zones : https://lena-renove.com/peintre-renovation-val-d-oise-yvelines.html
-- Portfolio : https://lena-renove.com/portfolio.html
-- Contact : https://lena-renove.com/contact-peintre-magny-en-vexin.html
+- Peinture intérieure : https://lena-renove.com/peinture-interieure-renovation-magny-en-vexin
+- Zones : https://lena-renove.com/peintre-renovation-val-d-oise-yvelines
+- Pontoise : https://lena-renove.com/peintre-pontoise
+- Réalisations : https://lena-renove.com/portfolio
+- Contact : https://lena-renove.com/contact-peintre-magny-en-vexin
 
 ## Engagements
 

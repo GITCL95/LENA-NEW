@@ -7,7 +7,7 @@ import PageHero from '@components/sections/PageHero';
 import FAQ from '@components/sections/FAQ';
 import CTA from '@components/sections/CTA';
 import { CITIES } from '@data/cities';
-import { SITE_URL } from '@data/client';
+import { SITE_URL, ZONES_PATH } from '@data/client';
 import { buildWebPageSchema, buildBreadcrumbSchema, buildFAQSchema } from '@data/schemas';
 
 const ZONES_FAQ = [
@@ -48,7 +48,7 @@ export default function Zones() {
   const title = 'Peintre Val-d\'Oise (95) et Yvelines (78) · Léna Rénove';
   const description =
     "Artisan peintre en bâtiment basé à Vétheuil. Intervention à Pontoise, Cergy, Gisors, Marines, Chars, Chaumont-en-Vexin. Devis 24h.";
-  const path = '/peintre-renovation-val-d-oise-yvelines.html';
+  const path = ZONES_PATH;
 
   const jsonLd = [
     buildWebPageSchema({ path, title, description }),

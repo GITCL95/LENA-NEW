@@ -2,13 +2,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import { CLIENT } from '@data/client';
+import { CLIENT, CONTACT_PATH } from '@data/client';
 
 export default function CTA() {
   return (
     <section className="relative py-24 md:py-32 overflow-hidden bg-espresso-800 text-ivory">
       <Image
-        src="/assets/img/cta_bg.jpg"
+        src="/assets/img/hero_bg.jpg"
         alt=""
         fill
         aria-hidden
@@ -37,7 +37,7 @@ export default function CTA() {
             Devis gratuit sous 24h après visite. Léna se déplace dans tout le Val-d&apos;Oise et les Yvelines.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Link href="/contact-peintre-magny-en-vexin.html" className="btn-primary">
+            <Link href={CONTACT_PATH} className="btn-primary">
               Demander un devis
               <ArrowRight size={16} strokeWidth={2} />
             </Link>

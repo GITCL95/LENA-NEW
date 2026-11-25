@@ -3,5 +3,108 @@
   "buildCommand": "next build",
   "outputDirectory": "out",
   "installCommand": "npm install",
-  "framework": null
+  "framework": null,
+  "redirects": [
+    {
+      "source": "/lena-renaud-peintre-magny-en-vexin.html",
+      "destination": "/lena-renaud-peintre-magny-en-vexin",
+      "statusCode": 301
+    },
+    {
+      "source": "/peinture-interieure-renovation-magny-en-vexin.html",
+      "destination": "/peinture-interieure-renovation-magny-en-vexin",
+      "statusCode": 301
+    },
+    {
+      "source": "/peintre-renovation-val-d-oise-yvelines.html",
+      "destination": "/peintre-renovation-val-d-oise-yvelines",
+      "statusCode": 301
+    },
+    {
+      "source": "/portfolio.html",
+      "destination": "/portfolio",
+      "statusCode": 301
+    },
+    {
+      "source": "/contact-peintre-magny-en-vexin.html",
+      "destination": "/contact-peintre-magny-en-vexin",
+      "statusCode": 301
+    },
+    {
+      "source": "/peintre-pontoise.html",
+      "destination": "/peintre-pontoise",
+      "statusCode": 301
+    },
+    {
+      "source": "/peintre-cergy.html",
+      "destination": "/peintre-cergy",
+      "statusCode": 301
+    },
+    {
+      "source": "/peintre-gisors.html",
+      "destination": "/peintre-gisors",
+      "statusCode": 301
+    },
+    {
+      "source": "/peintre-marines-95.html",
+      "destination": "/peintre-marines-95",
+      "statusCode": 301
+    },
+    {
+      "source": "/peintre-chars-95.html",
+      "destination": "/peintre-chars-95",
+      "statusCode": 301
+    },
+    {
+      "source": "/peintre-chaumont-en-vexin.html",
+      "destination": "/peintre-chaumont-en-vexin",
+      "statusCode": 301
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/lena-renaud-peintre-magny-en-vexin",
+      "destination": "/lena-renaud-peintre-magny-en-vexin.html"
+    },
+    {
+      "source": "/peinture-interieure-renovation-magny-en-vexin",
+      "destination": "/peinture-interieure-renovation-magny-en-vexin.html"
+    },
+    {
+      "source": "/peintre-renovation-val-d-oise-yvelines",
+      "destination": "/peintre-renovation-val-d-oise-yvelines.html"
+    },
+    {
+      "source": "/portfolio",
+      "destination": "/portfolio.html"
+    },
+    {
+      "source": "/contact-peintre-magny-en-vexin",
+      "destination": "/contact-peintre-magny-en-vexin.html"
+    },
+    {
+      "source": "/peintre-pontoise",
+      "destination": "/peintre-pontoise.html"
+    },
+    {
+      "source": "/peintre-cergy",
+      "destination": "/peintre-cergy.html"
+    },
+    {
+      "source": "/peintre-gisors",
+      "destination": "/peintre-gisors.html"
+    },
+    {
+      "source": "/peintre-marines-95",
+      "destination": "/peintre-marines-95.html"
+    },
+    {
+      "source": "/peintre-chars-95",
+      "destination": "/peintre-chars-95.html"
+    },
+    {
+      "source": "/peintre-chaumont-en-vexin",
+      "destination": "/peintre-chaumont-en-vexin.html"
+    }
+  ]
 }
