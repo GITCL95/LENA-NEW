@@ -1,6 +1,6 @@
 import { useRef, useState, type ReactNode } from 'react';
 import Image from 'next/image';
-import { ABOUT_PATH, CLIENT, CONTACT_PATH, LEGAL_PATH, PORTFOLIO_PATH, QUOTE_PATH, ZONES_PATH } from '@data/client';
+import { ABOUT_PATH, CLIENT, CONTACT_PATH, LEGAL_PATH, PAINTING_PATH, PORTFOLIO_PATH, QUOTE_PATH, ZONES_PATH } from '@data/client';
 import styles from '@/styles/Site.module.css';
 
 type SitePage = 'home' | 'about' | 'contact' | 'portfolio' | 'painting' | 'pontoise' | 'zones' | 'city' | 'legal';
@@ -42,7 +42,7 @@ function SiteHeader({ page }: { page: SitePage }) {
   const zoneLocation = page === 'pontoise' || page === 'city';
   const contactLocation = page === 'contact';
   const navigation: { label: string; href: string; current?: 'page' | 'location' }[] = [
-    { label: 'Prestations', href: page === 'home' ? '#prestations' : '/#prestations', current: page === 'painting' ? 'location' : undefined },
+    { label: 'Prestations', href: PAINTING_PATH, current: page === 'painting' ? 'page' : undefined },
     { label: 'Réalisations', href: PORTFOLIO_PATH, current: page === 'portfolio' ? 'page' : undefined },
     { label: 'À propos', href: ABOUT_PATH, current: page === 'about' ? 'page' : undefined },
     { label: 'Zones', href: ZONES_PATH, current: page === 'zones' ? 'page' : zoneLocation ? 'location' : undefined },
