@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import Image from 'next/image';
 import SEO from '@components/layout/SEO';
 import SiteLayout, { Arrow } from '@components/layout/SiteLayout';
+import PageHero from '@components/sections/PageHero';
 import { CLIENT, PORTFOLIO_PATH, SITE_URL } from '@data/client';
 import { buildBreadcrumbSchema, buildWebPageSchema } from '@data/schemas';
 import styles from '@/styles/Portfolio.module.css';
@@ -149,13 +150,13 @@ export default function Portfolio() {
     <>
       <SEO title={title} description={description} path={PORTFOLIO_PATH} jsonLd={jsonLd} />
       <SiteLayout page="portfolio">
-        <section className={styles.hero} aria-labelledby="portfolio-title">
-          <div className={siteStyles.container}>
-            <p className={siteStyles.eyebrow}>Réalisations</p>
-            <h1 id="portfolio-title">Les chantiers <em>en images.</em></h1>
-            <p className={styles.description}>{description}</p>
-          </div>
-        </section>
+        <PageHero
+          id="portfolio-title"
+          breadcrumb="Réalisations"
+          eyebrow="Réalisations"
+          title={<>Les chantiers <em>en images.</em></>}
+          description={description}
+        />
 
         <section className={styles.gallery} aria-label="Projets réalisés">
           <div className={siteStyles.container}>

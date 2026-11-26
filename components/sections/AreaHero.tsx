@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import Image from 'next/image';
 import { QuoteButton } from '@components/layout/SiteLayout';
+import { Breadcrumb } from '@components/sections/PageHero';
 import styles from '@/styles/AreaPage.module.css';
 import siteStyles from '@/styles/Site.module.css';
 
@@ -22,12 +23,12 @@ export default function AreaHero({ id, breadcrumb, eyebrow, title, description, 
   const { src, alt, caption } = photo;
 
   return (
-    <section id={id} className={`${siteStyles.container} ${styles.hero}${regional ? ` ${styles.regionalHero}` : ''}`} aria-labelledby="area-title">
-      <nav className={styles.breadcrumb} aria-label="Fil d’Ariane">
-        <a href="/">Accueil</a>
-        <span aria-hidden="true" />
-        <span aria-current="page">{breadcrumb}</span>
-      </nav>
+    <section
+      id={id}
+      className={`${siteStyles.container} ${siteStyles.pageIntroSpacing}${regional ? ` ${styles.regionalHero}` : ''}`}
+      aria-labelledby="area-title"
+    >
+      <Breadcrumb current={breadcrumb} />
       <div className={styles.heroGrid}>
         <div>
           <p className={siteStyles.eyebrow}>{eyebrow}</p>

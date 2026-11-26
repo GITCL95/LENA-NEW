@@ -1,0 +1,37 @@
+.details {
+  padding-block: var(--section-space);
+  background: var(--white);
+}
+
+.prose {
+  max-width: 49rem;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.prose article + article {
+  margin-top: 1.625rem;
+  padding-top: 1.625rem;
+  border-top: 1px solid var(--border);
+}
+
+.prose h2 {
+  margin-bottom: 0.5625rem;
+  color: var(--ink);
+  font-size: 1.6875rem;
+  line-height: 1.15;
+}
+
+.prose p + p {
+  margin-top: 0.75rem;
+}
+
+.prose strong {
+  color: var(--ink);
+}
+
+.prose a {
+  color: var(--rust);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}

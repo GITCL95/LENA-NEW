@@ -1,38 +1,8 @@
-.hero {
-  padding-block: 1.75rem 3.375rem;
-}
-
-.breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 0.6875rem;
-  color: var(--muted);
-  font-size: 0.8125rem;
-  line-height: 1.55;
-}
-
-.breadcrumb a:hover {
-  text-decoration: underline;
-}
-
-.breadcrumb span[aria-hidden] {
-  width: 0.3125rem;
-  height: 0.3125rem;
-  border-top: 1px solid;
-  border-right: 1px solid;
-  transform: rotate(45deg);
-}
-
-.breadcrumb [aria-current] {
-  color: var(--ink);
-}
-
 .heroGrid {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   align-items: center;
   gap: clamp(1.75rem, 4.15vw, 3.75rem);
-  margin-top: 1.6875rem;
 }
 
 .heroTitle {
@@ -130,7 +100,7 @@
 }
 
 .services {
-  padding-block: 5.125rem;
+  padding-block: var(--section-space);
   border-top: 1px solid var(--border);
 }
 
@@ -146,7 +116,7 @@
   min-height: 9.125rem;
   height: 100%;
   border: 1px solid var(--border);
-  border-radius: 0.4375rem;
+  border-radius: var(--card-radius);
   background: var(--white);
 }
 
@@ -189,19 +159,9 @@
 }
 
 @media (max-width: 57.5rem) {
-  .hero {
-    padding-block: 1.0625rem 1.6875rem;
-  }
-
-  .breadcrumb {
-    gap: 0.5625rem;
-    font-size: 0.75rem;
-  }
-
   .heroGrid {
     grid-template-columns: minmax(0, 1fr);
     gap: 1.4375rem;
-    margin-top: 1.5rem;
   }
 
   .heroTitle {
@@ -249,10 +209,6 @@
 
   .regionalHero .heroPhoto {
     height: auto;
-  }
-
-  .services {
-    padding-block: 3.3125rem;
   }
 
   .servicesIntro {

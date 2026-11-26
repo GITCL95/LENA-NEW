@@ -1,5 +1,5 @@
 .section {
-  padding-block: 5.125rem;
+  padding-block: var(--section-space);
 }
 
 .departments {
@@ -32,8 +32,7 @@
   letter-spacing: -0.05em;
 }
 
-.cities,
-.faq {
+.cities {
   background: var(--white);
 }
 
@@ -66,13 +65,13 @@
   gap: 0.75rem;
   padding: 1.0625rem 1.3125rem;
   border: 1px solid var(--border);
-  border-radius: 0.4375rem;
+  border-radius: var(--card-radius);
   background: var(--paper);
 }
 
 .cityLink:hover {
   border-color: #ba8e7a;
-  background: #f3e9de;
+  background: var(--sand);
 }
 
 .cityLink h3 {
@@ -114,7 +113,7 @@
 }
 
 .projects {
-  background: #f2e4da;
+  background: var(--blush);
 }
 
 .projectsInner {
@@ -151,7 +150,7 @@
   position: relative;
   height: clamp(17rem, 27.08vw, 24.375rem);
   overflow: hidden;
-  border-radius: 0.4375rem;
+  border-radius: var(--card-radius);
   background: var(--border);
 }
 
@@ -173,78 +172,7 @@
   color: var(--rust);
 }
 
-.faqInner {
-  display: grid;
-  grid-template-columns: minmax(0, 0.89fr) minmax(0, 1.11fr);
-  align-items: start;
-  gap: 2.8125rem;
-}
-
-.questions {
-  display: grid;
-  gap: 0.5625rem;
-}
-
-.questions details {
-  padding-inline: 1.125rem;
-  border: 1px solid var(--border);
-  border-radius: 0.4375rem;
-  background: var(--paper);
-}
-
-.questions summary {
-  display: flex;
-  min-height: 3.25rem;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  padding-block: 0.625rem;
-  cursor: pointer;
-  list-style: none;
-  font-weight: 640;
-  line-height: 1.35;
-}
-
-.questions summary::-webkit-details-marker {
-  display: none;
-}
-
-.questions summary:focus-visible {
-  outline: 2px solid var(--rust);
-  outline-offset: 0.25rem;
-}
-
-.questionIcon {
-  display: grid;
-  flex: 0 0 1.5625rem;
-  height: 1.5625rem;
-  place-items: center;
-  border: 1px solid #dfc4b4;
-  border-radius: 50%;
-  color: var(--rust);
-  font-size: 0.875rem;
-}
-
-.questionIcon::before {
-  content: '+';
-}
-
-.questions details[open] .questionIcon::before {
-  content: '−';
-}
-
-.questions p {
-  padding: 0 1.5rem 0.9375rem 0;
-  color: var(--muted);
-  font-size: 0.875rem;
-  line-height: 1.5;
-}
-
 @media (max-width: 57.5rem) {
-  .section {
-    padding-block: 3.3125rem;
-  }
-
   .departmentList {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     padding-block: 0.5rem;
@@ -342,32 +270,5 @@
     justify-self: start;
     margin-bottom: 0;
     font-size: 0.875rem;
-  }
-
-  .faqInner {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1.25rem;
-  }
-
-  .faqInner h2 em {
-    display: inline;
-  }
-
-  .questions {
-    gap: 0.4375rem;
-  }
-
-  .questions details {
-    padding-inline: 0.75rem;
-  }
-
-  .questions summary {
-    min-height: 2.9375rem;
-    font-size: 0.875rem;
-  }
-
-  .questions p {
-    padding-right: 0.4375rem;
-    font-size: 0.8125rem;
   }
 }

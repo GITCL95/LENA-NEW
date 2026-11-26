@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import SEO from '@components/layout/SEO';
 import SiteLayout, { ArrowLink } from '@components/layout/SiteLayout';
-import { DetailFaq, DetailHero, OnPageNavigation } from '@components/sections/DetailPage';
+import { DetailHero, OnPageNavigation } from '@components/sections/DetailPage';
+import Questions from '@components/sections/Questions';
 import { CLIENT, PAINTING_PATH, QUOTE_PATH, SITE_URL } from '@data/client';
 import { buildBreadcrumbSchema, buildFAQSchema, buildWebPageSchema } from '@data/schemas';
 import styles from '@/styles/Painting.module.css';
@@ -59,11 +60,11 @@ const photos = [
 
 const faq = [
   {
-    q: 'Comment connaître la durée de mes travaux ?',
+    q: 'Comment connaître la durée de mes travaux\u00a0?',
     a: 'Le devis précise le délai d’exécution après la visite et la prise de mesures.',
   },
   {
-    q: 'Le chantier est-il couvert par une assurance ?',
+    q: 'Le chantier est-il couvert par une assurance\u00a0?',
     a: 'Oui. Léna Rénove est couverte par une responsabilité civile professionnelle. Léna Renaud est titulaire du CAP Peintre en bâtiment.',
   },
 ];
@@ -94,6 +95,7 @@ export default function Painting() {
       <SiteLayout page="painting">
         <DetailHero
           id="peinture"
+          breadcrumb="Prestations"
           eyebrow="Artisane peintre · Vétheuil"
           title="Peinture"
           emphasis="intérieure."
@@ -207,7 +209,7 @@ export default function Painting() {
           </div>
         </section>
 
-        <DetailFaq items={faq} />
+        <Questions items={faq} />
       </SiteLayout>
     </>
   );

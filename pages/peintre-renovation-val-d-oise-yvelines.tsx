@@ -1,22 +1,15 @@
 import Image from 'next/image';
 import SEO from '@components/layout/SEO';
-import SiteLayout, { Arrow, ArrowLink, type NavigationLink } from '@components/layout/SiteLayout';
+import SiteLayout, { Arrow, ArrowLink } from '@components/layout/SiteLayout';
 import AreaHero from '@components/sections/AreaHero';
 import InteriorServices from '@components/sections/InteriorServices';
 import Qualifications from '@components/sections/Qualifications';
+import Questions from '@components/sections/Questions';
 import { CITIES, PONTOISE } from '@data/cities';
-import { ABOUT_PATH, CLIENT, PORTFOLIO_PATH, SITE_URL, ZONES_PATH } from '@data/client';
+import { CLIENT, PORTFOLIO_PATH, SITE_URL, ZONES_PATH } from '@data/client';
 import { buildBreadcrumbSchema, buildFAQSchema, buildWebPageSchema } from '@data/schemas';
 import styles from '@/styles/Zones.module.css';
 import siteStyles from '@/styles/Site.module.css';
-
-const navigation = [
-  { label: 'Prestations', href: '#prestations' },
-  { label: 'Réalisations', href: '#realisations' },
-  { label: 'À propos', href: ABOUT_PATH },
-  { label: 'Zones', href: ZONES_PATH, current: 'page' },
-  { label: 'Contact', href: '#contact' },
-] satisfies NavigationLink[];
 
 const departments = [
   { code: '95', name: 'Val-d’Oise' },
@@ -83,7 +76,7 @@ export default function Zones() {
   return (
     <>
       <SEO title={title} description={description} path={ZONES_PATH} ogImage={heroPhoto.src} jsonLd={jsonLd} />
-      <SiteLayout page="zones" localNavigation={navigation}>
+      <SiteLayout page="zones">
         <AreaHero
           breadcrumb="Zones d’intervention"
           eyebrow="Artisane peintre · Vétheuil"
@@ -158,22 +151,7 @@ export default function Zones() {
 
         <Qualifications light />
 
-        <section className={`${styles.section} ${styles.faq}`} aria-labelledby="faq-title">
-          <div className={`${siteStyles.container} ${styles.faqInner}`}>
-            <div>
-              <p className={siteStyles.eyebrow}>Questions fréquentes</p>
-              <h2 id="faq-title" className={siteStyles.sectionTitle}>Avant <em>les travaux.</em></h2>
-            </div>
-            <div className={styles.questions}>
-              {questions.map(({ q, a }, index) => (
-                <details key={q} open={index === 0}>
-                  <summary>{q}<span className={styles.questionIcon} aria-hidden="true" /></summary>
-                  <p>{a}</p>
-                </details>
-              ))}
-            </div>
-          </div>
-        </section>
+        <Questions items={questions} />
       </SiteLayout>
     </>
   );

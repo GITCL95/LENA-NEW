@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import SEO from '@components/layout/SEO';
 import SiteLayout, { QuoteButton } from '@components/layout/SiteLayout';
+import { Breadcrumb } from '@components/sections/PageHero';
 import { ABOUT_PATH, CLIENT, SITE_URL } from '@data/client';
 import { buildBreadcrumbSchema, buildWebPageSchema } from '@data/schemas';
 import styles from '@/styles/About.module.css';
@@ -74,26 +75,29 @@ export default function About() {
     <>
       <SEO title={title} description={description} path={ABOUT_PATH} ogImage={portrait} jsonLd={jsonLd} />
       <SiteLayout page="about">
-        <section className={`${siteStyles.container} ${styles.intro}`} aria-labelledby="about-title">
-          <div>
-            <p className={siteStyles.eyebrow}>À propos</p>
-            <h1 id="about-title" className={`${siteStyles.heroTitle} ${styles.title}`}>
-              {CLIENT.owner},<br /><em>artisane peintre.</em>
-            </h1>
-            <p className={`${siteStyles.heroDescription} ${styles.introDescription}`}>
-              Basée à Vétheuil, je réalise moi-même vos travaux de peinture et de décoration intérieure.
-            </p>
-            <QuoteButton />
-            <p className={siteStyles.heroNote}>Devis gratuit sous 24 h après visite.</p>
+        <section className={`${siteStyles.container} ${siteStyles.pageIntroSpacing}`} aria-labelledby="about-title">
+          <Breadcrumb current="À propos" />
+          <div className={styles.intro}>
+            <div>
+              <p className={siteStyles.eyebrow}>À propos</p>
+              <h1 id="about-title" className={`${siteStyles.heroTitle} ${styles.title}`}>
+                {CLIENT.owner},<br /><em>artisane peintre.</em>
+              </h1>
+              <p className={`${siteStyles.heroDescription} ${styles.introDescription}`}>
+                Basée à Vétheuil, je réalise moi-même vos travaux de peinture et de décoration intérieure.
+              </p>
+              <QuoteButton />
+              <p className={siteStyles.heroNote}>Devis gratuit sous 24&nbsp;h après visite.</p>
+            </div>
+            <figure className={styles.portrait}>
+              <Image
+                src={portrait}
+                alt="Léna Renaud découpe un lé de papier peint sur sa table de travail"
+                fill
+                priority
+              />
+            </figure>
           </div>
-          <figure className={styles.portrait}>
-            <Image
-              src={portrait}
-              alt="Léna Renaud découpe un lé de papier peint sur sa table de travail"
-              fill
-              priority
-            />
-          </figure>
         </section>
 
         <section className={`${styles.section} ${styles.light}`} aria-labelledby="parcours-title">

@@ -63,7 +63,7 @@ export default function Home() {
               Peinture intérieure, enduits de ratissage, pose de papier peint et vinyle adhésif décoratif.
             </p>
             <QuoteButton />
-            <p className={siteStyles.heroNote}>Devis gratuit sous 24 h après visite.</p>
+            <p className={siteStyles.heroNote}>Devis gratuit sous 24&nbsp;h après visite.</p>
           </div>
           <figure className={styles.heroPhoto}>
             <Image src={`${images}/hero_bg.jpg`} alt="Salon aux murs ocre et terracotta" fill priority />

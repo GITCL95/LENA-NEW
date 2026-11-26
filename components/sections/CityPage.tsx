@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import { MapPin } from 'lucide-react';
 import SEO from '@components/layout/SEO';
-import SiteLayout, { type NavigationLink } from '@components/layout/SiteLayout';
+import SiteLayout from '@components/layout/SiteLayout';
 import AreaHero from '@components/sections/AreaHero';
+import { OnPageNavigation } from '@components/sections/DetailPage';
 import InteriorServices from '@components/sections/InteriorServices';
 import Qualifications from '@components/sections/Qualifications';
 import type { CityPageContent, CityProject } from '@data/cities';
@@ -15,12 +16,12 @@ const illustration = {
   src: '/assets/img/hero_bg.jpg',
   alt: 'Salon aux murs ocre et terracotta',
 };
-const navigation = [
-  { label: 'Quartiers', href: '#quartiers' },
-  { label: 'Prestations', href: '#prestations' },
-] satisfies NavigationLink[];
-const projectLink = { label: 'Réalisation', href: '#realisation' };
-const contactLink = { label: 'Contact', href: '#contact' };
+const citySections = [
+  { label: 'Quartiers', id: 'quartiers' },
+  { label: 'Prestations', id: 'prestations' },
+];
+const projectSection = { label: 'Réalisation', id: 'realisation' };
+const contactSection = { label: 'Contact', id: 'contact' };
 const visitSteps = [
   {
     title: 'Décrivez vos travaux',
@@ -39,9 +40,9 @@ const visitSteps = [
 export default function CityPage({ city }: { city: CityPageContent }) {
   const { name, href, postalCode, title, metaDescription, departmentName, project } = city;
   const photo = project?.photo ?? illustration;
-  const localNavigation = project
-    ? [...navigation, projectLink, contactLink]
-    : [...navigation, contactLink];
+  const sections = project
+    ? [...citySections, projectSection, contactSection]
+    : [...citySections, contactSection];
   const jsonLd = [
     buildWebPageSchema({ path: href, title, description: metaDescription }),
     buildBreadcrumbSchema([
@@ -71,7 +72,7 @@ export default function CityPage({ city }: { city: CityPageContent }) {
   return (
     <>
       <SEO title={title} description={metaDescription} path={href} ogImage={project?.photo.src} jsonLd={jsonLd} />
-      <SiteLayout page="city" localNavigation={localNavigation}>
+      <SiteLayout page="city">
         <AreaHero
           id={city.slug}
           breadcrumb={name}
@@ -82,6 +83,7 @@ export default function CityPage({ city }: { city: CityPageContent }) {
         />
 
         <Qualifications />
+        <OnPageNavigation sections={sections} />
 
         <section id="quartiers" className={`${styles.section} ${styles.neighbourhoods}`} aria-labelledby="neighbourhoods-title" tabIndex={-1}>
           <div className={siteStyles.container}>

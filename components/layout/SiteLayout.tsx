@@ -3,8 +3,7 @@ import Image from 'next/image';
 import { CLIENT, LEGAL_PATH, NAV_ROUTES, QUOTE_PATH, ZONES_PATH } from '@data/client';
 import styles from '@/styles/Site.module.css';
 
-type SitePage = typeof NAV_ROUTES[number]['page'] | 'city' | 'legal';
-export type NavigationLink = { label: string; href: string; current?: 'page' };
+type SitePage = typeof NAV_ROUTES[number]['page'] | 'home' | 'city' | 'legal' | 'notFound';
 
 const contactIntros: Partial<Record<SitePage, string>> = {
   portfolio: 'Décrivez votre projet de rénovation intérieure.',
@@ -37,19 +36,16 @@ export function QuoteButton() {
   );
 }
 
-function SiteHeader({ page, localNavigation }: {
-  page: SitePage;
-  localNavigation?: readonly NavigationLink[];
-}) {
+function SiteHeader({ page }: { page: SitePage }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
   const contactLocation = page === 'contact';
-  const navigation: readonly NavigationLink[] = localNavigation
-    ?? NAV_ROUTES.map(({ label, href, page: destination }) => ({
-      label,
-      href: contactLocation && destination === 'contact' ? '#contact' : href,
-      current: destination === page ? 'page' : undefined,
-    }));
+  const navigation = NAV_ROUTES.map(({ label, href, page: destination }) => {
+    let current: 'page' | 'location' | undefined;
+    if (destination === page) current = 'page';
+    if (page === 'city' && destination === 'zones') current = 'location';
+    return { label, href: contactLocation && destination === 'contact' ? '#contact' : href, current };
+  });
 
   function closeMenu() {
     setMenuOpen(false);
@@ -66,7 +62,7 @@ function SiteHeader({ page, localNavigation }: {
       }}
     >
       <div className={`${styles.container} ${styles.headerInner}`}>
-        <a href="/" className={styles.logo} aria-label="Léna Rénove, accueil">
+        <a href="/" className={styles.logo} aria-label="Léna Rénove, accueil" aria-current={page === 'home' ? 'page' : undefined}>
           <Image src="/assets/img/logo-lt.png" alt="" width={500} height={442} loading="eager" />
         </a>
         <nav className={styles.desktopNav} aria-label="Navigation principale">
@@ -111,7 +107,7 @@ function SiteContact({ page }: { page: SitePage }) {
       id="contact"
       className={zonesPage ? `${styles.contact} ${styles.regionalContact}` : styles.contact}
       aria-labelledby="contact-title"
-      tabIndex={cityPage || zonesPage ? -1 : undefined}
+      tabIndex={-1}
     >
       <div className={`${styles.container} ${styles.contactInner}`}>
         <div>
@@ -162,17 +158,18 @@ function SiteContact({ page }: { page: SitePage }) {
   );
 }
 
-export default function SiteLayout({ children, page = 'home', localNavigation }: {
+export default function SiteLayout({ children, page = 'home' }: {
   children: ReactNode;
   page?: SitePage;
-  localNavigation?: readonly NavigationLink[];
 }) {
+  const showContact = page !== 'contact' && page !== 'legal' && page !== 'notFound';
+
   return (
-    <div className={page === 'city' || page === 'zones' ? `${styles.site} ${styles.areaPage}` : styles.site}>
-      <SiteHeader page={page} localNavigation={localNavigation} />
+    <div className={styles.site}>
+      <SiteHeader page={page} />
       <main id="content" tabIndex={-1}>
         {children}
-        {page !== 'contact' && page !== 'legal' && <SiteContact page={page} />}
+        {showContact && <SiteContact page={page} />}
       </main>
       <footer className={styles.footer}>
         <div className={`${styles.container} ${styles.footerInner}`}>

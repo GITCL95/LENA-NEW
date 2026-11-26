@@ -1,16 +1,23 @@
 .site {
-  --paper: #fbf7f0;
-  --white: #fffdf9;
+  --paper: #f9f6ef;
+  --white: #fdfbf7;
   --ink: #30221b;
-  --muted: #614e44;
+  --muted: #645247;
   --rust: #a23b25;
   --peach: #f4aa8d;
   --dark: #2c1c16;
   --dark-text: #f0dbce;
-  --border: #e5d7cc;
+  --border: #e3d5c9;
   --dark-border: #665046;
+  --blush: #f2e4da;
+  --sand: #f3e9de;
+  --card-radius: 0.4375rem;
+  --section-space: 5.125rem;
   --serif: Georgia, 'Times New Roman', serif;
 
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
   background: var(--paper);
   color: var(--ink);
   font: 400 1rem/1.6 system-ui, sans-serif;
@@ -34,12 +41,62 @@
 }
 
 .site > main {
+  flex: 1;
   isolation: isolate;
 }
 
 .container {
   width: min(85%, 76.5rem);
   margin-inline: auto;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.6875rem;
+  margin-bottom: 1.6875rem;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb span[aria-hidden] {
+  width: 0.3125rem;
+  height: 0.3125rem;
+  border-top: 1px solid;
+  border-right: 1px solid;
+  transform: rotate(45deg);
+}
+
+.breadcrumb [aria-current] {
+  color: var(--ink);
+}
+
+.pageIntroSpacing {
+  padding-block: 1.75rem 3.375rem;
+}
+
+.textHero {
+  border-bottom: 1px solid var(--border);
+}
+
+.textHeroDescription {
+  max-width: 36rem;
+  color: var(--muted);
+  font-size: 1.125rem;
+  line-height: 1.55;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.875rem 1.5rem;
+  align-items: center;
+  margin-top: 1.625rem;
 }
 
 .header {
@@ -174,6 +231,8 @@
 }
 
 .primaryButton {
+  min-height: 3.1875rem;
+  padding-inline: 1.5625rem;
   background: var(--rust);
   color: var(--white);
 }
@@ -234,18 +293,18 @@
 
 .contactInner {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 44.125%;
+  grid-template-columns: minmax(0, 1.14fr) minmax(0, 1fr);
   align-items: center;
-  gap: 2rem;
-  padding-block: 4.875rem 4.8125rem;
+  gap: 4rem;
+  padding-block: 4.375rem;
 }
 
 .contactTitle {
-  margin-block: 1rem 1.25rem;
+  margin-block: 0.75rem 1.4375rem;
   color: #fff8ef;
-  font-size: clamp(3.25rem, 5.55vw, 5rem);
+  font-size: clamp(3rem, 5.2vw, 4.6875rem);
   letter-spacing: -0.057em;
-  line-height: 1;
+  line-height: 1.01;
 }
 
 .contactDescription {
@@ -258,7 +317,8 @@
 }
 
 .contactButton {
-  padding-inline: 1.5rem;
+  min-height: 3.1875rem;
+  padding-inline: 1.5625rem;
   background: var(--peach);
   color: var(--dark);
 }
@@ -301,11 +361,19 @@
   margin-top: 0;
 }
 
+.regionalContact .contactTitle {
+  margin-bottom: 1rem;
+}
+
+.regionalContact .contactDescription {
+  max-width: 22.5rem;
+}
+
 .footer {
   --accent: var(--peach);
 
   border-top: 1px solid #564137;
-  background: #22160f;
+  background: #241710;
   color: var(--dark-text);
 }
 
@@ -314,7 +382,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  min-height: 4.6875rem;
+  min-height: 4.5rem;
   font-size: 0.875rem;
 }
 
@@ -324,53 +392,35 @@
   line-height: 1.2;
 }
 
-.areaPage {
-  --paper: #f9f6ef;
-  --white: #fdfbf7;
-  --muted: #645247;
-  --border: #e3d5c9;
-}
-
-.areaPage .contactInner {
-  grid-template-columns: minmax(0, 1.14fr) minmax(0, 1fr);
-  gap: 4rem;
-  padding-block: 4.375rem;
-}
-
-.areaPage .contactTitle {
-  margin-block: 0.75rem 1.4375rem;
-  font-size: clamp(3rem, 5.2vw, 4.6875rem);
-  line-height: 1.01;
-}
-
-.areaPage :is(.primaryButton, .contactButton) {
-  min-height: 3.1875rem;
-  padding-inline: 1.5625rem;
-}
-
-.areaPage .regionalContact .contactTitle {
-  margin-bottom: 1rem;
-}
-
-.regionalContact .contactDescription {
-  max-width: 22.5rem;
-}
-
-.areaPage .footer {
-  background: #241710;
-}
-
-.areaPage .footerInner {
-  min-height: 4.5rem;
-}
-
 @media (min-width: 57.5625rem) and (max-width: 69.375rem) {
-  .areaPage .container {
+  .container {
     width: 91%;
   }
 }
 
 @media (max-width: 57.5rem) {
+  .site {
+    --section-space: 3.3125rem;
+  }
+
+  .breadcrumb {
+    gap: 0.5625rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.75rem;
+  }
+
+  .pageIntroSpacing {
+    padding-block: 1.0625rem 1.6875rem;
+  }
+
+  .textHero .heroTitle em {
+    display: block;
+  }
+
+  .textHeroDescription {
+    font-size: 1rem;
+  }
+
   .container {
     width: calc(100% - 2 * clamp(1rem, 5.65vw, 2.5rem));
   }
@@ -378,7 +428,7 @@
   .headerInner {
     display: flex;
     justify-content: space-between;
-    min-height: 4.5rem;
+    min-height: 4.5625rem;
   }
 
   .logo {
@@ -444,9 +494,9 @@
     line-height: 1.5;
   }
 
-  .primaryButton {
+  :is(.primaryButton, .contactButton) {
     min-height: 3.0625rem;
-    padding-inline: 1.25rem;
+    padding-inline: 1.3125rem;
   }
 
   .heroNote {
@@ -470,13 +520,13 @@
 
   .contactInner {
     grid-template-columns: minmax(0, 1fr);
-    gap: 1.8125rem;
-    padding-block: 2.75rem 3.125rem;
+    gap: 1.6875rem;
+    padding-block: 2.9375rem;
   }
 
   .contactTitle {
-    margin-block: 0.625rem 0.8125rem;
-    font-size: clamp(2.375rem, 11.8vw, 4rem);
+    margin-block: 0.5625rem 1.0625rem;
+    font-size: clamp(2.6875rem, 12vw, 3.75rem);
     line-height: 1.01;
   }
 
@@ -486,9 +536,6 @@
     font-size: 0.9375rem;
   }
 
-  .contactButton {
-    padding-inline: 1.5rem;
-  }
 
   .contactRow {
     padding-block: 0.875rem;
@@ -504,35 +551,11 @@
   }
 
   .footerInner {
-    min-height: 4.1875rem;
+    min-height: 3.75rem;
     font-size: 0.8125rem;
   }
 
   .wordmark {
     font-size: 1.375rem;
-  }
-
-  .areaPage .headerInner {
-    min-height: 4.5625rem;
-  }
-
-  .areaPage .contactInner {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1.6875rem;
-    padding-block: 2.9375rem;
-  }
-
-  .areaPage .contactTitle {
-    margin-block: 0.5625rem 1.0625rem;
-    font-size: clamp(2.6875rem, 12vw, 3.75rem);
-  }
-
-  .areaPage :is(.primaryButton, .contactButton) {
-    min-height: 3.0625rem;
-    padding-inline: 1.3125rem;
-  }
-
-  .areaPage .footerInner {
-    min-height: 3.75rem;
   }
 }

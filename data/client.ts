@@ -50,10 +50,9 @@ export const CLIENT = {
 } as const;
 
 export const NAV_ROUTES = [
-  { label: "Accueil", href: "/", page: "home" },
-  { label: "A propos", href: ABOUT_PATH, page: "about" },
-  { label: "Services", href: PAINTING_PATH, page: "painting" },
-  { label: "Portfolio", href: PORTFOLIO_PATH, page: "portfolio" },
-  { label: "Zones d'intervention", href: ZONES_PATH, page: "zones" },
+  { label: "Prestations", href: PAINTING_PATH, page: "painting" },
+  { label: "Réalisations", href: PORTFOLIO_PATH, page: "portfolio" },
+  { label: "À propos", href: ABOUT_PATH, page: "about" },
+  { label: "Zones", href: ZONES_PATH, page: "zones" },
   { label: "Contact", href: CONTACT_PATH, page: "contact" },
 ] as const;

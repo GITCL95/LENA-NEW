@@ -2,6 +2,7 @@ import { useState, type FormEvent, type HTMLInputTypeAttribute } from 'react';
 import { useRouter } from 'next/router';
 import SEO from '@components/layout/SEO';
 import SiteLayout, { Arrow, ArrowLink } from '@components/layout/SiteLayout';
+import PageHero from '@components/sections/PageHero';
 import { CLIENT, CONTACT_PATH, LEGAL_PATH, SITE_URL } from '@data/client';
 import { buildBreadcrumbSchema, buildWebPageSchema } from '@data/schemas';
 import { QUOTE_SERVICES, type QuoteService } from '@data/services';
@@ -34,18 +35,15 @@ export default function Contact() {
     <>
       <SEO title={title} description={description} path={CONTACT_PATH} jsonLd={jsonLd} />
       <SiteLayout page="contact">
-        <section className={styles.hero} aria-labelledby="contact-hero-title">
-          <div className={siteStyles.container}>
-            <p className={siteStyles.eyebrow}>Contact et devis</p>
-            <h1 id="contact-hero-title">Parlons de <em>votre projet.</em></h1>
-            <p className={styles.heroDescription}>
-              Vous échangez directement avec Léna, qui réalisera vos travaux. Le devis est gratuit et envoyé sous 24 h après visite.
-            </p>
-            <ArrowLink href={EMAIL_LINK} className={`${siteStyles.textLink} ${styles.heroLink}`}>
-              Écrire à Léna par e-mail
-            </ArrowLink>
-          </div>
-        </section>
+        <PageHero
+          id="contact-hero-title"
+          breadcrumb="Contact"
+          eyebrow="Contact et devis"
+          title={<>Parlons de <em>votre projet.</em></>}
+          description="Vous échangez directement avec Léna, qui réalisera vos travaux. Le devis est gratuit et envoyé sous 24 h après visite."
+        >
+          <ArrowLink href={EMAIL_LINK} className={siteStyles.textLink}>Écrire à Léna par e-mail</ArrowLink>
+        </PageHero>
 
         <section id="contact" className={styles.details} aria-labelledby="quote-title" tabIndex={-1}>
           <div className={`${siteStyles.container} ${styles.columns}`}>

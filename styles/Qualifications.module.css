@@ -11,7 +11,7 @@
   --credential-border: #ddcabe;
 
   border-bottom: 1px solid var(--border);
-  background: #f3e9de;
+  background: var(--sand);
   color: var(--muted);
 }
 

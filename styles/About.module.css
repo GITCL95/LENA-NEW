@@ -2,7 +2,6 @@
   display: grid;
   grid-template-columns: 54.55% 45.45%;
   align-items: center;
-  padding-block: 2.8125rem 3.3125rem;
 }
 
 .intro .title {
@@ -30,7 +29,7 @@
 }
 
 .section {
-  padding-block: 5.625rem 6rem;
+  padding-block: var(--section-space);
 }
 
 .light {
@@ -38,7 +37,7 @@
 }
 
 .blush {
-  background: #f3e4dc;
+  background: var(--blush);
 }
 
 .story {
@@ -68,7 +67,7 @@
   padding: 1rem 1.25rem;
   border-left: 2px solid #b95940;
   border-radius: 0 0.375rem 0.375rem 0;
-  background: #f4e9de;
+  background: var(--sand);
   color: var(--ink);
   font: italic 1.5625rem/1.2 var(--serif);
   letter-spacing: -0.04em;
@@ -216,7 +215,6 @@
   .intro {
     grid-template-columns: minmax(0, 1fr);
     gap: 1.5rem;
-    padding-block: 1.875rem 1.75rem;
   }
 
   .intro .title {
@@ -234,10 +232,6 @@
 
   .portrait img {
     object-position: center 12.6%;
-  }
-
-  .section {
-    padding-block: 3.3125rem 3.5625rem;
   }
 
   .story,
