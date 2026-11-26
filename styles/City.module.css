@@ -1,0 +1,507 @@
+.hero {
+  padding-block: 1.75rem 3.375rem;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.6875rem;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb span[aria-hidden] {
+  width: 0.3125rem;
+  height: 0.3125rem;
+  border-top: 1px solid;
+  border-right: 1px solid;
+  transform: rotate(45deg);
+}
+
+.breadcrumb [aria-current] {
+  color: var(--ink);
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(1.75rem, 4.15vw, 3.75rem);
+  margin-top: 1.6875rem;
+}
+
+.heroTitle {
+  margin-block: 1.25rem 1.4375rem;
+  font-size: clamp(3.875rem, 6.25vw, 5.625rem);
+  letter-spacing: -0.047em;
+  line-height: 0.98;
+}
+
+.heroTitle em {
+  display: block;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.heroGrid .heroDescription {
+  max-width: 26.5rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.55;
+}
+
+.heroPhoto {
+  position: relative;
+  height: clamp(22rem, 32vw, 28.75rem);
+  overflow: hidden;
+  border-radius: 0.3125rem min(8.1vw, 7.25rem) 0.3125rem 0.3125rem;
+  background: var(--border);
+}
+
+.heroPhoto img {
+  object-position: 50% 54%;
+}
+
+.illustration img {
+  object-position: 65% center;
+}
+
+.heroPhoto figcaption {
+  position: absolute;
+  bottom: 1.0625rem;
+  left: 1.0625rem;
+  display: grid;
+  gap: 0.1875rem;
+  max-width: calc(100% - 2.125rem);
+  padding: 0.625rem 0.9375rem 0.5625rem;
+  border-radius: 0.1875rem;
+  background: var(--paper);
+  font-size: 0.75rem;
+  line-height: 1.25;
+}
+
+.heroPhoto figcaption span {
+  font: 400 1.1875rem/1.25 var(--serif);
+  letter-spacing: -0.025em;
+}
+
+.heroPhoto figcaption small {
+  color: var(--muted);
+  font-size: inherit;
+}
+
+.section {
+  padding-block: 5.125rem;
+}
+
+.neighbourhoods,
+.process {
+  background: var(--white);
+}
+
+.sectionIntro {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.sectionIntro > p {
+  flex: 0 1 18.4375rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.neighbourhoods .sectionIntro {
+  margin-bottom: 2.125rem;
+}
+
+.neighbourhoods h2 em {
+  display: block;
+}
+
+.neighbourhoodList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 0.4375rem;
+  background: var(--border);
+}
+
+.neighbourhoodList li {
+  display: flex;
+  flex: 1 1 12rem;
+  align-items: center;
+  gap: 1rem;
+  min-height: 7.5rem;
+  padding: 1.4375rem;
+  background: var(--paper);
+}
+
+.neighbourhoodList svg {
+  flex: none;
+  color: var(--rust);
+}
+
+.neighbourhoodList h3 {
+  font-size: 1.875rem;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.neighbourhoodList p {
+  margin-top: 0.3125rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.services {
+  border-top: 1px solid var(--border);
+}
+
+.servicesList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.875rem;
+}
+
+.serviceCard {
+  display: grid;
+  grid-template-columns: 35% minmax(0, 1fr);
+  min-height: 9.125rem;
+  height: 100%;
+  border: 1px solid var(--border);
+  border-radius: 0.4375rem;
+  background: var(--white);
+}
+
+.serviceCard:hover {
+  border-color: #ba8e7a;
+}
+
+.serviceCard:hover h3 {
+  color: var(--rust);
+}
+
+.servicePhoto {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.375rem 0 0 0.375rem;
+  background: var(--border);
+}
+
+.serviceCopy {
+  align-self: center;
+  padding: 1.125rem 1.3125rem;
+}
+
+.serviceCopy h3 {
+  font-size: 1.6875rem;
+  line-height: 1.1;
+}
+
+.serviceCopy p {
+  margin-top: 0.4375rem;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.45;
+}
+
+.photoNote {
+  margin-top: 0.8125rem;
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+.project {
+  background: #f2e4da;
+}
+
+.projectGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.17fr) minmax(0, 1fr);
+  grid-template-areas: 'photo copy';
+  gap: 6.2%;
+  align-items: center;
+}
+
+.projectCopy {
+  grid-area: copy;
+}
+
+.projectFigure {
+  grid-area: photo;
+}
+
+.projectPhoto {
+  position: relative;
+  overflow: hidden;
+  height: 22.5rem;
+  border-radius: min(6.667vw, 6rem) 0.3125rem 0.3125rem;
+  background: var(--border);
+}
+
+.projectPhoto img {
+  width: 100%;
+  height: 100%;
+}
+
+.projectPhoto .croppedPhoto {
+  position: absolute;
+  top: 0;
+  max-width: none;
+  height: auto;
+}
+
+.projectFigure figcaption {
+  margin-top: 0.5625rem;
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+.projectDescription {
+  max-width: 25.625rem;
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 1.0625rem;
+}
+
+.projectFacts {
+  max-width: 26.25rem;
+  margin-top: 1.375rem;
+  border-top: 1px solid #d6bdb1;
+  font-size: 0.875rem;
+}
+
+.projectFacts > div {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding-block: 0.5625rem;
+  border-bottom: 1px solid #d6bdb1;
+}
+
+.projectFacts dt {
+  color: var(--muted);
+}
+
+.projectFacts dd {
+  font-weight: 650;
+}
+
+.processList {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.processList li {
+  display: flex;
+  align-items: start;
+  gap: 0.8125rem;
+  padding: 1.0625rem 0.4375rem 0 0;
+  border-top: 1px solid #d6bdb1;
+}
+
+.step {
+  padding-top: 0.0625rem;
+  color: var(--rust);
+  font: 400 1.5625rem/1 var(--serif);
+}
+
+.processList h3 {
+  font-size: 1.5625rem;
+  line-height: 1.1;
+}
+
+.processList p {
+  margin-top: 0.5rem;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+@media (max-width: 57.5rem) {
+  .hero {
+    padding-block: 1.0625rem 1.6875rem;
+  }
+
+  .breadcrumb {
+    gap: 0.5625rem;
+    font-size: 0.75rem;
+  }
+
+  .heroGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.4375rem;
+    margin-top: 1.5rem;
+  }
+
+  .heroTitle {
+    margin-block: 0.875rem 0.9375rem;
+    font-size: clamp(2.6875rem, 14.65vw, 4rem);
+    line-height: 0.99;
+  }
+
+  .heroGrid .heroDescription {
+    margin-bottom: 1.125rem;
+    line-height: 1.5;
+  }
+
+  .heroPhoto {
+    height: auto;
+    max-height: 22.8125rem;
+    aspect-ratio: 1.46;
+    border-top-right-radius: min(17.5vw, 4.25rem);
+  }
+
+  .heroPhoto figcaption {
+    bottom: 0.5625rem;
+    left: 0.5625rem;
+    gap: 0.125rem;
+    padding: 0.4375rem 0.625rem;
+    font-size: 0.6875rem;
+  }
+
+  .heroPhoto figcaption span {
+    font-size: 1rem;
+  }
+
+  .section {
+    padding-block: 3.3125rem;
+  }
+
+  .sectionIntro {
+    display: block;
+    margin-bottom: 1.375rem;
+  }
+
+  .sectionIntro > p {
+    margin-top: 0.6875rem;
+    font-size: 0.9375rem;
+  }
+
+  .neighbourhoods .sectionIntro {
+    margin-bottom: 1.375rem;
+  }
+
+  .neighbourhoods h2 {
+    font-size: clamp(2.125rem, 9.7vw, 2.875rem);
+    line-height: 1.04;
+    text-wrap: balance;
+  }
+
+  .neighbourhoods h2 em {
+    display: inline;
+  }
+
+  .neighbourhoodList {
+    flex-direction: column;
+  }
+
+  .neighbourhoodList li {
+    flex-basis: auto;
+    gap: 0.75rem;
+    min-height: 4rem;
+    padding: 0.75rem 0.875rem;
+  }
+
+  .neighbourhoodList h3 {
+    font-size: 1.5rem;
+  }
+
+  .neighbourhoodList p {
+    margin-top: 0.1875rem;
+    font-size: 0.8125rem;
+  }
+
+  .servicesList {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+
+  .serviceCard {
+    grid-template-columns: 30% minmax(0, 1fr);
+    min-height: 5.9375rem;
+  }
+
+  .serviceCopy {
+    padding: 0.625rem 0.75rem;
+  }
+
+  .serviceCopy h3 {
+    font-size: 1.3125rem;
+  }
+
+  .serviceCopy p,
+  .photoNote {
+    font-size: 0.8125rem;
+  }
+
+  .serviceCopy p {
+    margin-top: 0.25rem;
+  }
+
+  .photoNote {
+    margin-top: 0.625rem;
+  }
+
+  .projectGrid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'copy' 'photo';
+    gap: 1.375rem;
+  }
+
+  .projectCopy h2 em {
+    display: inline;
+  }
+
+  .projectDescription {
+    margin-top: 0.6875rem;
+    font-size: 0.9375rem;
+  }
+
+  .projectFacts {
+    margin-top: 0.9375rem;
+  }
+
+  .projectFacts > div {
+    padding-block: 0.4375rem;
+  }
+
+  .projectPhoto {
+    height: auto;
+    aspect-ratio: 1.5;
+    border-top-left-radius: min(15vw, 3.5rem);
+  }
+
+  .projectFigure figcaption {
+    margin-top: 0.4375rem;
+    font-size: 0.75rem;
+  }
+
+  .processList {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.8125rem;
+    margin-top: 1.3125rem;
+  }
+
+  .processList li {
+    padding-top: 0.75rem;
+  }
+
+  .processList h3 {
+    font-size: 1.4375rem;
+  }
+
+  .processList p {
+    margin-top: 0.3125rem;
+    font-size: 0.875rem;
+  }
+}

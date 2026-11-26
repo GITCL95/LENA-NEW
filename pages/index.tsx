@@ -2,7 +2,8 @@ import Image from 'next/image';
 import SEO from '@components/layout/SEO';
 import SiteLayout, { ArrowLink, QuoteButton } from '@components/layout/SiteLayout';
 import { CLIENT, PONTOISE_PATH, PORTFOLIO_PATH, SITE_URL } from '@data/client';
-import { serviceHref } from '@data/services';
+import Qualifications from '@components/sections/Qualifications';
+import { INTERIOR_SERVICES, serviceHref } from '@data/services';
 import {
   buildBreadcrumbSchema,
   buildLocalBusinessSchema,
@@ -13,39 +14,6 @@ import styles from '@/styles/Home.module.css';
 import siteStyles from '@/styles/Site.module.css';
 
 const images = '/assets/img';
-const credentials = [
-  { title: `${CLIENT.credentials.experience} ans`, detail: 'd’expérience' },
-  { title: 'CAP', detail: 'Peintre en bâtiment' },
-  { title: 'RC Pro', detail: 'Assurance professionnelle' },
-  { title: CLIENT.brands.join(' & '), detail: 'Peintures professionnelles' },
-];
-
-const services = [
-  {
-    title: 'Peinture intérieure',
-    slug: 'peinture',
-    detail: 'Murs, plafonds et boiseries. Finitions mates, satinées ou brillantes.',
-    image: 'insta-9.jpg',
-  },
-  {
-    title: 'Enduits de ratissage',
-    slug: 'enduits',
-    detail: 'Rebouchage, lissage et traitement des fissures.',
-    image: 'service_thumb_2.jpg',
-  },
-  {
-    title: 'Pose de papier peint',
-    slug: 'papier-peint',
-    detail: 'Papiers peints intissés ou panoramiques.',
-    image: 'service_thumb_3.jpg',
-  },
-  {
-    title: 'Vinyle adhésif décoratif',
-    slug: 'vinyle',
-    detail: 'Relooking de cuisines, de meubles et de portes.',
-    image: 'service_thumb_4.jpg',
-  },
-] as const;
 
 const projects = [
   {
@@ -103,16 +71,7 @@ export default function Home() {
           </figure>
         </section>
 
-        <section className={styles.credentials} aria-label="Expérience et qualifications">
-          <ul className={`${siteStyles.container} ${styles.credentialGrid}`}>
-            {credentials.map(({ title: credential, detail }) => (
-              <li key={credential}>
-                <span className={styles.credentialTitle}>{credential}</span>
-                <span>{detail}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
+        <Qualifications />
 
         <section id="prestations" className={styles.services} aria-labelledby="services-title">
           <div className={siteStyles.container}>
@@ -124,7 +83,7 @@ export default function Home() {
               <p className={styles.servicesIntro}>De la préparation des supports à la finition.</p>
             </div>
             <ul className={styles.serviceGrid}>
-              {services.map(({ title: service, slug, detail, image }) => (
+              {INTERIOR_SERVICES.map(({ title: service, slug, detail, image }) => (
                 <li key={slug} id={slug} className={styles.serviceCard}>
                   <div className={styles.servicePhoto}>
                     <Image src={`${images}/${image}`} alt="" fill />

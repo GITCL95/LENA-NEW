@@ -16,6 +16,33 @@ export function serviceHref(service: QuoteService) {
   return service === 'peinture' ? PAINTING_PATH : `${CONTACT_PATH}?prestation=${service}#contact`;
 }
 
+export const INTERIOR_SERVICES = [
+  {
+    title: 'Peinture intérieure',
+    slug: 'peinture',
+    detail: 'Murs, plafonds et boiseries. Finitions mates, satinées ou brillantes.',
+    image: 'insta-9.jpg',
+  },
+  {
+    title: 'Enduits de ratissage',
+    slug: 'enduits',
+    detail: 'Rebouchage, lissage et traitement des fissures.',
+    image: 'service_thumb_2.jpg',
+  },
+  {
+    title: 'Pose de papier peint',
+    slug: 'papier-peint',
+    detail: 'Papiers peints intissés ou panoramiques.',
+    image: 'service_thumb_3.jpg',
+  },
+  {
+    title: 'Vinyle adhésif décoratif',
+    slug: 'vinyle',
+    detail: 'Relooking de cuisines, de meubles et de portes.',
+    image: 'service_thumb_4.jpg',
+  },
+] as const;
+
 export type Service = {
   id: string;
   number: string;

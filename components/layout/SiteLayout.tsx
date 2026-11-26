@@ -3,12 +3,12 @@ import Image from 'next/image';
 import { CLIENT, LEGAL_PATH, NAV_ROUTES, QUOTE_PATH, ZONES_PATH } from '@data/client';
 import styles from '@/styles/Site.module.css';
 
-type SitePage = typeof NAV_ROUTES[number]['page'] | 'pontoise' | 'city' | 'legal';
+type SitePage = typeof NAV_ROUTES[number]['page'] | 'city' | 'legal';
+export type NavigationLink = { label: string; href: string };
 
 const contactIntros: Partial<Record<SitePage, string>> = {
   portfolio: 'Décrivez votre projet de rénovation intérieure.',
   painting: 'Décrivez votre projet de peinture intérieure.',
-  pontoise: 'Indiquez votre quartier et les travaux envisagés.',
 };
 
 export function Arrow() {
@@ -36,22 +36,19 @@ export function QuoteButton() {
   );
 }
 
-function SiteHeader({ page }: { page: SitePage }) {
+function SiteHeader({ page, localNavigation }: {
+  page: SitePage;
+  localNavigation?: readonly NavigationLink[];
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
-  const zoneLocation = page === 'pontoise' || page === 'city';
   const contactLocation = page === 'contact';
-  const currentPage = zoneLocation ? 'zones' : page;
-  const navigation = NAV_ROUTES.map(({ label, href, page: destination }) => {
-    const current: 'page' | 'location' | undefined = destination === currentPage
-      ? (zoneLocation ? 'location' : 'page')
-      : undefined;
-    return {
+  const navigation: readonly (NavigationLink & { current?: 'page' })[] = localNavigation
+    ?? NAV_ROUTES.map(({ label, href, page: destination }) => ({
       label,
       href: contactLocation && destination === 'contact' ? '#contact' : href,
-      current,
-    };
-  });
+      current: destination === page ? 'page' : undefined,
+    }));
 
   function closeMenu() {
     setMenuOpen(false);
@@ -102,23 +99,25 @@ function SiteHeader({ page }: { page: SitePage }) {
 }
 
 function SiteContact({ page }: { page: SitePage }) {
-  const descriptionClass = page === 'painting' || page === 'pontoise'
+  const cityPage = page === 'city';
+  const descriptionClass = page === 'painting'
     ? `${styles.contactDescription} ${styles.detailContactDescription}`
     : styles.contactDescription;
 
   return (
-    <section id="contact" className={styles.contact} aria-labelledby="contact-title">
+    <section id="contact" className={styles.contact} aria-labelledby="contact-title" tabIndex={cityPage ? -1 : undefined}>
       <div className={`${styles.container} ${styles.contactInner}`}>
         <div>
           <p className={styles.eyebrow}>Contact</p>
           <h2 id="contact-title" className={styles.contactTitle}>
-            {page === 'pontoise' ? 'Votre projet' : 'Parlons de'}<br />
-            <em>{page === 'pontoise' ? 'à Pontoise.' : 'votre projet.'}</em>
+            Parlons de<br /><em>votre projet.</em>
           </h2>
-          <p className={descriptionClass}>
-            {contactIntros[page] ?? 'Décrivez les travaux que vous souhaitez réaliser.'}{' '}
-            Le devis est gratuit et envoyé sous 24 h après visite.
-          </p>
+          {!cityPage && (
+            <p className={descriptionClass}>
+              {contactIntros[page] ?? 'Décrivez les travaux que vous souhaitez réaliser.'}{' '}
+              Le devis est gratuit et envoyé sous 24 h après visite.
+            </p>
+          )}
           <ArrowLink href={QUOTE_PATH} className={`${styles.button} ${styles.contactButton}`}>
             Demander un devis
           </ArrowLink>
@@ -127,12 +126,14 @@ function SiteContact({ page }: { page: SitePage }) {
           <div className={styles.contactRow}>
             <h3>Coordonnées</h3>
             <ArrowLink href={`mailto:${CLIENT.email}`} className={styles.textLink}>{CLIENT.email}</ArrowLink>
-            <p>{CLIENT.address.postalCode} {CLIENT.address.locality}, Val-d’Oise</p>
+            {!cityPage && <p>{CLIENT.address.postalCode} {CLIENT.address.locality}, Val-d’Oise</p>}
           </div>
-          <div className={styles.contactRow}>
-            <h3><a href={ZONES_PATH} className={styles.contactAreaLink}>Zone d’intervention</a></h3>
-            <p>Dans un rayon de 40 km autour de Vétheuil, notamment dans le Val-d’Oise et les Yvelines.</p>
-          </div>
+          {!cityPage && (
+            <div className={styles.contactRow}>
+              <h3><a href={ZONES_PATH} className={styles.contactAreaLink}>Zone d’intervention</a></h3>
+              <p>Dans un rayon de 40 km autour de Vétheuil, notamment dans le Val-d’Oise et les Yvelines.</p>
+            </div>
+          )}
           {page !== 'portfolio' && (
             <div className={`${styles.contactRow} ${styles.instagramRow}`}>
               <h3>Instagram</h3>
@@ -145,13 +146,14 @@ function SiteContact({ page }: { page: SitePage }) {
   );
 }
 
-export default function SiteLayout({ children, page = 'home' }: {
+export default function SiteLayout({ children, page = 'home', localNavigation }: {
   children: ReactNode;
   page?: SitePage;
+  localNavigation?: readonly NavigationLink[];
 }) {
   return (
-    <div className={styles.site}>
-      <SiteHeader page={page} />
+    <div className={page === 'city' ? `${styles.site} ${styles.city}` : styles.site}>
+      <SiteHeader page={page} localNavigation={localNavigation} />
       <main id="content" tabIndex={-1}>
         {children}
         {page !== 'contact' && page !== 'legal' && <SiteContact page={page} />}
