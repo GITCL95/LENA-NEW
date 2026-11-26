@@ -4,11 +4,12 @@ import { CLIENT, LEGAL_PATH, NAV_ROUTES, QUOTE_PATH, ZONES_PATH } from '@data/cl
 import styles from '@/styles/Site.module.css';
 
 type SitePage = typeof NAV_ROUTES[number]['page'] | 'city' | 'legal';
-export type NavigationLink = { label: string; href: string };
+export type NavigationLink = { label: string; href: string; current?: 'page' };
 
 const contactIntros: Partial<Record<SitePage, string>> = {
   portfolio: 'Décrivez votre projet de rénovation intérieure.',
   painting: 'Décrivez votre projet de peinture intérieure.',
+  zones: 'Indiquez votre commune et les travaux envisagés dans votre demande.',
 };
 
 export function Arrow() {
@@ -43,7 +44,7 @@ function SiteHeader({ page, localNavigation }: {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
   const contactLocation = page === 'contact';
-  const navigation: readonly (NavigationLink & { current?: 'page' })[] = localNavigation
+  const navigation: readonly NavigationLink[] = localNavigation
     ?? NAV_ROUTES.map(({ label, href, page: destination }) => ({
       label,
       href: contactLocation && destination === 'contact' ? '#contact' : href,
@@ -100,12 +101,18 @@ function SiteHeader({ page, localNavigation }: {
 
 function SiteContact({ page }: { page: SitePage }) {
   const cityPage = page === 'city';
+  const zonesPage = page === 'zones';
   const descriptionClass = page === 'painting'
     ? `${styles.contactDescription} ${styles.detailContactDescription}`
     : styles.contactDescription;
 
   return (
-    <section id="contact" className={styles.contact} aria-labelledby="contact-title" tabIndex={cityPage ? -1 : undefined}>
+    <section
+      id="contact"
+      className={zonesPage ? `${styles.contact} ${styles.regionalContact}` : styles.contact}
+      aria-labelledby="contact-title"
+      tabIndex={cityPage || zonesPage ? -1 : undefined}
+    >
       <div className={`${styles.container} ${styles.contactInner}`}>
         <div>
           <p className={styles.eyebrow}>Contact</p>
@@ -114,8 +121,8 @@ function SiteContact({ page }: { page: SitePage }) {
           </h2>
           {!cityPage && (
             <p className={descriptionClass}>
-              {contactIntros[page] ?? 'Décrivez les travaux que vous souhaitez réaliser.'}{' '}
-              Le devis est gratuit et envoyé sous 24 h après visite.
+              {contactIntros[page] ?? 'Décrivez les travaux que vous souhaitez réaliser.'}
+              {!zonesPage && ' Le devis est gratuit et envoyé sous 24 h après visite.'}
             </p>
           )}
           <ArrowLink href={QUOTE_PATH} className={`${styles.button} ${styles.contactButton}`}>
@@ -130,8 +137,17 @@ function SiteContact({ page }: { page: SitePage }) {
           </div>
           {!cityPage && (
             <div className={styles.contactRow}>
-              <h3><a href={ZONES_PATH} className={styles.contactAreaLink}>Zone d’intervention</a></h3>
-              <p>Dans un rayon de 40 km autour de Vétheuil, notamment dans le Val-d’Oise et les Yvelines.</p>
+              {zonesPage ? (
+                <>
+                  <h3>Zone d’intervention</h3>
+                  <ArrowLink href="#villes" className={styles.textLink}>Voir les communes desservies</ArrowLink>
+                </>
+              ) : (
+                <>
+                  <h3><a href={ZONES_PATH} className={styles.contactAreaLink}>Zone d’intervention</a></h3>
+                  <p>Dans un rayon de 40 km autour de Vétheuil, notamment dans le Val-d’Oise et les Yvelines.</p>
+                </>
+              )}
             </div>
           )}
           {page !== 'portfolio' && (
@@ -152,7 +168,7 @@ export default function SiteLayout({ children, page = 'home', localNavigation }:
   localNavigation?: readonly NavigationLink[];
 }) {
   return (
-    <div className={page === 'city' ? `${styles.site} ${styles.city}` : styles.site}>
+    <div className={page === 'city' || page === 'zones' ? `${styles.site} ${styles.areaPage}` : styles.site}>
       <SiteHeader page={page} localNavigation={localNavigation} />
       <main id="content" tabIndex={-1}>
         {children}

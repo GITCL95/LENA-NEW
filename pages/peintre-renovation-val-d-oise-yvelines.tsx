@@ -1,222 +1,179 @@
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { MapPin, ArrowUpRight, Navigation, Clock, Check } from 'lucide-react';
+import Image from 'next/image';
 import SEO from '@components/layout/SEO';
-import SiteLayout from '@components/layout/SiteLayout';
-import PageHero from '@components/sections/PageHero';
-import FAQ from '@components/sections/FAQ';
-import { CITIES } from '@data/cities';
-import { SITE_URL, ZONES_PATH } from '@data/client';
-import { buildWebPageSchema, buildBreadcrumbSchema, buildFAQSchema } from '@data/schemas';
+import SiteLayout, { Arrow, ArrowLink, type NavigationLink } from '@components/layout/SiteLayout';
+import AreaHero from '@components/sections/AreaHero';
+import InteriorServices from '@components/sections/InteriorServices';
+import Qualifications from '@components/sections/Qualifications';
+import { CITIES, PONTOISE } from '@data/cities';
+import { ABOUT_PATH, CLIENT, PORTFOLIO_PATH, SITE_URL, ZONES_PATH } from '@data/client';
+import { buildBreadcrumbSchema, buildFAQSchema, buildWebPageSchema } from '@data/schemas';
+import styles from '@/styles/Zones.module.css';
+import siteStyles from '@/styles/Site.module.css';
 
-const ZONES_FAQ = [
+const navigation = [
+  { label: 'Prestations', href: '#prestations' },
+  { label: 'Réalisations', href: '#realisations' },
+  { label: 'À propos', href: ABOUT_PATH },
+  { label: 'Zones', href: ZONES_PATH, current: 'page' },
+  { label: 'Contact', href: '#contact' },
+] satisfies NavigationLink[];
+
+const departments = [
+  { code: '95', name: 'Val-d’Oise' },
+  { code: '78', name: 'Yvelines' },
+  { code: '27', name: 'Eure' },
+  { code: '60', name: 'Oise' },
+];
+
+const cities = departments.flatMap(({ code, name: department }) =>
+  CITIES.filter((city) => city.department === code)
+    .map(({ href, name, postalCode }) => ({ href, name, postalCode, department })),
+);
+
+const projects = [
   {
-    q: 'Dans quelles villes du Val-d\'Oise intervenez-vous ?',
-    a: 'Léna Rénove couvre l\'ensemble du Val-d\'Oise (95) avec des pages dédiées pour Pontoise, Cergy, Marines, Chars — et intervient également dans toutes les communes du Vexin français.',
+    title: 'Papier peint panoramique',
+    src: '/assets/img/realisations/papier-peint-panoramique-lit/papier-peint-panoramique-lit-1.webp',
+    alt: 'Chambre mansardée avec un papier peint panoramique à motif de palmiers',
+    href: `${PORTFOLIO_PATH}#papier-peint-panoramique`,
+    sizes: '(max-width: 920px) 89vw, (max-width: 1440px) 56vw, 804px',
   },
   {
-    q: 'Intervenez-vous à Pontoise pour des travaux de peinture ?',
-    a: 'Oui. Pontoise est l\'une de nos zones principales d\'intervention. Nous réalisons peinture intérieure, enduits de ratissage, pose de tapisserie et peinture de boiseries dans toute la ville — centre historique, Les Louvrais, Marcouville.',
-  },
-  {
-    q: 'Quel est le délai d\'intervention dans le Val-d\'Oise ?',
-    a: 'Devis gratuit sous 24h après visite, et début des travaux sous 15 jours en moyenne selon le planning. Les communes proches de Vétheuil (Marines, Chars) peuvent bénéficier d\'une intervention encore plus rapide.',
-  },
-  {
-    q: 'Quels travaux réalisez-vous dans les Yvelines ?',
-    a: 'Tous nos services : peinture intérieure, ratissage, pose de papier peint, vinyle adhésif. Nous intervenons également dans les communes des Yvelines proches de Vétheuil.',
-  },
-  {
-    q: 'Proposez-vous des devis gratuits à Cergy ?',
-    a: 'Oui. Devis gratuit et sans engagement à Cergy, comme sur l\'ensemble de nos zones d\'intervention. Je me déplace personnellement pour évaluer votre chantier et vous remettre un devis détaillé.',
-  },
-  {
-    q: 'Êtes-vous assurée pour intervenir dans le Val-d\'Oise et les Yvelines ?',
-    a: 'Oui. Léna Rénove est couverte par une Responsabilité Civile Professionnelle valide dans tous les départements où nous intervenons. CAP Peintre en Bâtiment, SIRET 88880825000011.',
+    title: 'Peinture d’une chambre',
+    src: '/assets/img/realisations/renovation-master-bedroom/renovation-master-bedroom-6.webp',
+    alt: 'Deux portes sombres dans une chambre aux murs terracotta',
+    href: `${PORTFOLIO_PATH}#chambre-terracotta`,
+    sizes: '(max-width: 920px) 89vw, (max-width: 1440px) 28vw, 402px',
   },
 ];
 
-const DEPARTMENTS = [
-  { code: '95', name: 'Val-d\'Oise', count: CITIES.filter(c => c.department === '95').length + ' villes' },
-  { code: '78', name: 'Yvelines', count: CITIES.filter(c => c.department === '78').length + ' villes' },
-  { code: '27', name: 'Eure', count: CITIES.filter(c => c.department === '27').length + ' ville' },
-  { code: '60', name: 'Oise', count: CITIES.filter(c => c.department === '60').length + ' ville' },
+const questions = [
+  {
+    q: 'Comment se passe la demande de devis\u00a0?',
+    a: 'Décrivez votre projet à Léna. Après la visite du chantier, elle vous envoie un devis gratuit sous 24\u00a0h.',
+  },
+  {
+    q: 'Quels travaux réalisez-vous dans les Yvelines\u00a0?',
+    a: 'Léna Rénove y propose la peinture intérieure, les enduits de ratissage, la pose de papier peint et le vinyle adhésif décoratif.',
+  },
+  {
+    q: 'Votre activité est-elle assurée\u00a0?',
+    a: 'Léna Rénove dispose d’une assurance responsabilité civile professionnelle (RC Pro).',
+  },
 ];
+
+const title = 'Peintre Val-d’Oise (95) et Yvelines (78) · Léna Rénove';
+const description = 'Artisane peintre basée à Vétheuil. Peinture intérieure, enduits, papier peint et vinyle adhésif dans un rayon de 40 km. Devis gratuit sous 24 h après visite.';
+const jsonLd = [
+  buildWebPageSchema({ path: ZONES_PATH, title, description }),
+  buildBreadcrumbSchema([
+    { name: 'Accueil', url: `${SITE_URL}/` },
+    { name: 'Zones d’intervention', url: `${SITE_URL}${ZONES_PATH}` },
+  ]),
+  buildFAQSchema(questions),
+];
+
+const salon = PONTOISE.project;
+const heroPhoto = {
+  ...salon.photo,
+  caption: { title: salon.title, detail: 'Pontoise, Val-d’Oise' },
+};
 
 export default function Zones() {
-  const title = 'Peintre Val-d\'Oise (95) et Yvelines (78) · Léna Rénove';
-  const description =
-    "Artisan peintre en bâtiment basé à Vétheuil. Intervention à Pontoise, Cergy, Gisors, Marines, Chars, Chaumont-en-Vexin. Devis 24h.";
-  const path = ZONES_PATH;
-
-  const jsonLd = [
-    buildWebPageSchema({ path, title, description }),
-    buildBreadcrumbSchema([
-      { name: 'Accueil', url: `${SITE_URL}/` },
-      { name: 'Zones d\'intervention', url: `${SITE_URL}${path}` },
-    ]),
-    buildFAQSchema(ZONES_FAQ),
-  ];
-
   return (
     <>
-      <SEO title={title} description={description} path={path} jsonLd={jsonLd} />
-      <SiteLayout page="zones">
-        <PageHero
-          eyebrow="Zones d'intervention"
-          title={<>Peintre en bâtiment dans le<br /><span className="italic text-corail-300 font-normal">Val-d&apos;Oise et les Yvelines.</span></>}
-          description="Basée à Vétheuil (95510), Léna Rénove intervient dans un rayon de 40 km — Val-d'Oise, Yvelines, Oise, Eure. 6 villes principales couvertes par des pages dédiées."
-          breadcrumb={[
-            { label: 'Accueil', href: '/' },
-            { label: 'Zones' },
-          ]}
+      <SEO title={title} description={description} path={ZONES_PATH} ogImage={heroPhoto.src} jsonLd={jsonLd} />
+      <SiteLayout page="zones" localNavigation={navigation}>
+        <AreaHero
+          breadcrumb="Zones d’intervention"
+          eyebrow="Artisane peintre · Vétheuil"
+          title={<>Peintre en bâtiment <em>dans le Val-d’Oise <br />et les Yvelines.</em></>}
+          description={<>Peinture intérieure, enduits, papier peint et vinyle adhésif. Léna Rénove intervient dans un rayon de 40&nbsp;km autour de Vétheuil.</>}
+          photo={heroPhoto}
+          regional
         />
 
-        {/* Département stats */}
-        <section className="border-b border-border/60">
-          <div className="container-premium">
-            <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-border/70 border-x border-border/70">
-              {DEPARTMENTS.map((d) => (
-                <div key={d.code} className="p-8 md:p-10 text-center">
-                  <div className="font-display text-display-md text-corail-600 leading-none">{d.code}</div>
-                  <div className="mt-2 font-display text-lg text-espresso-800">{d.name}</div>
-                  <div className="mt-1 text-[11px] uppercase tracking-[0.2em] text-espresso-400">{d.count}</div>
-                </div>
+        <section className={styles.departments} aria-label="Départements d’intervention">
+          <ul className={`${siteStyles.container} ${styles.departmentList}`}>
+            {departments.map(({ code, name }) => (
+              <li key={code}><strong>{code}</strong><span>{name}</span></li>
+            ))}
+          </ul>
+        </section>
+
+        <section id="villes" className={`${styles.section} ${styles.cities}`} aria-labelledby="cities-title" tabIndex={-1}>
+          <div className={siteStyles.container}>
+            <div className={styles.citiesIntro}>
+              <div>
+                <p className={siteStyles.eyebrow}>Communes desservies</p>
+                <h2 id="cities-title" className={siteStyles.sectionTitle}>Six villes <em>à découvrir.</em></h2>
+              </div>
+              <p>Retrouvez les informations locales et les prestations proposées dans chaque ville.</p>
+            </div>
+            <ul className={styles.cityList}>
+              {cities.map(({ href, name, postalCode, department }) => (
+                <li key={href}>
+                  <a href={href} className={styles.cityLink}>
+                    <div>
+                      <h3>{name}</h3>
+                      <p>{postalCode} · {department}</p>
+                    </div>
+                    <span className={styles.cityArrow} aria-hidden="true"><Arrow /></span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div className={styles.localNote}>
+              <p>Votre commune n’apparaît pas dans la liste&nbsp;?</p>
+              <ArrowLink href={`mailto:${CLIENT.email}`} className={siteStyles.textLink}>Vérifier ma commune</ArrowLink>
+            </div>
+          </div>
+        </section>
+
+        <InteriorServices />
+
+        <section id="realisations" className={`${styles.section} ${styles.projects}`} aria-labelledby="projects-title" tabIndex={-1}>
+          <div className={`${siteStyles.container} ${styles.projectsInner}`}>
+            <div className={styles.projectsHeading}>
+              <p className={siteStyles.eyebrow}>Réalisations</p>
+              <h2 id="projects-title" className={siteStyles.sectionTitle}>Les chantiers <em>en images.</em></h2>
+            </div>
+            <ul className={styles.projectList}>
+              {projects.map(({ title, alt, src, href, sizes }) => (
+                <li key={src} className={styles.project}>
+                  <figure>
+                    <div className={styles.projectPhoto}>
+                      <Image src={src} alt={alt} fill sizes={sizes} />
+                    </div>
+                    <figcaption><a href={href}>{title}</a></figcaption>
+                  </figure>
+                </li>
+              ))}
+            </ul>
+            <ArrowLink href={PORTFOLIO_PATH} className={`${siteStyles.textLink} ${styles.projectsLink}`}>
+              Voir toutes les réalisations
+            </ArrowLink>
+          </div>
+        </section>
+
+        <Qualifications light />
+
+        <section className={`${styles.section} ${styles.faq}`} aria-labelledby="faq-title">
+          <div className={`${siteStyles.container} ${styles.faqInner}`}>
+            <div>
+              <p className={siteStyles.eyebrow}>Questions fréquentes</p>
+              <h2 id="faq-title" className={siteStyles.sectionTitle}>Avant <em>les travaux.</em></h2>
+            </div>
+            <div className={styles.questions}>
+              {questions.map(({ q, a }, index) => (
+                <details key={q} open={index === 0}>
+                  <summary>{q}<span className={styles.questionIcon} aria-hidden="true" /></summary>
+                  <p>{a}</p>
+                </details>
               ))}
             </div>
           </div>
         </section>
-
-        {/* Cities list with content */}
-        <section className="section">
-          <div className="container-premium">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.9 }}
-              className="max-w-3xl mb-14"
-            >
-              <span className="eyebrow">Nos villes</span>
-              <h2 className="mt-5 font-display text-display-lg tracking-tightest text-balance">
-                6 villes principales,<br />
-                <span className="italic text-corail-600 font-normal">couvertes en détail.</span>
-              </h2>
-              <p className="mt-6 text-espresso-500 leading-relaxed">
-                Chaque ville dispose d&apos;une page dédiée avec les informations locales,
-                les quartiers couverts et les services spécifiques. Cliquez sur une ville pour en savoir plus.
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {CITIES.map((city, i) => (
-                <motion.div
-                  key={city.slug}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-50px' }}
-                  transition={{ duration: 0.7, delay: i * 0.04 }}
-                >
-                  <Link
-                    href={city.href}
-                    className="group block relative bg-ivory rounded-3xl p-7 lg:p-8 border border-border/70 hover:border-corail-500 hover:shadow-card transition-all duration-500"
-                  >
-                    <div className="flex items-start justify-between gap-4 mb-4">
-                      <div className="flex items-center gap-3">
-                        <MapPin size={18} className="text-corail-500" strokeWidth={1.8} />
-                        <span className="text-[11px] uppercase tracking-[0.2em] text-espresso-400">
-                          {city.postalCode} · {city.departmentName}
-                        </span>
-                      </div>
-                      <ArrowUpRight
-                        size={18}
-                        className="text-espresso-300 group-hover:text-corail-600 group-hover:rotate-45 transition-all"
-                        strokeWidth={1.8}
-                      />
-                    </div>
-
-                    <h3 className="font-display text-2xl lg:text-3xl tracking-tight text-espresso-800 group-hover:text-corail-600 transition">
-                      {city.name}
-                    </h3>
-
-                    <div className="mt-3 flex items-center gap-4 text-[13px] text-espresso-400">
-                      <span className="flex items-center gap-1.5">
-                        <Clock size={12} strokeWidth={1.8} /> {city.distance}
-                      </span>
-                      <span className="h-0.5 w-0.5 rounded-full bg-espresso-300" />
-                      <span>{city.population}</span>
-                    </div>
-
-                    <p className="mt-5 text-[14px] text-espresso-500 leading-relaxed line-clamp-3">
-                      {city.description}
-                    </p>
-
-                    <div className="mt-5 pt-5 border-t border-border/60 flex items-center gap-2 text-[12px] uppercase tracking-[0.15em] text-corail-600 font-semibold">
-                      Découvrir la page ville
-                      <ArrowUpRight size={12} strokeWidth={2} className="group-hover:translate-x-1 group-hover:-translate-y-0.5 transition" />
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Promesse / Checklist */}
-        <section className="section bg-ivory-300">
-          <div className="container-premium">
-            <div className="grid lg:grid-cols-12 gap-12 items-center">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.9 }}
-                className="lg:col-span-6"
-              >
-                <span className="eyebrow">Engagements zone</span>
-                <h2 className="mt-5 font-display text-display-lg tracking-tightest text-balance">
-                  Un niveau de service<br />
-                  <span className="italic text-corail-600 font-normal">identique partout.</span>
-                </h2>
-                <p className="mt-6 text-espresso-500 leading-relaxed text-[17px]">
-                  Que vous soyez à Vétheuil, à Pontoise ou à Cergy,
-                  la méthode et le niveau d&apos;exigence restent les mêmes. Seuls le délai
-                  d&apos;intervention et la typologie du bâti varient.
-                </p>
-              </motion.div>
-
-              <motion.ul
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.9, delay: 0.15 }}
-                className="lg:col-span-6 space-y-4"
-              >
-                {[
-                  'Déplacement gratuit pour devis dans tout le Val-d\'Oise et les Yvelines',
-                  'Délai de devis garanti sous 24h après visite du chantier',
-                  'Peintures professionnelles Tollens & Sikkens pour toutes les villes',
-                  'CAP Peintre + RC Pro — couverture légale identique en 95, 78, 27 et 60',
-                  'Application manuelle ou airless selon le support, pas de bâclage',
-                  'Protection des meubles et sols, évacuation des déchets incluse',
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 bg-ivory rounded-2xl border border-border/60 p-5">
-                    <span className="flex-shrink-0 w-7 h-7 rounded-full bg-corail-500 grid place-items-center">
-                      <Check size={14} className="text-ivory" strokeWidth={3} />
-                    </span>
-                    <span className="text-[15px] text-espresso-700 leading-relaxed">{item}</span>
-                  </li>
-                ))}
-              </motion.ul>
-            </div>
-          </div>
-        </section>
-
-        <FAQ
-          eyebrow="Questions fréquentes"
-          title="FAQ — Val-d'Oise & Yvelines"
-          items={ZONES_FAQ}
-        />
       </SiteLayout>
     </>
   );

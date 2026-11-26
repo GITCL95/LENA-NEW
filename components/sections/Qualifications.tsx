@@ -9,9 +9,9 @@ const credentials = [
   { title: CLIENT.brands.join(' & '), detail: 'Peintures professionnelles' },
 ];
 
-export default function Qualifications() {
+export default function Qualifications({ light = false }: { light?: boolean }) {
   return (
-    <section className={styles.credentials} aria-label="Expérience et qualifications">
+    <section className={light ? `${styles.credentials} ${styles.light}` : styles.credentials} aria-label="Expérience et qualifications">
       <ul className={`${siteStyles.container} ${styles.credentialGrid}`}>
         {credentials.map(({ title, detail }) => (
           <li key={title}>

@@ -54,7 +54,7 @@ const pontoiseSalon: CityPhoto = {
   height: 750,
 };
 
-export const PONTOISE: City = {
+export const PONTOISE = {
   name: 'Pontoise',
   slug: 'pontoise',
   href: PONTOISE_PATH,
@@ -92,7 +92,7 @@ export const PONTOISE: City = {
   title: 'Artisane peintre à Pontoise (95) · Léna Rénove',
   metaDescription: 'Léna Rénove intervient à Pontoise pour vos travaux de peinture intérieure, enduits, papier peint et vinyle adhésif. Devis gratuit sous 24 h après visite.',
   landmarks: 'Cathédrale Saint-Maclou, Musée Tavet-Delacour, centre médiéval',
-};
+} satisfies City;
 
 export const CITIES: City[] = [
   PONTOISE,

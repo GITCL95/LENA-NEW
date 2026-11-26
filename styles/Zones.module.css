@@ -1,0 +1,373 @@
+.section {
+  padding-block: 5.125rem;
+}
+
+.departments {
+  background: var(--dark);
+  color: var(--dark-text);
+}
+
+.departmentList {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding-block: 1.125rem;
+}
+
+.departmentList li {
+  display: grid;
+  justify-items: center;
+  gap: 0.25rem;
+  padding: 0.1875rem 0.75rem;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.departmentList li + li {
+  border-left: 1px solid var(--dark-border);
+}
+
+.departmentList strong {
+  color: var(--peach);
+  font: 400 2.1875rem/1.12 var(--serif);
+  letter-spacing: -0.05em;
+}
+
+.cities,
+.faq {
+  background: var(--white);
+}
+
+.citiesIntro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.citiesIntro > p {
+  max-width: 18.4375rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.cityList {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8125rem;
+}
+
+.cityLink {
+  display: flex;
+  min-height: 6.5625rem;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1.0625rem 1.3125rem;
+  border: 1px solid var(--border);
+  border-radius: 0.4375rem;
+  background: var(--paper);
+}
+
+.cityLink:hover {
+  border-color: #ba8e7a;
+  background: #f3e9de;
+}
+
+.cityLink h3 {
+  font-size: clamp(1.5rem, 2.1vw, 1.875rem);
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.cityLink p {
+  margin-top: 0.375rem;
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+.cityArrow {
+  display: grid;
+  flex: none;
+  width: 2.375rem;
+  height: 2.375rem;
+  place-items: center;
+  border: 1px solid #dec3b4;
+  border-radius: 50%;
+  color: var(--rust);
+}
+
+.localNote {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3125rem 0.75rem;
+  margin-top: 1.375rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.localNote a {
+  gap: 0.5625rem;
+  font-size: inherit;
+}
+
+.projects {
+  background: #f2e4da;
+}
+
+.projectsInner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: 'heading link' 'photos photos';
+  gap: 2rem 1.5rem;
+}
+
+.projectsHeading {
+  grid-area: heading;
+}
+
+.projectsLink {
+  grid-area: link;
+  align-self: end;
+  justify-self: end;
+  margin-bottom: 0.25rem;
+}
+
+.projectList {
+  display: grid;
+  grid-area: photos;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 1.125rem;
+}
+
+.project {
+  align-self: stretch;
+  border-bottom: 1px solid #d6bdb1;
+}
+
+.projectPhoto {
+  position: relative;
+  height: clamp(17rem, 27.08vw, 24.375rem);
+  overflow: hidden;
+  border-radius: 0.4375rem;
+  background: var(--border);
+}
+
+.projectPhoto img {
+  object-position: center 63%;
+}
+
+.project:nth-child(2) img {
+  object-position: center 51%;
+}
+
+.project figcaption {
+  padding-block: 0.75rem 0.9375rem;
+  font: 400 1.625rem/1.18 var(--serif);
+  letter-spacing: -0.04em;
+}
+
+.project a:hover {
+  color: var(--rust);
+}
+
+.faqInner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.89fr) minmax(0, 1.11fr);
+  align-items: start;
+  gap: 2.8125rem;
+}
+
+.questions {
+  display: grid;
+  gap: 0.5625rem;
+}
+
+.questions details {
+  padding-inline: 1.125rem;
+  border: 1px solid var(--border);
+  border-radius: 0.4375rem;
+  background: var(--paper);
+}
+
+.questions summary {
+  display: flex;
+  min-height: 3.25rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-block: 0.625rem;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 640;
+  line-height: 1.35;
+}
+
+.questions summary::-webkit-details-marker {
+  display: none;
+}
+
+.questions summary:focus-visible {
+  outline: 2px solid var(--rust);
+  outline-offset: 0.25rem;
+}
+
+.questionIcon {
+  display: grid;
+  flex: 0 0 1.5625rem;
+  height: 1.5625rem;
+  place-items: center;
+  border: 1px solid #dfc4b4;
+  border-radius: 50%;
+  color: var(--rust);
+  font-size: 0.875rem;
+}
+
+.questionIcon::before {
+  content: '+';
+}
+
+.questions details[open] .questionIcon::before {
+  content: '−';
+}
+
+.questions p {
+  padding: 0 1.5rem 0.9375rem 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 57.5rem) {
+  .section {
+    padding-block: 3.3125rem;
+  }
+
+  .departmentList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-block: 0.5rem;
+  }
+
+  .departmentList li {
+    padding: 0.6875rem 0.3125rem;
+    font-size: 0.8125rem;
+  }
+
+  .departmentList li:nth-child(3) {
+    border-left: 0;
+  }
+
+  .departmentList li:nth-child(n + 3) {
+    border-top: 1px solid var(--dark-border);
+  }
+
+  .departmentList strong {
+    font-size: 1.8125rem;
+  }
+
+  .citiesIntro {
+    display: block;
+    margin-bottom: 1.375rem;
+  }
+
+  .citiesIntro > p {
+    max-width: 23.125rem;
+    margin-top: 0.6875rem;
+    font-size: 0.9375rem;
+  }
+
+  .cityList {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.375rem;
+  }
+
+  .cityLink {
+    min-height: 4.1875rem;
+    padding: 0.5625rem 0.8125rem;
+  }
+
+  .cityLink h3 {
+    font-size: 1.5rem;
+  }
+
+  .cityLink p {
+    margin-top: 0.1875rem;
+    font-size: 0.75rem;
+  }
+
+  .cityArrow {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .localNote {
+    display: grid;
+    justify-items: start;
+    gap: 0.25rem;
+    margin-top: 1rem;
+  }
+
+  .projectsInner {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'heading' 'photos' 'link';
+    gap: 0.9375rem;
+  }
+
+  .projectsHeading {
+    margin-bottom: 0.4375rem;
+  }
+
+  .projectList {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.9375rem;
+  }
+
+  .projectPhoto {
+    height: auto;
+    aspect-ratio: 1.57;
+  }
+
+  .project:nth-child(2) .projectPhoto {
+    aspect-ratio: 1.02;
+  }
+
+  .project figcaption {
+    padding-block: 0.5rem 0.625rem;
+    font-size: 1.4375rem;
+  }
+
+  .projectsLink {
+    justify-self: start;
+    margin-bottom: 0;
+    font-size: 0.875rem;
+  }
+
+  .faqInner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+
+  .faqInner h2 em {
+    display: inline;
+  }
+
+  .questions {
+    gap: 0.4375rem;
+  }
+
+  .questions details {
+    padding-inline: 0.75rem;
+  }
+
+  .questions summary {
+    min-height: 2.9375rem;
+    font-size: 0.875rem;
+  }
+
+  .questions p {
+    padding-right: 0.4375rem;
+    font-size: 0.8125rem;
+  }
+}

@@ -1,12 +1,13 @@
 import Image from 'next/image';
 import { MapPin } from 'lucide-react';
 import SEO from '@components/layout/SEO';
-import SiteLayout, { QuoteButton, type NavigationLink } from '@components/layout/SiteLayout';
+import SiteLayout, { type NavigationLink } from '@components/layout/SiteLayout';
+import AreaHero from '@components/sections/AreaHero';
+import InteriorServices from '@components/sections/InteriorServices';
 import Qualifications from '@components/sections/Qualifications';
 import type { CityPageContent, CityProject } from '@data/cities';
 import { CLIENT, SITE_URL } from '@data/client';
 import { buildBreadcrumbSchema, buildWebPageSchema } from '@data/schemas';
-import { INTERIOR_SERVICES, serviceHref } from '@data/services';
 import styles from '@/styles/City.module.css';
 import siteStyles from '@/styles/Site.module.css';
 
@@ -71,30 +72,14 @@ export default function CityPage({ city }: { city: CityPageContent }) {
     <>
       <SEO title={title} description={metaDescription} path={href} ogImage={project?.photo.src} jsonLd={jsonLd} />
       <SiteLayout page="city" localNavigation={localNavigation}>
-        <section id={city.slug} className={`${siteStyles.container} ${styles.hero}`} aria-labelledby="city-title">
-          <nav className={styles.breadcrumb} aria-label="Fil d’Ariane">
-            <a href="/">Accueil</a>
-            <span aria-hidden="true" />
-            <span aria-current="page">{name}</span>
-          </nav>
-          <div className={styles.heroGrid}>
-            <div>
-              <p className={siteStyles.eyebrow}>{CLIENT.brand} · Artisane peintre</p>
-              <h1 id="city-title" className={styles.heroTitle}>Rénovation <em>à {name}.</em></h1>
-              <p className={`${siteStyles.heroDescription} ${styles.heroDescription}`}>
-                Peinture intérieure, enduits de ratissage, pose de papier peint et vinyle adhésif décoratif.
-              </p>
-              <QuoteButton />
-              <p className={siteStyles.heroNote}>Devis gratuit sous 24&nbsp;h après visite.</p>
-            </div>
-            <figure className={project ? styles.heroPhoto : `${styles.heroPhoto} ${styles.illustration}`}>
-              <Image src={photo.src} alt={photo.alt} fill priority sizes="(max-width: 920px) 89vw, (max-width: 1440px) 46vw, 640px" />
-              <figcaption>
-                {project ? <><span>{project.title}</span><small>Chantier à {name}</small></> : 'Photo d’illustration'}
-              </figcaption>
-            </figure>
-          </div>
-        </section>
+        <AreaHero
+          id={city.slug}
+          breadcrumb={name}
+          eyebrow={`${CLIENT.brand} · Artisane peintre`}
+          title={<>Rénovation <em>à {name}.</em></>}
+          description="Peinture intérieure, enduits de ratissage, pose de papier peint et vinyle adhésif décoratif."
+          photo={project ? { ...photo, caption: { title: project.title, detail: `Chantier à ${name}` } } : photo}
+        />
 
         <Qualifications />
 
@@ -123,33 +108,7 @@ export default function CityPage({ city }: { city: CityPageContent }) {
           </div>
         </section>
 
-        <section id="prestations" className={`${styles.section} ${styles.services}`} aria-labelledby="services-title" tabIndex={-1}>
-          <div className={siteStyles.container}>
-            <div className={styles.sectionIntro}>
-              <div>
-                <p className={siteStyles.eyebrow}>Prestations</p>
-                <h2 id="services-title" className={siteStyles.sectionTitle}>Vos travaux <em>d’intérieur.</em></h2>
-              </div>
-              <p>De la préparation des supports à la finition.</p>
-            </div>
-            <ul className={styles.servicesList}>
-              {INTERIOR_SERVICES.map(({ title: service, slug, detail, image }) => (
-                <li key={slug}>
-                  <a href={serviceHref(slug)} className={styles.serviceCard}>
-                    <div className={styles.servicePhoto}>
-                      <Image src={`/assets/img/${image}`} alt="" fill sizes="(max-width: 920px) 29vw, (max-width: 1440px) 16vw, 212px" />
-                    </div>
-                    <div className={styles.serviceCopy}>
-                      <h3>{service}</h3>
-                      <p>{detail}</p>
-                    </div>
-                  </a>
-                </li>
-              ))}
-            </ul>
-            <p className={styles.photoNote}>Photos d’illustration des prestations.</p>
-          </div>
-        </section>
+        <InteriorServices />
 
         {project && <CityProjectSection cityName={name} project={project} />}
 
