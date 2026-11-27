@@ -4,7 +4,7 @@ export const CONTACT_PATH = "/contact-peintre-magny-en-vexin";
 export const QUOTE_PATH = `${CONTACT_PATH}#contact`;
 export const LEGAL_PATH = "/mentions-legales";
 export const PORTFOLIO_PATH = "/portfolio";
-export const PAINTING_PATH = "/peinture-interieure-renovation-magny-en-vexin";
+export const SERVICES_PATH = "/peinture-interieure-renovation-magny-en-vexin";
 export const ZONES_PATH = "/peintre-renovation-val-d-oise-yvelines";
 export const PONTOISE_PATH = "/peintre-pontoise";
 
@@ -52,14 +52,14 @@ export const CLIENT = {
 const navRoutes = {
   home: { label: "Accueil", href: "/", page: "home" },
   about: { label: "À propos", href: ABOUT_PATH, page: "about" },
-  painting: { label: "Prestations", href: PAINTING_PATH, page: "painting" },
+  services: { label: "Prestations", href: SERVICES_PATH, page: "services" },
   portfolio: { label: "Réalisations", href: PORTFOLIO_PATH, page: "portfolio" },
   zones: { label: "Zones", href: ZONES_PATH, page: "zones" },
   contact: { label: "Contact", href: CONTACT_PATH, page: "contact" },
 } as const;
 
 export const NAV_ROUTES = [
-  navRoutes.painting,
+  navRoutes.services,
   navRoutes.portfolio,
   navRoutes.about,
   navRoutes.zones,
@@ -69,7 +69,7 @@ export const NAV_ROUTES = [
 export const MOBILE_NAV_ROUTES = [
   navRoutes.home,
   navRoutes.about,
-  navRoutes.painting,
+  navRoutes.services,
   navRoutes.portfolio,
   navRoutes.zones,
   navRoutes.contact,

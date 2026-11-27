@@ -16,6 +16,26 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://lena-renove.com/prestations/peinture-interieure</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://lena-renove.com/prestations/enduits-ratissage</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://lena-renove.com/prestations/pose-papier-peint</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://lena-renove.com/prestations/vinyle-adhesif-decoratif</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://lena-renove.com/peintre-renovation-val-d-oise-yvelines</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

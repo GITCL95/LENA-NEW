@@ -120,11 +120,81 @@
 }
 
 .desktopNav {
-  display: flex;
-  gap: clamp(0.75rem, calc(3.75vw - 1.5rem), 2.125rem);
   font-size: 0.9375rem;
   font-weight: 600;
   white-space: nowrap;
+}
+
+.desktopNavList {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 1.65vw, 1.625rem);
+}
+
+.navItem {
+  position: relative;
+}
+
+.navItemRow {
+  display: flex;
+  align-items: center;
+}
+
+.submenuButton {
+  display: grid;
+  width: 1.75rem;
+  min-height: 2.75rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 0.25rem;
+}
+
+.submenuButton span {
+  width: 0.42rem;
+  height: 0.42rem;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: translateY(-1px) rotate(45deg);
+}
+
+.submenuButton[aria-expanded='true'] span {
+  transform: translateY(2px) rotate(225deg);
+}
+
+.submenuButton:hover,
+.submenuButton[aria-expanded='true'] {
+  color: var(--rust);
+}
+
+.site .submenuButton:focus-visible {
+  outline-offset: -2px;
+}
+
+.submenu[hidden] {
+  display: none;
+}
+
+.desktopNav .submenu {
+  position: absolute;
+  inset: 100% auto auto -0.75rem;
+  z-index: 1;
+  min-width: 13.5rem;
+  padding: 0.375rem;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  background: var(--white);
+  box-shadow: 0 0.625rem 1.5rem rgb(48 34 27 / 12%);
+}
+
+.submenu a {
+  display: block;
+  padding: 0.5rem 0.625rem;
+  border-radius: 0.25rem;
+}
+
+.submenu a:hover,
+.submenu a[aria-current] {
+  background: var(--sand);
 }
 
 .desktopNav a:hover,
@@ -134,7 +204,7 @@
   color: var(--rust);
 }
 
-.desktopNav a[aria-current] {
+.desktopNav .navItemRow > a[aria-current] {
   text-decoration: underline;
   text-underline-offset: 0.55rem;
 }
@@ -462,22 +532,35 @@
     position: absolute;
     inset: 100% 0 auto;
     display: block;
+    max-height: calc(100dvh - 4.5625rem);
+    overflow-y: auto;
     border-block: 1px solid var(--border);
     background: var(--paper);
   }
 
-  .mobileNav > div {
-    display: grid;
+  .mobileNavList {
     padding-block: 0.375rem;
   }
 
-  .mobileNav a {
+  .mobileNav .navItem + .navItem {
+    border-top: 1px solid var(--border);
+  }
+
+  .mobileNav .navItemRow > a {
+    flex: 1;
     padding-block: 0.625rem;
     font-weight: 600;
   }
 
-  .mobileNav a + a {
-    border-top: 1px solid var(--border);
+  .mobileNav .submenuButton {
+    width: 2.75rem;
+  }
+
+  .mobileNav .submenu:not([hidden]) {
+    margin-bottom: 0.625rem;
+    padding-left: 0.625rem;
+    border-left: 1px solid var(--border);
+    font-size: 0.9375rem;
   }
 
   .heroTitle {

@@ -8,6 +8,7 @@ import siteStyles from '@/styles/Site.module.css';
 type AreaHeroProps = {
   id?: string;
   breadcrumb: string;
+  breadcrumbParent?: { label: string; href: string };
   eyebrow: string;
   title: ReactNode;
   description: ReactNode;
@@ -17,9 +18,10 @@ type AreaHeroProps = {
     caption?: { title: string; detail: string };
   };
   regional?: boolean;
+  directoryLink?: { label: string; href: string };
 };
 
-export default function AreaHero({ id, breadcrumb, eyebrow, title, description, photo, regional }: AreaHeroProps) {
+export default function AreaHero({ id, breadcrumb, breadcrumbParent, eyebrow, title, description, photo, regional, directoryLink }: AreaHeroProps) {
   const { src, alt, caption } = photo;
 
   return (
@@ -28,13 +30,16 @@ export default function AreaHero({ id, breadcrumb, eyebrow, title, description, 
       className={`${siteStyles.container} ${siteStyles.pageIntroSpacing}${regional ? ` ${styles.regionalHero}` : ''}`}
       aria-labelledby="area-title"
     >
-      <Breadcrumb current={breadcrumb} />
+      <Breadcrumb current={breadcrumb} parent={breadcrumbParent} />
       <div className={styles.heroGrid}>
         <div>
           <p className={siteStyles.eyebrow}>{eyebrow}</p>
           <h1 id="area-title" className={styles.heroTitle}>{title}</h1>
           <p className={`${siteStyles.heroDescription} ${styles.heroDescription}`}>{description}</p>
-          <QuoteButton />
+          <div className={styles.heroActions}>
+            <QuoteButton />
+            {directoryLink && <a href={directoryLink.href} className={siteStyles.textLink}>{directoryLink.label}</a>}
+          </div>
           <p className={siteStyles.heroNote}>Devis gratuit sous 24&nbsp;h après visite.</p>
         </div>
         <figure className={caption ? styles.heroPhoto : `${styles.heroPhoto} ${styles.illustration}`}>

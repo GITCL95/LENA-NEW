@@ -4,19 +4,21 @@ import { Breadcrumb } from '@components/sections/PageHero';
 import styles from '@/styles/Detail.module.css';
 import siteStyles from '@/styles/Site.module.css';
 
-export function DetailHero({ id, breadcrumb, eyebrow, title, emphasis, description, photo, className = '' }: {
+export function DetailHero({ id, breadcrumb, breadcrumbParent, eyebrow, title, emphasis, description, photo, quoteHref, className = '' }: {
   id: string;
   breadcrumb: string;
+  breadcrumbParent?: { label: string; href: string };
   eyebrow: string;
   title: string;
   emphasis: string;
   description: string;
   photo: { src: string; alt: string; caption: string };
+  quoteHref?: string;
   className?: string;
 }) {
   return (
     <section id={id} className={`${siteStyles.container} ${siteStyles.pageIntroSpacing} ${className}`} aria-labelledby={`${id}-title`}>
-      <Breadcrumb current={breadcrumb} />
+      <Breadcrumb current={breadcrumb} parent={breadcrumbParent} />
       <div className={styles.hero}>
         <div>
           <p className={siteStyles.eyebrow}>{eyebrow}</p>
@@ -24,7 +26,7 @@ export function DetailHero({ id, breadcrumb, eyebrow, title, emphasis, descripti
             {title}<br /><em>{emphasis}</em>
           </h1>
           <p className={`${siteStyles.heroDescription} ${styles.heroDescription}`}>{description}</p>
-          <QuoteButton />
+          <QuoteButton href={quoteHref} />
           <p className={siteStyles.heroNote}>Devis gratuit sous 24&nbsp;h après visite.</p>
         </div>
         <figure className={styles.heroPhoto}>

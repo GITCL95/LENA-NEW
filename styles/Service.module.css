@@ -4,18 +4,10 @@
   background: var(--border);
 }
 
-.splitHeading {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 1.5rem;
-}
-
-.splitHeading > p {
-  flex: 0 0 min(22.9%, 17.5rem);
+.scopeIntro {
+  max-width: 38rem;
+  margin-top: 0.875rem;
   color: var(--muted);
-  font-size: 1rem;
-  line-height: 1.58;
 }
 
 .threeColumns {
@@ -38,11 +30,35 @@
 }
 
 .surface h3,
-.finishCopy h3,
-.techniques h3,
-.priceFactors h3 {
+.finishesTitle {
   font-size: 1.75rem;
   line-height: 1.16;
+}
+
+.finishes {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  column-gap: 1.875rem;
+  margin-top: 1.375rem;
+  padding: 1.5rem;
+  border-radius: var(--card-radius);
+  background: var(--blush);
+}
+
+.finishesTitle,
+.finishGrid,
+.finishNote {
+  grid-column: 1;
+}
+
+.finishGrid {
+  gap: 0.625rem;
+  margin-top: 0.875rem;
+}
+
+.finishCopy h4,
+.techniques h4 {
+  font: 400 1.25rem/1.15 var(--serif);
 }
 
 .surface p,
@@ -62,7 +78,7 @@
 
 .swatch {
   display: block;
-  height: 6.375rem;
+  height: 2rem;
   background: #a35740;
 }
 
@@ -75,11 +91,12 @@
 }
 
 .finishCopy {
-  padding: 0.625rem 1.0625rem 0.9375rem;
+  padding: 0.5625rem 0.6875rem;
 }
 
 .finishCopy p {
   margin-top: 0.375rem;
+  font-size: 0.875rem;
 }
 
 .finishNote {
@@ -90,20 +107,17 @@
 
 .techniques {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.625rem;
-  margin-top: 1.875rem;
-  padding-top: 1.125rem;
-  border-top: 1px solid #dac1b3;
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  align-content: center;
+  gap: 1rem;
+  padding-left: 1.625rem;
+  border-left: 1px solid #dac1b3;
 }
 
 .techniques p {
   max-width: 30rem;
   margin-top: 0.375rem;
-}
-
-.techniques strong {
-  color: var(--ink);
 }
 
 .steps {
@@ -167,58 +181,71 @@
 
 .budgetInner {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 43.25%;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
   align-items: center;
-  gap: 1.5rem;
+  gap: clamp(1.5rem, 5vw, 4rem);
 }
 
 .price {
-  margin-top: 1rem;
   color: var(--peach);
-  font: 4.1875rem/1 var(--serif);
+  font: clamp(1.25rem, 4.1vw, 2.9375rem)/1.15 var(--serif);
   letter-spacing: -0.055em;
+  white-space: nowrap;
 }
 
-.price span {
-  font-size: 0.5em;
-  letter-spacing: -0.03em;
-}
-
-.priceNote {
-  margin-block: 0.4375rem 1.25rem;
-  color: var(--dark-text);
-  font-size: 0.9375rem;
+.pricePending {
+  color: var(--peach);
+  font-weight: 700;
 }
 
 .priceFactors {
-  padding: 1.375rem 1.5rem 1.375rem;
+  max-width: 25rem;
+  margin-top: 1rem;
+  color: var(--dark-text);
+}
+
+.priceFrame {
+  overflow: hidden;
   border: 1px solid var(--dark-border);
   border-radius: 0.5rem;
   background: #37251e;
 }
 
-.priceFactors dl {
-  margin-top: 0.75rem;
+.priceTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
 }
 
-.priceFactors dl > div {
-  padding-block: 0.625rem;
+.priceTable :is(th, td) {
+  padding: 0.9375rem clamp(0.5rem, 2vw, 1.375rem);
+}
+
+.priceTable thead th {
+  border-bottom: 1px solid var(--dark-border);
+  color: var(--dark-text);
+  font-size: 0.875rem;
+}
+
+.priceNote {
+  padding: 0.75rem clamp(0.5rem, 2vw, 1.375rem);
   border-top: 1px solid var(--dark-border);
-}
-
-.priceFactors dl > div:last-child {
-  padding-bottom: 0;
-}
-
-.priceFactors dt {
-  font-weight: 750;
-}
-
-.priceFactors dd {
-  margin-top: 0.21875rem;
   color: var(--dark-text);
   font-size: 0.9375rem;
-  line-height: 1.5;
+}
+
+.projects {
+  border-block: 1px solid var(--border);
+  background: var(--white);
+}
+
+.projectNote,
+.projectsLink {
+  margin-top: 1rem;
+}
+
+.projectNote {
+  color: var(--muted);
 }
 
 .photos {
@@ -231,6 +258,11 @@
 .projectPhoto {
   height: min(27.7vw, 24.9375rem);
   border-radius: 0.375rem;
+}
+
+.photos figure:only-child {
+  grid-column: 1 / -1;
+  max-width: 46rem;
 }
 
 .photos figure:first-child img {
@@ -250,17 +282,6 @@
 }
 
 @media (max-width: 57.5rem) {
-  .splitHeading {
-    display: grid;
-    gap: 0.625rem;
-  }
-
-  .splitHeading > p {
-    max-width: 18.75rem;
-    font-size: 0.9375rem;
-    line-height: 1.6;
-  }
-
   .threeColumns {
     gap: 0.5rem;
     margin-top: 1.40625rem;
@@ -276,8 +297,7 @@
   }
 
   .surface h3,
-  .techniques h3,
-  .priceFactors h3 {
+  .finishesTitle {
     font-size: 1.5rem;
   }
 
@@ -292,15 +312,16 @@
     margin-top: 0.375rem;
   }
 
-  .swatch {
-    height: 4.5625rem;
+  .finishes {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 1rem;
   }
 
   .finishCopy {
     padding: 0.71875rem 0.4375rem 0.46875rem;
   }
 
-  .finishCopy h3 {
+  .finishCopy h4 {
     font-size: clamp(1rem, 4.85vw, 1.375rem);
   }
 
@@ -315,10 +336,14 @@
   }
 
   .techniques {
-    grid-template-columns: minmax(0, 1fr);
+    grid-column: 1;
+    grid-row: auto;
     gap: 0.84375rem;
     margin-top: 1.25rem;
     padding-top: 0.875rem;
+    padding-left: 0;
+    border-top: 1px solid #dac1b3;
+    border-left: 0;
   }
 
   .steps {
@@ -367,18 +392,12 @@
     gap: 1.375rem;
   }
 
-  .price {
-    margin-top: 1.03125rem;
-    font-size: clamp(2.625rem, 13.13vw, 4rem);
+  .priceTable {
+    font-size: 0.875rem;
   }
 
-  .priceNote {
-    margin-block: 0.5rem 1.25rem;
-  }
-
-  .priceFactors {
-    padding: 0.8125rem 0.875rem 0.875rem;
-    border-radius: 0.4375rem;
+  .priceTable :is(th, td) {
+    padding-block: 0.625rem;
   }
 
   .photos {

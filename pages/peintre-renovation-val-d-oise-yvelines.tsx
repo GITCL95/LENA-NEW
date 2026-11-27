@@ -64,6 +64,17 @@ const jsonLd = [
     { name: 'Zones d’intervention', url: `${SITE_URL}${ZONES_PATH}` },
   ]),
   buildFAQSchema(questions),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Communes desservies',
+    itemListElement: cities.map(({ name, href }, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name,
+      url: `${SITE_URL}${href}`,
+    })),
+  },
 ];
 
 const salon = PONTOISE.project;
@@ -83,6 +94,7 @@ export default function Zones() {
           title={<>Peintre en bâtiment <em>dans le Val-d’Oise <br />et les Yvelines.</em></>}
           description={<>Peinture intérieure, enduits, papier peint et vinyle adhésif. Léna Rénove intervient dans un rayon de 40&nbsp;km autour de Vétheuil.</>}
           photo={heroPhoto}
+          directoryLink={{ label: 'Voir les communes', href: '#villes' }}
           regional
         />
 
@@ -98,8 +110,7 @@ export default function Zones() {
           <div className={siteStyles.container}>
             <div className={styles.citiesIntro}>
               <div>
-                <p className={siteStyles.eyebrow}>Communes desservies</p>
-                <h2 id="cities-title" className={siteStyles.sectionTitle}>Six villes <em>à découvrir.</em></h2>
+                <h2 id="cities-title" className={siteStyles.sectionTitle}>Les communes <em>desservies.</em></h2>
               </div>
               <p>Retrouvez les informations locales et les prestations proposées dans chaque ville.</p>
             </div>

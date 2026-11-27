@@ -24,6 +24,13 @@
   line-height: 1.55;
 }
 
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.625rem 1.25rem;
+}
+
 .heroPhoto {
   position: relative;
   height: clamp(22rem, 32vw, 28.75rem);

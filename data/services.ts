@@ -1,4 +1,4 @@
-import { CONTACT_PATH, PAINTING_PATH } from './client';
+import { CONTACT_PATH } from './client';
 
 export const QUOTE_SERVICES = {
   peinture: 'Peinture intérieure',
@@ -12,14 +12,15 @@ export const QUOTE_SERVICES = {
 
 export type QuoteService = keyof typeof QUOTE_SERVICES;
 
-export function serviceHref(service: QuoteService) {
-  return service === 'peinture' ? PAINTING_PATH : `${CONTACT_PATH}?prestation=${service}#contact`;
+export function serviceQuoteHref(service: QuoteService) {
+  return `${CONTACT_PATH}?prestation=${service}#contact`;
 }
 
 export const INTERIOR_SERVICES = [
   {
     title: 'Peinture intérieure',
     slug: 'peinture',
+    route: 'peinture-interieure',
     unit: 'm²',
     // https://entreprise-sakani.fr/prix-peinture-val-doise-paris/
     // https://boyer-peinture.com/peinture-interieure
@@ -31,6 +32,7 @@ export const INTERIOR_SERVICES = [
   {
     title: 'Enduits de ratissage',
     slug: 'enduits',
+    route: 'enduits-ratissage',
     unit: 'm²',
     // https://www.renovation-dany.fr/prix-ratissage-complet/
     priceRange: '25 à 40 €',
@@ -41,6 +43,7 @@ export const INTERIOR_SERVICES = [
   {
     title: 'Pose de papier peint',
     slug: 'papier-peint',
+    route: 'pose-papier-peint',
     unit: 'm²',
     // https://boyer-peinture.com/papier-peint-revetements-muraux
     priceRange: '15 à 60 €',
@@ -51,6 +54,7 @@ export const INTERIOR_SERVICES = [
   {
     title: 'Vinyle adhésif décoratif',
     slug: 'vinyle',
+    route: 'vinyle-adhesif-decoratif',
     unit: 'Par cuisine',
     // https://coverwithstyl.fr/pages/renovation-cuisine
     priceRange: '900 à 2 500 €',
@@ -59,6 +63,13 @@ export const INTERIOR_SERVICES = [
     image: 'service_thumb_4.jpg',
   },
 ] as const;
+
+export type InteriorService = (typeof INTERIOR_SERVICES)[number];
+
+export function serviceHref(service: QuoteService) {
+  const detail = INTERIOR_SERVICES.find(({ slug }) => slug === service);
+  return detail ? `/prestations/${detail.route}` : serviceQuoteHref(service);
+}
 
 export type Service = {
   id: string;

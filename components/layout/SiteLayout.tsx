@@ -1,14 +1,12 @@
 import { useRef, useState, type ReactNode } from 'react';
 import Image from 'next/image';
-import { CLIENT, LEGAL_PATH, MOBILE_NAV_ROUTES, NAV_ROUTES, QUOTE_PATH, ZONES_PATH } from '@data/client';
+import SiteNavigation, { type SitePage } from '@components/layout/SiteNavigation';
+import { CLIENT, LEGAL_PATH, QUOTE_PATH, ZONES_PATH } from '@data/client';
 import styles from '@/styles/Site.module.css';
-
-type NavigationRoute = typeof MOBILE_NAV_ROUTES[number];
-type SitePage = NavigationRoute['page'] | 'city' | 'legal' | 'notFound';
 
 const contactIntros: Partial<Record<SitePage, string>> = {
   portfolio: 'Décrivez votre projet de rénovation intérieure.',
-  painting: 'Décrivez votre projet de peinture intérieure.',
+  services: 'Décrivez votre projet de rénovation intérieure.',
   zones: 'Indiquez votre commune et les travaux envisagés dans votre demande.',
 };
 
@@ -29,32 +27,20 @@ export function ArrowLink({ href, className, children }: {
   );
 }
 
-export function QuoteButton() {
+export function QuoteButton({ href = QUOTE_PATH }: { href?: string }) {
   return (
-    <ArrowLink href={QUOTE_PATH} className={`${styles.button} ${styles.primaryButton}`}>
+    <ArrowLink href={href} className={`${styles.button} ${styles.primaryButton}`}>
       Demander un devis
     </ArrowLink>
   );
 }
 
-function SiteHeader({ page }: { page: SitePage }) {
+function SiteHeader({ page, activePath, quoteHref }: { page: SitePage; activePath?: string; quoteHref: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
-  const contactLocation = page === 'contact';
 
   function closeMenu() {
     setMenuOpen(false);
-  }
-
-  function renderNavLinks(routes: readonly NavigationRoute[], onClick?: () => void) {
-    return routes.map(({ label, href, page: destination }) => {
-      let current: 'page' | 'location' | undefined;
-      if (destination === page) current = 'page';
-      if (page === 'city' && destination === 'zones') current = 'location';
-      const linkHref = contactLocation && destination === 'contact' ? '#contact' : href;
-
-      return <a href={linkHref} key={href} aria-current={current} onClick={onClick}>{label}</a>;
-    });
   }
 
   return (
@@ -72,9 +58,9 @@ function SiteHeader({ page }: { page: SitePage }) {
           <Image src="/assets/img/logo-lt.png" alt="" width={500} height={442} loading="eager" />
         </a>
         <nav className={styles.desktopNav} aria-label="Navigation principale">
-          {renderNavLinks(NAV_ROUTES)}
+          <SiteNavigation page={page} activePath={activePath} />
         </nav>
-        <ArrowLink href={contactLocation ? '#contact' : QUOTE_PATH} className={`${styles.button} ${styles.headerButton}`}>
+        <ArrowLink href={quoteHref} className={`${styles.button} ${styles.headerButton}`}>
           Demander un devis
         </ArrowLink>
         <button
@@ -89,19 +75,21 @@ function SiteHeader({ page }: { page: SitePage }) {
         </button>
       </div>
       <nav id="site-navigation" className={styles.mobileNav} aria-label="Navigation principale" hidden={!menuOpen}>
-        <div className={styles.container}>
-          {renderNavLinks(MOBILE_NAV_ROUTES, closeMenu)}
-        </div>
+        {menuOpen && (
+          <div className={styles.container}>
+            <SiteNavigation page={page} activePath={activePath} mobile onFragmentNavigate={closeMenu} />
+          </div>
+        )}
       </nav>
     </header>
   );
 }
 
-function SiteContact({ page }: { page: SitePage }) {
+function SiteContact({ page, quoteHref }: { page: SitePage; quoteHref: string }) {
   const cityPage = page === 'city';
   const contactPage = page === 'contact';
   const zonesPage = page === 'zones';
-  const descriptionClass = page === 'painting'
+  const descriptionClass = page === 'service'
     ? `${styles.contactDescription} ${styles.detailContactDescription}`
     : styles.contactDescription;
 
@@ -124,7 +112,7 @@ function SiteContact({ page }: { page: SitePage }) {
               {!zonesPage && ' Le devis est gratuit et envoyé sous 24 h après visite.'}
             </p>
           )}
-          <ArrowLink href={contactPage ? '#contact' : QUOTE_PATH} className={`${styles.button} ${styles.contactButton}`}>
+          <ArrowLink href={quoteHref} className={`${styles.button} ${styles.contactButton}`}>
             Demander un devis
           </ArrowLink>
         </div>
@@ -161,16 +149,20 @@ function SiteContact({ page }: { page: SitePage }) {
   );
 }
 
-export default function SiteLayout({ children, page = 'home' }: {
+export default function SiteLayout({ children, page = 'home', activePath, quoteHref = QUOTE_PATH }: {
   children: ReactNode;
   page?: SitePage;
+  activePath?: string;
+  quoteHref?: string;
 }) {
+  const contactHref = page === 'contact' ? '#contact' : quoteHref;
+
   return (
     <div className={styles.site}>
-      <SiteHeader page={page} />
+      <SiteHeader page={page} activePath={activePath} quoteHref={contactHref} />
       <main id="content" tabIndex={-1}>
         {children}
-        {page !== 'notFound' && <SiteContact page={page} />}
+        {page !== 'notFound' && <SiteContact page={page} quoteHref={contactHref} />}
       </main>
       <footer className={styles.footer}>
         <div className={`${styles.container} ${styles.footerInner}`}>

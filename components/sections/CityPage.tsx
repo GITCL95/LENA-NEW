@@ -8,7 +8,7 @@ import InteriorServices from '@components/sections/InteriorServices';
 import Qualifications from '@components/sections/Qualifications';
 import Questions from '@components/sections/Questions';
 import type { CityPageContent, CityProject } from '@data/cities';
-import { CLIENT, SITE_URL } from '@data/client';
+import { CLIENT, SITE_URL, ZONES_PATH } from '@data/client';
 import { getCityQuestions } from '@data/faq';
 import { buildBreadcrumbSchema, buildFAQSchema, buildWebPageSchema } from '@data/schemas';
 import { INTERIOR_SERVICES } from '@data/services';
@@ -62,6 +62,7 @@ export default function CityPage({ city }: { city: CityPageContent }) {
     buildWebPageSchema({ path: href, title, description: metaDescription }),
     buildBreadcrumbSchema([
       { name: 'Accueil', url: `${SITE_URL}/` },
+      { name: 'Zones d’intervention', url: `${SITE_URL}${ZONES_PATH}` },
       { name, url: `${SITE_URL}${href}` },
     ]),
     buildFAQSchema(questions),
@@ -88,10 +89,11 @@ export default function CityPage({ city }: { city: CityPageContent }) {
   return (
     <>
       <SEO title={title} description={metaDescription} path={href} ogImage={project?.photo.src} jsonLd={jsonLd} />
-      <SiteLayout page="city">
+      <SiteLayout page="city" activePath={href}>
         <AreaHero
           id={city.slug}
           breadcrumb={name}
+          breadcrumbParent={{ label: 'Zones d’intervention', href: ZONES_PATH }}
           eyebrow={`${CLIENT.brand} · Artisane peintre`}
           title={<>Rénovation <em>à {name}.</em></>}
           description="Peinture intérieure, enduits de ratissage, pose de papier peint et vinyle adhésif décoratif."

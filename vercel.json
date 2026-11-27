@@ -16,6 +16,26 @@
       "statusCode": 301
     },
     {
+      "source": "/prestations/peinture-interieure.html",
+      "destination": "/prestations/peinture-interieure",
+      "statusCode": 301
+    },
+    {
+      "source": "/prestations/enduits-ratissage.html",
+      "destination": "/prestations/enduits-ratissage",
+      "statusCode": 301
+    },
+    {
+      "source": "/prestations/pose-papier-peint.html",
+      "destination": "/prestations/pose-papier-peint",
+      "statusCode": 301
+    },
+    {
+      "source": "/prestations/vinyle-adhesif-decoratif.html",
+      "destination": "/prestations/vinyle-adhesif-decoratif",
+      "statusCode": 301
+    },
+    {
       "source": "/peintre-renovation-val-d-oise-yvelines.html",
       "destination": "/peintre-renovation-val-d-oise-yvelines",
       "statusCode": 301
@@ -74,6 +94,22 @@
     {
       "source": "/peinture-interieure-renovation-magny-en-vexin",
       "destination": "/peinture-interieure-renovation-magny-en-vexin.html"
+    },
+    {
+      "source": "/prestations/peinture-interieure",
+      "destination": "/prestations/peinture-interieure.html"
+    },
+    {
+      "source": "/prestations/enduits-ratissage",
+      "destination": "/prestations/enduits-ratissage.html"
+    },
+    {
+      "source": "/prestations/pose-papier-peint",
+      "destination": "/prestations/pose-papier-peint.html"
+    },
+    {
+      "source": "/prestations/vinyle-adhesif-decoratif",
+      "destination": "/prestations/vinyle-adhesif-decoratif.html"
     },
     {
       "source": "/peintre-renovation-val-d-oise-yvelines",

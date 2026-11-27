@@ -1,11 +1,12 @@
 import type { ReactNode } from 'react';
 import styles from '@/styles/Site.module.css';
 
-export function Breadcrumb({ current }: { current: string }) {
+export function Breadcrumb({ current, parent }: { current: string; parent?: { label: string; href: string } }) {
   return (
     <nav className={styles.breadcrumb} aria-label="Fil d’Ariane">
       <a href="/">Accueil</a>
       <span aria-hidden="true" />
+      {parent && <><a href={parent.href}>{parent.label}</a><span aria-hidden="true" /></>}
       <span aria-current="page">{current}</span>
     </nav>
   );
