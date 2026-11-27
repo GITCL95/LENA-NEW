@@ -1,4 +1,4 @@
-import { PONTOISE_PATH } from './client';
+import { PONTOISE_PATH, ZONES_PATH } from './client';
 
 type CityPhoto = {
   src: string;
@@ -24,7 +24,6 @@ export type City = {
   name: string;
   slug: string;
   href: string;
-  filePath: string; // slug utilisé pour le routing dynamique
   postalCode: string;
   distance: string;
   department: string;
@@ -58,7 +57,6 @@ export const PONTOISE = {
   name: 'Pontoise',
   slug: 'pontoise',
   href: PONTOISE_PATH,
-  filePath: 'peintre-pontoise',
   postalCode: '95000',
   distance: '35 min',
   department: '95',
@@ -94,13 +92,10 @@ export const PONTOISE = {
   landmarks: 'Cathédrale Saint-Maclou, Musée Tavet-Delacour, centre médiéval',
 } satisfies City;
 
-export const CITIES: City[] = [
-  PONTOISE,
+const cityDetails: Omit<City, 'href'>[] = [
   {
     name: 'Cergy',
     slug: 'cergy',
-    href: '/peintre-cergy',
-    filePath: 'peintre-cergy',
     postalCode: '95000',
     distance: '30 min',
     department: '95',
@@ -125,8 +120,6 @@ export const CITIES: City[] = [
   {
     name: 'Gisors',
     slug: 'gisors',
-    href: '/peintre-gisors',
-    filePath: 'peintre-gisors',
     postalCode: '27140',
     distance: '35 min',
     department: '27',
@@ -146,8 +139,6 @@ export const CITIES: City[] = [
   {
     name: 'Marines',
     slug: 'marines-95',
-    href: '/peintre-marines-95',
-    filePath: 'peintre-marines-95',
     postalCode: '95640',
     distance: '30 min',
     department: '95',
@@ -167,8 +158,6 @@ export const CITIES: City[] = [
   {
     name: 'Chars',
     slug: 'chars-95',
-    href: '/peintre-chars-95',
-    filePath: 'peintre-chars-95',
     postalCode: '95750',
     distance: '30 min',
     department: '95',
@@ -188,8 +177,6 @@ export const CITIES: City[] = [
   {
     name: 'Chaumont-en-Vexin',
     slug: 'chaumont-en-vexin',
-    href: '/peintre-chaumont-en-vexin',
-    filePath: 'peintre-chaumont-en-vexin',
     postalCode: '60240',
     distance: '45 min',
     department: '60',
@@ -208,5 +195,10 @@ export const CITIES: City[] = [
   },
 ];
 
+export const CITIES: City[] = [
+  PONTOISE,
+  ...cityDetails.map((city) => ({ ...city, href: `${ZONES_PATH}/${city.slug}` })),
+];
+
 export const getCityBySlug = (slug: string) =>
-  CITIES.find((c) => c.filePath === slug || c.slug === slug);
+  CITIES.find((city) => city.slug === slug);

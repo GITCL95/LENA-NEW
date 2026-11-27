@@ -36,7 +36,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://lena-renove.com/peintre-renovation-val-d-oise-yvelines</loc>
+    <loc>https://lena-renove.com/zones</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -51,32 +51,32 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lena-renove.com/peintre-pontoise</loc>
+    <loc>https://lena-renove.com/zones/pontoise</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://lena-renove.com/peintre-cergy</loc>
+    <loc>https://lena-renove.com/zones/cergy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://lena-renove.com/peintre-gisors</loc>
+    <loc>https://lena-renove.com/zones/gisors</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://lena-renove.com/peintre-marines-95</loc>
+    <loc>https://lena-renove.com/zones/marines-95</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://lena-renove.com/peintre-chars-95</loc>
+    <loc>https://lena-renove.com/zones/chars-95</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://lena-renove.com/peintre-chaumont-en-vexin</loc>
+    <loc>https://lena-renove.com/zones/chaumont-en-vexin</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

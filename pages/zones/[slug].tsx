@@ -3,7 +3,7 @@ import CityPage from '@components/sections/CityPage';
 import { CITIES, getCityBySlug, type CityPageContent } from '@data/cities';
 
 export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: CITIES.map(({ filePath }) => ({ params: { slug: filePath } })),
+  paths: CITIES.map(({ slug }) => ({ params: { slug } })),
   fallback: false,
 });
 

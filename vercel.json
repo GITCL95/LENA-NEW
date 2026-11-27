@@ -86,8 +86,18 @@
       "statusCode": 301
     },
     {
+      "source": "/peintre-renovation-val-d-oise-yvelines",
+      "destination": "/zones",
+      "statusCode": 301
+    },
+    {
       "source": "/peintre-renovation-val-d-oise-yvelines.html",
-      "destination": "/peintre-renovation-val-d-oise-yvelines",
+      "destination": "/zones",
+      "statusCode": 301
+    },
+    {
+      "source": "/zones.html",
+      "destination": "/zones",
       "statusCode": 301
     },
     {
@@ -101,33 +111,93 @@
       "statusCode": 301
     },
     {
+      "source": "/peintre-pontoise",
+      "destination": "/zones/pontoise",
+      "statusCode": 301
+    },
+    {
       "source": "/peintre-pontoise.html",
-      "destination": "/peintre-pontoise",
+      "destination": "/zones/pontoise",
+      "statusCode": 301
+    },
+    {
+      "source": "/zones/pontoise.html",
+      "destination": "/zones/pontoise",
+      "statusCode": 301
+    },
+    {
+      "source": "/peintre-cergy",
+      "destination": "/zones/cergy",
       "statusCode": 301
     },
     {
       "source": "/peintre-cergy.html",
-      "destination": "/peintre-cergy",
+      "destination": "/zones/cergy",
+      "statusCode": 301
+    },
+    {
+      "source": "/zones/cergy.html",
+      "destination": "/zones/cergy",
+      "statusCode": 301
+    },
+    {
+      "source": "/peintre-gisors",
+      "destination": "/zones/gisors",
       "statusCode": 301
     },
     {
       "source": "/peintre-gisors.html",
-      "destination": "/peintre-gisors",
+      "destination": "/zones/gisors",
+      "statusCode": 301
+    },
+    {
+      "source": "/zones/gisors.html",
+      "destination": "/zones/gisors",
+      "statusCode": 301
+    },
+    {
+      "source": "/peintre-marines-95",
+      "destination": "/zones/marines-95",
       "statusCode": 301
     },
     {
       "source": "/peintre-marines-95.html",
-      "destination": "/peintre-marines-95",
+      "destination": "/zones/marines-95",
+      "statusCode": 301
+    },
+    {
+      "source": "/zones/marines-95.html",
+      "destination": "/zones/marines-95",
+      "statusCode": 301
+    },
+    {
+      "source": "/peintre-chars-95",
+      "destination": "/zones/chars-95",
       "statusCode": 301
     },
     {
       "source": "/peintre-chars-95.html",
-      "destination": "/peintre-chars-95",
+      "destination": "/zones/chars-95",
+      "statusCode": 301
+    },
+    {
+      "source": "/zones/chars-95.html",
+      "destination": "/zones/chars-95",
+      "statusCode": 301
+    },
+    {
+      "source": "/peintre-chaumont-en-vexin",
+      "destination": "/zones/chaumont-en-vexin",
       "statusCode": 301
     },
     {
       "source": "/peintre-chaumont-en-vexin.html",
-      "destination": "/peintre-chaumont-en-vexin",
+      "destination": "/zones/chaumont-en-vexin",
+      "statusCode": 301
+    },
+    {
+      "source": "/zones/chaumont-en-vexin.html",
+      "destination": "/zones/chaumont-en-vexin",
       "statusCode": 301
     },
     {
@@ -162,8 +232,8 @@
       "destination": "/services/vinyle-adhesif-decoratif.html"
     },
     {
-      "source": "/peintre-renovation-val-d-oise-yvelines",
-      "destination": "/peintre-renovation-val-d-oise-yvelines.html"
+      "source": "/zones",
+      "destination": "/zones.html"
     },
     {
       "source": "/portfolio",
@@ -174,28 +244,28 @@
       "destination": "/contact-peintre-magny-en-vexin.html"
     },
     {
-      "source": "/peintre-pontoise",
-      "destination": "/peintre-pontoise.html"
+      "source": "/zones/pontoise",
+      "destination": "/zones/pontoise.html"
     },
     {
-      "source": "/peintre-cergy",
-      "destination": "/peintre-cergy.html"
+      "source": "/zones/cergy",
+      "destination": "/zones/cergy.html"
     },
     {
-      "source": "/peintre-gisors",
-      "destination": "/peintre-gisors.html"
+      "source": "/zones/gisors",
+      "destination": "/zones/gisors.html"
     },
     {
-      "source": "/peintre-marines-95",
-      "destination": "/peintre-marines-95.html"
+      "source": "/zones/marines-95",
+      "destination": "/zones/marines-95.html"
     },
     {
-      "source": "/peintre-chars-95",
-      "destination": "/peintre-chars-95.html"
+      "source": "/zones/chars-95",
+      "destination": "/zones/chars-95.html"
     },
     {
-      "source": "/peintre-chaumont-en-vexin",
-      "destination": "/peintre-chaumont-en-vexin.html"
+      "source": "/zones/chaumont-en-vexin",
+      "destination": "/zones/chaumont-en-vexin.html"
     },
     {
       "source": "/mentions-legales",
