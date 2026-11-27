@@ -7,7 +7,7 @@ import siteStyles from '@/styles/Site.module.css';
 
 export default function MentionsLegales() {
   const title = 'Mentions légales · Léna Rénove';
-  const description = 'Mentions légales du site lena-renove.com. Éditeur, hébergeur, données personnelles, propriété intellectuelle.';
+  const description = 'Mentions légales du site lena-renove.com. Éditeur, hébergeur, données personnelles, cookies et propriété intellectuelle.';
 
   return (
     <>
@@ -22,7 +22,7 @@ export default function MentionsLegales() {
           id="legal-title"
           eyebrow="Informations légales"
           title={<>Mentions <em>légales.</em></>}
-          description="Éditeur, hébergeur, traitement des données personnelles et propriété intellectuelle."
+          description="Éditeur, hébergeur, traitement des données personnelles, cookies et propriété intellectuelle."
           breadcrumb="Mentions légales"
         />
 
@@ -67,22 +67,34 @@ export default function MentionsLegales() {
               <article>
                 <h2>Données personnelles</h2>
                 <p>
-                  Les données collectées via le formulaire de contact (nom, email, téléphone, ville,
-                  message) sont utilisées uniquement pour répondre aux demandes de devis. Elles ne sont
-                  transmises à aucun tiers et sont conservées 3 ans maximum.
+                  Léna Rénove traite les informations du formulaire de contact (prénom, nom, adresse e-mail,
+                  téléphone, ville du chantier, message et prestations éventuellement sélectionnées) pour
+                  répondre à votre demande et préparer un devis. Ce traitement correspond aux mesures
+                  précontractuelles prises à votre demande. Léna Rénove conserve les demandes au maximum trois ans.
+                </p>
+                <p>
+                  Le formulaire transmet ces informations à Formspree, notre prestataire de traitement des
+                  demandes. Formspree héberge ses services aux États-Unis et indique utiliser des clauses
+                  contractuelles types pour les transferts de données.{' '}
+                  <a href="https://formspree.io/legal/privacy-policy/">Politique de confidentialité de Formspree</a>.
                 </p>
                 <p>
                   Conformément au RGPD et à la loi « Informatique et libertés », vous disposez d&apos;un
-                  droit d&apos;accès, de rectification et de suppression de vos données. Pour l&apos;exercer,
-                  écrivez à <a href={`mailto:${CLIENT.email}`}>{CLIENT.email}</a>.
+                  droit d&apos;accès, de rectification et d&apos;effacement de vos données, ainsi que, selon
+                  votre situation, d&apos;un droit à la limitation et à la portabilité. Pour exercer vos droits,
+                  écrivez à <a href={`mailto:${CLIENT.email}`}>{CLIENT.email}</a>. Vous pouvez aussi{' '}
+                  <a href="https://www.cnil.fr/fr/plaintes">adresser une réclamation à la CNIL</a>.
                 </p>
               </article>
 
               <article>
-                <h2>Cookies</h2>
+                <h2>Cookies et Google Maps</h2>
                 <p>
-                  Ce site utilise uniquement des cookies techniques strictement nécessaires à son
-                  fonctionnement. Aucun cookie de suivi ou publicitaire n&apos;est déposé sans votre accord.
+                  La page Contact intègre une carte Google Maps. Lorsque la carte se charge, votre navigateur
+                  se connecte aux serveurs de Google et lui transmet des informations techniques, dont votre
+                  adresse IP. Google peut lire ou déposer des cookies selon les paramètres de votre navigateur.
+                  Pour connaître les usages de ces données et les réglages disponibles, consultez les{' '}
+                  <a href="https://policies.google.com/privacy?hl=fr">règles de confidentialité de Google</a>.
                 </p>
               </article>
 

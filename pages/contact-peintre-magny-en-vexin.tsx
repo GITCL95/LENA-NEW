@@ -172,7 +172,7 @@ function QuoteForm() {
             <div className={styles.consent}>
               <input type="checkbox" id="quote-consent" required />
               <p>
-                <label htmlFor="quote-consent">J’accepte que mes données soient utilisées pour traiter ma demande.</label>{' '}
+                <label htmlFor="quote-consent">J’ai pris connaissance des informations sur le traitement de mes données.</label>{' '}
                 <a href={LEGAL_PATH} target="_blank" rel="noopener" aria-label="Mentions légales (nouvel onglet)">Mentions légales</a>.
               </p>
             </div>
@@ -245,7 +245,11 @@ function ContactDetails() {
       <div className={styles.office}>
         <div>
           <h3>Siège</h3>
-          <p>{CLIENT.address.postalCode} {CLIENT.address.locality}<br />Val-d’Oise, {CLIENT.address.region}</p>
+          <p>
+            {CLIENT.address.street}<br />
+            {CLIENT.address.postalCode} {CLIENT.address.locality}<br />
+            Val-d’Oise, {CLIENT.address.region}
+          </p>
           <p className={styles.registration}>SIRET {siret} · {CLIENT.rcs}</p>
         </div>
         <div className={styles.hours}>
@@ -253,37 +257,29 @@ function ContactDetails() {
           <p>Du lundi au vendredi, de 8 h à 18 h.</p>
         </div>
       </div>
+      <div className={styles.office}>
+        <h3>Carte</h3>
+        <p>{MAP_ADDRESS}</p>
+        <a href={MAP_LINK} target="_blank" rel="noopener noreferrer" className={`${siteStyles.textLink} ${styles.mapLink}`}>
+          Ouvrir dans Google Maps <span className="sr-only">(nouvel onglet)</span>
+          <Arrow />
+        </a>
+      </div>
     </aside>
   );
 }
 
 function ContactMap() {
-  const [mapOpen, setMapOpen] = useState(false);
-
   return (
-    <div className={`${styles.office} ${styles.mapCard}`}>
-      <h3>Carte</h3>
-      <p>{MAP_ADDRESS}</p>
-      <p id="contact-map-note" className={styles.mapNote}>Google Maps peut utiliser des cookies si vous affichez la carte.</p>
-      <details className={styles.mapDisclosure} onToggle={(event) => setMapOpen(event.currentTarget.open)}>
-        <summary aria-describedby="contact-map-note">{mapOpen ? 'Masquer la carte' : 'Afficher la carte'}</summary>
-        {mapOpen && (
-          <iframe
-            className={styles.mapFrame}
-            title={`Google Maps – ${MAP_ADDRESS}`}
-            src={MAP_EMBED_URL}
-            width={600}
-            height={450}
-            loading="lazy"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
-          />
-        )}
-      </details>
-      <a href={MAP_LINK} target="_blank" rel="noopener noreferrer" className={siteStyles.textLink}>
-        Ouvrir dans Google Maps <span className="sr-only">(nouvel onglet)</span>
-        <Arrow />
-      </a>
-    </div>
+    <iframe
+      className={styles.mapFrame}
+      title={`Google Maps – ${MAP_ADDRESS}`}
+      src={MAP_EMBED_URL}
+      width={600}
+      height={450}
+      loading="lazy"
+      referrerPolicy="strict-origin-when-cross-origin"
+      allowFullScreen
+    />
   );
 }

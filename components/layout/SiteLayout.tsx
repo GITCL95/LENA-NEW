@@ -99,6 +99,7 @@ function SiteHeader({ page }: { page: SitePage }) {
 
 function SiteContact({ page }: { page: SitePage }) {
   const cityPage = page === 'city';
+  const contactPage = page === 'contact';
   const zonesPage = page === 'zones';
   const descriptionClass = page === 'painting'
     ? `${styles.contactDescription} ${styles.detailContactDescription}`
@@ -106,10 +107,10 @@ function SiteContact({ page }: { page: SitePage }) {
 
   return (
     <section
-      id="contact"
+      id={contactPage ? undefined : 'contact'}
       className={zonesPage ? `${styles.contact} ${styles.regionalContact}` : styles.contact}
       aria-labelledby="contact-title"
-      tabIndex={-1}
+      tabIndex={contactPage ? undefined : -1}
     >
       <div className={`${styles.container} ${styles.contactInner}`}>
         <div>
@@ -123,7 +124,7 @@ function SiteContact({ page }: { page: SitePage }) {
               {!zonesPage && ' Le devis est gratuit et envoyé sous 24 h après visite.'}
             </p>
           )}
-          <ArrowLink href={QUOTE_PATH} className={`${styles.button} ${styles.contactButton}`}>
+          <ArrowLink href={contactPage ? '#contact' : QUOTE_PATH} className={`${styles.button} ${styles.contactButton}`}>
             Demander un devis
           </ArrowLink>
         </div>
@@ -164,14 +165,12 @@ export default function SiteLayout({ children, page = 'home' }: {
   children: ReactNode;
   page?: SitePage;
 }) {
-  const showContact = page !== 'contact' && page !== 'legal' && page !== 'notFound';
-
   return (
     <div className={styles.site}>
       <SiteHeader page={page} />
       <main id="content" tabIndex={-1}>
         {children}
-        {showContact && <SiteContact page={page} />}
+        {page !== 'notFound' && <SiteContact page={page} />}
       </main>
       <footer className={styles.footer}>
         <div className={`${styles.container} ${styles.footerInner}`}>
