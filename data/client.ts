@@ -66,6 +66,8 @@ export const NAV_ROUTES = [
   navRoutes.contact,
 ] as const;
 
+export const DESKTOP_NAV_ROUTES = [navRoutes.home, ...NAV_ROUTES] as const;
+
 export const MOBILE_NAV_ROUTES = [
   navRoutes.home,
   navRoutes.about,

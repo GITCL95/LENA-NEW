@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { CITIES } from '@data/cities';
-import { MOBILE_NAV_ROUTES, NAV_ROUTES } from '@data/client';
+import { DESKTOP_NAV_ROUTES, MOBILE_NAV_ROUTES } from '@data/client';
 import { INTERIOR_SERVICES, serviceHref } from '@data/services';
 import styles from '@/styles/Site.module.css';
 
@@ -20,7 +20,7 @@ export default function SiteNavigation({ page, activePath, mobile = false, onFra
 }) {
   const [openGroup, setOpenGroup] = useState<NavigationGroup | null>(null);
   const list = useRef<HTMLUListElement>(null);
-  const routes = mobile ? MOBILE_NAV_ROUTES : NAV_ROUTES;
+  const routes = mobile ? MOBILE_NAV_ROUTES : DESKTOP_NAV_ROUTES;
 
   useEffect(() => {
     if (!openGroup) return;
