@@ -10,6 +10,10 @@
   gap: 2.8125rem;
 }
 
+.faqInner h2:first-child {
+  margin-top: 0;
+}
+
 .questions {
   display: grid;
   gap: 0.5625rem;

@@ -6,9 +6,12 @@ import AreaHero from '@components/sections/AreaHero';
 import { OnPageNavigation } from '@components/sections/DetailPage';
 import InteriorServices from '@components/sections/InteriorServices';
 import Qualifications from '@components/sections/Qualifications';
+import Questions from '@components/sections/Questions';
 import type { CityPageContent, CityProject } from '@data/cities';
 import { CLIENT, SITE_URL } from '@data/client';
-import { buildBreadcrumbSchema, buildWebPageSchema } from '@data/schemas';
+import { getCityQuestions } from '@data/faq';
+import { buildBreadcrumbSchema, buildFAQSchema, buildWebPageSchema } from '@data/schemas';
+import { INTERIOR_SERVICES } from '@data/services';
 import styles from '@/styles/City.module.css';
 import siteStyles from '@/styles/Site.module.css';
 
@@ -19,27 +22,39 @@ const illustration = {
 const citySections = [
   { label: 'Quartiers', id: 'quartiers' },
   { label: 'Prestations', id: 'prestations' },
+  { label: 'Tarifs', id: 'tarifs' },
+  { label: 'Étapes', id: 'devis' },
+  { label: 'FAQ', id: 'faq' },
 ];
 const projectSection = { label: 'Réalisation', id: 'realisation' };
 const contactSection = { label: 'Contact', id: 'contact' };
-const visitSteps = [
+const workSteps = [
   {
-    title: 'Décrivez vos travaux',
+    title: 'Prise de contact',
     detail: 'Indiquez votre quartier et les pièces ou surfaces à rénover.',
   },
   {
-    title: 'Planifiez la visite',
-    detail: 'Léna vient voir le chantier, prendre les mesures et échanger avec vous sur les finitions.',
+    title: 'Visite sur place selon le projet',
+    detail: 'Si nécessaire, Léna examine les supports et prend les mesures.',
   },
   {
-    title: 'Recevez votre devis',
-    detail: 'Il détaille les matériaux, la main-d’œuvre et le délai des travaux.',
+    title: 'Envoi du devis',
+    detail: 'Le devis détaille les matériaux, la main-d’œuvre et le délai des travaux.',
+  },
+  {
+    title: 'Réalisation des travaux',
+    detail: 'Léna prépare les supports et réalise les travaux prévus au devis.',
+  },
+  {
+    title: 'Réception du chantier',
+    detail: 'Vous vérifiez ensemble le résultat avant la remise du chantier.',
   },
 ];
 
 export default function CityPage({ city }: { city: CityPageContent }) {
-  const { name, href, postalCode, title, metaDescription, departmentName, project } = city;
+  const { name, href, postalCode, title, metaDescription, departmentName, paintingRate, project } = city;
   const photo = project?.photo ?? illustration;
+  const questions = getCityQuestions(city);
   const sections = project
     ? [...citySections, projectSection, contactSection]
     : [...citySections, contactSection];
@@ -49,6 +64,7 @@ export default function CityPage({ city }: { city: CityPageContent }) {
       { name: 'Accueil', url: `${SITE_URL}/` },
       { name, url: `${SITE_URL}${href}` },
     ]),
+    buildFAQSchema(questions),
     {
       '@context': 'https://schema.org',
       '@type': 'Service',
@@ -112,14 +128,15 @@ export default function CityPage({ city }: { city: CityPageContent }) {
 
         <InteriorServices />
 
-        {project && <CityProjectSection cityName={name} project={project} />}
+        <CityPrices name={name} paintingRate={paintingRate} />
 
-        <section id="devis" className={`${styles.section} ${styles.process}`} aria-labelledby="visit-title">
+        <section id="devis" className={`${styles.section} ${styles.process}`} aria-labelledby="process-title" tabIndex={-1}>
           <div className={siteStyles.container}>
-            <p className={siteStyles.eyebrow}>Devis et visite</p>
-            <h2 id="visit-title" className={siteStyles.sectionTitle}>Du premier échange <em>au devis.</em></h2>
+            <h2 id="process-title" className={`${siteStyles.sectionTitle} ${styles.inlineTitle}`}>
+              Comment se déroulent <em>vos travaux&nbsp;?</em>
+            </h2>
             <ol className={styles.processList} role="list">
-              {visitSteps.map(({ title, detail }, index) => (
+              {workSteps.map(({ title, detail }, index) => (
                 <li key={title}>
                   <span className={styles.step} aria-hidden="true">{index + 1}</span>
                   <div><h3>{title}</h3><p>{detail}</p></div>
@@ -128,8 +145,55 @@ export default function CityPage({ city }: { city: CityPageContent }) {
             </ol>
           </div>
         </section>
+
+        <Questions id="faq" title={<>Questions <em>fréquentes</em></>} items={questions} />
+
+        {project && <CityProjectSection cityName={name} project={project} />}
       </SiteLayout>
     </>
+  );
+}
+
+function CityPrices({ name, paintingRate }: Pick<CityPageContent, 'name' | 'paintingRate'>) {
+  return (
+    <section id="tarifs" className={`${styles.section} ${styles.prices}`} aria-labelledby="prices-title" tabIndex={-1}>
+      <div className={siteStyles.container}>
+        <h2 id="prices-title" className={`${siteStyles.sectionTitle} ${styles.inlineTitle}`}>
+          Quels tarifs pour vos travaux <em>à {name}&nbsp;?</em>
+        </h2>
+        <div className={styles.priceTableFrame}>
+          <table className={styles.priceTable} aria-labelledby="prices-title" aria-describedby="prices-note">
+            <thead>
+              <tr>
+                <th scope="col">Prestation</th>
+                <th scope="col">Tarif indicatif</th>
+                <th scope="col">Unité</th>
+              </tr>
+            </thead>
+            <tbody>
+              {INTERIOR_SERVICES.map(({ title, slug, unit }) => {
+                const rate = slug === 'peinture' ? paintingRate : undefined;
+
+                return (
+                  <tr key={slug}>
+                    <th scope="row">
+                      {title}
+                      {rate?.scope && <small>{rate.scope}. Autres surfaces à confirmer.</small>}
+                    </th>
+                    <td>{rate?.amount ?? 'À confirmer'}</td>
+                    <td>{unit}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        <p id="prices-note" className={styles.priceNote}>
+          {paintingRate && 'La fourchette affichée inclut les fournitures. '}
+          Le prix final dépend des travaux à réaliser et sera précisé dans le devis.
+        </p>
+      </div>
+    </section>
   );
 }
 

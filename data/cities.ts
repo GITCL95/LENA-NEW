@@ -34,6 +34,7 @@ export type City = {
   description: string;
   neighbourhoodIntro: string;
   neighbourhoods: { name: string; detail?: string }[];
+  paintingRate?: { amount: string; scope?: string };
   project?: CityProject;
   keyword: string;
   secondaryKeywords: string[];
@@ -44,8 +45,10 @@ export type City = {
 
 export type CityPageContent = Pick<City,
   'name' | 'slug' | 'href' | 'postalCode' | 'departmentName' | 'title' | 'metaDescription'
-  | 'neighbourhoodIntro' | 'neighbourhoods' | 'project'
+  | 'neighbourhoodIntro' | 'neighbourhoods' | 'paintingRate' | 'project'
 >;
+
+const interiorPaintingRate = { amount: '25 à 45 €' };
 
 const pontoiseSalon: CityPhoto = {
   src: '/assets/img/projet-renov-3.jpg',
@@ -73,6 +76,7 @@ export const PONTOISE = {
     { name: 'Les Louvrais' },
     { name: 'Marcouville' },
   ],
+  paintingRate: interiorPaintingRate,
   project: {
     title: 'Peinture d’un salon',
     heading: 'Un salon',
@@ -116,6 +120,7 @@ export const CITIES: City[] = [
       { name: 'Cergy-le-Haut' },
       { name: 'Cergy-Village' },
     ],
+    paintingRate: { amount: '20 à 35 €', scope: 'Plafonds uniquement' },
     keyword: 'peintre cergy',
     secondaryKeywords: ['peintre cergy 95', 'peinture plafond cergy', 'peintre intérieur cergy', 'artisan peintre cergy'],
     title: 'Peintre Cergy (95) · Rénovation intérieure · Léna Rénove',
@@ -158,6 +163,7 @@ export const CITIES: City[] = [
       "À seulement 30 minutes de Vétheuil, Marines bénéficie d'une intervention rapide de Léna Rénove. Maisons anciennes du Vexin, pavillons récents et corps de ferme rénovés — chaque typologie est traitée avec des techniques adaptées et des peintures professionnelles Tollens & Sikkens.",
     neighbourhoodIntro: 'À Marines, Léna Rénove intervient dans les maisons anciennes, les pavillons et les corps de ferme rénovés.',
     neighbourhoods: [{ name: 'Centre-bourg' }, { name: 'Hameau de la Hée' }],
+    paintingRate: interiorPaintingRate,
     keyword: 'peintre marines 95',
     secondaryKeywords: ['peinture marines val d\'oise', 'rénovation intérieure marines', 'peintre 95640'],
     title: 'Peintre Marines (95) · Vexin · Léna Rénove',
@@ -179,6 +185,7 @@ export const CITIES: City[] = [
       "Village de caractère au cœur du Vexin français, Chars mêle maisons en pierre, bâtiments agricoles reconvertis et habitat pavillonnaire. Léna Rénove intervient dans toute la commune pour vos travaux de peinture, ratissage, pose de papier peint ou vinyle adhésif.",
     neighbourhoodIntro: 'Léna Rénove se déplace dans toute la commune de Chars, des maisons en pierre aux pavillons et bâtiments reconvertis.',
     neighbourhoods: [{ name: 'Centre du village' }, { name: 'La Villeneuve-Saint-Martin' }],
+    paintingRate: interiorPaintingRate,
     keyword: 'peintre chars 95',
     secondaryKeywords: ['peinture intérieure chars', 'artisan peintre chars val d\'oise', 'peintre 95750'],
     title: 'Peintre Chars (95) · Vexin · Léna Rénove',

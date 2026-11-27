@@ -20,24 +20,28 @@ export const INTERIOR_SERVICES = [
   {
     title: 'Peinture intérieure',
     slug: 'peinture',
+    unit: 'm²',
     detail: 'Murs, plafonds et boiseries. Finitions mates, satinées ou brillantes.',
     image: 'insta-9.jpg',
   },
   {
     title: 'Enduits de ratissage',
     slug: 'enduits',
+    unit: 'm²',
     detail: 'Rebouchage, lissage et traitement des fissures.',
     image: 'service_thumb_2.jpg',
   },
   {
     title: 'Pose de papier peint',
     slug: 'papier-peint',
+    unit: 'm²',
     detail: 'Papiers peints intissés ou panoramiques.',
     image: 'service_thumb_3.jpg',
   },
   {
     title: 'Vinyle adhésif décoratif',
     slug: 'vinyle',
+    unit: 'Selon le projet',
     detail: 'Relooking de cuisines, de meubles et de portes.',
     image: 'service_thumb_4.jpg',
   },

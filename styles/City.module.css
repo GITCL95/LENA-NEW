@@ -3,8 +3,13 @@
 }
 
 .neighbourhoods,
-.process {
+.prices {
   background: var(--white);
+}
+
+.inlineTitle {
+  margin-top: 0;
+  text-wrap: balance;
 }
 
 .sectionIntro {
@@ -62,6 +67,61 @@
 
 .neighbourhoodList p {
   margin-top: 0.3125rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.priceTableFrame {
+  margin-top: 2rem;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+}
+
+.priceTable {
+  width: 100%;
+  table-layout: fixed;
+  background: var(--paper);
+  font-size: clamp(0.875rem, 1.65vw, 1rem);
+  line-height: 1.4;
+  text-align: left;
+}
+
+.priceTable thead {
+  background: var(--sand);
+}
+
+.priceTable :is(th, td) {
+  padding: 0.875rem clamp(0.4375rem, 2vw, 1.4375rem);
+  vertical-align: top;
+}
+
+.priceTable thead th:first-child {
+  width: 49%;
+}
+
+.priceTable thead th:last-child {
+  width: 21%;
+}
+
+.priceTable tbody tr {
+  border-top: 1px solid var(--border);
+}
+
+.priceTable tbody th {
+  font-weight: 650;
+}
+
+.priceTable small {
+  display: block;
+  margin-top: 0.1875rem;
+  color: var(--muted);
+  font-size: 0.875em;
+  font-weight: 400;
+}
+
+.priceNote {
+  margin-top: 0.75rem;
   color: var(--muted);
   font-size: 0.875rem;
 }
@@ -141,25 +201,27 @@
   font-weight: 650;
 }
 
+.process {
+  border-block: 1px solid var(--border);
+}
+
 .processList {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 1.5rem;
   margin-top: 2rem;
 }
 
 .processList li {
-  display: flex;
-  align-items: start;
-  gap: 0.8125rem;
-  padding: 1.0625rem 0.4375rem 0 0;
-  border-top: 1px solid #d6bdb1;
+  padding-top: 1.0625rem;
+  border-top: 1px solid var(--border);
 }
 
 .step {
-  padding-top: 0.0625rem;
+  display: block;
+  margin-bottom: 0.5rem;
   color: var(--rust);
-  font: 400 1.5625rem/1 var(--serif);
+  font: 400 2.125rem/1 var(--serif);
 }
 
 .processList h3 {
@@ -174,6 +236,10 @@
 }
 
 @media (max-width: 57.5rem) {
+  .inlineTitle em {
+    display: inline;
+  }
+
   .sectionIntro {
     display: block;
     margin-bottom: 1.375rem;
@@ -218,6 +284,18 @@
     font-size: 0.8125rem;
   }
 
+  .priceTableFrame {
+    margin-top: 1.375rem;
+  }
+
+  .priceTable :is(th, td) {
+    padding-block: 0.6875rem;
+  }
+
+  .priceTable thead th:first-child {
+    width: 45%;
+  }
+
   .projectGrid {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas: 'copy' 'photo';
@@ -259,7 +337,15 @@
   }
 
   .processList li {
+    display: grid;
+    grid-template-columns: 1.5rem minmax(0, 1fr);
+    gap: 0.6875rem;
     padding-top: 0.75rem;
+  }
+
+  .step {
+    margin-bottom: 0;
+    font-size: 1.75rem;
   }
 
   .processList h3 {
