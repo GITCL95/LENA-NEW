@@ -68,7 +68,10 @@ export type InteriorService = (typeof INTERIOR_SERVICES)[number];
 
 export function serviceHref(service: QuoteService) {
   const detail = INTERIOR_SERVICES.find(({ slug }) => slug === service);
-  return detail ? `/prestations/${detail.route}` : serviceQuoteHref(service);
+  if (!detail) return serviceQuoteHref(service);
+
+  const directory = service === 'peinture' ? 'services' : 'prestations';
+  return `/${directory}/${detail.route}`;
 }
 
 export type Service = {
