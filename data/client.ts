@@ -52,7 +52,7 @@ export const CLIENT = {
 const navRoutes = {
   home: { label: "Accueil", href: "/", page: "home" },
   about: { label: "À propos", href: ABOUT_PATH, page: "about" },
-  services: { label: "Prestations", href: SERVICES_PATH, page: "services" },
+  services: { label: "Services", href: SERVICES_PATH, page: "services" },
   portfolio: { label: "Réalisations", href: PORTFOLIO_PATH, page: "portfolio" },
   zones: { label: "Zones", href: ZONES_PATH, page: "zones" },
   contact: { label: "Contact", href: CONTACT_PATH, page: "contact" },

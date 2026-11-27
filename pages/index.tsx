@@ -77,7 +77,7 @@ export default function Home() {
           <div className={siteStyles.container}>
             <div className={styles.sectionIntro}>
               <div>
-                <p className={siteStyles.eyebrow}>Prestations</p>
+                <p className={siteStyles.eyebrow}>Services</p>
                 <h2 id="services-title" className={siteStyles.sectionTitle}>Vos travaux <em>d’intérieur.</em></h2>
               </div>
               <p className={styles.servicesIntro}>De la préparation des supports à la finition.</p>

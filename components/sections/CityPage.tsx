@@ -21,7 +21,7 @@ const illustration = {
 };
 const citySections = [
   { label: 'Quartiers', id: 'quartiers' },
-  { label: 'Prestations', id: 'prestations' },
+  { label: 'Services', id: 'prestations' },
   { label: 'Tarifs', id: 'tarifs' },
   { label: 'Étapes', id: 'devis' },
   { label: 'FAQ', id: 'faq' },

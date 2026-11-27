@@ -18,7 +18,7 @@ export default function Services() {
             transition={{ duration: 0.9, ease: [0.19, 1, 0.22, 1] }}
             className="max-w-3xl"
           >
-            <span className="eyebrow">Nos prestations</span>
+            <span className="eyebrow">Nos services</span>
             <h2 className="mt-5 font-display text-display-lg tracking-tightest text-balance">
               Quatre domaines d&apos;expertise<br />
               pour <span className="italic text-corail-600 font-normal">transformer vos intérieurs.</span>

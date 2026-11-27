@@ -30,7 +30,7 @@ export const getStaticProps: GetStaticProps<ServicePageProps> = ({ params }) => 
 };
 
 const serviceTitles = Object.fromEntries(INTERIOR_SERVICES.map(({ slug, title }) => [slug, title]));
-const hub = { label: 'Prestations', href: SERVICES_PATH };
+const hub = { label: 'Services', href: SERVICES_PATH };
 const sections = [
   { id: 'surfaces', label: 'Prestation' },
   { id: 'tarif', label: 'Tarifs' },
