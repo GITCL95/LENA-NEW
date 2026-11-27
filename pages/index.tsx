@@ -3,6 +3,7 @@ import SEO from '@components/layout/SEO';
 import SiteLayout, { ArrowLink, QuoteButton } from '@components/layout/SiteLayout';
 import { CLIENT, PONTOISE_PATH, PORTFOLIO_PATH, SITE_URL } from '@data/client';
 import Qualifications from '@components/sections/Qualifications';
+import ServiceLink from '@components/sections/ServiceLink';
 import { INTERIOR_SERVICES, serviceHref } from '@data/services';
 import {
   buildBreadcrumbSchema,
@@ -60,7 +61,7 @@ export default function Home() {
               Peintre en<br />bâtiment<br /><em>à Vétheuil.</em>
             </h1>
             <p className={siteStyles.heroDescription}>
-              Peinture intérieure, enduits de ratissage, pose de papier peint et vinyle adhésif décoratif.
+              <ServiceLink service="peinture">Peinture intérieure</ServiceLink>, enduits de ratissage, pose de papier peint et vinyle adhésif décoratif.
             </p>
             <QuoteButton />
             <p className={siteStyles.heroNote}>Devis gratuit sous 24&nbsp;h après visite.</p>
@@ -80,7 +81,9 @@ export default function Home() {
                 <p className={siteStyles.eyebrow}>Services</p>
                 <h2 id="services-title" className={siteStyles.sectionTitle}>Vos travaux <em>d’intérieur.</em></h2>
               </div>
-              <p className={styles.servicesIntro}>De la préparation des supports à la finition.</p>
+              <p className={styles.servicesIntro}>
+                Découvrez les <ServiceLink service="overview">prestations de rénovation intérieure</ServiceLink>, de la préparation des supports aux finitions.
+              </p>
             </div>
             <ul className={styles.serviceGrid}>
               {INTERIOR_SERVICES.map(({ title: service, slug, detail, image }) => (
@@ -104,6 +107,7 @@ export default function Home() {
             <div className={styles.projectsIntro}>
               <p className={siteStyles.eyebrow}>Réalisations</p>
               <h2 id="projects-title" className={siteStyles.sectionTitle}>Les chantiers <em>en images.</em></h2>
+              <p className="mt-3">Un <ServiceLink service="papier-peint">papier peint panoramique</ServiceLink> suffit à changer l’ambiance d’une chambre.</p>
             </div>
             <div className={styles.projectGrid}>
               {projects.map(({ title: project, location, image, alt, href }) => (
@@ -140,7 +144,7 @@ export default function Home() {
             </blockquote>
             <figcaption>
               <strong>Sophie Dubois</strong>
-              <span>Relooking de cuisine · Saint-Germain-en-Laye</span>
+              <span>Relooking de cuisine au <ServiceLink service="vinyle">vinyle adhésif</ServiceLink> · Saint-Germain-en-Laye</span>
             </figcaption>
           </figure>
         </section>

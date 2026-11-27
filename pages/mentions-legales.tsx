@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import SiteLayout from '@components/layout/SiteLayout';
 import PageHero from '@components/sections/PageHero';
+import ServiceLink from '@components/sections/ServiceLink';
 import { CLIENT, LEGAL_PATH, SITE_URL } from '@data/client';
 import styles from '@/styles/Legal.module.css';
 import siteStyles from '@/styles/Site.module.css';
@@ -17,7 +18,10 @@ export default function MentionsLegales() {
         <meta name="robots" content="noindex, follow" />
         <link rel="canonical" href={`${SITE_URL}${LEGAL_PATH}`} />
       </Head>
-      <SiteLayout page="legal">
+      <SiteLayout
+        page="legal"
+        contactIntro={<>Si vous prévoyez de <ServiceLink service="papier-peint">faire poser du papier peint</ServiceLink>, indiquez les dimensions du mur dans votre demande.</>}
+      >
         <PageHero
           id="legal-title"
           eyebrow="Informations légales"
@@ -39,6 +43,7 @@ export default function MentionsLegales() {
                   {CLIENT.rcs}<br />
                   Email : <a href={`mailto:${CLIENT.email}`}>{CLIENT.email}</a>
                 </p>
+                <p>Ce site présente les <ServiceLink service="overview">prestations de rénovation intérieure</ServiceLink> de Léna Rénove.</p>
               </article>
 
               <article>
@@ -62,13 +67,14 @@ export default function MentionsLegales() {
                   graphismes, code) sont la propriété exclusive de {CLIENT.brand} ou de ses ayants droit.
                   Toute reproduction, même partielle, sans autorisation écrite préalable, est interdite.
                 </p>
+                <p>Cette protection s’applique notamment aux photos de chantiers de <ServiceLink service="peinture">peinture intérieure</ServiceLink> publiées sur le site.</p>
               </article>
 
               <article>
                 <h2>Données personnelles</h2>
                 <p>
                   Léna Rénove traite les informations du formulaire de contact (prénom, nom, adresse e-mail,
-                  téléphone, ville du chantier, message et prestations éventuellement sélectionnées) pour
+                  téléphone, ville du chantier, message et prestations éventuellement sélectionnées, comme les <ServiceLink service="enduits">enduits de ratissage</ServiceLink>) pour
                   répondre à votre demande et préparer un devis. Ce traitement correspond aux mesures
                   précontractuelles prises à votre demande. Léna Rénove conserve les demandes au maximum trois ans.
                 </p>

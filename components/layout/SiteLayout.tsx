@@ -4,12 +4,6 @@ import SiteNavigation, { type SitePage } from '@components/layout/SiteNavigation
 import { CLIENT, LEGAL_PATH, QUOTE_PATH, ZONES_PATH } from '@data/client';
 import styles from '@/styles/Site.module.css';
 
-const contactIntros: Partial<Record<SitePage, string>> = {
-  portfolio: 'Décrivez votre projet de rénovation intérieure.',
-  services: 'Décrivez votre projet de rénovation intérieure.',
-  zones: 'Indiquez votre commune et les travaux envisagés dans votre demande.',
-};
-
 type HeaderLogo = { src: string; width: number; height: number };
 
 const defaultHeaderLogo: HeaderLogo = { src: '/assets/img/logo-lt.png', width: 500, height: 442 };
@@ -94,7 +88,7 @@ function SiteHeader({ page, activePath, quoteHref, logo = defaultHeaderLogo }: {
   );
 }
 
-function SiteContact({ page, quoteHref }: { page: SitePage; quoteHref: string }) {
+function SiteContact({ page, quoteHref, intro }: { page: SitePage; quoteHref: string; intro?: ReactNode }) {
   const cityPage = page === 'city';
   const contactPage = page === 'contact';
   const zonesPage = page === 'zones';
@@ -117,7 +111,7 @@ function SiteContact({ page, quoteHref }: { page: SitePage; quoteHref: string })
           </h2>
           {!cityPage && (
             <p className={descriptionClass}>
-              {contactIntros[page] ?? 'Décrivez les travaux que vous souhaitez réaliser.'}
+              {intro ?? 'Décrivez les travaux que vous souhaitez réaliser.'}
               {!zonesPage && ' Le devis est gratuit et envoyé sous 24 h après visite.'}
             </p>
           )}
@@ -158,12 +152,13 @@ function SiteContact({ page, quoteHref }: { page: SitePage; quoteHref: string })
   );
 }
 
-export default function SiteLayout({ children, page = 'home', activePath, quoteHref = QUOTE_PATH, headerLogo }: {
+export default function SiteLayout({ children, page = 'home', activePath, quoteHref = QUOTE_PATH, headerLogo, contactIntro }: {
   children: ReactNode;
   page?: SitePage;
   activePath?: string;
   quoteHref?: string;
   headerLogo?: HeaderLogo;
+  contactIntro?: ReactNode;
 }) {
   const contactHref = page === 'contact' ? '#contact' : quoteHref;
 
@@ -172,7 +167,7 @@ export default function SiteLayout({ children, page = 'home', activePath, quoteH
       <SiteHeader page={page} activePath={activePath} quoteHref={contactHref} logo={headerLogo} />
       <main id="content" tabIndex={-1}>
         {children}
-        {page !== 'notFound' && <SiteContact page={page} quoteHref={contactHref} />}
+        {page !== 'notFound' && <SiteContact page={page} quoteHref={contactHref} intro={contactIntro} />}
       </main>
       <footer className={styles.footer}>
         <div className={`${styles.container} ${styles.footerInner}${page === 'home' ? ` ${styles.footerWithCredit}` : ''}`}>

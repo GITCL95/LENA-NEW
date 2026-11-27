@@ -1,8 +1,10 @@
 import Image from 'next/image';
+import type { ReactNode } from 'react';
 import SEO from '@components/layout/SEO';
 import SiteLayout from '@components/layout/SiteLayout';
 import { DetailHero, OnPageNavigation } from '@components/sections/DetailPage';
 import Questions from '@components/sections/Questions';
+import ServiceLink from '@components/sections/ServiceLink';
 import { PORTFOLIO_PATH, SERVICES_PATH, SITE_URL } from '@data/client';
 import { buildBreadcrumbSchema, buildFAQSchema, buildWebPageSchema } from '@data/schemas';
 import type { ServiceContent } from '@data/service-details';
@@ -31,8 +33,32 @@ const estimate = { title: 'Devis détaillé', detail: 'Sous 24 h après la visit
 const preparation = { title: 'Préparation', detail: 'Léna protège les sols et le mobilier, puis prépare les supports selon leur état.' };
 const check = { title: 'Contrôle et livraison', detail: 'Vous vérifiez le résultat avec Léna, qui livre le chantier propre après évacuation des déchets.' };
 
+const relatedServices: Record<InteriorService['slug'], { intro: ReactNode; scope: ReactNode; budget: ReactNode }> = {
+  peinture: {
+    intro: <>Si vos murs présentent des irrégularités, un <ServiceLink service="enduits">ratissage</ServiceLink> peut être nécessaire avant de peindre.</>,
+    scope: <>Pour mettre en valeur un seul mur, vous pouvez aussi choisir un <ServiceLink service="papier-peint">papier peint panoramique</ServiceLink>.</>,
+    budget: <>Si vous rénovez aussi vos meubles de cuisine, la <ServiceLink service="vinyle">pose de vinyle adhésif</ServiceLink> peut figurer dans le même devis.</>,
+  },
+  enduits: {
+    intro: <>Vous pouvez ensuite confier à Léna la <ServiceLink service="peinture">mise en peinture</ServiceLink>.</>,
+    scope: <>Le lissage prépare aussi les murs à la <ServiceLink service="papier-peint">pose de papier peint</ServiceLink>.</>,
+    budget: <>Pour une rénovation de cuisine, le même devis peut prévoir la remise en état des murs et l’<ServiceLink service="vinyle">habillage des façades en vinyle</ServiceLink>.</>,
+  },
+  'papier-peint': {
+    intro: <>Si le mur est irrégulier, elle peut d’abord le <ServiceLink service="enduits">lisser à l’enduit</ServiceLink>.</>,
+    scope: <>Dans la même pièce, un <ServiceLink service="vinyle">film adhésif décoratif</ServiceLink> peut habiller une porte ou un meuble.</>,
+    budget: <>Si vous souhaitez aussi <ServiceLink service="peinture">repeindre une partie de la pièce</ServiceLink>, précisez-le dans votre demande de devis.</>,
+  },
+  vinyle: {
+    intro: <>Elle peut aussi <ServiceLink service="peinture">repeindre les murs et le plafond</ServiceLink>.</>,
+    scope: <>Pour décorer les murs de la même pièce, Léna peut également poser du <ServiceLink service="papier-peint">papier peint intissé ou panoramique</ServiceLink>.</>,
+    budget: <>Si les murs de la pièce sont irréguliers, vous pouvez aussi demander un devis pour les <ServiceLink service="enduits">lisser à l’enduit</ServiceLink>.</>,
+  },
+};
+
 export default function ServicePage({ service, content }: ServicePageProps) {
   const { description, heading, photo, scopeIntro, scope, finishes, price, priceFactors, workStep, projects, faq } = content;
+  const related = relatedServices[service];
   const label = serviceTitles[service];
   const path = serviceHref(service);
   const quoteHref = serviceQuoteHref(service);
@@ -59,7 +85,12 @@ export default function ServicePage({ service, content }: ServicePageProps) {
   return (
     <>
       <SEO title={title} description={description} path={path} ogImage={photo.src} jsonLd={jsonLd} />
-      <SiteLayout page="service" activePath={path} quoteHref={quoteHref}>
+      <SiteLayout
+        page="service"
+        activePath={path}
+        quoteHref={quoteHref}
+        contactIntro={<>Vous prévoyez plusieurs types de travaux&nbsp;? Consultez <ServiceLink service="overview">l’ensemble des prestations</ServiceLink> avant de demander votre devis.</>}
+      >
         <DetailHero
           id="service"
           breadcrumb={label}
@@ -67,7 +98,7 @@ export default function ServicePage({ service, content }: ServicePageProps) {
           eyebrow="Artisane peintre · Vétheuil"
           title={heading[0]}
           emphasis={heading[1]}
-          description={description}
+          description={<>{description} {related.intro}</>}
           photo={photo}
           quoteHref={quoteHref}
         />
@@ -80,6 +111,7 @@ export default function ServicePage({ service, content }: ServicePageProps) {
                 <p className={siteStyles.eyebrow}>La prestation</p>
                 <h2 id="surfaces-title" className={siteStyles.sectionTitle}>Travaux <em>inclus.</em></h2>
                 {scopeIntro && <p className={styles.scopeIntro}>{scopeIntro}</p>}
+                <p className={styles.scopeIntro}>{related.scope}</p>
               </div>
               <ul className={styles.surfaces} role="list">
                 {scope.map(({ title, detail }) => (
@@ -116,7 +148,7 @@ export default function ServicePage({ service, content }: ServicePageProps) {
             <div>
               <p className={siteStyles.eyebrow}>Tarifs</p>
               <h2 id="budget-title" className={siteStyles.sectionTitle}>Quel budget <em>prévoir&nbsp;?</em></h2>
-              <p className={styles.priceFactors}>{priceFactors}</p>
+              <p className={styles.priceFactors}>{priceFactors} {related.budget}</p>
             </div>
             <div className={styles.priceFrame}>
               <table className={styles.priceTable} aria-label={`Tarif de la prestation ${label}`} aria-describedby={price ? 'price-note' : undefined}>

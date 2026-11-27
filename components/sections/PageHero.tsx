@@ -16,7 +16,7 @@ export default function PageHero({ id, eyebrow, title, description, breadcrumb, 
   id: string;
   eyebrow?: string;
   title: ReactNode;
-  description: string;
+  description: ReactNode;
   breadcrumb: string;
   children?: ReactNode;
 }) {

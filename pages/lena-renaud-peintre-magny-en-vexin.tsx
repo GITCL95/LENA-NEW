@@ -2,6 +2,7 @@ import Image from 'next/image';
 import SEO from '@components/layout/SEO';
 import SiteLayout, { QuoteButton } from '@components/layout/SiteLayout';
 import { Breadcrumb } from '@components/sections/PageHero';
+import ServiceLink from '@components/sections/ServiceLink';
 import { ABOUT_PATH, CLIENT, SITE_URL } from '@data/client';
 import { buildBreadcrumbSchema, buildWebPageSchema } from '@data/schemas';
 import styles from '@/styles/About.module.css';
@@ -39,7 +40,7 @@ const steps = [
   },
   {
     title: 'Préparation du chantier',
-    description: 'Je protège les sols et les meubles, puis je nettoie, rebouche, lisse et ponce les supports selon leur état.',
+    description: <>Je protège les sols et les meubles, puis je prépare les supports selon leur état. Si les murs sont irréguliers, je les <ServiceLink service="enduits">lisse à l’enduit</ServiceLink>.</>,
   },
   {
     title: 'Application et finitions',
@@ -84,7 +85,7 @@ export default function About() {
                 {CLIENT.owner},<br /><em>artisane peintre.</em>
               </h1>
               <p className={`${siteStyles.heroDescription} ${styles.introDescription}`}>
-                Basée à Vétheuil, je réalise moi-même vos travaux de peinture et de décoration intérieure.
+                Basée à Vétheuil, je réalise moi-même vos <ServiceLink service="overview">travaux de peinture et de décoration intérieure</ServiceLink>.
               </p>
               <QuoteButton />
               <p className={siteStyles.heroNote}>Devis gratuit sous 24&nbsp;h après visite.</p>
@@ -108,7 +109,7 @@ export default function About() {
             </div>
             <div className={styles.storyCopy}>
               <p>J’ai travaillé plusieurs années en bureau d’études. J’y ai appris à connaître les structures, les matériaux et les contraintes techniques du bâtiment.</p>
-              <p>Après avoir obtenu mon <strong>CAP Peintre en bâtiment</strong>, j’ai fondé <strong>Léna Rénove</strong> à Vétheuil. Je prépare les supports et j’adapte la technique d’application à chaque surface, à la main ou au pistolet airless.</p>
+              <p>Après avoir obtenu mon <strong>CAP Peintre en bâtiment</strong>, j’ai fondé <strong>Léna Rénove</strong> à Vétheuil. Pour les <ServiceLink service="peinture">travaux de peinture intérieure</ServiceLink>, je prépare les supports, puis j’applique la peinture à la main ou au pistolet airless selon la surface.</p>
               <blockquote className={styles.storyQuote}>« Je ne livre que ce que j’accepterais chez moi. »</blockquote>
             </div>
           </div>
@@ -172,7 +173,7 @@ export default function About() {
               </blockquote>
               <figcaption>
                 <strong>Marc Legrand</strong>
-                <span>Pose de papier peint panoramique · Cergy</span>
+                <span><ServiceLink service="papier-peint">Pose de papier peint panoramique</ServiceLink> · Cergy</span>
               </figcaption>
             </figure>
           </div>

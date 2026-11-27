@@ -224,6 +224,12 @@
   color: #ffc4ac;
 }
 
+.directNote {
+  padding-block: 0.75rem 0.5rem;
+  border-top: 1px solid var(--dark-border);
+  font-size: 0.875rem;
+}
+
 .directLabel {
   display: block;
   margin-bottom: 0.125rem;

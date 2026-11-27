@@ -1,8 +1,9 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, type ReactNode } from 'react';
 import Image from 'next/image';
 import SEO from '@components/layout/SEO';
 import SiteLayout, { Arrow } from '@components/layout/SiteLayout';
 import PageHero from '@components/sections/PageHero';
+import ServiceLink from '@components/sections/ServiceLink';
 import { CLIENT, PORTFOLIO_PATH, SITE_URL } from '@data/client';
 import { buildBreadcrumbSchema, buildWebPageSchema } from '@data/schemas';
 import styles from '@/styles/Portfolio.module.css';
@@ -26,6 +27,7 @@ type Project = {
   before?: Photo;
   coverPosition?: string;
   wideOnMobile?: boolean;
+  relatedService?: ReactNode;
 };
 
 function photo(folder: string, number: number, alt: string): Photo {
@@ -49,6 +51,7 @@ const PROJECTS: readonly Project[] = [
     category: 'chambre',
     photos: [photo('papier-peint-panoramique-lit', 1, 'Chambre avec un papier peint panoramique derrière le lit')],
     coverPosition: 'center 57%',
+    relatedService: <>Découvrez comment se déroule la <ServiceLink service="papier-peint">pose d’un papier peint panoramique</ServiceLink>.</>,
   },
   {
     title: 'Rénovation d’un escalier',
@@ -71,6 +74,7 @@ const PROJECTS: readonly Project[] = [
       photo('beton-cire-cuisine', 4, 'Détail des meubles et du plan de travail'),
     ],
     coverPosition: '51% center',
+    relatedService: <>Pour rénover des façades de cuisine, vous pouvez aussi choisir un <ServiceLink service="vinyle">film adhésif décoratif</ServiceLink>.</>,
   },
   {
     title: 'Rénovation d’une salle de bain',
@@ -149,13 +153,16 @@ export default function Portfolio() {
   return (
     <>
       <SEO title={title} description={description} path={PORTFOLIO_PATH} jsonLd={jsonLd} />
-      <SiteLayout page="portfolio">
+      <SiteLayout
+        page="portfolio"
+        contactIntro={<>Vous avez repéré une finition qui vous plaît&nbsp;? Si vos murs sont irréguliers, Léna peut prévoir un <ServiceLink service="enduits">ratissage</ServiceLink> dans le devis.</>}
+      >
         <PageHero
           id="portfolio-title"
           breadcrumb="Réalisations"
           eyebrow="Réalisations"
           title={<>Les chantiers <em>en images.</em></>}
-          description={description}
+          description={<>Avant-après et détails de finition des chantiers de Léna Rénove, de la <ServiceLink service="peinture">peinture intérieure</ServiceLink> à la décoration des murs.</>}
         />
 
         <section className={styles.gallery} aria-label="Projets réalisés">
@@ -238,7 +245,7 @@ export default function Portfolio() {
 }
 
 function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void }) {
-  const { title, category, photos: [cover], before, wideOnMobile, coverPosition } = project;
+  const { title, category, photos: [cover], before, wideOnMobile, coverPosition, relatedService } = project;
   const sizes = `(max-width: 920px) ${wideOnMobile ? '90vw' : '44vw'}, 28vw`;
   const cardClass = before ? styles.featured : wideOnMobile ? styles.wideOnMobile : undefined;
 
@@ -269,6 +276,7 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void
           </span>
         </span>
       </button>
+      {relatedService && <p className={styles.projectService}>{relatedService}</p>}
     </li>
   );
 }

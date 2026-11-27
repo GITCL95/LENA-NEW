@@ -5,6 +5,7 @@ import AreaHero from '@components/sections/AreaHero';
 import InteriorServices from '@components/sections/InteriorServices';
 import Qualifications from '@components/sections/Qualifications';
 import Questions from '@components/sections/Questions';
+import ServiceLink from '@components/sections/ServiceLink';
 import { CITIES, PONTOISE } from '@data/cities';
 import { CLIENT, PORTFOLIO_PATH, SITE_URL, ZONES_PATH } from '@data/client';
 import { buildBreadcrumbSchema, buildFAQSchema, buildWebPageSchema } from '@data/schemas';
@@ -87,12 +88,15 @@ export default function Zones() {
   return (
     <>
       <SEO title={title} description={description} path={ZONES_PATH} ogImage={heroPhoto.src} jsonLd={jsonLd} />
-      <SiteLayout page="zones">
+      <SiteLayout
+        page="zones"
+        contactIntro={<>Indiquez votre commune et les travaux envisagés. Pour un <ServiceLink service="vinyle">habillage de cuisine en vinyle</ServiceLink>, précisez les surfaces à rénover.</>}
+      >
         <AreaHero
           breadcrumb="Zones d’intervention"
           eyebrow="Artisane peintre · Vétheuil"
           title={<>Peintre en bâtiment <em>dans le Val-d’Oise <br />et les Yvelines.</em></>}
-          description={<>Peinture intérieure, enduits, papier peint et vinyle adhésif. Léna Rénove intervient dans un rayon de 40&nbsp;km autour de Vétheuil.</>}
+          description={<><ServiceLink service="peinture">Peinture intérieure</ServiceLink>, enduits, papier peint et vinyle adhésif. Léna Rénove intervient dans un rayon de 40&nbsp;km autour de Vétheuil.</>}
           photo={heroPhoto}
           directoryLink={{ label: 'Voir les communes', href: '#villes' }}
           regional
@@ -112,7 +116,7 @@ export default function Zones() {
               <div>
                 <h2 id="cities-title" className={siteStyles.sectionTitle}>Les communes <em>desservies.</em></h2>
               </div>
-              <p>Retrouvez les informations locales et les prestations proposées dans chaque ville.</p>
+              <p>Choisissez votre commune pour retrouver les informations locales ou consultez l’<ServiceLink service="overview">ensemble des prestations</ServiceLink>.</p>
             </div>
             <ul className={styles.cityList}>
               {cities.map(({ href, name, postalCode, department }) => (
@@ -141,6 +145,7 @@ export default function Zones() {
             <div className={styles.projectsHeading}>
               <p className={siteStyles.eyebrow}>Réalisations</p>
               <h2 id="projects-title" className={siteStyles.sectionTitle}>Les chantiers <em>en images.</em></h2>
+              <p className="mt-3">Découvrez le résultat d’une <ServiceLink service="papier-peint">pose de papier peint panoramique</ServiceLink> dans une chambre mansardée.</p>
             </div>
             <ul className={styles.projectList}>
               {projects.map(({ title, alt, src, href, sizes }) => (

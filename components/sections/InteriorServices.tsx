@@ -1,9 +1,13 @@
 import Image from 'next/image';
+import type { ReactNode } from 'react';
 import { INTERIOR_SERVICES, serviceHref } from '@data/services';
 import styles from '@/styles/AreaPage.module.css';
 import siteStyles from '@/styles/Site.module.css';
 
-export default function InteriorServices({ compactImages = false }: { compactImages?: boolean }) {
+export default function InteriorServices({ compactImages = false, intro = 'De la préparation des supports à la finition.' }: {
+  compactImages?: boolean;
+  intro?: ReactNode;
+}) {
   return (
     <section id="prestations" className={styles.services} aria-labelledby="services-title" tabIndex={-1}>
       <div className={siteStyles.container}>
@@ -12,7 +16,7 @@ export default function InteriorServices({ compactImages = false }: { compactIma
             <p className={siteStyles.eyebrow}>Services</p>
             <h2 id="services-title" className={siteStyles.sectionTitle}>Vos travaux <em>d’intérieur.</em></h2>
           </div>
-          <p>De la préparation des supports à la finition.</p>
+          <p>{intro}</p>
         </div>
         <ul className={styles.servicesList}>
           {INTERIOR_SERVICES.map(({ title, slug, detail, image, thumbnail }) => (

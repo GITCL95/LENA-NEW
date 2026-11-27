@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import SEO from '@components/layout/SEO';
 import SiteLayout, { Arrow, ArrowLink } from '@components/layout/SiteLayout';
 import PageHero from '@components/sections/PageHero';
+import ServiceLink from '@components/sections/ServiceLink';
 import { CLIENT, CONTACT_PATH, LEGAL_PATH, SITE_URL } from '@data/client';
 import { buildBreadcrumbSchema, buildWebPageSchema } from '@data/schemas';
 import { QUOTE_SERVICES, type QuoteService } from '@data/services';
@@ -37,13 +38,16 @@ export default function Contact() {
   return (
     <>
       <SEO title={title} description={description} path={CONTACT_PATH} jsonLd={jsonLd} />
-      <SiteLayout page="contact">
+      <SiteLayout
+        page="contact"
+        contactIntro={<>Pour <ServiceLink service="vinyle">rénover vos meubles de cuisine avec un film adhésif</ServiceLink>, indiquez dans votre demande quels éléments vous souhaitez habiller.</>}
+      >
         <PageHero
           id="contact-hero-title"
           breadcrumb="Contact"
           eyebrow="Contact et devis"
           title={<>Parlons de <em>votre projet.</em></>}
-          description="Vous échangez directement avec Léna, qui réalisera vos travaux. Le devis est gratuit et envoyé sous 24 h après visite."
+          description={<>Vous échangez directement avec Léna, qui réalisera vos travaux. Consultez <ServiceLink service="overview">les prestations proposées</ServiceLink> pour préciser votre projet. Le devis est gratuit et envoyé sous 24&nbsp;h après visite.</>}
         >
           <ArrowLink href={EMAIL_LINK} className={siteStyles.textLink}>Écrire à Léna par e-mail</ArrowLink>
         </PageHero>
@@ -137,7 +141,9 @@ function QuoteForm() {
 
             <fieldset aria-describedby="services-hint">
               <legend className={styles.label}>Type de prestation <span>(facultatif)</span></legend>
-              <p id="services-hint" className={styles.servicesHint}>Vous pouvez sélectionner plusieurs prestations.</p>
+              <p id="services-hint" className={styles.servicesHint}>
+                Vous pouvez sélectionner plusieurs prestations. Pour un devis de <ServiceLink service="peinture">peinture intérieure</ServiceLink>, indiquez les pièces à peindre dans votre message.
+              </p>
               <div className={styles.services}>
                 {serviceOptions.map((service) => (
                   <label key={service} className={styles.service}>
@@ -240,6 +246,9 @@ function ContactDetails() {
           </span>
           <Arrow />
         </a>
+        <p className={styles.directNote}>
+          Pour une <ServiceLink service="papier-peint">pose de papier peint</ServiceLink>, vous pouvez indiquer par e-mail les dimensions du mur et le revêtement choisi.
+        </p>
       </div>
 
       <div className={styles.office}>

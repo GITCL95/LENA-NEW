@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import Image from 'next/image';
 import { ArrowLink } from '@components/layout/SiteLayout';
 import { Breadcrumb } from '@components/sections/PageHero';
@@ -12,7 +13,7 @@ export function DetailHero({ id, breadcrumb, breadcrumbParent, eyebrow, title, e
   eyebrow: string;
   title: string;
   emphasis: string;
-  description: string;
+  description: ReactNode;
   photo: { src: string; alt: string; caption: string };
   quoteHref?: string;
   className?: string;

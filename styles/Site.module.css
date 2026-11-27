@@ -354,6 +354,16 @@
   text-underline-offset: 0.2em;
 }
 
+.serviceLink {
+  color: var(--accent, var(--rust));
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.serviceLink:hover {
+  text-decoration-thickness: 2px;
+}
+
 .stars {
   color: var(--rust);
   font-size: 0.9375rem;

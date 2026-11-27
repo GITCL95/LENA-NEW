@@ -37,15 +37,26 @@
   gap: 1.25rem 1.0625rem;
 }
 
+.projects > li {
+  display: flex;
+  flex-direction: column;
+}
+
+.projectService {
+  padding: 0.5rem 0.25rem 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
 .featured {
   grid-column: span 2;
 }
 
 .card {
   display: flex;
+  flex: 1;
   flex-direction: column;
   width: 100%;
-  height: 100%;
   overflow: hidden;
   border: 1px solid var(--border);
   border-radius: var(--card-radius);

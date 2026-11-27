@@ -7,6 +7,7 @@ import { OnPageNavigation } from '@components/sections/DetailPage';
 import InteriorServices from '@components/sections/InteriorServices';
 import Qualifications from '@components/sections/Qualifications';
 import Questions from '@components/sections/Questions';
+import ServiceLink from '@components/sections/ServiceLink';
 import type { CityPageContent, CityProject } from '@data/cities';
 import { CLIENT, SITE_URL, ZONES_PATH } from '@data/client';
 import { getCityQuestions } from '@data/faq';
@@ -37,7 +38,7 @@ const contactSection = { label: 'Contact', id: 'contact' };
 const workSteps = [
   {
     title: 'Prise de contact',
-    detail: 'Indiquez votre quartier et les pièces ou surfaces à rénover.',
+    detail: <>Indiquez votre quartier et les éléments à rénover. Pour un <ServiceLink service="vinyle">habillage en vinyle</ServiceLink>, précisez quels meubles ou quelles portes sont concernés.</>,
   },
   {
     title: 'Visite sur place selon le projet',
@@ -102,7 +103,7 @@ export default function CityPage({ city }: { city: CityPageContent }) {
           breadcrumbParent={{ label: 'Zones d’intervention', href: ZONES_PATH }}
           eyebrow={`${CLIENT.brand} · Artisane peintre`}
           title={<>Rénovation <em>à {name}.</em></>}
-          description="Peinture intérieure, enduits de ratissage, pose de papier peint et vinyle adhésif décoratif."
+          description={<><ServiceLink service="peinture">Peinture intérieure</ServiceLink>, enduits de ratissage, pose de papier peint et vinyle adhésif décoratif.</>}
           photo={project ? { ...photo, caption: { title: project.title, detail: `Chantier à ${name}` } } : photo}
         />
 
@@ -118,7 +119,7 @@ export default function CityPage({ city }: { city: CityPageContent }) {
                   Nos interventions dans <em>les quartiers de {name}</em>
                 </h2>
               </div>
-              <p>{city.neighbourhoodIntro}</p>
+              <p>{city.neighbourhoodIntro} Pour préparer votre projet, consultez le détail des <ServiceLink service="overview">prestations de rénovation intérieure</ServiceLink>.</p>
             </div>
             <ul className={styles.neighbourhoodList}>
               {city.neighbourhoods.map(({ name, detail }) => (
@@ -194,7 +195,7 @@ function CityPrices({ name }: { name: string }) {
         </div>
         <p id="prices-note" className={styles.priceNote}>
           Ces fourchettes s’appuient sur les prix publiés par des professionnels en Île-de-France.
-          {' '}Le prix final dépend des travaux à réaliser et sera précisé dans le devis.
+          {' '}Le devis tient compte des reprises à prévoir, comme un <ServiceLink service="enduits">ratissage</ServiceLink> si les murs sont irréguliers.
         </p>
       </div>
     </section>
