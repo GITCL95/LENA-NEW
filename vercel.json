@@ -11,8 +11,18 @@
       "statusCode": 301
     },
     {
+      "source": "/peinture-interieure-renovation-magny-en-vexin",
+      "destination": "/services",
+      "statusCode": 301
+    },
+    {
       "source": "/peinture-interieure-renovation-magny-en-vexin.html",
-      "destination": "/peinture-interieure-renovation-magny-en-vexin",
+      "destination": "/services",
+      "statusCode": 301
+    },
+    {
+      "source": "/services.html",
+      "destination": "/services",
       "statusCode": 301
     },
     {
@@ -132,8 +142,8 @@
       "destination": "/lena-renaud-peintre-magny-en-vexin.html"
     },
     {
-      "source": "/peinture-interieure-renovation-magny-en-vexin",
-      "destination": "/peinture-interieure-renovation-magny-en-vexin.html"
+      "source": "/services",
+      "destination": "/services.html"
     },
     {
       "source": "/services/peinture-interieure",

@@ -1,4 +1,4 @@
-import { CONTACT_PATH } from './client';
+import { CONTACT_PATH, SERVICES_PATH } from './client';
 
 export const QUOTE_SERVICES = {
   peinture: 'Peinture intérieure',
@@ -68,7 +68,7 @@ export type InteriorService = (typeof INTERIOR_SERVICES)[number];
 
 export function serviceHref(service: QuoteService) {
   const detail = INTERIOR_SERVICES.find(({ slug }) => slug === service);
-  return detail ? `/services/${detail.route}` : serviceQuoteHref(service);
+  return detail ? `${SERVICES_PATH}/${detail.route}` : serviceQuoteHref(service);
 }
 
 export type Service = {
