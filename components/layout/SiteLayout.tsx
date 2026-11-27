@@ -169,7 +169,7 @@ export default function SiteLayout({ children, page = 'home', activePath, quoteH
           <a href="/" className={styles.wordmark}>Léna <em>Rénove</em></a>
           {page === 'home' && (
             <span className={styles.footerCredit}>
-              Site créé par <a href="https://www.alizee-web.com/" target="_blank" rel="noopener">Alizée Web</a>
+              Site créé par <a href="https://www.alizee-web.pt/" target="_blank" rel="noopener">Alizée Web</a>
             </span>
           )}
           <a href={LEGAL_PATH} aria-current={page === 'legal' ? 'page' : undefined}>Mentions légales</a>
