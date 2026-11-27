@@ -10,6 +10,10 @@ const contactIntros: Partial<Record<SitePage, string>> = {
   zones: 'Indiquez votre commune et les travaux envisagés dans votre demande.',
 };
 
+type HeaderLogo = { src: string; width: number; height: number };
+
+const defaultHeaderLogo: HeaderLogo = { src: '/assets/img/logo-lt.png', width: 500, height: 442 };
+
 export function Arrow() {
   return <span className={styles.arrow} aria-hidden="true" />;
 }
@@ -35,7 +39,12 @@ export function QuoteButton({ href = QUOTE_PATH }: { href?: string }) {
   );
 }
 
-function SiteHeader({ page, activePath, quoteHref }: { page: SitePage; activePath?: string; quoteHref: string }) {
+function SiteHeader({ page, activePath, quoteHref, logo = defaultHeaderLogo }: {
+  page: SitePage;
+  activePath?: string;
+  quoteHref: string;
+  logo?: HeaderLogo;
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
 
@@ -55,7 +64,7 @@ function SiteHeader({ page, activePath, quoteHref }: { page: SitePage; activePat
     >
       <div className={`${styles.container} ${styles.headerInner}`}>
         <a href="/" className={styles.logo} aria-label="Léna Rénove, accueil" aria-current={page === 'home' ? 'page' : undefined}>
-          <Image src="/assets/img/logo-lt.png" alt="" width={500} height={442} loading="eager" />
+          <Image {...logo} alt="" loading="eager" />
         </a>
         <nav className={styles.desktopNav} aria-label="Navigation principale">
           <SiteNavigation page={page} activePath={activePath} />
@@ -149,17 +158,18 @@ function SiteContact({ page, quoteHref }: { page: SitePage; quoteHref: string })
   );
 }
 
-export default function SiteLayout({ children, page = 'home', activePath, quoteHref = QUOTE_PATH }: {
+export default function SiteLayout({ children, page = 'home', activePath, quoteHref = QUOTE_PATH, headerLogo }: {
   children: ReactNode;
   page?: SitePage;
   activePath?: string;
   quoteHref?: string;
+  headerLogo?: HeaderLogo;
 }) {
   const contactHref = page === 'contact' ? '#contact' : quoteHref;
 
   return (
     <div className={styles.site}>
-      <SiteHeader page={page} activePath={activePath} quoteHref={contactHref} />
+      <SiteHeader page={page} activePath={activePath} quoteHref={contactHref} logo={headerLogo} />
       <main id="content" tabIndex={-1}>
         {children}
         {page !== 'notFound' && <SiteContact page={page} quoteHref={contactHref} />}

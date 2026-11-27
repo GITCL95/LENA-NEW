@@ -14,6 +14,7 @@ type AreaHeroProps = {
   description: ReactNode;
   photo: {
     src: string;
+    srcSet?: string;
     alt: string;
     caption?: { title: string; detail: string };
   };
@@ -21,8 +22,10 @@ type AreaHeroProps = {
   directoryLink?: { label: string; href: string };
 };
 
+const photoSizes = '(max-width: 920px) 89vw, (max-width: 1440px) 46vw, 640px';
+
 export default function AreaHero({ id, breadcrumb, breadcrumbParent, eyebrow, title, description, photo, regional, directoryLink }: AreaHeroProps) {
-  const { src, alt, caption } = photo;
+  const { src, srcSet, alt, caption } = photo;
 
   return (
     <section
@@ -43,7 +46,19 @@ export default function AreaHero({ id, breadcrumb, breadcrumbParent, eyebrow, ti
           <p className={siteStyles.heroNote}>Devis gratuit sous 24&nbsp;h après visite.</p>
         </div>
         <figure className={caption ? styles.heroPhoto : `${styles.heroPhoto} ${styles.illustration}`}>
-          <Image src={src} alt={alt} fill priority sizes="(max-width: 920px) 89vw, (max-width: 1440px) 46vw, 640px" />
+          {srcSet ? (
+            <img
+              src={src}
+              srcSet={srcSet}
+              sizes={photoSizes}
+              alt={alt}
+              fetchPriority="high"
+              decoding="async"
+              className={styles.responsiveHeroPhoto}
+            />
+          ) : (
+            <Image src={src} alt={alt} fill priority sizes={photoSizes} />
+          )}
           <figcaption>
             {caption ? <><span>{caption.title}</span><small>{caption.detail}</small></> : 'Photo d’illustration'}
           </figcaption>

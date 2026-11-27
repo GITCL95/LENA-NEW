@@ -34,6 +34,7 @@ export type City = {
   neighbourhoodIntro: string;
   neighbourhoods: { name: string; detail?: string }[];
   project?: CityProject;
+  optimizedImages?: boolean;
   keyword: string;
   secondaryKeywords: string[];
   title: string;
@@ -43,7 +44,7 @@ export type City = {
 
 export type CityPageContent = Pick<City,
   'name' | 'slug' | 'href' | 'postalCode' | 'departmentName' | 'title' | 'metaDescription'
-  | 'neighbourhoodIntro' | 'neighbourhoods' | 'project'
+  | 'neighbourhoodIntro' | 'neighbourhoods' | 'project' | 'optimizedImages'
 >;
 
 const pontoiseSalon: CityPhoto = {
@@ -98,6 +99,7 @@ export const CITIES: City[] = [
     name: 'Cergy',
     slug: 'cergy',
     href: '/peintre-cergy',
+    optimizedImages: true,
     postalCode: '95000',
     distance: '30 min',
     department: '95',
@@ -183,6 +185,7 @@ export const CITIES: City[] = [
     name: 'Chaumont-en-Vexin',
     slug: 'chaumont-en-vexin',
     href: '/peintre-chaumont-en-vexin',
+    optimizedImages: true,
     postalCode: '60240',
     distance: '45 min',
     department: '60',

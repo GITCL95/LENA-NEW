@@ -19,6 +19,12 @@ const illustration = {
   src: '/assets/img/hero_bg.jpg',
   alt: 'Salon aux murs ocre et terracotta',
 };
+const responsiveIllustration = {
+  ...illustration,
+  src: '/assets/img/hero-1024.webp',
+  srcSet: '/assets/img/hero-640.webp 640w, /assets/img/hero-1024.webp 1024w',
+};
+const compactLogo = { src: '/assets/img/logo-250.webp', width: 250, height: 221 };
 const citySections = [
   { label: 'Quartiers', id: 'quartiers' },
   { label: 'Services', id: 'prestations' },
@@ -52,8 +58,8 @@ const workSteps = [
 ];
 
 export default function CityPage({ city }: { city: CityPageContent }) {
-  const { name, href, postalCode, title, metaDescription, departmentName, project } = city;
-  const photo = project?.photo ?? illustration;
+  const { name, href, postalCode, title, metaDescription, departmentName, project, optimizedImages } = city;
+  const photo = project?.photo ?? (optimizedImages ? responsiveIllustration : illustration);
   const questions = getCityQuestions(city);
   const sections = project
     ? [...citySections, projectSection, contactSection]
@@ -89,7 +95,7 @@ export default function CityPage({ city }: { city: CityPageContent }) {
   return (
     <>
       <SEO title={title} description={metaDescription} path={href} ogImage={project?.photo.src} jsonLd={jsonLd} />
-      <SiteLayout page="city" activePath={href}>
+      <SiteLayout page="city" activePath={href} headerLogo={optimizedImages ? compactLogo : undefined}>
         <AreaHero
           id={city.slug}
           breadcrumb={name}
@@ -128,7 +134,7 @@ export default function CityPage({ city }: { city: CityPageContent }) {
           </div>
         </section>
 
-        <InteriorServices />
+        <InteriorServices compactImages={optimizedImages} />
 
         <CityPrices name={name} />
 

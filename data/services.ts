@@ -28,6 +28,7 @@ export const INTERIOR_SERVICES = [
     priceDetail: 'Murs et plafonds, peinture comprise',
     detail: 'Murs, plafonds et boiseries. Finitions mates, satinées ou brillantes.',
     image: 'insta-9.jpg',
+    thumbnail: 'thumbnails/insta-9.webp',
   },
   {
     title: 'Enduits de ratissage',
@@ -39,6 +40,7 @@ export const INTERIOR_SERVICES = [
     priceDetail: 'Ratissage mural courant, hors peinture',
     detail: 'Rebouchage, lissage et traitement des fissures.',
     image: 'service_thumb_2.jpg',
+    thumbnail: 'thumbnails/service_thumb_2.webp',
   },
   {
     title: 'Pose de papier peint',
@@ -50,6 +52,7 @@ export const INTERIOR_SERVICES = [
     priceDetail: 'Intissé ou panoramique, papier non fourni',
     detail: 'Papiers peints intissés ou panoramiques.',
     image: 'service_thumb_3.jpg',
+    thumbnail: 'thumbnails/service_thumb_3.webp',
   },
   {
     title: 'Vinyle adhésif décoratif',
@@ -61,6 +64,7 @@ export const INTERIOR_SERVICES = [
     priceDetail: 'Film et pose compris',
     detail: 'Relooking de cuisines, de meubles et de portes.',
     image: 'service_thumb_4.jpg',
+    thumbnail: 'thumbnails/service_thumb_4.webp',
   },
 ] as const;
 

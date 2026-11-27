@@ -43,6 +43,13 @@
   object-position: 50% 54%;
 }
 
+.responsiveHeroPhoto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .illustration img {
   object-position: 65% center;
 }
