@@ -53,6 +53,7 @@ export default function Contact() {
             <div>
               <h2 id="quote-title" className={styles.formTitle}>Votre demande de devis</h2>
               <QuoteForm />
+              <ContactMap />
             </div>
             <ContactDetails />
           </div>
@@ -252,8 +253,6 @@ function ContactDetails() {
           <p>Du lundi au vendredi, de 8 h à 18 h.</p>
         </div>
       </div>
-
-      <ContactMap />
     </aside>
   );
 }
@@ -262,7 +261,7 @@ function ContactMap() {
   const [mapOpen, setMapOpen] = useState(false);
 
   return (
-    <div className={styles.office}>
+    <div className={`${styles.office} ${styles.mapCard}`}>
       <h3>Carte</h3>
       <p>{MAP_ADDRESS}</p>
       <p id="contact-map-note" className={styles.mapNote}>Google Maps peut utiliser des cookies si vous affichez la carte.</p>
