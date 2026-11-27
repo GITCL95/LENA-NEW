@@ -1,9 +1,10 @@
 import { useRef, useState, type ReactNode } from 'react';
 import Image from 'next/image';
-import { CLIENT, LEGAL_PATH, NAV_ROUTES, QUOTE_PATH, ZONES_PATH } from '@data/client';
+import { CLIENT, LEGAL_PATH, MOBILE_NAV_ROUTES, NAV_ROUTES, QUOTE_PATH, ZONES_PATH } from '@data/client';
 import styles from '@/styles/Site.module.css';
 
-type SitePage = typeof NAV_ROUTES[number]['page'] | 'home' | 'city' | 'legal' | 'notFound';
+type NavigationRoute = typeof MOBILE_NAV_ROUTES[number];
+type SitePage = NavigationRoute['page'] | 'city' | 'legal' | 'notFound';
 
 const contactIntros: Partial<Record<SitePage, string>> = {
   portfolio: 'Décrivez votre projet de rénovation intérieure.',
@@ -40,15 +41,20 @@ function SiteHeader({ page }: { page: SitePage }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
   const contactLocation = page === 'contact';
-  const navigation = NAV_ROUTES.map(({ label, href, page: destination }) => {
-    let current: 'page' | 'location' | undefined;
-    if (destination === page) current = 'page';
-    if (page === 'city' && destination === 'zones') current = 'location';
-    return { label, href: contactLocation && destination === 'contact' ? '#contact' : href, current };
-  });
 
   function closeMenu() {
     setMenuOpen(false);
+  }
+
+  function renderNavLinks(routes: readonly NavigationRoute[], onClick?: () => void) {
+    return routes.map(({ label, href, page: destination }) => {
+      let current: 'page' | 'location' | undefined;
+      if (destination === page) current = 'page';
+      if (page === 'city' && destination === 'zones') current = 'location';
+      const linkHref = contactLocation && destination === 'contact' ? '#contact' : href;
+
+      return <a href={linkHref} key={href} aria-current={current} onClick={onClick}>{label}</a>;
+    });
   }
 
   return (
@@ -66,9 +72,7 @@ function SiteHeader({ page }: { page: SitePage }) {
           <Image src="/assets/img/logo-lt.png" alt="" width={500} height={442} loading="eager" />
         </a>
         <nav className={styles.desktopNav} aria-label="Navigation principale">
-          {navigation.map(({ label, href, current }) => (
-            <a href={href} key={href} aria-current={current}>{label}</a>
-          ))}
+          {renderNavLinks(NAV_ROUTES)}
         </nav>
         <ArrowLink href={contactLocation ? '#contact' : QUOTE_PATH} className={`${styles.button} ${styles.headerButton}`}>
           Demander un devis
@@ -86,9 +90,7 @@ function SiteHeader({ page }: { page: SitePage }) {
       </div>
       <nav id="site-navigation" className={styles.mobileNav} aria-label="Navigation principale" hidden={!menuOpen}>
         <div className={styles.container}>
-          {navigation.map(({ label, href, current }) => (
-            <a href={href} key={href} aria-current={current} onClick={closeMenu}>{label}</a>
-          ))}
+          {renderNavLinks(MOBILE_NAV_ROUTES, closeMenu)}
         </div>
       </nav>
     </header>

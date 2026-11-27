@@ -49,10 +49,28 @@ export const CLIENT = {
   },
 } as const;
 
+const navRoutes = {
+  home: { label: "Accueil", href: "/", page: "home" },
+  about: { label: "À propos", href: ABOUT_PATH, page: "about" },
+  painting: { label: "Prestations", href: PAINTING_PATH, page: "painting" },
+  portfolio: { label: "Réalisations", href: PORTFOLIO_PATH, page: "portfolio" },
+  zones: { label: "Zones", href: ZONES_PATH, page: "zones" },
+  contact: { label: "Contact", href: CONTACT_PATH, page: "contact" },
+} as const;
+
 export const NAV_ROUTES = [
-  { label: "Prestations", href: PAINTING_PATH, page: "painting" },
-  { label: "Réalisations", href: PORTFOLIO_PATH, page: "portfolio" },
-  { label: "À propos", href: ABOUT_PATH, page: "about" },
-  { label: "Zones", href: ZONES_PATH, page: "zones" },
-  { label: "Contact", href: CONTACT_PATH, page: "contact" },
+  navRoutes.painting,
+  navRoutes.portfolio,
+  navRoutes.about,
+  navRoutes.zones,
+  navRoutes.contact,
+] as const;
+
+export const MOBILE_NAV_ROUTES = [
+  navRoutes.home,
+  navRoutes.about,
+  navRoutes.painting,
+  navRoutes.portfolio,
+  navRoutes.zones,
+  navRoutes.contact,
 ] as const;
