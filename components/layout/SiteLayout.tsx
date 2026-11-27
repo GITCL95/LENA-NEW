@@ -165,8 +165,13 @@ export default function SiteLayout({ children, page = 'home', activePath, quoteH
         {page !== 'notFound' && <SiteContact page={page} quoteHref={contactHref} />}
       </main>
       <footer className={styles.footer}>
-        <div className={`${styles.container} ${styles.footerInner}`}>
+        <div className={`${styles.container} ${styles.footerInner}${page === 'home' ? ` ${styles.footerWithCredit}` : ''}`}>
           <a href="/" className={styles.wordmark}>Léna <em>Rénove</em></a>
+          {page === 'home' && (
+            <span className={styles.footerCredit}>
+              Site créé par <a href="https://www.alizee-web.com/" target="_blank" rel="noopener">Alizée Web</a>
+            </span>
+          )}
           <a href={LEGAL_PATH} aria-current={page === 'legal' ? 'page' : undefined}>Mentions légales</a>
         </div>
       </footer>
