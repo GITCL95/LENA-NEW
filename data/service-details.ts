@@ -1,4 +1,6 @@
 import { CLIENT } from './client';
+import { PONTOISE } from './cities';
+import { panoramicWallpaper, wallpaperIllustration } from './images';
 import type { InteriorService } from './services';
 
 type Detail = { title: string; detail: string };
@@ -7,6 +9,7 @@ type Photo = { src: string; alt: string; caption: string };
 export type ServiceContent = {
   heading: [string, string];
   description: string;
+  metaDescription: string;
   photo: Photo;
   scopeIntro?: string;
   scope: Detail[];
@@ -23,15 +26,13 @@ export type ServiceContent = {
 
 const assets = '/assets/img';
 const terracotta = `${assets}/realisations/renovation-master-bedroom/renovation-master-bedroom`;
-const panoramic = `${assets}/realisations/papier-peint-panoramique-lit/papier-peint-panoramique-lit-1.webp`;
-
 export const SERVICE_CONTENT: Record<InteriorService['slug'], ServiceContent> = {
   peinture: {
     heading: ['Peinture', 'intérieure.'],
     description: 'Murs, plafonds et boiseries dans le neuf comme en rénovation. De la préparation des supports à la finition, votre chantier est réalisé par Léna Renaud.',
+    metaDescription: 'Faites peindre vos murs, plafonds et boiseries par Léna Renaud, à Vétheuil et dans les environs. Comparez les finitions et demandez un devis.',
     photo: {
-      src: `${assets}/projet-renov-3.jpg`,
-      alt: 'Salon aux murs bleu-gris, soubassements blancs et parquet clair',
+      ...PONTOISE.project.photo,
       caption: 'Peinture d’un salon à Pontoise',
     },
     scopeIntro: 'Pour les appartements, les maisons et les locaux professionnels, dans le neuf ou en rénovation.',
@@ -70,9 +71,10 @@ export const SERVICE_CONTENT: Record<InteriorService['slug'], ServiceContent> = 
   enduits: {
     heading: ['Enduits', 'de ratissage.'],
     description: 'Léna Renaud prépare les murs avant la finition. La prestation peut comprendre le rebouchage, le traitement des fissures et le lissage des surfaces.',
+    metaDescription: 'Enduits de ratissage à Vétheuil et dans les environs. Léna Renaud rebouche les trous et lisse vos murs avant la peinture ou le papier peint.',
     photo: {
       src: `${assets}/service_thumb_2.jpg`,
-      alt: 'Intérieur en cours de rénovation dont le sol est protégé',
+      alt: 'Pièce en travaux avec un sol bâché et des zones à reprendre au plafond',
       caption: 'Photo d’illustration',
     },
     scope: [
@@ -92,9 +94,9 @@ export const SERVICE_CONTENT: Record<InteriorService['slug'], ServiceContent> = 
   'papier-peint': {
     heading: ['Pose de', 'papier peint.'],
     description: 'Du papier peint intissé au panoramique, Léna Renaud prépare le mur et pose le revêtement choisi.',
+    metaDescription: 'Faites poser un papier peint intissé ou panoramique par Léna Renaud à Vétheuil et dans les environs. Découvrez comment elle prépare le mur et ajuste les raccords.',
     photo: {
-      src: `${assets}/service_thumb_3.jpg`,
-      alt: 'Revêtement mural panoramique représentant une verrière',
+      ...wallpaperIllustration,
       caption: 'Photo d’illustration',
     },
     scope: [
@@ -105,7 +107,7 @@ export const SERVICE_CONTENT: Record<InteriorService['slug'], ServiceContent> = 
     priceFactors: 'Le devis précise les travaux de préparation et la pose du revêtement choisi.',
     workStep: { title: 'Pose du revêtement', detail: 'Léna pose le revêtement choisi et soigne les raccords du motif.' },
     projects: [
-      { src: panoramic, alt: 'Chambre mansardée avec un papier peint panoramique à motif de palmiers', caption: 'Papier peint panoramique derrière un lit' },
+      { ...panoramicWallpaper, caption: 'Papier peint panoramique derrière un lit' },
     ],
     faq: [
       { q: 'Posez-vous les papiers peints panoramiques ?', a: 'Oui, la prestation comprend la pose de papiers peints panoramiques et intissés.' },
@@ -116,9 +118,10 @@ export const SERVICE_CONTENT: Record<InteriorService['slug'], ServiceContent> = 
   vinyle: {
     heading: ['Vinyle adhésif', 'décoratif.'],
     description: 'Léna Renaud pose un film adhésif décoratif pour relooker les cuisines, les meubles et les portes.',
+    metaDescription: 'Relookez vos façades de cuisine, meubles ou portes avec un vinyle adhésif décoratif. Léna Renaud intervient à Vétheuil et dans les environs.',
     photo: {
       src: `${assets}/service_thumb_4.jpg`,
-      alt: 'Cuisine aux façades claires et aux finitions effet bois',
+      alt: 'Cuisine aux façades claires, placards couleur bois et îlot effet marbre',
       caption: 'Photo d’illustration',
     },
     scope: [

@@ -4,40 +4,28 @@ import SEO from '@components/layout/SEO';
 import SiteLayout, { Arrow, ArrowLink } from '@components/layout/SiteLayout';
 import PageHero from '@components/sections/PageHero';
 import ServiceLink from '@components/sections/ServiceLink';
-import { CLIENT, CONTACT_PATH, LEGAL_PATH, SITE_URL } from '@data/client';
-import { buildBreadcrumbSchema, buildWebPageSchema } from '@data/schemas';
+import { CLIENT, CONTACT_PATH, LEGAL_PATH } from '@data/client';
+import { buildHousePainter } from '@data/schemas';
 import { QUOTE_SERVICES, type QuoteService } from '@data/services';
 import styles from '@/styles/Contact.module.css';
 import siteStyles from '@/styles/Site.module.css';
 
 const FORM_ENDPOINT = 'https://formspree.io/f/xeajyayy';
 const EMAIL_LINK = `mailto:${CLIENT.email}`;
-const MAP_ADDRESS = '39 Grande Rue, 95510 Villers-en-Arthies';
-const MAP_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MAP_ADDRESS)}`;
-const MAP_EMBED_URL = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2612.8822744880504!2d1.7233560767044018!3d49.088877384458954!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6c1bd8a15c2af%3A0x66d66952ebf32ced!2s39%20Grande%20Rue%2C%2095510%20Villers-en-Arthies!5e0!3m2!1sen!2sfr!4v1795779144212!5m2!1sen!2sfr';
+const MAP_ADDRESS = `${CLIENT.address.street}, ${CLIENT.address.postalCode} ${CLIENT.address.locality}`;
+const mapQuery = encodeURIComponent(MAP_ADDRESS);
+const MAP_LINK = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
+const MAP_EMBED_URL = `https://www.google.com/maps?q=${mapQuery}&hl=fr&output=embed`;
 const serviceOptions = Object.keys(QUOTE_SERVICES) as QuoteService[];
 
-const title = 'Contact · Devis gratuit sous 24 h · Léna Rénove';
-const description = 'Contactez Léna Rénove pour un devis gratuit sous 24 h après visite. Artisane peintre à Vétheuil, dans le Val-d’Oise et les Yvelines.';
-const jsonLd = [
-  buildWebPageSchema({ path: CONTACT_PATH, title, description }),
-  buildBreadcrumbSchema([
-    { name: 'Accueil', url: `${SITE_URL}/` },
-    { name: 'Contact', url: `${SITE_URL}${CONTACT_PATH}` },
-  ]),
-  {
-    '@context': 'https://schema.org',
-    '@type': 'ContactPage',
-    url: `${SITE_URL}${CONTACT_PATH}`,
-    name: title,
-    mainEntity: { '@id': `${SITE_URL}/#business` },
-  },
-];
+const title = 'Contact et devis pour vos travaux de peinture · Léna Rénove';
+const description = 'Décrivez vos travaux à Léna Rénove par formulaire ou par e-mail. Devis gratuit sous 24 h après visite, depuis Vétheuil.';
 
 export default function Contact() {
   return (
     <>
-      <SEO title={title} description={description} path={CONTACT_PATH} jsonLd={jsonLd} />
+      <SEO title={title} description={description} path={CONTACT_PATH}
+        breadcrumb={{ label: 'Contact' }} pageType="ContactPage" mainEntity={buildHousePainter()} />
       <SiteLayout
         page="contact"
         contactIntro={<>Pour <ServiceLink service="vinyle">rénover vos meubles de cuisine avec un film adhésif</ServiceLink>, indiquez dans votre demande quels éléments vous souhaitez habiller.</>}
@@ -46,7 +34,7 @@ export default function Contact() {
           id="contact-hero-title"
           breadcrumb="Contact"
           eyebrow="Contact et devis"
-          title={<>Parlons de <em>votre projet.</em></>}
+          title={<>Contact et <em>demande de devis.</em></>}
           description={<>Vous échangez directement avec Léna, qui réalisera vos travaux. Consultez <ServiceLink service="overview">les prestations proposées</ServiceLink> pour préciser votre projet. Le devis est gratuit et envoyé sous 24&nbsp;h après visite.</>}
         >
           <ArrowLink href={EMAIL_LINK} className={siteStyles.textLink}>Écrire à Léna par e-mail</ArrowLink>
@@ -178,8 +166,9 @@ function QuoteForm() {
             <div className={styles.consent}>
               <input type="checkbox" id="quote-consent" required />
               <p>
+                Votre demande est transmise via Formspree.{' '}
                 <label htmlFor="quote-consent">J’ai pris connaissance des informations sur le traitement de mes données.</label>{' '}
-                <a href={LEGAL_PATH} target="_blank" rel="noopener" aria-label="Mentions légales (nouvel onglet)">Mentions légales</a>.
+                <a href={`${LEGAL_PATH}#donnees-personnelles`} target="_blank" rel="noopener" aria-label="Données personnelles dans les mentions légales (nouvel onglet)">Mentions légales</a>.
               </p>
             </div>
 

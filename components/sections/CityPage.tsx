@@ -9,23 +9,21 @@ import Qualifications from '@components/sections/Qualifications';
 import Questions from '@components/sections/Questions';
 import ServiceLink from '@components/sections/ServiceLink';
 import type { CityPageContent, CityProject } from '@data/cities';
-import { CLIENT, SITE_URL, ZONES_PATH } from '@data/client';
+import { CLIENT, ZONES_PATH } from '@data/client';
 import { getCityQuestions } from '@data/faq';
-import { buildBreadcrumbSchema, buildFAQSchema, buildWebPageSchema } from '@data/schemas';
+import { interiorIllustration } from '@data/images';
+import { buildService } from '@data/schemas';
 import { INTERIOR_SERVICES } from '@data/services';
 import styles from '@/styles/City.module.css';
 import siteStyles from '@/styles/Site.module.css';
 
-const illustration = {
-  src: '/assets/img/hero_bg.jpg',
-  alt: 'Salon aux murs ocre et terracotta',
-};
 const responsiveIllustration = {
-  ...illustration,
+  ...interiorIllustration,
   src: '/assets/img/hero-1024.webp',
   srcSet: '/assets/img/hero-640.webp 640w, /assets/img/hero-1024.webp 1024w',
 };
 const compactLogo = { src: '/assets/img/logo-250.webp', width: 250, height: 221 };
+const serviceAreaHub = { label: 'Zones d’intervention', href: ZONES_PATH };
 const citySections = [
   { label: 'Quartiers', id: 'quartiers' },
   { label: 'Services', id: 'prestations' },
@@ -59,50 +57,31 @@ const workSteps = [
 ];
 
 export default function CityPage({ city }: { city: CityPageContent }) {
-  const { name, href, postalCode, title, metaDescription, departmentName, project, optimizedImages } = city;
-  const photo = project?.photo ?? (optimizedImages ? responsiveIllustration : illustration);
+  const { name, href, postalCode, title, metaDescription, project, optimizedImages } = city;
+  const photo = project?.photo ?? (optimizedImages ? responsiveIllustration : interiorIllustration);
   const questions = getCityQuestions(city);
   const sections = project
     ? [...citySections, projectSection, contactSection]
     : [...citySections, contactSection];
-  const jsonLd = [
-    buildWebPageSchema({ path: href, title, description: metaDescription }),
-    buildBreadcrumbSchema([
-      { name: 'Accueil', url: `${SITE_URL}/` },
-      { name: 'Zones d’intervention', url: `${SITE_URL}${ZONES_PATH}` },
-      { name, url: `${SITE_URL}${href}` },
-    ]),
-    buildFAQSchema(questions),
-    {
-      '@context': 'https://schema.org',
-      '@type': 'Service',
-      serviceType: `Peinture intérieure à ${name}`,
-      url: `${SITE_URL}${href}`,
-      provider: { '@id': `${SITE_URL}/#business` },
-      areaServed: {
-        '@type': 'City',
-        name,
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: name,
-          postalCode,
-          addressRegion: departmentName,
-          addressCountry: 'FR',
-        },
-      },
-    },
-  ];
+  const localService = buildService({
+    path: href,
+    name: `Travaux de peinture et de décoration à ${name}`,
+    serviceType: 'Rénovation intérieure',
+    description: 'Peinture intérieure, enduits de ratissage, pose de papier peint et vinyle adhésif décoratif.',
+    city: name,
+  });
 
   return (
     <>
-      <SEO title={title} description={metaDescription} path={href} ogImage={project?.photo.src} jsonLd={jsonLd} />
+      <SEO title={title} description={metaDescription} path={href} image={project?.photo}
+        breadcrumb={{ label: name, parent: serviceAreaHub }} mainEntity={localService} />
       <SiteLayout page="city" activePath={href} headerLogo={optimizedImages ? compactLogo : undefined}>
         <AreaHero
           id={city.slug}
           breadcrumb={name}
-          breadcrumbParent={{ label: 'Zones d’intervention', href: ZONES_PATH }}
+          breadcrumbParent={serviceAreaHub}
           eyebrow={`${CLIENT.brand} · Artisane peintre`}
-          title={<>Rénovation <em>à {name}.</em></>}
+          title={<>Artisane peintre <em>à {name}.</em></>}
           description={<><ServiceLink service="peinture">Peinture intérieure</ServiceLink>, enduits de ratissage, pose de papier peint et vinyle adhésif décoratif.</>}
           photo={project ? { ...photo, caption: { title: project.title, detail: `Chantier à ${name}` } } : photo}
         />
@@ -137,7 +116,7 @@ export default function CityPage({ city }: { city: CityPageContent }) {
 
         <InteriorServices compactImages={optimizedImages} />
 
-        <CityPrices name={name} />
+        <CityPrices />
 
         <section id="devis" className={`${styles.section} ${styles.process}`} aria-labelledby="process-title" tabIndex={-1}>
           <div className={siteStyles.container}>
@@ -163,19 +142,19 @@ export default function CityPage({ city }: { city: CityPageContent }) {
   );
 }
 
-function CityPrices({ name }: { name: string }) {
+function CityPrices() {
   return (
     <section id="tarifs" className={`${styles.section} ${styles.prices}`} aria-labelledby="prices-title" tabIndex={-1}>
       <div className={siteStyles.container}>
         <h2 id="prices-title" className={`${siteStyles.sectionTitle} ${styles.inlineTitle}`}>
-          Quels tarifs pour vos travaux <em>à {name}&nbsp;?</em>
+          Quels repères <em>pour votre budget&nbsp;?</em>
         </h2>
         <div className={styles.priceTableFrame}>
           <table className={styles.priceTable} aria-labelledby="prices-title" aria-describedby="prices-note">
             <thead>
               <tr>
                 <th scope="col">Prestation</th>
-                <th scope="col">Tarif indicatif</th>
+                <th scope="col">Repère de prix</th>
                 <th scope="col">Unité</th>
               </tr>
             </thead>
@@ -194,8 +173,8 @@ function CityPrices({ name }: { name: string }) {
           </table>
         </div>
         <p id="prices-note" className={styles.priceNote}>
-          Ces fourchettes s’appuient sur les prix publiés par des professionnels en Île-de-France.
-          {' '}Le devis tient compte des reprises à prévoir, comme un <ServiceLink service="enduits">ratissage</ServiceLink> si les murs sont irréguliers.
+          Ces prix de référence proviennent d’autres professionnels en Île-de-France. Léna établit son propre devis
+          selon les surfaces et les reprises à prévoir, comme un <ServiceLink service="enduits">ratissage</ServiceLink> si les murs sont irréguliers.
         </p>
       </div>
     </section>

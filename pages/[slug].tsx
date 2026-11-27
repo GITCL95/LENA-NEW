@@ -27,12 +27,12 @@ export const getStaticProps: GetStaticProps<PageProps> = ({ params }) => {
   const city = CITIES.find(({ href }) => href === `/${params?.slug}`);
   if (!city) return { notFound: true };
 
-  const { name, slug, href, postalCode, departmentName, title, metaDescription, neighbourhoodIntro, neighbourhoods, project, optimizedImages } = city;
+  const { name, slug, href, postalCode, title, metaDescription, neighbourhoodIntro, neighbourhoods, planningQuestion, project, optimizedImages } = city;
   return {
     props: {
       kind: 'city',
       city: {
-        name, slug, href, postalCode, departmentName, title, metaDescription, neighbourhoodIntro, neighbourhoods,
+        name, slug, href, postalCode, title, metaDescription, neighbourhoodIntro, neighbourhoods, planningQuestion,
         ...(project ? { project } : {}),
         ...(optimizedImages ? { optimizedImages } : {}),
       },

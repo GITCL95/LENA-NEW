@@ -1,18 +1,27 @@
 import Head from 'next/head';
-import { SITE_URL } from '@data/client';
+import { CLIENT, SITE_URL } from '@data/client';
+import { interiorIllustration } from '@data/images';
+import { buildPageGraph, type PageSchemaOptions } from '@data/schemas';
 
-interface SEOProps {
+type SEOProps = PageSchemaOptions & {
   title: string;
   description: string;
   path: string;
-  ogImage?: string;
-  jsonLd?: object | object[];
-}
+  image?: { src: string; alt: string };
+  noIndex?: boolean;
+};
 
-export default function SEO({ title, description, path, ogImage, jsonLd }: SEOProps) {
+export default function SEO({ title, description, path, image, noIndex = false, ...schemaOptions }: SEOProps) {
   const url = `${SITE_URL}${path}`;
-  const image = ogImage ? `${SITE_URL}${ogImage}` : `${SITE_URL}/assets/img/hero_bg.jpg`;
-  const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+  const socialImage = image ?? interiorIllustration;
+  const imageUrl = `${SITE_URL}${socialImage.src}`;
+  const graph = noIndex ? null : buildPageGraph({
+    ...schemaOptions,
+    url,
+    title,
+    description,
+    primaryImage: image ? imageUrl : undefined,
+  });
 
   return (
     <Head>
@@ -20,26 +29,27 @@ export default function SEO({ title, description, path, ogImage, jsonLd }: SEOPr
       <meta name="description" content={description} />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link rel="canonical" href={url} />
-      <meta name="robots" content="index, follow, max-image-preview:large" />
-      <meta name="author" content="Léna Rénove" />
+      <meta name="robots" content={noIndex ? 'noindex, follow' : 'max-image-preview:large'} />
       <meta property="og:type" content="website" />
       <meta property="og:locale" content="fr_FR" />
       <meta property="og:url" content={url} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={image} />
-      <meta property="og:site_name" content="Léna Rénove" />
+      <meta property="og:image" content={imageUrl} />
+      <meta property="og:image:alt" content={socialImage.alt} />
+      <meta property="og:site_name" content={CLIENT.brand} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
-      {jsonLdArray.map((schema, i) => (
+      <meta name="twitter:image" content={imageUrl} />
+      <meta name="twitter:image:alt" content={socialImage.alt} />
+      {graph && (
         <script
-          key={i}
+          key="structured-data"
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(graph).replace(/</g, '\\u003c') }}
         />
-      ))}
+      )}
     </Head>
   );
 }

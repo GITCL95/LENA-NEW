@@ -1,127 +1,142 @@
-import { CLIENT, SITE_URL } from './client';
-import { HOME_FAQ } from './faq';
+import { ABOUT_PATH, CLIENT, CONTACT_PATH, SERVICE_AREA, SITE_URL } from './client';
 
-export function buildWebSiteSchema() {
+const homeUrl = `${SITE_URL}/`;
+const websiteId = `${homeUrl}#website`;
+const businessId = `${homeUrl}#business`;
+const businessRef = { '@id': businessId };
+
+type Entity = { '@id': string; '@type': string } & Record<string, unknown>;
+type Breadcrumb = { label: string; parent?: { label: string; href: string } };
+type PageType = 'WebPage' | 'AboutPage' | 'ContactPage' | 'CollectionPage';
+
+export type PageSchemaOptions = {
+  breadcrumb?: Breadcrumb;
+  pageType?: PageType;
+  mainEntity?: Entity;
+};
+
+export function buildPageGraph({
+  url, title, description, primaryImage, breadcrumb, pageType = 'WebPage', mainEntity,
+}: PageSchemaOptions & { url: string; title: string; description: string; primaryImage?: string }) {
+  const breadcrumbId = `${url}#breadcrumb`;
+  const trail = breadcrumb && [
+    { label: 'Accueil', url: homeUrl },
+    ...(breadcrumb.parent ? [{ label: breadcrumb.parent.label, url: `${SITE_URL}${breadcrumb.parent.href}` }] : []),
+    { label: breadcrumb.label, url },
+  ];
+
   return {
     '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    '@id': `${SITE_URL}/#website`,
-    url: `${SITE_URL}/`,
-    name: CLIENT.brand,
-    description: 'Artisan peintre en bâtiment à Vétheuil, Val-d\'Oise',
-    inLanguage: 'fr-FR',
+    '@graph': [
+      {
+        '@type': pageType,
+        '@id': `${url}#webpage`,
+        url,
+        name: title,
+        description,
+        inLanguage: 'fr-FR',
+        isPartOf: { '@id': websiteId },
+        publisher: businessRef,
+        ...(mainEntity && { mainEntity: { '@id': mainEntity['@id'] } }),
+        ...(primaryImage && { primaryImageOfPage: { '@type': 'ImageObject', contentUrl: primaryImage } }),
+        ...(trail && { breadcrumb: { '@id': breadcrumbId } }),
+      },
+      ...(url === homeUrl ? [{
+        '@type': 'WebSite',
+        '@id': websiteId,
+        url: homeUrl,
+        name: CLIENT.brand,
+        inLanguage: 'fr-FR',
+        publisher: businessRef,
+      }] : []),
+      ...(trail ? [{
+        '@type': 'BreadcrumbList',
+        '@id': breadcrumbId,
+        itemListElement: trail.map(({ label, url: item }, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: label,
+          item,
+        })),
+      }] : []),
+      ...(mainEntity ? [mainEntity] : []),
+    ],
   };
 }
 
-export function buildLocalBusinessSchema() {
+export function buildOrganization(): Entity {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    '@id': `${SITE_URL}/#business`,
+    '@type': 'Organization',
+    '@id': businessId,
     name: CLIENT.brand,
-    description: 'Artisan peintre en bâtiment — peinture intérieure, enduits, papier peint, vinyle adhésif',
-    url: `${SITE_URL}/`,
+    url: homeUrl,
     logo: `${SITE_URL}/assets/img/logo-lt.png`,
-    image: `${SITE_URL}/assets/img/hero_bg.jpg`,
     email: CLIENT.email,
-    priceRange: '€€',
+    sameAs: [CLIENT.instagram],
+  };
+}
+
+export function buildHousePainter(): Entity {
+  const { street, locality, postalCode, region, country } = CLIENT.address;
+  return {
+    ...buildOrganization(),
+    '@type': 'HousePainter',
+    areaServed: SERVICE_AREA,
     address: {
       '@type': 'PostalAddress',
-      streetAddress: CLIENT.address.street,
-      addressLocality: CLIENT.address.locality,
-      postalCode: CLIENT.address.postalCode,
-      addressRegion: CLIENT.address.region,
-      addressCountry: CLIENT.address.country,
+      streetAddress: street,
+      addressLocality: locality,
+      postalCode,
+      addressRegion: region,
+      addressCountry: country,
     },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: CLIENT.address.lat,
-      longitude: CLIENT.address.lng,
-    },
-    openingHoursSpecification: [
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-        opens: '08:00',
-        closes: '18:00',
-      },
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: 'Saturday',
-        opens: '09:00',
-        closes: '12:00',
-      },
-    ],
-    founder: { '@type': 'Person', name: CLIENT.owner },
-    sameAs: [CLIENT.instagram],
-    hasCredential: CLIENT.credentials.diploma,
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: CLIENT.stats.rating,
-      reviewCount: CLIENT.stats.reviews,
-      bestRating: '5',
-    },
-    areaServed: [
-      'Vétheuil', 'Magny-en-Vexin', 'Pontoise', 'Cergy', 'Gisors',
-      'Marines', 'Chars', 'Chaumont-en-Vexin',
-    ],
-    hasOfferCatalog: {
-      '@type': 'OfferCatalog',
-      name: 'Services de peinture',
-      itemListElement: [
-        { '@type': 'Offer', name: 'Peinture intérieure' },
-        { '@type': 'Offer', name: 'Enduits de ratissage' },
-        { '@type': 'Offer', name: 'Pose de papier peint' },
-        { '@type': 'Offer', name: 'Vinyle adhésif décoratif' },
-      ],
-    },
+    openingHoursSpecification: [{
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: CLIENT.hours.opens,
+      closes: CLIENT.hours.closes,
+    }],
+    mainEntityOfPage: { '@id': `${SITE_URL}${CONTACT_PATH}#webpage` },
   };
 }
 
-export function buildFAQSchema(faq = HOME_FAQ) {
+export function buildOwner(): Entity {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faq.map((item) => ({
-      '@type': 'Question',
-      name: item.q,
-      acceptedAnswer: { '@type': 'Answer', text: item.a },
-    })),
+    '@type': 'Person',
+    '@id': `${SITE_URL}${ABOUT_PATH}#person`,
+    name: CLIENT.owner,
+    jobTitle: 'Artisane peintre en bâtiment',
+    worksFor: businessRef,
   };
 }
 
-export function buildBreadcrumbSchema(items: { name: string; url: string }[]) {
+export function buildService({
+  path, name, serviceType = name, description, city,
+}: { path: string; name: string; serviceType?: string; description: string; city?: string }): Entity {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: item.name,
-      item: item.url,
-    })),
-  };
-}
-
-export function buildWebPageSchema({
-  path,
-  title,
-  description,
-}: {
-  path: string;
-  title: string;
-  description: string;
-}) {
-  const url = `${SITE_URL}${path}`;
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    '@id': `${url}#webpage`,
-    url,
-    name: title,
+    '@type': 'Service',
+    '@id': `${SITE_URL}${path}#service`,
+    url: `${SITE_URL}${path}`,
+    name,
+    serviceType,
     description,
-    isPartOf: { '@id': `${SITE_URL}/#website` },
-    about: { '@id': `${SITE_URL}/#business` },
-    inLanguage: 'fr-FR',
+    provider: businessRef,
+    areaServed: city
+      ? { '@type': 'City', name: city }
+      : SERVICE_AREA,
+  };
+}
+
+export function buildItemList(path: string, name: string, items: { name: string; href: string }[]): Entity {
+  return {
+    '@type': 'ItemList',
+    '@id': `${SITE_URL}${path}#liste`,
+    name,
+    itemListElement: items.map(({ name, href }, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name,
+      url: `${SITE_URL}${href}`,
+    })),
   };
 }

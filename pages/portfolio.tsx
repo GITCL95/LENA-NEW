@@ -4,8 +4,8 @@ import SEO from '@components/layout/SEO';
 import SiteLayout, { Arrow } from '@components/layout/SiteLayout';
 import PageHero from '@components/sections/PageHero';
 import ServiceLink from '@components/sections/ServiceLink';
-import { CLIENT, PORTFOLIO_PATH, SITE_URL } from '@data/client';
-import { buildBreadcrumbSchema, buildWebPageSchema } from '@data/schemas';
+import { CLIENT, PORTFOLIO_PATH } from '@data/client';
+import { panoramicWallpaper } from '@data/images';
 import styles from '@/styles/Portfolio.module.css';
 import siteStyles from '@/styles/Site.module.css';
 
@@ -49,7 +49,7 @@ const PROJECTS: readonly Project[] = [
     anchor: 'papier-peint-panoramique',
     title: 'Papier peint panoramique',
     category: 'chambre',
-    photos: [photo('papier-peint-panoramique-lit', 1, 'Chambre avec un papier peint panoramique derrière le lit')],
+    photos: [panoramicWallpaper],
     coverPosition: 'center 57%',
     relatedService: <>Découvrez comment se déroule la <ServiceLink service="papier-peint">pose d’un papier peint panoramique</ServiceLink>.</>,
   },
@@ -58,9 +58,9 @@ const PROJECTS: readonly Project[] = [
     category: 'escalier',
     photos: [
       photo('renovation-escalier-magistral', 3, 'Escalier en bois, soubassement gris et rampe en fer forgé'),
-      photo('renovation-escalier-magistral', 2, 'Palier et boiseries de la cage d’escalier'),
-      photo('renovation-escalier-magistral', 1, 'Vue plongeante de l’escalier et de sa rampe'),
-      photo('renovation-escalier-magistral', 4, 'Autre vue de la cage d’escalier'),
+      photo('renovation-escalier-magistral', 2, 'Palier en bois bordé d’une balustrade en fer forgé'),
+      photo('renovation-escalier-magistral', 1, 'Vue plongeante de l’escalier tournant et de sa rampe en fer forgé'),
+      photo('renovation-escalier-magistral', 4, 'Escalier tournant vu depuis le bas, avec une fenêtre au fond'),
     ],
     coverPosition: 'center 58%',
   },
@@ -69,9 +69,9 @@ const PROJECTS: readonly Project[] = [
     category: 'cuisine-bain',
     photos: [
       photo('beton-cire-cuisine', 2, 'Cuisine rénovée avec des meubles bleus et un îlot en bois'),
-      photo('beton-cire-cuisine', 1, 'Autre vue des meubles bleus et de la crédence'),
-      photo('beton-cire-cuisine', 3, 'Vue de l’îlot et du plan de travail'),
-      photo('beton-cire-cuisine', 4, 'Détail des meubles et du plan de travail'),
+      photo('beton-cire-cuisine', 1, 'Placards bleus et crédence beige sous les poutres apparentes'),
+      photo('beton-cire-cuisine', 3, 'Vue de dessus du plan de travail et de ses raccords avec l’îlot'),
+      photo('beton-cire-cuisine', 4, 'Plan de travail clair avec évier et placards bleu foncé'),
     ],
     coverPosition: '51% center',
     relatedService: <>Pour rénover des façades de cuisine, vous pouvez aussi choisir un <ServiceLink service="vinyle">film adhésif décoratif</ServiceLink>.</>,
@@ -80,10 +80,10 @@ const PROJECTS: readonly Project[] = [
     title: 'Rénovation d’une salle de bain',
     category: 'cuisine-bain',
     photos: [
-      photo('modification-chambre-sdb', 2, 'Salle de bain rénovée avec un meuble vasque et une paroi de douche'),
-      photo('modification-chambre-sdb', 1, 'Vue de la pièce en cours de transformation'),
-      photo('modification-chambre-sdb', 3, 'Autre vue de la pièce en travaux'),
-      photo('modification-chambre-sdb', 4, 'Détail de la douche'),
+      photo('modification-chambre-sdb', 2, 'Salle de bain avec meuble double vasque, mur noir veiné et paroi de douche'),
+      photo('modification-chambre-sdb', 1, 'Ancienne pièce en travaux, avec parquet et fenêtre'),
+      photo('modification-chambre-sdb', 3, 'Cloisons montées autour de la fenêtre et du parquet existant'),
+      photo('modification-chambre-sdb', 4, 'Douche vitrée avec receveur foncé et carrelage mural clair'),
     ],
     coverPosition: 'center 54%',
   },
@@ -120,15 +120,8 @@ const FILTERS = [
   ...(Object.keys(CATEGORIES) as Category[]).map((id) => ({ id, label: CATEGORIES[id] })),
 ] as const;
 
-const title = 'Réalisations · Les chantiers en images · Léna Rénove';
-const description = 'Avant/après et détails de finition des chantiers de Léna Rénove dans le Val-d’Oise et les Yvelines.';
-const jsonLd = [
-  buildWebPageSchema({ path: PORTFOLIO_PATH, title, description }),
-  buildBreadcrumbSchema([
-    { name: 'Accueil', url: `${SITE_URL}/` },
-    { name: 'Réalisations', url: `${SITE_URL}${PORTFOLIO_PATH}` },
-  ]),
-];
+const title = 'Réalisations de peinture et de décoration · Léna Rénove';
+const description = 'Explorez les chantiers de Léna Rénove en photos. Peinture d’une chambre, papier peint panoramique, rénovation d’un escalier et avant-après d’une fresque.';
 
 export default function Portfolio() {
   const [filter, setFilter] = useState<Category | 'all'>('all');
@@ -152,7 +145,8 @@ export default function Portfolio() {
 
   return (
     <>
-      <SEO title={title} description={description} path={PORTFOLIO_PATH} jsonLd={jsonLd} />
+      <SEO title={title} description={description} path={PORTFOLIO_PATH} image={PROJECTS[0].photos[0]}
+        breadcrumb={{ label: 'Réalisations' }} pageType="CollectionPage" />
       <SiteLayout
         page="portfolio"
         contactIntro={<>Vous avez repéré une finition qui vous plaît&nbsp;? Si vos murs sont irréguliers, Léna peut prévoir un <ServiceLink service="enduits">ratissage</ServiceLink> dans le devis.</>}
@@ -161,12 +155,13 @@ export default function Portfolio() {
           id="portfolio-title"
           breadcrumb="Réalisations"
           eyebrow="Réalisations"
-          title={<>Les chantiers <em>en images.</em></>}
+          title={<>Réalisations <em>en images.</em></>}
           description={<>Avant-après et détails de finition des chantiers de Léna Rénove, de la <ServiceLink service="peinture">peinture intérieure</ServiceLink> à la décoration des murs.</>}
         />
 
-        <section className={styles.gallery} aria-label="Projets réalisés">
+        <section className={styles.gallery} aria-labelledby="gallery-title">
           <div className={siteStyles.container}>
+            <h2 id="gallery-title" className="sr-only">Projets réalisés</h2>
             <div className={styles.filters} role="group" aria-label="Filtrer les projets">
               {FILTERS.map(({ id, label }) => (
                 <button
@@ -204,7 +199,7 @@ export default function Portfolio() {
         <dialog
           ref={dialog}
           className={styles.lightbox}
-          aria-labelledby="project-title"
+          aria-labelledby={selected ? 'project-title' : undefined}
           data-lenis-prevent
           onClose={() => setSelected(null)}
           onClick={(event) => {
@@ -219,7 +214,7 @@ export default function Portfolio() {
         >
           <div className={styles.lightboxContent}>
             <div className={styles.lightboxHeader}>
-              <h2 id="project-title">{selected?.title}</h2>
+              {selected && <h2 id="project-title">{selected.title}</h2>}
               <button type="button" className={styles.close} aria-label="Fermer" onClick={() => dialog.current?.close()}>×</button>
             </div>
             {currentPhoto && (

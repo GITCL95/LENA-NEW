@@ -24,21 +24,12 @@ export const HOME_FAQ: FAQItem[] = [
   },
 ];
 
-export function getCityQuestions({ name, neighbourhoods }: CityPageContent): FAQItem[] {
-  const areas = new Intl.ListFormat('fr').format(neighbourhoods.map((area) => area.name));
-
+export function getCityQuestions({ planningQuestion }: CityPageContent): FAQItem[] {
   return [
-    {
-      q: 'Quelles informations donner pour demander un devis ?',
-      a: 'Indiquez votre quartier, les travaux souhaités, la surface approximative et l’état des supports. Précisez votre délai si vous en avez un.',
-    },
+    planningQuestion,
     {
       q: 'Qu’est-ce qui fait varier le prix des travaux ?',
       a: 'Le prix dépend de la surface, de l’état des supports et de la finition choisie. En peinture, le nombre de couches compte aussi.',
-    },
-    {
-      q: `Dans quels quartiers intervenez-vous à ${name} ?`,
-      a: `Parmi les secteurs desservis figurent ${areas}.`,
     },
     {
       q: 'Le devis est-il gratuit ?',

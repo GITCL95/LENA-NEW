@@ -7,6 +7,7 @@ export const PORTFOLIO_PATH = "/portfolio";
 export const SERVICES_PATH = "/peinture-interieure-renovation-magny-en-vexin";
 export const ZONES_PATH = "/peintre-renovation-val-d-oise-yvelines";
 export const PONTOISE_PATH = "/peintre-pontoise";
+export const SERVICE_AREA = "Dans un rayon de 40 km autour de Vétheuil, notamment dans le Val-d’Oise et les Yvelines";
 
 export const CLIENT = {
   brand: "Léna Rénove",
@@ -30,6 +31,8 @@ export const CLIENT = {
   instagram: "https://www.instagram.com/lena.renove/",
   instagramHandle: "@lena.renove",
   hours: {
+    opens: "08:00",
+    closes: "18:00",
     weekdays: "Lundi au Vendredi · 8h00 – 18h00",
     saturday: "Samedi · Fermé",
     sunday: "Dimanche · Fermé",

@@ -3,12 +3,11 @@ import SEO from '@components/layout/SEO';
 import SiteLayout, { QuoteButton } from '@components/layout/SiteLayout';
 import { Breadcrumb } from '@components/sections/PageHero';
 import ServiceLink from '@components/sections/ServiceLink';
-import { ABOUT_PATH, CLIENT, SITE_URL } from '@data/client';
-import { buildBreadcrumbSchema, buildWebPageSchema } from '@data/schemas';
+import { ABOUT_PATH, CLIENT } from '@data/client';
+import { workPortrait } from '@data/images';
+import { buildOwner } from '@data/schemas';
 import styles from '@/styles/About.module.css';
 import siteStyles from '@/styles/Site.module.css';
-
-const portrait = '/assets/img/about_heading_bg.webp';
 
 const commitments = [
   {
@@ -55,26 +54,10 @@ const steps = [
 export default function About() {
   const title = 'Léna Renaud · Artisane peintre à Vétheuil · Léna Rénove';
   const description = 'Découvrez le parcours de Léna Renaud, artisane peintre à Vétheuil, sa méthode de travail et ses engagements pour vos travaux de peinture et de décoration intérieure.';
-  const jsonLd = [
-    buildWebPageSchema({ path: ABOUT_PATH, title, description }),
-    buildBreadcrumbSchema([
-      { name: 'Accueil', url: `${SITE_URL}/` },
-      { name: 'À propos', url: `${SITE_URL}${ABOUT_PATH}` },
-    ]),
-    {
-      '@context': 'https://schema.org',
-      '@type': 'Person',
-      name: CLIENT.owner,
-      jobTitle: 'Artisane peintre en bâtiment',
-      worksFor: { '@type': 'LocalBusiness', '@id': `${SITE_URL}/#business` },
-      hasCredential: CLIENT.credentials.diploma,
-      url: `${SITE_URL}${ABOUT_PATH}`,
-    },
-  ];
-
   return (
     <>
-      <SEO title={title} description={description} path={ABOUT_PATH} ogImage={portrait} jsonLd={jsonLd} />
+      <SEO title={title} description={description} path={ABOUT_PATH} image={workPortrait}
+        breadcrumb={{ label: 'À propos' }} pageType="AboutPage" mainEntity={buildOwner()} />
       <SiteLayout page="about">
         <section className={`${siteStyles.container} ${siteStyles.pageIntroSpacing}`} aria-labelledby="about-title">
           <Breadcrumb current="À propos" />
@@ -92,8 +75,7 @@ export default function About() {
             </div>
             <figure className={styles.portrait}>
               <Image
-                src={portrait}
-                alt="Léna Renaud découpe un lé de papier peint sur sa table de travail"
+                {...workPortrait}
                 fill
                 priority
               />

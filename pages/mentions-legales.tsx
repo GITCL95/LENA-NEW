@@ -1,8 +1,8 @@
-import Head from 'next/head';
+import SEO from '@components/layout/SEO';
 import SiteLayout from '@components/layout/SiteLayout';
 import PageHero from '@components/sections/PageHero';
 import ServiceLink from '@components/sections/ServiceLink';
-import { CLIENT, LEGAL_PATH, SITE_URL } from '@data/client';
+import { CLIENT, LEGAL_PATH } from '@data/client';
 import styles from '@/styles/Legal.module.css';
 import siteStyles from '@/styles/Site.module.css';
 
@@ -12,12 +12,7 @@ export default function MentionsLegales() {
 
   return (
     <>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <meta name="robots" content="noindex, follow" />
-        <link rel="canonical" href={`${SITE_URL}${LEGAL_PATH}`} />
-      </Head>
+      <SEO title={title} description={description} path={LEGAL_PATH} noIndex />
       <SiteLayout
         page="legal"
         contactIntro={<>Si vous prévoyez de <ServiceLink service="papier-peint">faire poser du papier peint</ServiceLink>, indiquez les dimensions du mur dans votre demande.</>}
@@ -70,7 +65,7 @@ export default function MentionsLegales() {
                 <p>Cette protection s’applique notamment aux photos de chantiers de <ServiceLink service="peinture">peinture intérieure</ServiceLink> publiées sur le site.</p>
               </article>
 
-              <article>
+              <article id="donnees-personnelles">
                 <h2>Données personnelles</h2>
                 <p>
                   Léna Rénove traite les informations du formulaire de contact (prénom, nom, adresse e-mail,
@@ -79,10 +74,12 @@ export default function MentionsLegales() {
                   précontractuelles prises à votre demande. Léna Rénove conserve les demandes au maximum trois ans.
                 </p>
                 <p>
-                  Le formulaire transmet ces informations à Formspree, notre prestataire de traitement des
-                  demandes. Formspree héberge ses services aux États-Unis et indique utiliser des clauses
-                  contractuelles types pour les transferts de données.{' '}
-                  <a href="https://formspree.io/legal/privacy-policy/">Politique de confidentialité de Formspree</a>.
+                  <strong>Prestataire du formulaire de contact.</strong> Formspree, Inc. reçoit les données saisies
+                  dans le formulaire et transmet votre demande par e-mail à Léna Rénove. Selon sa politique
+                  de confidentialité, Formspree peut traiter ces données aux États-Unis et dans les autres pays où
+                  l’entreprise exerce ses activités. Consultez la{' '}
+                  <a href="https://formspree.io/legal/privacy-policy/">politique de confidentialité de Formspree</a>{' '}
+                  pour en savoir plus sur le traitement et les transferts de données.
                 </p>
                 <p>
                   Conformément au RGPD et à la loi « Informatique et libertés », vous disposez d&apos;un

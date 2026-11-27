@@ -1,58 +1,46 @@
 import Image from 'next/image';
 import SEO from '@components/layout/SEO';
 import SiteLayout, { ArrowLink, QuoteButton } from '@components/layout/SiteLayout';
-import { CLIENT, PONTOISE_PATH, PORTFOLIO_PATH, SITE_URL } from '@data/client';
+import { CLIENT, PONTOISE_PATH, PORTFOLIO_PATH } from '@data/client';
+import { PONTOISE } from '@data/cities';
+import { interiorIllustration, panoramicWallpaper, workPortrait } from '@data/images';
 import Qualifications from '@components/sections/Qualifications';
 import ServiceLink from '@components/sections/ServiceLink';
 import { INTERIOR_SERVICES, serviceHref } from '@data/services';
-import {
-  buildBreadcrumbSchema,
-  buildLocalBusinessSchema,
-  buildWebPageSchema,
-  buildWebSiteSchema,
-} from '@data/schemas';
+import { buildOrganization } from '@data/schemas';
 import styles from '@/styles/Home.module.css';
 import siteStyles from '@/styles/Site.module.css';
 
 const images = '/assets/img';
 
-const projects = [
+const projects: { title: string; location?: string; href: string; src: string; alt: string }[] = [
   {
     title: 'Peinture d’un salon',
     location: 'Pontoise',
     href: `${PONTOISE_PATH}#realisation`,
-    image: 'projet-renov-3.jpg',
-    alt: 'Salon aux murs bleu-gris, soubassements blancs et parquet clair',
+    ...PONTOISE.project.photo,
   },
   {
     title: 'Papier peint panoramique',
     href: `${PORTFOLIO_PATH}#papier-peint-panoramique`,
-    image: 'realisations/papier-peint-panoramique-lit/papier-peint-panoramique-lit-1.webp',
-    alt: 'Chambre mansardée avec un papier peint panoramique à motif de palmiers',
+    ...panoramicWallpaper,
   },
   {
     title: 'Peinture d’une chambre',
     href: `${PORTFOLIO_PATH}#chambre-terracotta`,
-    image: 'realisations/renovation-master-bedroom/renovation-master-bedroom-6.webp',
+    src: `${images}/realisations/renovation-master-bedroom/renovation-master-bedroom-6.webp`,
     alt: 'Deux portes sombres dans une chambre aux murs terracotta',
   },
 ];
 
 export default function Home() {
-  const title = 'Peintre Vétheuil (95) · Devis Gratuit · Léna Rénove';
+  const title = 'Peintre en bâtiment à Vétheuil (95) · Léna Rénove';
   const description =
-    'Artisane peintre à Vétheuil (95) depuis 10 ans. Peinture intérieure, enduits de ratissage, papier peint et vinyle adhésif. Devis gratuit sous 24 h après visite.';
-
-  const jsonLd = [
-    buildWebSiteSchema(),
-    buildWebPageSchema({ path: '/', title, description }),
-    buildLocalBusinessSchema(),
-    buildBreadcrumbSchema([{ name: 'Accueil', url: `${SITE_URL}/` }]),
-  ];
+    'Léna Renaud, artisane peintre à Vétheuil, réalise vos travaux de peinture intérieure, d’enduits et de revêtements décoratifs. Demandez un devis gratuit.';
 
   return (
     <>
-      <SEO title={title} description={description} path="/" jsonLd={jsonLd} />
+      <SEO title={title} description={description} path="/" image={PONTOISE.project.photo} mainEntity={buildOrganization()} />
       <SiteLayout>
         <section className={`${siteStyles.container} ${styles.hero}`} aria-labelledby="home-title">
           <div className={styles.heroCopy}>
@@ -67,7 +55,7 @@ export default function Home() {
             <p className={siteStyles.heroNote}>Devis gratuit sous 24&nbsp;h après visite.</p>
           </div>
           <figure className={styles.heroPhoto}>
-            <Image src={`${images}/hero_bg.jpg`} alt="Salon aux murs ocre et terracotta" fill priority />
+            <Image {...interiorIllustration} fill priority />
             <figcaption>Photo d’illustration</figcaption>
           </figure>
         </section>
@@ -110,10 +98,10 @@ export default function Home() {
               <p className="mt-3">Un <ServiceLink service="papier-peint">papier peint panoramique</ServiceLink> suffit à changer l’ambiance d’une chambre.</p>
             </div>
             <div className={styles.projectGrid}>
-              {projects.map(({ title: project, location, image, alt, href }) => (
+              {projects.map(({ title: project, location, src, alt, href }) => (
                 <figure className={styles.projectCard} key={project}>
                   <div className={styles.projectPhoto}>
-                    <Image src={`${images}/${image}`} alt={alt} fill />
+                    <Image src={src} alt={alt} fill />
                   </div>
                   <figcaption>
                     <a href={href} className={styles.cardLink}>{project}</a>
@@ -135,7 +123,7 @@ export default function Home() {
             <p>Basée à Vétheuil, Léna Renaud réalise elle-même chaque chantier, de la préparation des supports aux finitions.</p>
           </div>
           <div className={styles.aboutPhoto}>
-            <Image src={`${images}/about_heading_bg.webp`} alt="Léna Renaud découpe un lé de papier peint sur sa table de travail" fill />
+            <Image {...workPortrait} fill />
           </div>
           <figure className={styles.testimonial}>
             <div className={siteStyles.stars} role="img" aria-label="5 étoiles sur 5">★★★★★</div>

@@ -1,7 +1,7 @@
 import { useRef, useState, type ReactNode } from 'react';
 import Image from 'next/image';
 import SiteNavigation, { type SitePage } from '@components/layout/SiteNavigation';
-import { CLIENT, LEGAL_PATH, QUOTE_PATH, ZONES_PATH } from '@data/client';
+import { CLIENT, LEGAL_PATH, QUOTE_PATH, SERVICE_AREA, ZONES_PATH } from '@data/client';
 import styles from '@/styles/Site.module.css';
 
 type HeaderLogo = { src: string; width: number; height: number };
@@ -135,7 +135,7 @@ function SiteContact({ page, quoteHref, intro }: { page: SitePage; quoteHref: st
               ) : (
                 <>
                   <h3><a href={ZONES_PATH} className={styles.contactAreaLink}>Zone d’intervention</a></h3>
-                  <p>Dans un rayon de 40 km autour de Vétheuil, notamment dans le Val-d’Oise et les Yvelines.</p>
+                  <p>{SERVICE_AREA}.</p>
                 </>
               )}
             </div>

@@ -5,8 +5,8 @@ import SiteLayout from '@components/layout/SiteLayout';
 import { DetailHero, OnPageNavigation } from '@components/sections/DetailPage';
 import Questions from '@components/sections/Questions';
 import ServiceLink from '@components/sections/ServiceLink';
-import { PORTFOLIO_PATH, SERVICES_PATH, SITE_URL } from '@data/client';
-import { buildBreadcrumbSchema, buildFAQSchema, buildWebPageSchema } from '@data/schemas';
+import { PORTFOLIO_PATH, SERVICES_PATH } from '@data/client';
+import { buildService } from '@data/schemas';
 import type { ServiceContent } from '@data/service-details';
 import { INTERIOR_SERVICES, serviceHref, serviceQuoteHref, type InteriorService } from '@data/services';
 import styles from '@/styles/Service.module.css';
@@ -57,34 +57,18 @@ const relatedServices: Record<InteriorService['slug'], { intro: ReactNode; scope
 };
 
 export default function ServicePage({ service, content }: ServicePageProps) {
-  const { description, heading, photo, scopeIntro, scope, finishes, price, priceFactors, workStep, projects, faq } = content;
+  const { description, metaDescription, heading, photo, scopeIntro, scope, finishes, price, priceFactors, workStep, projects, faq } = content;
   const related = relatedServices[service];
   const label = serviceTitles[service];
   const path = serviceHref(service);
   const quoteHref = serviceQuoteHref(service);
   const title = `${label} à Vétheuil · Léna Rénove`;
   const steps = [visit, estimate, preparation, workStep, check];
-  const jsonLd = [
-    buildWebPageSchema({ path, title, description }),
-    buildBreadcrumbSchema([
-      { name: 'Accueil', url: `${SITE_URL}/` },
-      { name: hub.label, url: `${SITE_URL}${hub.href}` },
-      { name: label, url: `${SITE_URL}${path}` },
-    ]),
-    buildFAQSchema(faq),
-    {
-      '@context': 'https://schema.org',
-      '@type': 'Service',
-      serviceType: label,
-      url: `${SITE_URL}${path}`,
-      provider: { '@id': `${SITE_URL}/#business` },
-      areaServed: ['Val-d’Oise', 'Yvelines'],
-    },
-  ];
 
   return (
     <>
-      <SEO title={title} description={description} path={path} ogImage={photo.src} jsonLd={jsonLd} />
+      <SEO title={title} description={metaDescription} path={path} image={projects[0] ?? photo}
+        breadcrumb={{ label, parent: hub }} mainEntity={buildService({ path, name: label, description })} />
       <SiteLayout
         page="service"
         activePath={path}

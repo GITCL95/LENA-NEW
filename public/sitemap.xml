@@ -1,83 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://lena-renove.com</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <loc>https://lena-renove.com/</loc>
   </url>
   <url>
     <loc>https://lena-renove.com/lena-renaud-peintre-magny-en-vexin</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lena-renove.com/peinture-interieure-renovation-magny-en-vexin</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lena-renove.com/peinture-interieure</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://lena-renove.com/enduits-ratissage</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://lena-renove.com/pose-papier-peint</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://lena-renove.com/vinyle-adhesif-decoratif</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://lena-renove.com/peintre-renovation-val-d-oise-yvelines</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lena-renove.com/portfolio</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://lena-renove.com/assets/img/realisations/cabinet-medical-fresque/cabinet-medical-fresque-1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://lena-renove.com/assets/img/realisations/cabinet-medical-fresque/cabinet-medical-fresque-2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://lena-renove.com/assets/img/realisations/inauguration-cabinet-medical/inauguration-cabinet-medical-1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://lena-renove.com/assets/img/realisations/papier-peint-panoramique-lit/papier-peint-panoramique-lit-1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://lena-renove.com/assets/img/realisations/renovation-escalier-magistral/renovation-escalier-magistral-3.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://lena-renove.com/assets/img/realisations/renovation-escalier-magistral/renovation-escalier-magistral-2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://lena-renove.com/assets/img/realisations/renovation-escalier-magistral/renovation-escalier-magistral-1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://lena-renove.com/assets/img/realisations/renovation-escalier-magistral/renovation-escalier-magistral-4.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://lena-renove.com/assets/img/realisations/beton-cire-cuisine/beton-cire-cuisine-2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://lena-renove.com/assets/img/realisations/beton-cire-cuisine/beton-cire-cuisine-1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://lena-renove.com/assets/img/realisations/beton-cire-cuisine/beton-cire-cuisine-3.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://lena-renove.com/assets/img/realisations/beton-cire-cuisine/beton-cire-cuisine-4.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://lena-renove.com/assets/img/realisations/modification-chambre-sdb/modification-chambre-sdb-2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://lena-renove.com/assets/img/realisations/modification-chambre-sdb/modification-chambre-sdb-1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://lena-renove.com/assets/img/realisations/modification-chambre-sdb/modification-chambre-sdb-3.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://lena-renove.com/assets/img/realisations/modification-chambre-sdb/modification-chambre-sdb-4.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://lena-renove.com/assets/img/realisations/decoration-wc/decoration-wc-2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://lena-renove.com/assets/img/realisations/decoration-wc/decoration-wc-1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://lena-renove.com/assets/img/realisations/renovation-master-bedroom/renovation-master-bedroom-5.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://lena-renove.com/assets/img/realisations/renovation-master-bedroom/renovation-master-bedroom-6.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://lena-renove.com/assets/img/realisations/renovation-chambre-chapelle/renovation-chambre-chapelle-1.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://lena-renove.com/contact-peintre-magny-en-vexin</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lena-renove.com/peintre-pontoise</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://lena-renove.com/peintre-cergy</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://lena-renove.com/peintre-gisors</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://lena-renove.com/peintre-marines-95</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://lena-renove.com/chars-95</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://lena-renove.com/peintre-chaumont-en-vexin</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
 </urlset>

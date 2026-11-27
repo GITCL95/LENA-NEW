@@ -7,8 +7,9 @@ import Qualifications from '@components/sections/Qualifications';
 import Questions from '@components/sections/Questions';
 import ServiceLink from '@components/sections/ServiceLink';
 import { CITIES, PONTOISE } from '@data/cities';
-import { CLIENT, PORTFOLIO_PATH, SITE_URL, ZONES_PATH } from '@data/client';
-import { buildBreadcrumbSchema, buildFAQSchema, buildWebPageSchema } from '@data/schemas';
+import { CLIENT, PORTFOLIO_PATH, ZONES_PATH } from '@data/client';
+import { panoramicWallpaper } from '@data/images';
+import { buildItemList } from '@data/schemas';
 import styles from '@/styles/Zones.module.css';
 import siteStyles from '@/styles/Site.module.css';
 
@@ -27,8 +28,7 @@ const cities = departments.flatMap(({ code, name: department }) =>
 const projects = [
   {
     title: 'Papier peint panoramique',
-    src: '/assets/img/realisations/papier-peint-panoramique-lit/papier-peint-panoramique-lit-1.webp',
-    alt: 'Chambre mansardée avec un papier peint panoramique à motif de palmiers',
+    ...panoramicWallpaper,
     href: `${PORTFOLIO_PATH}#papier-peint-panoramique`,
     sizes: '(max-width: 920px) 89vw, (max-width: 1440px) 56vw, 804px',
   },
@@ -56,27 +56,9 @@ const questions = [
   },
 ];
 
-const title = 'Peintre Val-d’Oise (95) et Yvelines (78) · Léna Rénove';
-const description = 'Artisane peintre basée à Vétheuil. Peinture intérieure, enduits, papier peint et vinyle adhésif dans un rayon de 40 km. Devis gratuit sous 24 h après visite.';
-const jsonLd = [
-  buildWebPageSchema({ path: ZONES_PATH, title, description }),
-  buildBreadcrumbSchema([
-    { name: 'Accueil', url: `${SITE_URL}/` },
-    { name: 'Zones d’intervention', url: `${SITE_URL}${ZONES_PATH}` },
-  ]),
-  buildFAQSchema(questions),
-  {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Communes desservies',
-    itemListElement: cities.map(({ name, href }, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name,
-      url: `${SITE_URL}${href}`,
-    })),
-  },
-];
+const title = 'Peintre dans le Val-d’Oise et les Yvelines · Zones d’intervention';
+const description = 'Vérifiez si Léna Rénove intervient dans votre commune pour vos travaux de peinture et de décoration, dans un rayon de 40 km autour de Vétheuil.';
+const serviceAreas = buildItemList(ZONES_PATH, 'Communes desservies', cities);
 
 const salon = PONTOISE.project;
 const heroPhoto = {
@@ -87,7 +69,8 @@ const heroPhoto = {
 export default function Zones() {
   return (
     <>
-      <SEO title={title} description={description} path={ZONES_PATH} ogImage={heroPhoto.src} jsonLd={jsonLd} />
+      <SEO title={title} description={description} path={ZONES_PATH} image={heroPhoto}
+        breadcrumb={{ label: 'Zones d’intervention' }} pageType="CollectionPage" mainEntity={serviceAreas} />
       <SiteLayout
         page="zones"
         contactIntro={<>Indiquez votre commune et les travaux envisagés. Pour un <ServiceLink service="vinyle">habillage de cuisine en vinyle</ServiceLink>, précisez les surfaces à rénover.</>}
