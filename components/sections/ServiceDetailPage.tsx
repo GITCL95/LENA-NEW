@@ -21,7 +21,7 @@ const hub = { label: 'Services', href: SERVICES_PATH };
 const sections = [
   { id: 'surfaces', label: 'Prestation' },
   { id: 'tarif', label: 'Tarifs' },
-  { id: 'etapes', label: 'Étapes du chantier' },
+  { id: 'etapes', label: 'Étapes' },
   { id: 'realisations', label: 'Réalisations' },
   { id: 'faq', label: 'FAQ' },
 ];
@@ -71,34 +71,40 @@ export default function ServicePage({ service, content }: ServicePageProps) {
           photo={photo}
           quoteHref={quoteHref}
         />
-        <OnPageNavigation sections={sections} />
+        <OnPageNavigation sections={sections} className={detailStyles.plainNav} />
 
-        <section id="surfaces" className={`${detailStyles.section} ${detailStyles.light}`} aria-labelledby="surfaces-title">
+        <section id="surfaces" className={detailStyles.section} aria-labelledby="surfaces-title">
           <div className={siteStyles.container}>
-            <p className={siteStyles.eyebrow}>La prestation</p>
-            <h2 id="surfaces-title" className={siteStyles.sectionTitle}>Travaux <em>et finitions.</em></h2>
-            {scopeIntro && <p className={styles.scopeIntro}>{scopeIntro}</p>}
-            <ul className={`${styles.threeColumns} ${styles.surfaceGrid}`} role="list">
-              {scope.map(({ title, detail }) => (
-                <li key={title} className={styles.surface}><h3>{title}</h3><p>{detail}</p></li>
-              ))}
-            </ul>
+            <div className={styles.scopeLayout}>
+              <div>
+                <p className={siteStyles.eyebrow}>La prestation</p>
+                <h2 id="surfaces-title" className={siteStyles.sectionTitle}>Travaux <em>inclus.</em></h2>
+                {scopeIntro && <p className={styles.scopeIntro}>{scopeIntro}</p>}
+              </div>
+              <ul className={styles.surfaces} role="list">
+                {scope.map(({ title, detail }) => (
+                  <li key={title} className={styles.surface}><h3>{title}</h3><p>{detail}</p></li>
+                ))}
+              </ul>
+            </div>
             {finishes && (
               <div id="finitions" className={styles.finishes}>
-                <h3 className={styles.finishesTitle}>Finitions disponibles</h3>
-                <ul className={`${styles.threeColumns} ${styles.finishGrid}`} role="list">
-                  {finishes.options.map(({ id, title, detail }) => (
-                    <li key={id} className={styles.finish}>
-                      <span className={styles.swatch} data-finish={id} aria-hidden="true" />
-                      <div className={styles.finishCopy}><h4>{title}</h4><p>{detail}</p></div>
-                    </li>
-                  ))}
-                </ul>
-                <p className={styles.finishNote}>Aperçus illustratifs des niveaux de brillance.</p>
+                <div>
+                  <h3>Finitions disponibles</h3>
+                  <ul className={styles.finishGrid} role="list">
+                    {finishes.options.map(({ id, title, detail }) => (
+                      <li key={id} className={styles.finish}>
+                        <span className={styles.swatch} data-finish={id} aria-hidden="true" />
+                        <h4>{title}</h4>
+                        <p>{detail}</p>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className={styles.finishNote}>Aperçus illustratifs des niveaux de brillance.</p>
+                </div>
                 <div className={styles.techniques}>
-                  {finishes.techniques.map(({ title, detail }) => (
-                    <div key={title}><h4>{title}</h4><p>{detail}</p></div>
-                  ))}
+                  <h3>Peintures et application</h3>
+                  <p>{finishes.techniques}</p>
                 </div>
               </div>
             )}
@@ -117,9 +123,9 @@ export default function ServicePage({ service, content }: ServicePageProps) {
                 <thead><tr><th scope="col">Prestation</th><th scope="col">Tarif indicatif</th><th scope="col">Unité</th></tr></thead>
                 <tbody>
                   <tr>
-                    <th scope="row">{label}</th>
+                    <th scope="row">{label}{price?.scope && <small className={styles.priceScope}>{price.scope}</small>}</th>
                     <td className={price ? styles.price : styles.pricePending}>{price?.amount ?? 'Tarif à confirmer'}</td>
-                    <td>{price?.unit ?? 'À préciser'}</td>
+                    <td className={styles.priceUnit}>{price?.unit ?? 'À préciser'}</td>
                   </tr>
                 </tbody>
               </table>
@@ -135,7 +141,8 @@ export default function ServicePage({ service, content }: ServicePageProps) {
               {steps.map(({ title, detail }, index) => (
                 <li key={title} className={styles.step}>
                   <span className={styles.stepNumber} aria-hidden="true">{index + 1}</span>
-                  <div><h3>{title}</h3><p>{detail}</p></div>
+                  <h3>{title}</h3>
+                  <p>{detail}</p>
                 </li>
               ))}
             </ol>
@@ -150,7 +157,7 @@ export default function ServicePage({ service, content }: ServicePageProps) {
                 {projects.map(({ src, alt, caption }) => (
                   <figure key={src}>
                     <div className={styles.projectPhoto}>
-                      <Image src={src} alt={alt} fill sizes="(max-width: 920px) 90vw, (max-width: 1440px) 52vw, 760px" />
+                      <Image src={src} alt={alt} fill sizes="(max-width: 920px) 89vw, (max-width: 1440px) 43vw, 736px" />
                     </div>
                     <figcaption>{caption}</figcaption>
                   </figure>
@@ -163,7 +170,7 @@ export default function ServicePage({ service, content }: ServicePageProps) {
           </div>
         </section>
 
-        <Questions id="faq" items={faq} />
+        <Questions id="faq" items={faq} layout="grid" />
       </SiteLayout>
     </>
   );

@@ -12,9 +12,9 @@ export type ServiceContent = {
   scope: Detail[];
   finishes?: {
     options: (Detail & { id: 'matte' | 'satin' | 'gloss' })[];
-    techniques: Detail[];
+    techniques: string;
   };
-  price?: { amount: string; unit: string; note: string };
+  price?: { amount: string; unit: string; note: string; scope?: string };
   priceFactors: string;
   workStep: Detail;
   projects: Photo[];
@@ -46,12 +46,14 @@ export const SERVICE_CONTENT: Record<InteriorService['slug'], ServiceContent> = 
         { id: 'satin', title: 'Satinée', detail: 'Des reflets doux.' },
         { id: 'gloss', title: 'Brillante', detail: 'Des reflets plus marqués.' },
       ],
-      techniques: [
-        { title: 'Peintures utilisées', detail: `Peintures professionnelles ${CLIENT.brands.join(' et ')}, acryliques, glycéro ou naturelles selon le support.` },
-        { title: 'Modes d’application', detail: 'Application manuelle ou au pistolet airless, selon la surface à peindre et l’état du support.' },
-      ],
+      techniques: `Peintures professionnelles ${CLIENT.brands.join(' et ')}, acryliques, glycéro ou naturelles selon le support. Application manuelle ou au pistolet airless, selon la surface à peindre et l’état du support.`,
     },
-    price: { amount: '25 à 45 €', unit: 'm²', note: 'Fourchette indicative, fournitures comprises.' },
+    price: {
+      amount: '25 à 45 €',
+      unit: 'au m²',
+      note: 'Fourchette indicative, fournitures comprises.',
+      scope: 'Murs, plafonds et boiseries',
+    },
     priceFactors: 'Le prix dépend de l’état des supports, du nombre de couches et de la finition choisie.',
     workStep: { title: 'Mise en peinture', detail: 'Léna applique le nombre de couches prévu au devis et la finition choisie.' },
     projects: [

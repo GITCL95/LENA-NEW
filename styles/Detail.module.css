@@ -1,27 +1,50 @@
-.hero {
-  display: grid;
-  grid-template-columns: 48.25% 51.75%;
-  align-items: center;
+.heroSection {
+  padding-block: 1.4375rem 1.75rem;
 }
 
-.hero > div {
-  padding-right: 1.5rem;
+.hero {
+  --accent: var(--peach);
+
+  display: grid;
+  grid-template-areas: 'photo copy';
+  grid-template-columns: minmax(0, 1.13fr) minmax(0, 0.87fr);
+  min-height: 31.25rem;
+  overflow: hidden;
+  border-radius: min(6.6vw, 5.875rem) 0.5625rem 0.5625rem 0.5625rem;
+  background: var(--dark);
+  color: #fff8ef;
+}
+
+.heroCopy {
+  grid-area: copy;
+  align-self: center;
+  padding: 2.75rem clamp(1.5rem, 4vw, 3.625rem);
+}
+
+.hero .heroTitle {
+  margin-block: 0.875rem 1.3125rem;
+  font-size: clamp(3.125rem, 6vw, 5.75rem);
+  letter-spacing: -0.06em;
+  line-height: 0.98;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
 }
 
 .hero .heroDescription {
-  max-width: 24.5rem;
-  line-height: 1.53;
+  max-width: 24rem;
+  margin-bottom: 1.4375rem;
+  color: var(--dark-text);
+  line-height: 1.58;
 }
 
-.hero > div > a {
-  padding-inline: 1.9375rem;
+.hero .heroNote {
+  color: var(--dark-text);
 }
 
 .heroPhoto {
   position: relative;
-  overflow: hidden;
-  aspect-ratio: 950 / 787;
-  border-radius: 0.3125rem min(8.7vw, 7.875rem) 0.3125rem 0.3125rem;
+  grid-area: photo;
+  min-width: 0;
   background: var(--border);
 }
 
@@ -31,11 +54,13 @@
 
 .heroPhoto figcaption {
   position: absolute;
-  right: 0.8125rem;
-  bottom: 0.8125rem;
+  bottom: 1.125rem;
+  left: 1.125rem;
+  max-width: calc(100% - 2.25rem);
   padding: 0.1875rem 0.5625rem;
   border-radius: 0.125rem;
   background: var(--paper);
+  color: var(--ink);
   font-size: 0.75rem;
 }
 
@@ -80,6 +105,15 @@
   color: var(--rust);
 }
 
+.plainNav {
+  border: 0;
+  background: transparent;
+}
+
+.plainNav .pageNavInner {
+  border-block: 1px solid var(--border);
+}
+
 .section {
   padding-block: var(--section-space);
 }
@@ -93,17 +127,24 @@
 }
 
 @media (max-width: 57.5rem) {
-  .hero {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1.375rem;
+  .heroSection {
+    padding-block: 1.0625rem 1.25rem;
   }
 
-  .hero > div {
-    padding-right: 0;
+  .hero {
+    min-height: 0;
+    grid-template-areas: 'copy' 'photo';
+    grid-template-columns: minmax(0, 1fr);
+    border-radius: 0.5625rem;
+  }
+
+  .heroCopy {
+    padding: clamp(1.375rem, 5.2vw, 2.25rem);
   }
 
   .hero .heroTitle {
-    font-size: var(--detail-hero-title-mobile, clamp(2.5rem, 12.82vw, 4.5rem));
+    font-size: clamp(2.5rem, 11.8vw, 4.5rem);
+    text-wrap: wrap;
   }
 
   .hero .heroDescription {
@@ -111,18 +152,14 @@
     margin-bottom: 1.0625rem;
   }
 
-  .hero > div > a {
-    padding-inline: 1.1875rem;
-  }
-
   .heroPhoto {
-    aspect-ratio: 692 / 507;
-    border-top-right-radius: min(18vw, 7.875rem);
+    aspect-ratio: 1.55;
   }
 
   .heroPhoto figcaption {
-    right: 0.5rem;
     bottom: 0.5rem;
+    left: 0.5rem;
+    max-width: calc(100% - 1rem);
     padding-inline: 0.4375rem;
     font-size: 0.6875rem;
   }
@@ -150,6 +187,21 @@
     border-radius: 999px;
     background: var(--paper);
     font-size: 0.8125rem;
+  }
+
+  .plainNav .pageNavInner {
+    padding-block: 0.625rem;
+  }
+
+  .plainNav .pageNavLinks {
+    gap: 0 0.8125rem;
+  }
+
+  .plainNav .pageNavLinks a {
+    min-height: 2rem;
+    padding-inline: 0;
+    border: 0;
+    background: transparent;
   }
 
   .section .inlineTitle em {
