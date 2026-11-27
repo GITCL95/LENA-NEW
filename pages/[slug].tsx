@@ -11,12 +11,11 @@ export const getStaticProps: GetStaticProps<{ city: CityPageContent }> = async (
   const city = typeof params?.slug === 'string' ? getCityBySlug(params.slug) : undefined;
   if (!city) return { notFound: true };
 
-  const { name, slug, href, postalCode, departmentName, title, metaDescription, neighbourhoodIntro, neighbourhoods, paintingRate, project } = city;
+  const { name, slug, href, postalCode, departmentName, title, metaDescription, neighbourhoodIntro, neighbourhoods, project } = city;
   return {
     props: {
       city: {
         name, slug, href, postalCode, departmentName, title, metaDescription, neighbourhoodIntro, neighbourhoods,
-        ...(paintingRate ? { paintingRate } : {}),
         ...(project ? { project } : {}),
       },
     },

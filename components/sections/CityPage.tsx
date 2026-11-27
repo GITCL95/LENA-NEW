@@ -52,7 +52,7 @@ const workSteps = [
 ];
 
 export default function CityPage({ city }: { city: CityPageContent }) {
-  const { name, href, postalCode, title, metaDescription, departmentName, paintingRate, project } = city;
+  const { name, href, postalCode, title, metaDescription, departmentName, project } = city;
   const photo = project?.photo ?? illustration;
   const questions = getCityQuestions(city);
   const sections = project
@@ -128,7 +128,7 @@ export default function CityPage({ city }: { city: CityPageContent }) {
 
         <InteriorServices />
 
-        <CityPrices name={name} paintingRate={paintingRate} />
+        <CityPrices name={name} />
 
         <section id="devis" className={`${styles.section} ${styles.process}`} aria-labelledby="process-title" tabIndex={-1}>
           <div className={siteStyles.container}>
@@ -154,7 +154,7 @@ export default function CityPage({ city }: { city: CityPageContent }) {
   );
 }
 
-function CityPrices({ name, paintingRate }: Pick<CityPageContent, 'name' | 'paintingRate'>) {
+function CityPrices({ name }: { name: string }) {
   return (
     <section id="tarifs" className={`${styles.section} ${styles.prices}`} aria-labelledby="prices-title" tabIndex={-1}>
       <div className={siteStyles.container}>
@@ -171,26 +171,22 @@ function CityPrices({ name, paintingRate }: Pick<CityPageContent, 'name' | 'pain
               </tr>
             </thead>
             <tbody>
-              {INTERIOR_SERVICES.map(({ title, slug, unit }) => {
-                const rate = slug === 'peinture' ? paintingRate : undefined;
-
-                return (
-                  <tr key={slug}>
-                    <th scope="row">
-                      {title}
-                      {rate?.scope && <small>{rate.scope}. Autres surfaces à confirmer.</small>}
-                    </th>
-                    <td>{rate?.amount ?? 'À confirmer'}</td>
-                    <td>{unit}</td>
-                  </tr>
-                );
-              })}
+              {INTERIOR_SERVICES.map(({ title, slug, unit, priceRange, priceDetail }) => (
+                <tr key={slug}>
+                  <th scope="row">
+                    {title}
+                    <small>{priceDetail}</small>
+                  </th>
+                  <td>{priceRange}</td>
+                  <td>{unit}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
         <p id="prices-note" className={styles.priceNote}>
-          {paintingRate && 'La fourchette affichée inclut les fournitures. '}
-          Le prix final dépend des travaux à réaliser et sera précisé dans le devis.
+          Ces fourchettes s’appuient sur les prix publiés par des professionnels en Île-de-France.
+          {' '}Le prix final dépend des travaux à réaliser et sera précisé dans le devis.
         </p>
       </div>
     </section>

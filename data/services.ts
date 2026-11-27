@@ -21,6 +21,10 @@ export const INTERIOR_SERVICES = [
     title: 'Peinture intérieure',
     slug: 'peinture',
     unit: 'm²',
+    // https://entreprise-sakani.fr/prix-peinture-val-doise-paris/
+    // https://boyer-peinture.com/peinture-interieure
+    priceRange: '25 à 45 €',
+    priceDetail: 'Murs et plafonds, peinture comprise',
     detail: 'Murs, plafonds et boiseries. Finitions mates, satinées ou brillantes.',
     image: 'insta-9.jpg',
   },
@@ -28,6 +32,9 @@ export const INTERIOR_SERVICES = [
     title: 'Enduits de ratissage',
     slug: 'enduits',
     unit: 'm²',
+    // https://www.renovation-dany.fr/prix-ratissage-complet/
+    priceRange: '25 à 40 €',
+    priceDetail: 'Ratissage mural courant, hors peinture',
     detail: 'Rebouchage, lissage et traitement des fissures.',
     image: 'service_thumb_2.jpg',
   },
@@ -35,13 +42,19 @@ export const INTERIOR_SERVICES = [
     title: 'Pose de papier peint',
     slug: 'papier-peint',
     unit: 'm²',
+    // https://boyer-peinture.com/papier-peint-revetements-muraux
+    priceRange: '15 à 60 €',
+    priceDetail: 'Intissé ou panoramique, papier non fourni',
     detail: 'Papiers peints intissés ou panoramiques.',
     image: 'service_thumb_3.jpg',
   },
   {
     title: 'Vinyle adhésif décoratif',
     slug: 'vinyle',
-    unit: 'Selon le projet',
+    unit: 'Par cuisine',
+    // https://coverwithstyl.fr/pages/renovation-cuisine
+    priceRange: '900 à 2 500 €',
+    priceDetail: 'Film et pose compris',
     detail: 'Relooking de cuisines, de meubles et de portes.',
     image: 'service_thumb_4.jpg',
   },
