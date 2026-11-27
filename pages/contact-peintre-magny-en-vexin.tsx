@@ -11,6 +11,9 @@ import siteStyles from '@/styles/Site.module.css';
 
 const FORM_ENDPOINT = 'https://formspree.io/f/xeajyayy';
 const EMAIL_LINK = `mailto:${CLIENT.email}`;
+const MAP_ADDRESS = '39 Grande Rue, 95510 Villers-en-Arthies';
+const MAP_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MAP_ADDRESS)}`;
+const MAP_EMBED_URL = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2612.8822744880504!2d1.7233560767044018!3d49.088877384458954!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6c1bd8a15c2af%3A0x66d66952ebf32ced!2s39%20Grande%20Rue%2C%2095510%20Villers-en-Arthies!5e0!3m2!1sen!2sfr!4v1795779144212!5m2!1sen!2sfr';
 const serviceOptions = Object.keys(QUOTE_SERVICES) as QuoteService[];
 
 const title = 'Contact · Devis gratuit sous 24 h · Léna Rénove';
@@ -249,6 +252,39 @@ function ContactDetails() {
           <p>Du lundi au vendredi, de 8 h à 18 h.</p>
         </div>
       </div>
+
+      <ContactMap />
     </aside>
+  );
+}
+
+function ContactMap() {
+  const [mapOpen, setMapOpen] = useState(false);
+
+  return (
+    <div className={styles.office}>
+      <h3>Carte</h3>
+      <p>{MAP_ADDRESS}</p>
+      <p id="contact-map-note" className={styles.mapNote}>Google Maps peut utiliser des cookies si vous affichez la carte.</p>
+      <details className={styles.mapDisclosure} onToggle={(event) => setMapOpen(event.currentTarget.open)}>
+        <summary aria-describedby="contact-map-note">{mapOpen ? 'Masquer la carte' : 'Afficher la carte'}</summary>
+        {mapOpen && (
+          <iframe
+            className={styles.mapFrame}
+            title={`Google Maps – ${MAP_ADDRESS}`}
+            src={MAP_EMBED_URL}
+            width={600}
+            height={450}
+            loading="lazy"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
+        )}
+      </details>
+      <a href={MAP_LINK} target="_blank" rel="noopener noreferrer" className={siteStyles.textLink}>
+        Ouvrir dans Google Maps <span className="sr-only">(nouvel onglet)</span>
+        <Arrow />
+      </a>
+    </div>
   );
 }
