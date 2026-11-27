@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight } from 'lucide-react';
-import { CLIENT, CONTACT_PATH } from '@data/client';
+import { ABOUT_PATH, CLIENT, CONTACT_PATH } from '@data/client';
 
 const CHECKS = [
   'CAP Peintre en Bâtiment — Diplôme d\'État',
@@ -106,7 +106,7 @@ export default function About() {
             </ul>
 
             <div className="mt-10 flex flex-wrap gap-4">
-              <Link href="/lena-renaud-peintre-magny-en-vexin.html" className="btn-primary">
+              <Link href={ABOUT_PATH} className="btn-primary">
                 Notre histoire
                 <ArrowRight size={16} strokeWidth={2} />
               </Link>

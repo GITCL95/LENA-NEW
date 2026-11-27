@@ -4,9 +4,9 @@ export const CONTACT_PATH = "/contact-peintre-magny-en-vexin";
 export const QUOTE_PATH = `${CONTACT_PATH}#contact`;
 export const LEGAL_PATH = "/mentions-legales";
 export const PORTFOLIO_PATH = "/portfolio";
-export const SERVICES_PATH = "/services";
-export const ZONES_PATH = "/zones";
-export const PONTOISE_PATH = `${ZONES_PATH}/pontoise`;
+export const SERVICES_PATH = "/peinture-interieure-renovation-magny-en-vexin";
+export const ZONES_PATH = "/peintre-renovation-val-d-oise-yvelines";
+export const PONTOISE_PATH = "/peintre-pontoise";
 
 export const CLIENT = {
   brand: "Léna Rénove",

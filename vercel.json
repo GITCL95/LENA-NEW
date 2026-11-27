@@ -11,93 +11,83 @@
       "statusCode": 301
     },
     {
-      "source": "/peinture-interieure-renovation-magny-en-vexin",
-      "destination": "/services",
-      "statusCode": 301
-    },
-    {
       "source": "/peinture-interieure-renovation-magny-en-vexin.html",
-      "destination": "/services",
+      "destination": "/peinture-interieure-renovation-magny-en-vexin",
       "statusCode": 301
     },
     {
       "source": "/services.html",
-      "destination": "/services",
+      "destination": "/peinture-interieure-renovation-magny-en-vexin",
       "statusCode": 301
     },
     {
       "source": "/prestations/peinture-interieure",
-      "destination": "/services/peinture-interieure",
+      "destination": "/peinture-interieure",
       "statusCode": 301
     },
     {
       "source": "/prestations/peinture-interieure.html",
-      "destination": "/services/peinture-interieure",
+      "destination": "/peinture-interieure",
       "statusCode": 301
     },
     {
       "source": "/services/peinture-interieure.html",
-      "destination": "/services/peinture-interieure",
+      "destination": "/peinture-interieure",
       "statusCode": 301
     },
     {
       "source": "/prestations/enduits-ratissage",
-      "destination": "/services/enduits-ratissage",
+      "destination": "/enduits-ratissage",
       "statusCode": 301
     },
     {
       "source": "/prestations/enduits-ratissage.html",
-      "destination": "/services/enduits-ratissage",
+      "destination": "/enduits-ratissage",
       "statusCode": 301
     },
     {
       "source": "/services/enduits-ratissage.html",
-      "destination": "/services/enduits-ratissage",
+      "destination": "/enduits-ratissage",
       "statusCode": 301
     },
     {
       "source": "/prestations/pose-papier-peint",
-      "destination": "/services/pose-papier-peint",
+      "destination": "/pose-papier-peint",
       "statusCode": 301
     },
     {
       "source": "/prestations/pose-papier-peint.html",
-      "destination": "/services/pose-papier-peint",
+      "destination": "/pose-papier-peint",
       "statusCode": 301
     },
     {
       "source": "/services/pose-papier-peint.html",
-      "destination": "/services/pose-papier-peint",
+      "destination": "/pose-papier-peint",
       "statusCode": 301
     },
     {
       "source": "/prestations/vinyle-adhesif-decoratif",
-      "destination": "/services/vinyle-adhesif-decoratif",
+      "destination": "/vinyle-adhesif-decoratif",
       "statusCode": 301
     },
     {
       "source": "/prestations/vinyle-adhesif-decoratif.html",
-      "destination": "/services/vinyle-adhesif-decoratif",
+      "destination": "/vinyle-adhesif-decoratif",
       "statusCode": 301
     },
     {
       "source": "/services/vinyle-adhesif-decoratif.html",
-      "destination": "/services/vinyle-adhesif-decoratif",
-      "statusCode": 301
-    },
-    {
-      "source": "/peintre-renovation-val-d-oise-yvelines",
-      "destination": "/zones",
+      "destination": "/vinyle-adhesif-decoratif",
       "statusCode": 301
     },
     {
       "source": "/peintre-renovation-val-d-oise-yvelines.html",
-      "destination": "/zones",
+      "destination": "/peintre-renovation-val-d-oise-yvelines",
       "statusCode": 301
     },
     {
       "source": "/zones.html",
-      "destination": "/zones",
+      "destination": "/peintre-renovation-val-d-oise-yvelines",
       "statusCode": 301
     },
     {
@@ -111,98 +101,198 @@
       "statusCode": 301
     },
     {
-      "source": "/peintre-pontoise",
-      "destination": "/zones/pontoise",
-      "statusCode": 301
-    },
-    {
       "source": "/peintre-pontoise.html",
-      "destination": "/zones/pontoise",
+      "destination": "/peintre-pontoise",
       "statusCode": 301
     },
     {
       "source": "/zones/pontoise.html",
-      "destination": "/zones/pontoise",
-      "statusCode": 301
-    },
-    {
-      "source": "/peintre-cergy",
-      "destination": "/zones/cergy",
+      "destination": "/peintre-pontoise",
       "statusCode": 301
     },
     {
       "source": "/peintre-cergy.html",
-      "destination": "/zones/cergy",
+      "destination": "/peintre-cergy",
       "statusCode": 301
     },
     {
       "source": "/zones/cergy.html",
-      "destination": "/zones/cergy",
-      "statusCode": 301
-    },
-    {
-      "source": "/peintre-gisors",
-      "destination": "/zones/gisors",
+      "destination": "/peintre-cergy",
       "statusCode": 301
     },
     {
       "source": "/peintre-gisors.html",
-      "destination": "/zones/gisors",
+      "destination": "/peintre-gisors",
       "statusCode": 301
     },
     {
       "source": "/zones/gisors.html",
-      "destination": "/zones/gisors",
-      "statusCode": 301
-    },
-    {
-      "source": "/peintre-marines-95",
-      "destination": "/zones/marines-95",
+      "destination": "/peintre-gisors",
       "statusCode": 301
     },
     {
       "source": "/peintre-marines-95.html",
-      "destination": "/zones/marines-95",
+      "destination": "/peintre-marines-95",
       "statusCode": 301
     },
     {
       "source": "/zones/marines-95.html",
-      "destination": "/zones/marines-95",
+      "destination": "/peintre-marines-95",
       "statusCode": 301
     },
     {
       "source": "/peintre-chars-95",
-      "destination": "/zones/chars-95",
+      "destination": "/chars-95",
       "statusCode": 301
     },
     {
       "source": "/peintre-chars-95.html",
-      "destination": "/zones/chars-95",
+      "destination": "/chars-95",
       "statusCode": 301
     },
     {
       "source": "/zones/chars-95.html",
-      "destination": "/zones/chars-95",
-      "statusCode": 301
-    },
-    {
-      "source": "/peintre-chaumont-en-vexin",
-      "destination": "/zones/chaumont-en-vexin",
+      "destination": "/chars-95",
       "statusCode": 301
     },
     {
       "source": "/peintre-chaumont-en-vexin.html",
-      "destination": "/zones/chaumont-en-vexin",
+      "destination": "/peintre-chaumont-en-vexin",
       "statusCode": 301
     },
     {
       "source": "/zones/chaumont-en-vexin.html",
-      "destination": "/zones/chaumont-en-vexin",
+      "destination": "/peintre-chaumont-en-vexin",
       "statusCode": 301
     },
     {
       "source": "/mentions-legales.html",
       "destination": "/mentions-legales",
+      "statusCode": 301
+    },
+    {
+      "source": "/services",
+      "destination": "/peinture-interieure-renovation-magny-en-vexin",
+      "statusCode": 301
+    },
+    {
+      "source": "/zones",
+      "destination": "/peintre-renovation-val-d-oise-yvelines",
+      "statusCode": 301
+    },
+    {
+      "source": "/zones/pontoise",
+      "destination": "/peintre-pontoise",
+      "statusCode": 301
+    },
+    {
+      "source": "/zones/cergy",
+      "destination": "/peintre-cergy",
+      "statusCode": 301
+    },
+    {
+      "source": "/zones/gisors",
+      "destination": "/peintre-gisors",
+      "statusCode": 301
+    },
+    {
+      "source": "/zones/marines-95",
+      "destination": "/peintre-marines-95",
+      "statusCode": 301
+    },
+    {
+      "source": "/zones/chars-95",
+      "destination": "/chars-95",
+      "statusCode": 301
+    },
+    {
+      "source": "/chars-95.html",
+      "destination": "/chars-95",
+      "statusCode": 301
+    },
+    {
+      "source": "/zones/chaumont-en-vexin",
+      "destination": "/peintre-chaumont-en-vexin",
+      "statusCode": 301
+    },
+    {
+      "source": "/services/peinture-interieure",
+      "destination": "/peinture-interieure",
+      "statusCode": 301
+    },
+    {
+      "source": "/peinture-interieure.html",
+      "destination": "/peinture-interieure",
+      "statusCode": 301
+    },
+    {
+      "source": "/services/enduits-ratissage",
+      "destination": "/enduits-ratissage",
+      "statusCode": 301
+    },
+    {
+      "source": "/enduits-ratissage.html",
+      "destination": "/enduits-ratissage",
+      "statusCode": 301
+    },
+    {
+      "source": "/services/pose-papier-peint",
+      "destination": "/pose-papier-peint",
+      "statusCode": 301
+    },
+    {
+      "source": "/pose-papier-peint.html",
+      "destination": "/pose-papier-peint",
+      "statusCode": 301
+    },
+    {
+      "source": "/services/vinyle-adhesif-decoratif",
+      "destination": "/vinyle-adhesif-decoratif",
+      "statusCode": 301
+    },
+    {
+      "source": "/vinyle-adhesif-decoratif.html",
+      "destination": "/vinyle-adhesif-decoratif",
+      "statusCode": 301
+    },
+    {
+      "source": "/a-propos",
+      "destination": "/lena-renaud-peintre-magny-en-vexin",
+      "statusCode": 301
+    },
+    {
+      "source": "/a-propos.html",
+      "destination": "/lena-renaud-peintre-magny-en-vexin",
+      "statusCode": 301
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact-peintre-magny-en-vexin",
+      "statusCode": 301
+    },
+    {
+      "source": "/contact.html",
+      "destination": "/contact-peintre-magny-en-vexin",
+      "statusCode": 301
+    },
+    {
+      "source": "/prestations",
+      "destination": "/peinture-interieure-renovation-magny-en-vexin",
+      "statusCode": 301
+    },
+    {
+      "source": "/prestations.html",
+      "destination": "/peinture-interieure-renovation-magny-en-vexin",
+      "statusCode": 301
+    },
+    {
+      "source": "/zone-intervention",
+      "destination": "/peintre-renovation-val-d-oise-yvelines",
+      "statusCode": 301
+    },
+    {
+      "source": "/zone-intervention.html",
+      "destination": "/peintre-renovation-val-d-oise-yvelines",
       "statusCode": 301
     }
   ],
@@ -212,28 +302,28 @@
       "destination": "/lena-renaud-peintre-magny-en-vexin.html"
     },
     {
-      "source": "/services",
-      "destination": "/services.html"
+      "source": "/peinture-interieure-renovation-magny-en-vexin",
+      "destination": "/peinture-interieure-renovation-magny-en-vexin.html"
     },
     {
-      "source": "/services/peinture-interieure",
-      "destination": "/services/peinture-interieure.html"
+      "source": "/peinture-interieure",
+      "destination": "/peinture-interieure.html"
     },
     {
-      "source": "/services/enduits-ratissage",
-      "destination": "/services/enduits-ratissage.html"
+      "source": "/enduits-ratissage",
+      "destination": "/enduits-ratissage.html"
     },
     {
-      "source": "/services/pose-papier-peint",
-      "destination": "/services/pose-papier-peint.html"
+      "source": "/pose-papier-peint",
+      "destination": "/pose-papier-peint.html"
     },
     {
-      "source": "/services/vinyle-adhesif-decoratif",
-      "destination": "/services/vinyle-adhesif-decoratif.html"
+      "source": "/vinyle-adhesif-decoratif",
+      "destination": "/vinyle-adhesif-decoratif.html"
     },
     {
-      "source": "/zones",
-      "destination": "/zones.html"
+      "source": "/peintre-renovation-val-d-oise-yvelines",
+      "destination": "/peintre-renovation-val-d-oise-yvelines.html"
     },
     {
       "source": "/portfolio",
@@ -244,28 +334,28 @@
       "destination": "/contact-peintre-magny-en-vexin.html"
     },
     {
-      "source": "/zones/pontoise",
-      "destination": "/zones/pontoise.html"
+      "source": "/peintre-pontoise",
+      "destination": "/peintre-pontoise.html"
     },
     {
-      "source": "/zones/cergy",
-      "destination": "/zones/cergy.html"
+      "source": "/peintre-cergy",
+      "destination": "/peintre-cergy.html"
     },
     {
-      "source": "/zones/gisors",
-      "destination": "/zones/gisors.html"
+      "source": "/peintre-gisors",
+      "destination": "/peintre-gisors.html"
     },
     {
-      "source": "/zones/marines-95",
-      "destination": "/zones/marines-95.html"
+      "source": "/peintre-marines-95",
+      "destination": "/peintre-marines-95.html"
     },
     {
-      "source": "/zones/chars-95",
-      "destination": "/zones/chars-95.html"
+      "source": "/chars-95",
+      "destination": "/chars-95.html"
     },
     {
-      "source": "/zones/chaumont-en-vexin",
-      "destination": "/zones/chaumont-en-vexin.html"
+      "source": "/peintre-chaumont-en-vexin",
+      "destination": "/peintre-chaumont-en-vexin.html"
     },
     {
       "source": "/mentions-legales",

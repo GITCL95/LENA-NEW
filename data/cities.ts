@@ -1,4 +1,4 @@
-import { PONTOISE_PATH, ZONES_PATH } from './client';
+import { PONTOISE_PATH } from './client';
 
 type CityPhoto = {
   src: string;
@@ -92,10 +92,12 @@ export const PONTOISE = {
   landmarks: 'Cathédrale Saint-Maclou, Musée Tavet-Delacour, centre médiéval',
 } satisfies City;
 
-const cityDetails: Omit<City, 'href'>[] = [
+export const CITIES: City[] = [
+  PONTOISE,
   {
     name: 'Cergy',
     slug: 'cergy',
+    href: '/peintre-cergy',
     postalCode: '95000',
     distance: '30 min',
     department: '95',
@@ -120,6 +122,7 @@ const cityDetails: Omit<City, 'href'>[] = [
   {
     name: 'Gisors',
     slug: 'gisors',
+    href: '/peintre-gisors',
     postalCode: '27140',
     distance: '35 min',
     department: '27',
@@ -139,6 +142,7 @@ const cityDetails: Omit<City, 'href'>[] = [
   {
     name: 'Marines',
     slug: 'marines-95',
+    href: '/peintre-marines-95',
     postalCode: '95640',
     distance: '30 min',
     department: '95',
@@ -158,6 +162,7 @@ const cityDetails: Omit<City, 'href'>[] = [
   {
     name: 'Chars',
     slug: 'chars-95',
+    href: '/chars-95',
     postalCode: '95750',
     distance: '30 min',
     department: '95',
@@ -177,6 +182,7 @@ const cityDetails: Omit<City, 'href'>[] = [
   {
     name: 'Chaumont-en-Vexin',
     slug: 'chaumont-en-vexin',
+    href: '/peintre-chaumont-en-vexin',
     postalCode: '60240',
     distance: '45 min',
     department: '60',
@@ -194,11 +200,3 @@ const cityDetails: Omit<City, 'href'>[] = [
     landmarks: 'Collégiale Saint-Jean-Baptiste, lavoir ancien',
   },
 ];
-
-export const CITIES: City[] = [
-  PONTOISE,
-  ...cityDetails.map((city) => ({ ...city, href: `${ZONES_PATH}/${city.slug}` })),
-];
-
-export const getCityBySlug = (slug: string) =>
-  CITIES.find((city) => city.slug === slug);
