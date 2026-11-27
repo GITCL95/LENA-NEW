@@ -31,18 +31,48 @@
       "statusCode": 301
     },
     {
+      "source": "/prestations/enduits-ratissage",
+      "destination": "/services/enduits-ratissage",
+      "statusCode": 301
+    },
+    {
       "source": "/prestations/enduits-ratissage.html",
-      "destination": "/prestations/enduits-ratissage",
+      "destination": "/services/enduits-ratissage",
+      "statusCode": 301
+    },
+    {
+      "source": "/services/enduits-ratissage.html",
+      "destination": "/services/enduits-ratissage",
+      "statusCode": 301
+    },
+    {
+      "source": "/prestations/pose-papier-peint",
+      "destination": "/services/pose-papier-peint",
       "statusCode": 301
     },
     {
       "source": "/prestations/pose-papier-peint.html",
-      "destination": "/prestations/pose-papier-peint",
+      "destination": "/services/pose-papier-peint",
+      "statusCode": 301
+    },
+    {
+      "source": "/services/pose-papier-peint.html",
+      "destination": "/services/pose-papier-peint",
+      "statusCode": 301
+    },
+    {
+      "source": "/prestations/vinyle-adhesif-decoratif",
+      "destination": "/services/vinyle-adhesif-decoratif",
       "statusCode": 301
     },
     {
       "source": "/prestations/vinyle-adhesif-decoratif.html",
-      "destination": "/prestations/vinyle-adhesif-decoratif",
+      "destination": "/services/vinyle-adhesif-decoratif",
+      "statusCode": 301
+    },
+    {
+      "source": "/services/vinyle-adhesif-decoratif.html",
+      "destination": "/services/vinyle-adhesif-decoratif",
       "statusCode": 301
     },
     {
@@ -110,16 +140,16 @@
       "destination": "/services/peinture-interieure.html"
     },
     {
-      "source": "/prestations/enduits-ratissage",
-      "destination": "/prestations/enduits-ratissage.html"
+      "source": "/services/enduits-ratissage",
+      "destination": "/services/enduits-ratissage.html"
     },
     {
-      "source": "/prestations/pose-papier-peint",
-      "destination": "/prestations/pose-papier-peint.html"
+      "source": "/services/pose-papier-peint",
+      "destination": "/services/pose-papier-peint.html"
     },
     {
-      "source": "/prestations/vinyle-adhesif-decoratif",
-      "destination": "/prestations/vinyle-adhesif-decoratif.html"
+      "source": "/services/vinyle-adhesif-decoratif",
+      "destination": "/services/vinyle-adhesif-decoratif.html"
     },
     {
       "source": "/peintre-renovation-val-d-oise-yvelines",
