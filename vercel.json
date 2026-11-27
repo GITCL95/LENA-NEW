@@ -294,6 +294,11 @@
       "source": "/zone-intervention.html",
       "destination": "/peintre-renovation-val-d-oise-yvelines",
       "statusCode": 301
+    },
+    {
+      "source": "/:path([A-Za-z0-9_-]+(?:[./][A-Za-z0-9_-]+)*)/",
+      "destination": "/:path",
+      "statusCode": 301
     }
   ],
   "rewrites": [
